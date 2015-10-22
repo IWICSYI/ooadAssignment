@@ -1,0 +1,4 @@
+1cineplexId|1movieUniqueId|1listingId|startDate|endDate|1typeofDay|status
+1cineplexId|1movieUniqueId|2listingId|startDate|endDate|1typeofDay|status
+1cineplexId|1movieUniqueId|3listingId|startDate|endDate|1typeofDay|status
+1cineplexId|1movieUniqueId|4listingId|startDate|endDate|1typeofDay|status

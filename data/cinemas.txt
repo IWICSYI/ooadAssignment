@@ -1,0 +1,11 @@
+1cineplexid|1cinemaid|cinemaName|cinemaType|200
+1cineplexid|2cinemaid|cinemaName2|cinemaType|100
+1cineplexid|3cinemaid|cinemaName3|cinemaTypePlat|200
+2cineplexid|4cinemaid|cinemaName|cinemaType|200
+2cineplexid|5cinemaid|cinemaName2|cinemaType|200
+2cineplexid|6cinemaid|cinemaName3|cinemaTypePlat|200
+2cineplexid|7cinemaid|cinemaName4|cinemaType|200
+3cineplexid|8cinemaid|cinemaName|cinemaType|200
+3cineplexid|9cinemaid|cinemaName2|cinemaType|200
+3cineplexid|10cinemaid|cinemaName3|cinemaTypePlat|200
+3cineplexid|11cinemaid|cinemaName4|cinemaType|200

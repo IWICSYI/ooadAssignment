@@ -1,0 +1,1 @@
+showTimeId|TrueSeatStatus|A1seatName|seatId|transectionId

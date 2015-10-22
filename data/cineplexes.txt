@@ -1,0 +1,3 @@
+1|cineplexName1
+2|cineplexName2
+3|cineplexName3

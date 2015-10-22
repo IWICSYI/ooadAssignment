@@ -1,0 +1,17 @@
+program flow create movie entites
+
+
+ui display{
+Movie entries Manager->1.Create,2.Update
+
+MovieListing manager->
+1.Create->choose cineplex->choose cinema
+									->show and choose from UniqueMovieList->weekday/weekend/publicholiday->create no Of showTime->enter showTime(validate)->save in showTimelisting and showTimes
+									->query cinemaList
+2.Update->choose cineplex->choose cinema->show cinemaList->typeofDay->update showTime(validate)->allDay?... ...
+}
+
+
+
+
+program flow for inserting showTime
