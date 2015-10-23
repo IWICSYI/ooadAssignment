@@ -1,4 +1,10 @@
-1cineplexId|1movieUniqueId|1listingId|startDate|endDate|1typeofDay|status
-1cineplexId|1movieUniqueId|2listingId|startDate|endDate|1typeofDay|status
-1cineplexId|1movieUniqueId|3listingId|startDate|endDate|1typeofDay|status
-1cineplexId|1movieUniqueId|4listingId|startDate|endDate|1typeofDay|status
+1|1|1|startDate|endDate|1|21|0|2|20.12.2015|25.12.2015|1|1
+1|0|2|20.12.2015|25.12.2015|1|1
+1|0|3|20.12.2015|25.12.2015|1|1
+1|0|4|20.12.2015|25.12.2015|1|1
+2|0|5|20.12.2015|25.12.2015|1|1
+1|0|6|20.12.2015|25.12.2015|1|1
+1|0|7|20.12.2015|25.12.2015|1|1
+1|2|8|20.12.2015|25.12.2015|1|1
+1|1|9|20.12.2015|25.12.2015|1|1
+1|1|10|20.12.2015|25.12.2015|1|1

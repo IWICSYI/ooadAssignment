@@ -1,1 +1,2 @@
-1ListingId|1cinemaid|1showTimeId|3noOfShowTimes|showTime1|showTime2|showTime3
+9|1|1|1|1|200-1200|
+10|1|1|2|1|201|
