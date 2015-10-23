@@ -1,5 +1,6 @@
 package boundaryClasses;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ import data.Movie;
 public class MovieEntryUi {
 	
 	
-	public void displayMain(){
+	public static void displayMain() throws IOException{
 		Scanner sc=new Scanner(System.in);
 		int choice = 0;
 		String test;
@@ -20,10 +21,9 @@ public class MovieEntryUi {
 		do{
 			System.out.println("#############################################");
 			System.out.println("#            Movie Manager Page             #");
-			System.out.println("#          1.Create Movie Listing           #");
+			System.out.println("#          1.Create Movie Entry           #");
 			System.out.println("#          2.Update Movie Details           #");
 			System.out.println("#          3.Sort Movies by Rankings        #");
-			System.out.println("#                                           #");
 			System.out.println("#############################################");
 			test=sc.nextLine();
 			validation=vl.isInteger(test);
@@ -34,20 +34,19 @@ public class MovieEntryUi {
 				System.out.println("Invalid choice, please try again");
 				choice=200;
 			}
+			if(choice==1)
+			{
+				displayCreatePage();
+			}
+			
 		}while(choice<4);
 		
-		if(choice==1)
-		{
-			displayCreatePage();
-		}
 		
 	}
 
-	public static void displayCreatePage(){
+	public static void displayCreatePage() throws IOException{
 		Scanner sc=new Scanner(System.in);
 		int choice = 0;
-		String test;
-		boolean validation;
 		ValidationControl vl=new ValidationControl();
 		Movie movie=new Movie();
 		System.out.println("#############################################");
@@ -69,10 +68,9 @@ public class MovieEntryUi {
 		movie.setSynopsis(sc.nextLine());
 		
 		System.out.println("Please enter movie length in minutes(Eg:130)");
-		String len=sc.nextLine();
-		Date date=new Date();
-		date.setTime(130);
-		movie.setMovieLength(date);
+		int len=vl.validateAndReturnIntegerValue(sc.nextLine());
+		
+		movie.setMovieLength(len);
 		
 		
 		do
@@ -81,26 +79,22 @@ public class MovieEntryUi {
 			System.out.println("1.Digital Movie");
 			System.out.println("2.Digital Block Buster Movie");
 			System.out.println("3.3D Movie");
-			
-			test=sc.nextLine();
-			validation=vl.isInteger(test);
-			if(validation)
-			{
-				choice=Integer.parseInt(test);
-				movie.setMovieType(choice);
-			}
-			else
-				choice=200;
+			choice=vl.validateAndReturnIntegerValue(sc.nextLine());
 			if(choice<1||choice>3)
 			{
 				System.out.println("Invalid input, please try again");
 				choice=200;
 			}
-		}while(choice<3);
+			else
+			{
+				movie.setMovieType(choice);
+				break;
+			}
+		}while(choice>4);
 		
 		MovieEntryController mec=new MovieEntryController();
 		mec.createMovie(movie);
-		
+		displayMain();
 			
 	
 		

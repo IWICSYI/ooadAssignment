@@ -3,6 +3,13 @@ package data;
 import java.util.ArrayList;
 
 public class Cineplex {
+	
+	public Cineplex(int cinplexId, String cineplexName) {
+		super();
+		this.cinplexId = cinplexId;
+		this.cineplexName = cineplexName;
+	}
+
 	private int cinplexId;
 	private String cineplexName;
 	private ArrayList<Cinema> cinemaList;

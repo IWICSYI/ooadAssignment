@@ -32,6 +32,10 @@ public class AdminUi {
 					MovieEntryUi mUI=new MovieEntryUi();
 					mUI.displayMain();
 				}
+				else if(choice==2){
+					SchedulerUi sUI=new SchedulerUi();
+					sUI.displayMain();
+				}
 			}
 			catch(Exception e)
 				{

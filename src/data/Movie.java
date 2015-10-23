@@ -2,8 +2,8 @@ package data;
 
 import java.util.*;
 
-//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
 public class Movie {
+	
 	private int movieId;
 	private String movieName;	
 	private int movieType;
@@ -13,8 +13,26 @@ public class Movie {
 	private String cast;
 	private double overallRating;
 	private long ticketSales;
-	private Date movieLength;
+	private int movieLength;
 	private ArrayList<Reviews> reviewList;
+	
+	public Movie(){}
+	
+	public Movie(int movieId, String movieName, int movieType,
+			String ageRating, String director, String synopsis, String cast,
+			double overallRating, long ticketSales, int movieLength) {
+		super();
+		this.movieId = movieId;
+		this.movieName = movieName;
+		this.movieType = movieType;
+		this.ageRating = ageRating;
+		this.director = director;
+		this.synopsis = synopsis;
+		this.cast = cast;
+		this.overallRating = overallRating;
+		this.ticketSales = ticketSales;
+		this.movieLength = movieLength;
+	}
 	public int getMovieId() {
 		return movieId;
 	}
@@ -69,10 +87,10 @@ public class Movie {
 	public void setTicketSales(long ticketSales) {
 		this.ticketSales = ticketSales;
 	}
-	public Date getMovieLength() {
+	public int getMovieLength() {
 		return movieLength;
 	}
-	public void setMovieLength(Date movieLength) {
+	public void setMovieLength(int movieLength) {
 		this.movieLength = movieLength;
 	}
 	public ArrayList<Reviews> getReviewList() {

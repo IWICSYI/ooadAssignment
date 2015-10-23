@@ -5,12 +5,12 @@ import java.util.Scanner;
 import controllerClasses.ValidationControl;
 
 public class ModuleSelectionUi {
-	public static void main(String[] args)
+	
+	public static void display()
 	{
 		Scanner sc = new Scanner(System.in);
 		int choice = 0;
-		String test;
-		boolean validation;
+	
 		ValidationControl vl=new ValidationControl();
 		do
 		{
@@ -19,12 +19,7 @@ public class ModuleSelectionUi {
 			System.out.println("2.Movie Goer Module");
 			try
 			{
-				test=sc.nextLine();
-				validation=vl.isInteger(test);
-				if(validation)
-					choice=Integer.parseInt(test);
-				else
-					choice=200;
+				choice=vl.validateAndReturnIntegerValue(sc.nextLine());
 				if(choice<1||choice>2)
 				{
 					System.out.println("Invalid input, please try again");

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 import data.User;
 
-public class LoginControl {
+public class LoginControl  {
 	
 	
 	private static MessageDigest md;

@@ -3,24 +3,25 @@ package data;
 import java.util.ArrayList;
 
 public class Cinema {
+	private int cinplexId;
+	private int cinemaId;
+	private String cinemaHallName;
+	private int cinemaType;
+	private int seats;
+	private ArrayList<ShowTime> showTimes;
+	
 	
 	public Cinema(int cinplexId, int cinemaId, String cinemaHallName,
-			String cinemaType, long seats, ArrayList<ShowTime> showTimes) {
+			int cinemaType, int seats) {
 		super();
 		this.cinplexId = cinplexId;
 		this.cinemaId = cinemaId;
 		this.cinemaHallName = cinemaHallName;
 		this.cinemaType = cinemaType;
 		this.seats = seats;
-		this.showTimes = showTimes;
+		
 	}
 
-	private int cinplexId;
-	private int cinemaId;
-	private String cinemaHallName;
-	private String cinemaType;
-	private long seats;
-	private ArrayList<ShowTime> showTimes;
 	
 	public Cinema() {
 		// TODO Auto-generated constructor stub
@@ -50,19 +51,19 @@ public class Cinema {
 		this.cinemaHallName = cinemaHallName;
 	}
 
-	public String getCinemaType() {
+	public int getCinemaType() {
 		return cinemaType;
 	}
 
-	public void setCinemaType(String cinemaType) {
+	public void setCinemaType(int cinemaType) {
 		this.cinemaType = cinemaType;
 	}
 
-	public long getSeats() {
+	public int getSeats() {
 		return seats;
 	}
 
-	public void setSeats(long seats) {
+	public void setSeats(int seats) {
 		this.seats = seats;
 	}
 
