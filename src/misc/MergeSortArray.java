@@ -1,34 +1,21 @@
-package controllerClasses;
+package misc;
+
 
 import java.util.ArrayList;
 
-import misc.ObjectContainer;
+public class MergeSortArray {
 
-public class MiscControl {
-
-	private ArrayList<String> stringList = new ArrayList<String>();
 	
-
-	public ObjectContainer idPairerWithCinema(int i, int id, String name, int cineType)
-	{
-		ObjectContainer pair=new ObjectContainer(i,id,name,cineType);
-		return pair;
+	ArrayList<String> stringList = new ArrayList<String>();
+	
+	public MergeSortArray(ArrayList<String> input) {
+		System.out.print("Unsorted List:");
+        for(int i=0; i<input.size(); i++)
+        {
+            stringList.add(input.get(i));
+            System.out.print(input.get(i) + ",");
+        }
 	}
-	
-	public ObjectContainer idPairerWithName(int i, int id, String name)
-	{
-		ObjectContainer pair=new ObjectContainer(i,id,name);
-		return pair;
-	}
-	
-	public ObjectContainer idPairerWithMovieLength(int i, int id, int len, int movieType)
-	{
-		ObjectContainer pair=new ObjectContainer(i,id,len,movieType);
-		return pair;
-	}
-	
-	
-	
 	 public void sort()
 	    {
 	 
@@ -121,13 +108,5 @@ public class MiscControl {
             intListIndex++;
         }
     }
-
-	public ArrayList<String> getStringList() {
-		return stringList;
-	}
-
-	public void setStringList(ArrayList<String> stringList) {
-		this.stringList = stringList;
-	}
-	
+ 
 }

@@ -6,9 +6,10 @@ public class TimeDateControl {
 	{
 		int hr=minutes/60;
 		int min=minutes-(hr*60);
-		int finalTime=time+hr*100+min;
-		System.out.println(hr+"  "+min);
-		return Integer.toString(finalTime);
+		int endTime=time+hr*100+min;
+		String finalTime=time+"-"+endTime;
+		System.out.println(finalTime);
+		return finalTime;
 		
 	}
 }

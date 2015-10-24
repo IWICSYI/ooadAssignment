@@ -39,6 +39,12 @@ public class DataControl extends TimeDateControl {
 		    }
 		    return data;
 		  }
+
+
+
+
+
+	private int movieIdcheck;
 	 
 	public ArrayList<User> readLogin() throws IOException{
 		
@@ -127,7 +133,7 @@ public class DataControl extends TimeDateControl {
 			return alr ;
 	}
 	
-	public ArrayList<Cinema> readCinemaByCineplexId(int cId) throws IOException{
+	public ArrayList<Cinema> readCinemaByCineplexIdAndMovieType(int cId,int mID) throws IOException{
 		ArrayList<Cineplex> cnList= new ArrayList<Cineplex>();
 		cnList=readCineplex();
 		
@@ -147,7 +153,8 @@ public class DataControl extends TimeDateControl {
 					int seats=Integer.parseInt(star.nextToken().trim());	
 					Cinema u = new Cinema(cineplexId,cinemaId,cinemaName,cinemaType,seats);
 					// add to  list
-					alr.add(u) ;
+					if(cinemaType==mID)
+						alr.add(u) ;
 				}
 			}
 			return alr ;
@@ -195,16 +202,18 @@ public class DataControl extends TimeDateControl {
 				int listingId=Integer.parseInt(star.nextToken().trim());
 				int  movieId = Integer.parseInt(star.nextToken().trim());
 				int  cinemaId = Integer.parseInt(star.nextToken().trim());
-				int  showTimeId = Integer.parseInt(star.nextToken().trim());	
+				int  showTimeId = Integer.parseInt(star.nextToken().trim());
+				int  dayType = Integer.parseInt(star.nextToken().trim());
 				int  noOfSlots = Integer.parseInt(star.nextToken().trim());
 				
 				for(int j=0;j<noOfSlots;j++)
 				{
 					showTimeArray.add(star.nextToken().trim());
 				}
+				int seats = Integer.parseInt(star.nextToken().trim());
 				
 				
-				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,noOfSlots,showTimeArray);
+				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,noOfSlots,showTimeArray,seats);
 				// add to  list
 				alr.add(u) ;
 				
@@ -212,7 +221,7 @@ public class DataControl extends TimeDateControl {
 			return alr ;
 	}
 
-	public ArrayList<ShowTime> readShowTimesBasedOnCinemaId(int cinemaID) throws IOException{
+	public ArrayList<ShowTime> readShowTimesBasedOnCinemaId(int cinemaID,int dayT) throws IOException{
 		ArrayList stringArray = (ArrayList)read("data/showTimes.txt");
 		ArrayList alr = new ArrayList() ;// to store data
 		ArrayList<String> showTimeArray=new ArrayList<String>();
@@ -225,18 +234,59 @@ public class DataControl extends TimeDateControl {
 				int listingId=Integer.parseInt(star.nextToken().trim());
 				int  movieId = Integer.parseInt(star.nextToken().trim());
 				int  cinemaId = Integer.parseInt(star.nextToken().trim());
-				if(cinemaID==cinemaId)
+				int  showTimeId = Integer.parseInt(star.nextToken().trim());
+				int  dayType = Integer.parseInt(star.nextToken().trim());
+				int  noOfSlots = Integer.parseInt(star.nextToken().trim());
+
+				for(int j=0;j<noOfSlots;j++)
 				{
-					int  showTimeId = Integer.parseInt(star.nextToken().trim());	
-					int  noOfSlots = Integer.parseInt(star.nextToken().trim());
-					
-					for(int j=0;j<noOfSlots;j++)
-					{
-						showTimeArray.add(star.nextToken().trim());
-					}
-					
+					showTimeArray.add(star.nextToken().trim());
+				}
+				int seats = Integer.parseInt(star.nextToken().trim());
+
+
+
+
+				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,noOfSlots,showTimeArray,seats);
 				
-					ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,noOfSlots,showTimeArray);
+				if(cinemaID==cinemaId && dayType==dayT)
+				{	
+					// add to  list
+					alr.add(u) ;
+				}
+
+			}
+			return alr ;
+	}
+	
+	
+	public ArrayList<ShowTime> readShowTimesBasedOnMovieId(int movieIDCheck,int dayT) throws IOException{
+		ArrayList stringArray = (ArrayList)read("data/showTimes.txt");
+		ArrayList alr = new ArrayList() ;// to store data
+		ArrayList<String> showTimeArray=new ArrayList<String>();
+		
+//1ListingId|1movieId|1cinemaid|1showTimeId|3noOfShowTimes|showTime1|showTime2|showTime3
+        for (int i = 0 ; i < stringArray.size() ; i++) {
+				String st = (String)stringArray.get(i);
+				// get individual 'fields' of the string separated by SEPARATOR
+				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
+				int listingId=Integer.parseInt(star.nextToken().trim());
+				int  movieId = Integer.parseInt(star.nextToken().trim());
+				int  cinemaId = Integer.parseInt(star.nextToken().trim());
+				int  showTimeId = Integer.parseInt(star.nextToken().trim());
+				int  dayType = Integer.parseInt(star.nextToken().trim());
+				int  noOfSlots = Integer.parseInt(star.nextToken().trim());
+
+				for(int j=0;j<noOfSlots;j++)
+				{
+					showTimeArray.add(star.nextToken().trim());
+				}
+				int seats = Integer.parseInt(star.nextToken().trim());
+				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,noOfSlots,showTimeArray,seats);
+				
+
+				if(movieId==movieIdcheck && dayType==dayT)
+				{	
 					// add to  list
 					alr.add(u) ;
 				}

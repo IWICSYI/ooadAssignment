@@ -60,7 +60,7 @@ public class SchedulerUi extends DataControl {
 	
 	public void displayCreatePage() throws IOException {
 		Scanner sc=new Scanner(System.in);
-		int choice = 0, num=0,cinemaId,movieId,movieLen;
+		int choice = 0, num=0,cinemaId,movieId,movieLen,movieType;
 		MovieSchedule sch=new MovieSchedule();
 		
 		ValidationControl vl=new ValidationControl();
@@ -94,17 +94,36 @@ public class SchedulerUi extends DataControl {
 		for(int i=0;i<movieList.size();i++)
 		{
 			System.out.println((i+1)+":"+movieList.get(i).getMovieName());
-			pair.add(oC.idPairerWithMovieLength(i, movieList.get(i).getMovieId(), movieList.get(i).getMovieLength()));
+			pair.add(oC.idPairerWithMovieLength(i, movieList.get(i).getMovieId(), movieList.get(i).getMovieLength(),movieList.get(i).getMovieType()));
 		}
 		choice=vl.validateAndReturnIntegerValue(sc.nextLine());
 		movieId=pair.get(choice-1).getId();
 		movieLen=pair.get(choice-1).getMovieLen();
+		movieType=pair.get(choice-1).getMovieType();
 		sch.setMovieId(movieId);
 		pair.clear();
+		if(movieType==2)
+		{
+			System.out.println("Please select whether movie will be shown in 3D?");
+			choice=vl.validateAndReturnIntegerValue(sc.nextLine());
+			if(choice<1||choice>2)
+			{
+				System.out.println("Invalid input, please try again");
+				choice=200;
+			}
+			else
+			{
+				sch.setThreeDOrNot(choice);
+				//break;
+			}
+		}
+		
+		
+		
 		
 		SchedulerController sec=new SchedulerController();
 		ShowTimeController sTC=new ShowTimeController();
-		sch=sTC.TimeSlotHandler(sch,movieId,movieLen, pair);
+		ArrayList<MovieSchedule>schList=sTC.TimeSlotHandler(sch,movieId,movieLen,movieType, pair);
 		
 		//System.out.println("Please enter how many days the movie will on");
 		

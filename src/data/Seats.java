@@ -6,6 +6,7 @@ public class Seats {
 	private String seatName;
 	private int seatId;
 	private int transcationId;
+	
 	public int getShowTimeId() {
 		return showTimeId;
 	}

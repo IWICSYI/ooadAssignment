@@ -8,24 +8,43 @@ public class ObjectContainer {
 	private int i;
 	private int id;
 	private int cinemaId;
+	private int cineType;
 	private int movieId;
 	private int movieLen;
+	private int movieType;
 	private String name;
 	ArrayList<Integer> newST;
+	ArrayList<String> stringArray;
 	
 	//Constructor to pair id and choice with name
+	public ObjectContainer(int i, int id, String name, int cineType) {
+		super();
+		this.i = i;
+		this.id = id;
+		this.name = name;
+		this.cineType=cineType;
+	}
+	
 	public ObjectContainer(int i, int id, String name) {
 		super();
 		this.i = i;
 		this.id = id;
 		this.name = name;
+		
 	}
 	
-	public ObjectContainer(int i, int id, int len) {
+	public ObjectContainer(int id, ArrayList<String> stringArray) {
+		super();
+		this.id = id;
+		this.stringArray = stringArray;
+	}
+	
+	public ObjectContainer(int i, int id, int len, int movieType) {
 		super();
 		this.i = i;
 		this.id = id;
 		this.movieLen = len;
+		this.movieType=movieType;
 	}
 	
 	//Constructor to pair id and choice 
@@ -35,17 +54,6 @@ public class ObjectContainer {
 		this.id = id;
 	}
 	
-	
-
-	
-	
-	public ObjectContainer(int checkCinemaId, ArrayList<Integer> newST) {
-		cinemaId=checkCinemaId;
-		this.newST=newST;
-	}
-
-
-
 	public int getI() {
 		return i;
 	}
@@ -114,6 +122,39 @@ public class ObjectContainer {
 
 	public void setMovieLen(int movieLen) {
 		this.movieLen = movieLen;
+	}
+
+	public ArrayList<String> getStringArray() {
+		return stringArray;
+	}
+	
+	public void printStringArray() {
+		for(int i=0;i< stringArray.size();i++)
+		if(id==1)
+			System.out.print("Movie Already Allocated:"+stringArray.get(i)+" ");
+		else if(id==2)
+			System.out.print("Cinema Already Allocated:"+stringArray.get(i)+" ");
+		
+	}
+
+	public void setStringArray(ArrayList<String> stringArray) {
+		this.stringArray = stringArray;
+	}
+
+	public int getMovieType() {
+		return movieType;
+	}
+
+	public void setMovieType(int movieType) {
+		this.movieType = movieType;
+	}
+
+	public int getCineType() {
+		return cineType;
+	}
+
+	public void setCineType(int cineType) {
+		this.cineType = cineType;
 	}
 
 }

@@ -16,6 +16,9 @@ public class MovieSchedule {
 	private String endDate;
 	private int typeofDay;
 	private int status;
+	private int threeDOrNot;
+	private int platOrNot;
+	
 	private ArrayList<ShowTime> showTimeList;
 	
 	public MovieSchedule(int cineplexId, int movieId,
@@ -84,6 +87,22 @@ public class MovieSchedule {
 	}
 	public void setCinemaId(int cinemaId) {
 		this.cinemaId = cinemaId;
+	}
+
+	public int getThreeDOrNot() {
+		return threeDOrNot;
+	}
+
+	public void setThreeDOrNot(int threeDOrNot) {
+		this.threeDOrNot = threeDOrNot;
+	}
+
+	public int getPlatOrNot() {
+		return platOrNot;
+	}
+
+	public void setPlatOrNot(int platOrNot) {
+		this.platOrNot = platOrNot;
 	}
 
 }

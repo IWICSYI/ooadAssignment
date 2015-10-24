@@ -21,38 +21,10 @@ public class Main {
 		DataControl test=new DataControl();
 		//test.readMovie();
 		SchedulerUi ui3=new SchedulerUi();
-		ui3.displayCreatePage();
+		//ui3.displayCreatePage();
+		validateTimeSlotClash(1950);
 		
-		
-		ArrayList<ShowTime> sTArray=new ArrayList<ShowTime>();
-		ArrayList<Integer> showTimeArray =new ArrayList<Integer>();
-		for(int i=0;i<5;i++){
-			ShowTime s=new ShowTime();
-			if(i%2==0){
-				s.setCinemaId(2);
-				s.setMovieId(1);
-				showTimeArray.add(2000);
-			}
-			else
-			{
-				s.setCinemaId(1);
-				s.setMovieId(1);
-				showTimeArray.add(2200);
-			}
-		/*	if(i==3){
-				s.setCinemaId(3);
-				s.setMovieId(1);
-				showTimeArray.add(2300);
-			}
-			*/
-			//s.setShowTimeArray(showTimeArray);
-			sTArray.add(s);
-		}
-		for(int i=0;i<sTArray.size();i++)
-		{
-		  // sTArray.get(i).printShowTimeArray();
-		 }
-		//validateCinemaShowTime2(sTArray);
+
 	}
 
 	
@@ -131,5 +103,24 @@ public class Main {
 		
 		return false;
 		
+	}
+	
+	public static boolean validateTimeSlotClash(int time) throws IOException {
+		boolean valid=true;
+		String tmp="1900-2100";
+				String[] timeArr = tmp.split("-");
+				int startTime=Integer.parseInt(timeArr[0]);
+				int endTime=Integer.parseInt(timeArr[1]);
+				if(time>=startTime && time<=endTime)
+				{
+					valid=false;
+					
+				}
+				System.out.println(valid);
+				return valid;
+					
+	
+		
+	
 	}
 }

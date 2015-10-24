@@ -13,12 +13,16 @@ public class ShowTime {
 	private int movieId;
 	private int showTimeId;
 	private int noOfShowTimes;
+	private int noOfSeats;
+	private int dayType;
+	private String showTimeValue;
 	private ArrayList<String> showTimeArray;
+	
 	private ArrayList<Seats> listOfSeats;
 	
 	
-	public ShowTime(int listingId, int cinemaId, int movieId, int showTimeId,
-			int noOfShowTimes, ArrayList<String> showTimeArray) {
+	public ShowTime(int listingId, int cinemaId, int movieId, int showTimeId, int dayType,
+			int noOfShowTimes, ArrayList<String> showTimeArray,int seats){
 		super();
 		this.listingId = listingId;
 		this.cinemaId = cinemaId;
@@ -26,10 +30,14 @@ public class ShowTime {
 		this.showTimeId = showTimeId;
 		this.noOfShowTimes = noOfShowTimes;
 		this.showTimeArray = showTimeArray;
+		this.dayType=dayType;
+		noOfSeats=seats;
 	}
+	
 	public ShowTime() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public int getListingId() {
 		return listingId;
 	}
@@ -71,6 +79,26 @@ public class ShowTime {
 	}
 	public void setMovieId(int movieId) {
 		this.movieId = movieId;
+	}
+	public int getNoOfSeats() {
+		return noOfSeats;
+	}
+	public void setNoOfSeats(int noOfSeats) {
+		this.noOfSeats = noOfSeats;
+	}
+	public int getDayType() {
+		return dayType;
+	}
+	public void setDayType(int dayType) {
+		this.dayType = dayType;
+	}
+
+	public String getShowTimeValue() {
+		return showTimeValue;
+	}
+
+	public void setShowTimeValue(String showTimeValue) {
+		this.showTimeValue = showTimeValue;
 	}
 	
 	

@@ -98,13 +98,6 @@ public class ValidationControl extends DataControl{
 	
 	
 	
-	public boolean validateTimeSlotClash(ArrayList<ShowTime> s)
-	{
-		
-		
-		return false;
-		
-	}
 	
 	public int validateAndReturnIntegerValue(String s)
 	{
@@ -114,6 +107,14 @@ public class ValidationControl extends DataControl{
 		}
 		else
 			return 200;
+		
+	}
+
+
+
+
+	public void validateTimeSlotClash(int movieId, int cinemaId, int time, ArrayList<String> showTimeArray) {
+		// TODO Auto-generated method stub
 		
 	}
 }

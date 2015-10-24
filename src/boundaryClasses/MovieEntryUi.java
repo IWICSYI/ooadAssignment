@@ -75,12 +75,11 @@ public class MovieEntryUi {
 		
 		do
 		{	
-			System.out.println("Please choose movie type");
-			System.out.println("1.Digital Movie");
-			System.out.println("2.Digital Block Buster Movie");
-			System.out.println("3.3D Movie");
+			System.out.println("Please choose whehter movie is available in 3D?");
+			System.out.println("1.No");
+			System.out.println("2.Yes");
 			choice=vl.validateAndReturnIntegerValue(sc.nextLine());
-			if(choice<1||choice>3)
+			if(choice<1||choice>2)
 			{
 				System.out.println("Invalid input, please try again");
 				choice=200;
