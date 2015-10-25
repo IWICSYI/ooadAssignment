@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.Scanner;
 
 import controllerClasses.LoginControl;
@@ -14,7 +15,7 @@ public class LoginUi {
 		
 	}
 	
-	public void display() throws IOException
+	public void display() throws IOException, ParseException
 	{
 		Console console= System.console();
 		 if (console == null) {

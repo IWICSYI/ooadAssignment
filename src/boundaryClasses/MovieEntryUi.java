@@ -78,7 +78,7 @@ public class MovieEntryUi {
 			System.out.println("Please choose whehter movie is available in 3D?");
 			System.out.println("1.No");
 			System.out.println("2.Yes");
-			choice=vl.validateAndReturnIntegerValue(sc.nextLine());
+			choice=vl.validateYesNoAndReturnIntegerValue(sc.nextLine());
 			if(choice<1||choice>2)
 			{
 				System.out.println("Invalid input, please try again");
@@ -89,7 +89,7 @@ public class MovieEntryUi {
 				movie.setMovieType(choice);
 				break;
 			}
-		}while(choice>4);
+		}while(choice<=-1);
 		
 		MovieEntryController mec=new MovieEntryController();
 		mec.createMovie(movie);

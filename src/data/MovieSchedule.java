@@ -2,9 +2,10 @@ package data;
 import data.Cineplex;
 import data.Movie;
 
+import java.io.Serializable;
 import java.util.*;
 //1cineplexId|1movieUniqueId|4listingId|startDate|endDate|1typeofDay|status
-public class MovieSchedule {
+public class MovieSchedule implements Serializable{
 	public MovieSchedule(){}
 	
 
@@ -12,28 +13,46 @@ public class MovieSchedule {
 	private int cinemaId;
 	private int movieId;
 	private int listingId;
-	private String startDate;
-	private String endDate;
+	private Date startDate;
+	private Date endDate;
 	private int typeofDay;
 	private int status;
 	private int threeDOrNot;
 	private int platOrNot;
+	private int previewStatus;
 	
 	private ArrayList<ShowTime> showTimeList;
 	
-	public MovieSchedule(int cineplexId, int movieId,
-			int listingId, String startDate, String endDate, int typeofDay,
-			int status) {
+	
+	
+	public MovieSchedule(int cineplexId, int cinemaId, int movieId,
+			int listingId, Date startDate, Date endDate, int typeofDay,
+			int status, int threeDOrNot, int platOrNot, int previewStatus) {
 		super();
 		this.cineplexId = cineplexId;
+		this.cinemaId = cinemaId;
 		this.movieId = movieId;
 		this.listingId = listingId;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.typeofDay = typeofDay;
 		this.status = status;
+		this.threeDOrNot = threeDOrNot;
+		this.platOrNot = platOrNot;
+		this.previewStatus = previewStatus;
 	}
-	
+	public int getPreviewStatus() {
+		return previewStatus;
+	}
+	public void setPreviewStatus(int previewStatus) {
+		this.previewStatus = previewStatus;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 	public int getCineplexId() {
 		return cineplexId;
 	}
@@ -52,17 +71,12 @@ public class MovieSchedule {
 	public void setListingId(int listingId) {
 		this.listingId = listingId;
 	}
-	public String getStartDate() {
+	
+	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
-	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
 	}
 	public int getTypeofDay() {
 		return typeofDay;

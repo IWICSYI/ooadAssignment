@@ -1,6 +1,7 @@
 package boundaryClasses;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ import data.ShowTime;
 
 public class SchedulerUi extends DataControl {
 
-	public void displayMain() throws IOException {
+	public void displayMain() throws IOException, ParseException {
 		Scanner sc=new Scanner(System.in);
 		int choice = 0;
 		String test;
@@ -58,9 +59,10 @@ public class SchedulerUi extends DataControl {
 	}
 	
 	
-	public void displayCreatePage() throws IOException {
+	public void displayCreatePage() throws IOException, ParseException {
 		Scanner sc=new Scanner(System.in);
-		int choice = 0, num=0,cinemaId,movieId,movieLen,movieType;
+		int choice = 0, num=0,cinemaId,movieId,movieLen,movieType, cinplexId;
+		boolean validDate;
 		MovieSchedule sch=new MovieSchedule();
 		
 		ValidationControl vl=new ValidationControl();
@@ -87,13 +89,13 @@ public class SchedulerUi extends DataControl {
 		{
 			System.out.println((i+1)+":"+cnList.get(i).getCineplexName());
 		}
-			choice=vl.validateAndReturnIntegerValue(sc.nextLine());
-			sch.setCineplexId(choice);
+			cinplexId=vl.validateAndReturnIntegerValue(sc.nextLine());
+			sch.setCineplexId(cinplexId);
 		
 		System.out.println("Please select which movie to be scheduled");
 		for(int i=0;i<movieList.size();i++)
 		{
-			System.out.println((i+1)+":"+movieList.get(i).getMovieName());
+			System.out.print((i+1)+":"+movieList.get(i).getMovieName()+" ");
 			pair.add(oC.idPairerWithMovieLength(i, movieList.get(i).getMovieId(), movieList.get(i).getMovieLength(),movieList.get(i).getMovieType()));
 		}
 		choice=vl.validateAndReturnIntegerValue(sc.nextLine());
@@ -102,10 +104,13 @@ public class SchedulerUi extends DataControl {
 		movieType=pair.get(choice-1).getMovieType();
 		sch.setMovieId(movieId);
 		pair.clear();
+		
 		if(movieType==2)
 		{
 			System.out.println("Please select whether movie will be shown in 3D?");
-			choice=vl.validateAndReturnIntegerValue(sc.nextLine());
+			System.out.println("1.No");
+			System.out.println("2.Yes");
+			choice=vl.validateYesNoAndReturnIntegerValue(sc.nextLine());
 			if(choice<1||choice>2)
 			{
 				System.out.println("Invalid input, please try again");
@@ -114,23 +119,31 @@ public class SchedulerUi extends DataControl {
 			else
 			{
 				sch.setThreeDOrNot(choice);
-				//break;
 			}
 		}
+	
+		
+		System.out.println("Please enter starting date of the movie");
+		String tmp=sc.nextLine();
+		Date startDate=ValidationControl.validateDate(tmp);
+		sch.setStartDate(startDate);
+		
+		System.out.println("How many days will the movie be shown?");
+		int runDate=vl.validateAndReturnIntegerValue(sc.nextLine());
+		sch.setEndDate(calculateEndDate(startDate,runDate));
+		
+		System.out.println("Please select whether movie will have a preview?");
+		System.out.println("1.No");
+		System.out.println("2.Yes");
+		choice=vl.validateYesNoAndReturnIntegerValue(sc.nextLine());
+		sch.setPreviewStatus(choice);
 		
 		
 		
-		
-		SchedulerController sec=new SchedulerController();
 		ShowTimeController sTC=new ShowTimeController();
-		ArrayList<MovieSchedule>schList=sTC.TimeSlotHandler(sch,movieId,movieLen,movieType, pair);
-		
-		//System.out.println("Please enter how many days the movie will on");
+		sTC.TimeSlotHandler(sch,movieId,movieLen,movieType,cinplexId, pair);
 		
 		
-			
-		
-		sec.createSchedule(sch);
 		displayMain();
 			
 		

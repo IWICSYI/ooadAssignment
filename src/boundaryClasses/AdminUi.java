@@ -1,6 +1,10 @@
 package boundaryClasses;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
+
+import controllerClasses.ValidationControl;
 
 public class AdminUi {
 
@@ -8,7 +12,7 @@ public class AdminUi {
 		
 	}
 
-	public void display() {
+	public void display() throws IOException, ParseException {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("#############################################");
 		System.out.println("#                 Admin Page                #");
@@ -17,16 +21,14 @@ public class AdminUi {
 		System.out.println("#     and the movies to be shown            #");
 		System.out.println("#   3.Configure System Setting              #");
 		System.out.println("#############################################");
-		
+		String s=sc.nextLine();
 		int choice = 0;
 		do
 		{
-			try
-			{
-				choice=sc.nextInt();
+				choice=ValidationControl.validateAndReturnIntegerValue(s);
 				if(choice<1||choice>3)
 				{
-					System.out.println("Invalid Input,please try again");
+					System.out.println("Invalid Input, please try again"+choice);
 				}
 				else if(choice==1){
 					MovieEntryUi mUI=new MovieEntryUi();
@@ -36,13 +38,9 @@ public class AdminUi {
 					SchedulerUi sUI=new SchedulerUi();
 					sUI.displayMain();
 				}
-			}
-			catch(Exception e)
-				{
-					System.out.println("Invalid Input,please try again");
-				
-				}
-		}while(choice>3||choice<0);
+			
+			
+		}while(choice>3);
 		
 	}
 

@@ -1,7 +1,11 @@
 package controllerClasses;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
+import data.Movie;
+import data.ShowTime;
 import misc.ObjectContainer;
 
 public class MiscControl {
@@ -9,23 +13,54 @@ public class MiscControl {
 	private ArrayList<String> stringList = new ArrayList<String>();
 	
 
-	public ObjectContainer idPairerWithCinema(int i, int id, String name, int cineType)
+	public static ArrayList<Integer> getUniqueInteger(ArrayList<Integer> a){
+		 Set<Integer> set = new HashSet<Integer>();
+		 ArrayList<Integer> uniqueList=new ArrayList<Integer>();
+		 for(int i=0;i<a.size();i++)
+		 {
+			 set.add(a.get(i));
+		 }
+		Object[] intListObj = set.toArray();
+		for(int i=0;i<intListObj.length;i++){
+			uniqueList.add(Integer.parseInt(intListObj[i].toString().trim()));
+		}
+		 
+		 return uniqueList;
+		
+		
+	}
+	
+	public static ObjectContainer idPairerWithCinema(int i, int id, String name, int cineType, int seatNo)
 	{
-		ObjectContainer pair=new ObjectContainer(i,id,name,cineType);
+		ObjectContainer pair=new ObjectContainer(i,id,name,cineType,seatNo);
 		return pair;
 	}
 	
-	public ObjectContainer idPairerWithName(int i, int id, String name)
+	public static ObjectContainer idPairerWithShowTime(int i, int dayOfWeek,
+			ArrayList<String> showTimeArray, ArrayList<Integer> showTimeId) {
+	
+		ObjectContainer pair=new ObjectContainer(i,dayOfWeek,showTimeArray,showTimeId);
+		return pair;
+	}
+	
+	public static ObjectContainer idPairerWithName(int i, int id, String name)
 	{
 		ObjectContainer pair=new ObjectContainer(i,id,name);
 		return pair;
 	}
 	
-	public ObjectContainer idPairerWithMovieLength(int i, int id, int len, int movieType)
+	public static ObjectContainer idPairerWithMovieLength(int i, int id, int len, int movieType)
 	{
 		ObjectContainer pair=new ObjectContainer(i,id,len,movieType);
 		return pair;
 	}
+	
+	public static ObjectContainer idPairerWithMovie(int i, Movie m)
+	{
+		ObjectContainer pair=new ObjectContainer(i,m);
+		return pair;
+	}
+	
 	
 	
 	
@@ -71,7 +106,7 @@ public class MiscControl {
         return stringList2;
     }
  
-    private void merge(ArrayList<String> left, ArrayList<String> right, 
+    private  void merge(ArrayList<String> left, ArrayList<String> right, 
             ArrayList<String> stringList) {
  
         int leftIndex = 0;
@@ -129,5 +164,7 @@ public class MiscControl {
 	public void setStringList(ArrayList<String> stringList) {
 		this.stringList = stringList;
 	}
+
+	
 	
 }

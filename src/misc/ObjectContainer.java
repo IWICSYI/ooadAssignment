@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import data.*;
+
 public class ObjectContainer {
 	private int i;
 	private int id;
@@ -12,17 +14,23 @@ public class ObjectContainer {
 	private int movieId;
 	private int movieLen;
 	private int movieType;
+	private int dayType;
+	private int seatNo;
+	private Movie m;
 	private String name;
-	ArrayList<Integer> newST;
-	ArrayList<String> stringArray;
+	private ArrayList<Integer> newST;
+	private ArrayList<String> stringArray;
+	private String timeValue;
+	private ArrayList<Integer> sTIdList;
 	
 	//Constructor to pair id and choice with name
-	public ObjectContainer(int i, int id, String name, int cineType) {
+	public ObjectContainer(int i, int id, String name, int cineType, int seatNo) {
 		super();
 		this.i = i;
 		this.id = id;
 		this.name = name;
 		this.cineType=cineType;
+		this.seatNo=seatNo;
 	}
 	
 	public ObjectContainer(int i, int id, String name) {
@@ -33,10 +41,10 @@ public class ObjectContainer {
 		
 	}
 	
-	public ObjectContainer(int id, ArrayList<String> stringArray) {
+	public ObjectContainer(int id, String string) {
 		super();
 		this.id = id;
-		this.stringArray = stringArray;
+		this.setTimeValue(string);
 	}
 	
 	public ObjectContainer(int i, int id, int len, int movieType) {
@@ -54,6 +62,19 @@ public class ObjectContainer {
 		this.id = id;
 	}
 	
+	public ObjectContainer(int i2, Movie m2) {
+		this.i=i2;
+		this.m=m2;
+	}
+
+	public ObjectContainer(int i2, int dayOfWeek,ArrayList<String> showTimeArray,ArrayList<Integer> showTimeId) {
+		this.i=i2;
+		this.dayType=dayOfWeek;
+		this.stringArray=showTimeArray;
+		this.setsTIdList(showTimeId);
+				
+	}
+
 	public int getI() {
 		return i;
 	}
@@ -155,6 +176,46 @@ public class ObjectContainer {
 
 	public void setCineType(int cineType) {
 		this.cineType = cineType;
+	}
+
+	public String getTimeValue() {
+		return timeValue;
+	}
+
+	public void setTimeValue(String timeValue) {
+		this.timeValue = timeValue;
+	}
+
+	public int getSeatNo() {
+		return seatNo;
+	}
+
+	public void setSeatNo(int seatNo) {
+		this.seatNo = seatNo;
+	}
+
+	public Movie getM() {
+		return m;
+	}
+
+	public void setM(Movie m) {
+		this.m = m;
+	}
+
+	public int getDayType() {
+		return dayType;
+	}
+
+	public void setDayType(int dayType) {
+		this.dayType = dayType;
+	}
+
+	public ArrayList<Integer> getsTIdList() {
+		return sTIdList;
+	}
+
+	public void setsTIdList(ArrayList<Integer> sTIdList) {
+		this.sTIdList = sTIdList;
 	}
 
 }

@@ -2,18 +2,21 @@ package misc;
 
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import controllerClasses.DataControl;
+import controllerClasses.ValidationControl;
 import data.ShowTime;
 import boundaryClasses.*;
 
-public class Main {
+public class Main extends ValidationControl{
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		ModuleSelectionUi ui=new ModuleSelectionUi();
 		//ui.display();
 		MovieEntryUi ui2=new MovieEntryUi();
@@ -21,89 +24,97 @@ public class Main {
 		DataControl test=new DataControl();
 		//test.readMovie();
 		SchedulerUi ui3=new SchedulerUi();
-		//ui3.displayCreatePage();
-		validateTimeSlotClash(1950);
+		ui3.displayCreatePage();
+		
+		
+		CustomerUi ui4=new CustomerUi();
+		//ui4.displayNowShowing();
+		
+		CustBuyTicketUi u=new CustBuyTicketUi();
+		//u.displayBuyTicket(4);
+		//validateTimeSlotClash(1950);
+		int time = ValidationControl.validateAndReturnTime("1900");
+		CustSeatsUi a=new CustSeatsUi();
+		//a.displaySeat(4);
+		
+		String time2=minutesPlusTime2(20,0000);
+		//System.out.println(time2);
+		//System.out.println(time);
+		Date startDate=validateDate("1-2-2015");
+		//calculatePreviewStartDate(startDate);
+		
 		
 
 	}
 
-	
-	
-	public static boolean validateCinemaShowTime(ArrayList<ShowTime> sTArray) throws IOException
+	public static String minutesPlusTime2(int minutes,int time)
 	{
-		Set<Integer> set = new HashSet<Integer>();
-		for(int i=0;i<sTArray.size();i++)
-		{
-			System.out.print(sTArray.get(i).getCinemaId()+" ");
-			set.add(sTArray.get(i).getCinemaId());
-		}
-		Iterator<Integer> a=set.iterator();
-		System.out.println();
-		while(a.hasNext()){
-			System.out.println(a.next());
-		
-	
-		
-		}
-		return false;
-		
-	}
-	
-	public static boolean validateCinemaShowTime2(ArrayList<ShowTime> sTArray) throws IOException
-	{
-		Set<Integer> set = new HashSet<Integer>();
-		ArrayList<ShowTime> sTArray2=sTArray;
-		ShowTime s=new ShowTime();
-		//Set<Integer> newST=new ArrayList<Integer>();
-		ArrayList<ObjectContainer> pairList=new ArrayList<ObjectContainer>();
-		int checkCinemaId,checkMovieId;
-		int checkCinemaId2,checkMovieId2;
-		for(int i=0;i<sTArray.size();i++)
-		{
-			checkCinemaId=sTArray.get(i).getCinemaId();
-			checkMovieId=sTArray.get(i).getMovieId();
-			
-			for(int j=i+1;j<sTArray.size();j++)
-			{	
-				checkCinemaId2=sTArray.get(j).getCinemaId();
-				checkMovieId2=sTArray.get(j).getMovieId();
-				if(checkCinemaId==checkCinemaId2)
-				{
-					System.out.println(i+1+" compare with "+(j+1));
-					//set=sTArray.get(j).getShowTimeArrayValue();
-					//Pairer a=new Pairer(checkCinemaId,newST);
-					//pairList.add(a);
-					//for(int k=0;k<newST.size();k++)
-					//{
-						//sTArray.get(i).getShowTimeArray().add(newST.get(k));
-						
-						
-					//}
+		int hr=minutes/60;
+		int min=minutes-(hr*60);
+		int endTime=time+hr*100+min;
+		String startTimeSt = Integer.toString(time);
+		String endTimeSt = Integer.toString(endTime);
+		if(startTimeSt.length()==4){
+			String a=startTimeSt.substring(0, 2);
+			int check=Integer.parseInt(a);
+			if(check>=24){
+				check=check-24;
+				a=Integer.toString(check);
+				if(a.length()==0||a.length()==1){
+					a="0"+a;
 				}
 			}
+			startTimeSt=a+startTimeSt.substring(2, 4);
 			
 		}
-		
-		for(int i=0;i<set.size();i++){
-			//System.out.print(newST.get(i).intValue()+" ");
+		else if(startTimeSt.length()==3)
+		{
+			startTimeSt="0"+startTimeSt;
+		}
+		else if(startTimeSt.length()==2)
+		{
+			startTimeSt="00"+startTimeSt;
+		}
+		else if(startTimeSt.length()==1)
+		{
+			startTimeSt="000"+startTimeSt;
 		}
 		
-		for(int i=0;i<sTArray.size();i++)
-		{
-		  // sTArray.get(i).printShowTimeArray();
-		 }
-		String st="";
-		for(int i=0;i<pairList.size();i++)
-		{
-		  st=st+"cinema id:"+pairList.get(i).getCinemaId()+"\n";
-		  st=st+"int[] value:"+pairList.get(i).printNewSTList()+"\n";
-		  set=pairList.get(i).getUniqueNewSTList();
-		 }
-		System.out.println(st);
 		
-		return false;
+		if(endTimeSt.length()==4){
+			String a=endTimeSt.substring(0, 2);
+			int check=Integer.parseInt(a);
+			if(check>=24){
+				check=check-24;
+				a=Integer.toString(check);
+				if(a.length()==0||a.length()==1)
+				{
+					a="0"+a;
+				}
+			}
+			endTimeSt=a+endTimeSt.substring(2, 4);;
+		}
+		else if(endTimeSt.length()==3)
+		{
+			endTimeSt="0"+endTimeSt;
+		}
+		else if(endTimeSt.length()==2)
+		{
+			endTimeSt="00"+endTimeSt;
+		}
+		else if(endTimeSt.length()==1)
+		{
+			endTimeSt="000"+endTimeSt;
+		}
+		
+		String finalTime=startTimeSt+"-"+endTimeSt;
+		System.out.println(finalTime);
+		return finalTime;
 		
 	}
+	
+	
+	
 	
 	public static boolean validateTimeSlotClash(int time) throws IOException {
 		boolean valid=true;

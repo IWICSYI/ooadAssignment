@@ -1,8 +1,9 @@
 package data;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Movie {
+public class Movie implements Serializable{
 	
 	private int movieId;
 	private String movieName;	
