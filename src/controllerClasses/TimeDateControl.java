@@ -76,7 +76,6 @@ public class TimeDateControl {
 		}
 		
 		String finalTime=startTimeSt+"-"+endTimeSt;
-		System.out.println(finalTime);
 		return finalTime;
 		
 	}
@@ -91,11 +90,11 @@ public class TimeDateControl {
 	  
 	      // // NOTE!!! : Month from 0 to 11 => 3 is April
 	      calTemp = (Calendar) cal.clone();
-	      System.out.println(" Starting Date will be: " + calTemp.getTime());
+	      System.out.println("Starting date will be: " + calTemp.getTime());
 
 	      // add time
 	     calTemp.add(Calendar.DATE, runDate );
-	      System.out.println(runDate+" days later, it will be: " + calTemp.getTime());
+	      System.out.println("Ending date will be: " + calTemp.getTime());
 	      Date endDate = calTemp.getTime();
 		return endDate;
 		
@@ -110,16 +109,14 @@ public class TimeDateControl {
 			
 		cal.setTime(startDate);
 		Calendar calTemp;
-	  
-	      // // NOTE!!! : Month from 0 to 11 => 3 is April
-	      calTemp = (Calendar) cal.clone();
-	      System.out.println(" Starting Date will be: " + calTemp.getTime());
 
-	      // add time
-	     
-	     calTemp.add(Calendar.DATE, -1 );
-	      System.out.println("1 days before, it will be: " + calTemp.getTime());
-	      startDate = calTemp.getTime();
+		// // NOTE!!! : Month from 0 to 11 => 3 is April
+		calTemp = (Calendar) cal.clone();
+
+		// add time
+
+		calTemp.add(Calendar.DATE, -1 );
+		startDate = calTemp.getTime();
 		return startDate;
 		
 	}

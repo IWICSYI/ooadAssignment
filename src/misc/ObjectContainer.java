@@ -16,12 +16,16 @@ public class ObjectContainer {
 	private int movieType;
 	private int dayType;
 	private int seatNo;
+	private int showTimeId;
 	private Movie m;
+	private ShowTime sT;
 	private String name;
+	private ArrayList<Seats> seatList;
 	private ArrayList<Integer> newST;
 	private ArrayList<String> stringArray;
 	private String timeValue;
 	private ArrayList<Integer> sTIdList;
+	public ObjectContainer(){}
 	
 	//Constructor to pair id and choice with name
 	public ObjectContainer(int i, int id, String name, int cineType, int seatNo) {
@@ -31,6 +35,13 @@ public class ObjectContainer {
 		this.name = name;
 		this.cineType=cineType;
 		this.seatNo=seatNo;
+	}
+	
+	public ObjectContainer(String name, ArrayList<Seats> seats) {
+		super();
+		
+		this.name = name;
+		this.seatList=seats;
 	}
 	
 	public ObjectContainer(int i, int id, String name) {
@@ -67,11 +78,11 @@ public class ObjectContainer {
 		this.m=m2;
 	}
 
-	public ObjectContainer(int i2, int dayOfWeek,ArrayList<String> showTimeArray,ArrayList<Integer> showTimeId) {
+	public ObjectContainer(int i2, int dayOfWeek,String showTimeArray,int showTimeId) {
 		this.i=i2;
 		this.dayType=dayOfWeek;
-		this.stringArray=showTimeArray;
-		this.setsTIdList(showTimeId);
+		this.timeValue=showTimeArray;
+		this.showTimeId=showTimeId;
 				
 	}
 
@@ -216,6 +227,30 @@ public class ObjectContainer {
 
 	public void setsTIdList(ArrayList<Integer> sTIdList) {
 		this.sTIdList = sTIdList;
+	}
+
+	public int getShowTimeId() {
+		return showTimeId;
+	}
+
+	public void setShowTimeId(int showTimeId) {
+		this.showTimeId = showTimeId;
+	}
+
+	public ArrayList<Seats> getSeatList() {
+		return seatList;
+	}
+
+	public void setSeatList(ArrayList<Seats> seatList) {
+		this.seatList = seatList;
+	}
+
+	public ShowTime getsT() {
+		return sT;
+	}
+
+	public void setsT(ShowTime sT) {
+		this.sT = sT;
 	}
 
 }

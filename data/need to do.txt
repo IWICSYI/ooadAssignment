@@ -1,0 +1,24 @@
+Things to do
+
+
+update showtime->end of showing && alot of shit(half done!)
+
+
+show movie details(done) left validation
+show coming soon
+show preview
+
+calculate price(done)
+purchase ticket (done)
+update ticketsales in movie 
+transcation
+validate date input(done)
+
+update movie
+
+sort by ticket sales
+sort by rating
+
+write reviews
+read reviews
+

@@ -42,49 +42,7 @@ public class ValidationControl extends MovieListingControl{
 	}
 	
 	
-	public boolean validateCinemaShowTime(ArrayList<ShowTime> sTArray) throws IOException, ParseException
-	{
-		ArrayList<ShowTime> existST=readShowTimes();
-		ArrayList<ObjectContainer> pairList=new ArrayList<ObjectContainer>();
-		ArrayList<ObjectContainer> pairList2=new ArrayList<ObjectContainer>();
-		StringBuilder st =  new StringBuilder() ;
-		ArrayList<ShowTime> newST=readShowTimes();
-		int checkCinemaId,checkMovieId;
-		int checkCinemaId2,checkMovieId2;
-		Set<Integer> set = new HashSet<Integer>();
-		
-		
-		for(int i=0;i<existST.size();i++)
-		{
-			ObjectContainer p=new ObjectContainer(existST.get(i).getCinemaId(),existST.get(i).getMovieId());
-			pairList.add(p);
-		}
-		
-		for(int i=0;i<sTArray.size();i++)
-		{
-			ObjectContainer p2=new ObjectContainer(sTArray.get(i).getCinemaId(),sTArray.get(i).getMovieId());
-			pairList2.add(p2);
-		}
-		
-		
-		for(int i=0;i<existST.size();i++)
-		{
-			checkCinemaId=pairList.get(i).getI();
-			checkMovieId=pairList.get(i).getId();
-			
-			for(int j=0;j<sTArray.size();j++)
-			{	
-				checkCinemaId2=pairList2.get(j).getI();
-				checkMovieId2=pairList2.get(j).getId();
-				if(checkCinemaId==checkCinemaId2 && checkMovieId==checkMovieId2)
-				{
-					newST.add(sTArray.get(j));
-				}
-			}
-		}
-		return false;
-		
-	}
+
 	
 	
 	public static boolean isInteger(String s) {
@@ -108,9 +66,10 @@ public class ValidationControl extends MovieListingControl{
 		if(intValid && Integer.parseInt(s)>=0){
 			return Integer.parseInt(s);
 		}
-		else
+		else{
+			System.out.println("Invalid integer input!");
 			return -2;
-		
+		}
 	}
 
 	public static int validateYesNoAndReturnIntegerValue(String s)
@@ -134,6 +93,42 @@ public class ValidationControl extends MovieListingControl{
 		boolean valid=false;
 		SimpleDateFormat finalDateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 		
+		if(dateString.length()<8||dateString.length()>10)
+		{
+			System.out.println("Input date is not acceptable, please try again!");
+			return null;
+		}
+		
+		if(!dateString.contains("/"))
+		{
+			System.out.println("Input date must be sperated by /");
+			return null;
+		}
+		if(dateString.contains("/"))
+		{
+			String[] dateCheck=	dateString.split("/");
+			if(dateCheck[0].length()<0||dateCheck[0].length()>2)
+			{
+				System.out.println("Input day is not valid, please try again");
+				return null;
+				
+			}
+			if(dateCheck[1].length()<0||dateCheck[1].length()>2)
+			{
+				System.out.println("Input month is not valid, please try again");
+				
+				return null;
+				
+			}
+			if(dateCheck[2].length()!=4)
+			{	
+				System.out.println("Input year is not valid, it must be 4 letters in lenght, please try again");
+			
+				return null;
+				
+			}
+			
+		}
 		for(int i=0;i<formats.length;i++)
 		{
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(formats[i]);
@@ -170,33 +165,33 @@ public class ValidationControl extends MovieListingControl{
 		boolean valid=true;
 		int first = 0,second=0,third=0,four=0,i=1;
 		if(!intValid){
-			System.out.println(i++);
+			System.out.println("Input time is not acceptable, please try again!");
 			return -2;
 		}
 		
-		if(intValid && Integer.parseInt(s)>0 && s.length()==4){
+		if(intValid && Integer.parseInt(s)>=0 && s.length()==4){
 			 first=Character.getNumericValue(s.charAt(0));
 			 second=Character.getNumericValue(s.charAt(1));
 			 third=Character.getNumericValue(s.charAt(2));
 			 four=Character.getNumericValue(s.charAt(3));	
 		}
 		else{
-			System.out.println("here");
+			System.out.println("Input time is not acceptable, please try again!");
 			return -2;
 		}
 		if(first<0||first>2){
 			valid=false;
-			System.out.println("3");
+			//System.out.println("3");
 		}
 		else if(first>1&&second>4)
 		{
 			valid=false;
-			System.out.println("4");
+			//System.out.println("4");
 		}
 		else if(third>5)
 		{
 			valid=false; 
-			System.out.println("5");
+			//System.out.println("5");
 		}
 		else
 			valid=true;
@@ -204,8 +199,10 @@ public class ValidationControl extends MovieListingControl{
 		if(valid)
 			return Integer.parseInt(s);
 		else
+		{
+			System.out.println("Input time is not acceptable, please try again!");
 			return -2;
-		
+		}
 	}
 
 }

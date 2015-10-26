@@ -18,6 +18,7 @@ public class MovieSchedule implements Serializable{
 	private int typeofDay;
 	private int status;
 	private int threeDOrNot;
+	private int blockBuster;
 	private int platOrNot;
 	private int previewStatus;
 	
@@ -27,7 +28,7 @@ public class MovieSchedule implements Serializable{
 	
 	public MovieSchedule(int cineplexId, int cinemaId, int movieId,
 			int listingId, Date startDate, Date endDate, int typeofDay,
-			int status, int threeDOrNot, int platOrNot, int previewStatus) {
+			int status, int threeDOrNot,int blockOrNot, int platOrNot, int previewStatus) {
 		super();
 		this.cineplexId = cineplexId;
 		this.cinemaId = cinemaId;
@@ -38,6 +39,7 @@ public class MovieSchedule implements Serializable{
 		this.typeofDay = typeofDay;
 		this.status = status;
 		this.threeDOrNot = threeDOrNot;
+		this.blockBuster=blockOrNot;
 		this.platOrNot = platOrNot;
 		this.previewStatus = previewStatus;
 	}
@@ -117,6 +119,12 @@ public class MovieSchedule implements Serializable{
 
 	public void setPlatOrNot(int platOrNot) {
 		this.platOrNot = platOrNot;
+	}
+	public int getBlockBuster() {
+		return blockBuster;
+	}
+	public void setBlockBuster(int blockBuster) {
+		this.blockBuster = blockBuster;
 	}
 
 }

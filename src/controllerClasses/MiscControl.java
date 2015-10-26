@@ -37,9 +37,9 @@ public class MiscControl {
 	}
 	
 	public static ObjectContainer idPairerWithShowTime(int i, int dayOfWeek,
-			ArrayList<String> showTimeArray, ArrayList<Integer> showTimeId) {
+			String string, int j) {
 	
-		ObjectContainer pair=new ObjectContainer(i,dayOfWeek,showTimeArray,showTimeId);
+		ObjectContainer pair=new ObjectContainer(i,dayOfWeek,string,j);
 		return pair;
 	}
 	
@@ -77,8 +77,10 @@ public class MiscControl {
         ArrayList<String> right = new ArrayList<String>();
         int middle;
  
-        if(stringList2.size()==1)    
-            return stringList2;
+        if(stringList2.size()==1)  {
+        	return stringList2;
+        }
+            
         else
         {
             middle = stringList2.size()/2;

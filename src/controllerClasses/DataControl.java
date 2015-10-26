@@ -181,7 +181,7 @@ public class DataControl extends TimeDateControl {
 			return alr ;
 	}
 	
-	public ArrayList<Cinema> readCinemaByCineplexIdAndMovieType(int cId,int mID) throws IOException{
+	public ArrayList<Cinema> readCinemaByCineplexId(int cId) throws IOException{
 		ArrayList<Cineplex> cnList= new ArrayList<Cineplex>();
 		cnList=readCineplex();
 		
@@ -193,20 +193,49 @@ public class DataControl extends TimeDateControl {
 				// get individual 'fields' of the string separated by SEPARATOR
 				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
 				int cineplexId=Integer.parseInt(star.nextToken().trim());
+				int  cinemaId = Integer.parseInt(star.nextToken().trim());	
+				String cinemaName=star.nextToken().trim();
+				int cinemaType=Integer.parseInt(star.nextToken().trim());	
+				int seats=Integer.parseInt(star.nextToken().trim());	
+				
 				if(cineplexId==cId)
 				{
-					int  cinemaId = Integer.parseInt(star.nextToken().trim());	
-					String cinemaName=star.nextToken().trim();
-					int cinemaType=Integer.parseInt(star.nextToken().trim());	
-					int seats=Integer.parseInt(star.nextToken().trim());	
 					Cinema u = new Cinema(cineplexId,cinemaId,cinemaName,cinemaType,seats);
 					// add to  list
-					if(cinemaType==mID)
-						alr.add(u) ;
+					alr.add(u) ;
 				}
 			}
 			return alr ;
 	}
+	
+	
+	public ArrayList<Prices> readPrice() throws IOException{
+		
+		ArrayList stringArray = (ArrayList)read("data/ticketPrice.txt");
+		ArrayList alr = new ArrayList() ;// to store data
+
+        for (int i = 0 ; i < stringArray.size() ; i++) {
+				String st = (String)stringArray.get(i);
+				//normal price=8*platinum=6*3D=1*blockbuster=*0.5*Age65>-2*holidayPrice=2*weekEndPrice=2
+				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
+				double normal=Double.parseDouble(star.nextToken().trim());
+				double  plat = Double.parseDouble(star.nextToken().trim());	
+				double tD=Double.parseDouble(star.nextToken().trim());
+				double blockbuster=Double.parseDouble(star.nextToken().trim());
+				double age=Double.parseDouble(star.nextToken().trim());
+				double child=Double.parseDouble(star.nextToken().trim());
+				double holi=Double.parseDouble(star.nextToken().trim());
+				double weekend=Double.parseDouble(star.nextToken().trim());
+				
+				
+					Prices u = new Prices(normal,plat,tD,blockbuster,age,child,holi,weekend);
+					// add to  list
+					alr.add(u) ;
+				}
+        return alr ;
+			}
+			
+	
 	
 	public ArrayList<Cinema> readCinema() throws IOException{
 		ArrayList<Cineplex> cnList= new ArrayList<Cineplex>();

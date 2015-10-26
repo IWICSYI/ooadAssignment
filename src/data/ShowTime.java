@@ -19,13 +19,13 @@ public class ShowTime implements Serializable{
 	private Date startDate;
 	private Date endDate;
 	private double ticketPrice;
-
+	private int previewStatus;
 	
 	private ArrayList<Seats> listOfSeats;
 	
 	
 	public ShowTime(int listingId, int cinemaId, int movieId, int showTimeId, int dayType,
-			String showTime,int seats){
+			String showTime,int seats,Date startDate,Date endDate,double ticketPrice,int prev){
 		super();
 		this.listingId = listingId;
 		this.cinemaId = cinemaId;
@@ -34,6 +34,10 @@ public class ShowTime implements Serializable{
 		this.dayType=dayType;
 		noOfSeats=seats;
 		showTimeValue=showTime;
+		this.startDate=startDate;
+		this.endDate=endDate;
+		this.ticketPrice=ticketPrice;
+		this.previewStatus=prev;
 	}
 	
 	public ShowTime() {
@@ -114,6 +118,14 @@ public class ShowTime implements Serializable{
 
 	public void setTicketPrice(double ticketPrice) {
 		this.ticketPrice = ticketPrice;
+	}
+
+	public int getPreviewStatus() {
+		return previewStatus;
+	}
+
+	public void setPreviewStatus(int previewStatus) {
+		this.previewStatus = previewStatus;
 	}
 	
 	

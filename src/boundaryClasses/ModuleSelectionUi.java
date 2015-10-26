@@ -28,8 +28,13 @@ public class ModuleSelectionUi {
 			}
 			else if(choice==1){
 
-				LoginUi lg=new LoginUi();
+				AdminLoginUi lg=new AdminLoginUi();
 				lg.display();
+			}
+			else if(choice==2){
+
+				CustomerUi cu=new CustomerUi();
+				cu.displayNowShowing();
 			}
 
 

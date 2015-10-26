@@ -45,7 +45,7 @@ public class MovieListingControl extends DataControl {
 	
 	
 	
-	public ArrayList<MovieSchedule> readScheduleListingBasedOnStartingDate() throws IOException, ParseException{
+	public ArrayList<MovieSchedule> readNonPlatScheduleListingBasedOnStartingDate() throws IOException, ParseException{
 		
 		ArrayList stringArray = (ArrayList)read("data/movieScheduleListing.txt");
 		ArrayList alr = new ArrayList() ;// to store data
@@ -69,13 +69,14 @@ public class MovieListingControl extends DataControl {
 				int typeOfDay=Integer.parseInt(star.nextToken().trim());
 				int status=Integer.parseInt(star.nextToken().trim());
 				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
+				int blockDOrNot=Integer.parseInt(star.nextToken().trim());
 				int platOrNot=Integer.parseInt(star.nextToken().trim());
 				int previewStatus=Integer.parseInt(star.nextToken().trim());
 				
 				
 				
-				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,platOrNot,previewStatus);
-				if(today.after(startDate)&&today.before(endDate))
+				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,blockDOrNot,platOrNot,previewStatus);
+				if(today.after(startDate)&&today.before(endDate)&& platOrNot==0)
 				{
 					
 					alr.add(u) ;
@@ -86,7 +87,7 @@ public class MovieListingControl extends DataControl {
 	}
 
 	
-	public ArrayList<MovieSchedule> readScheduleListingBasedOnPreview() throws IOException, ParseException{
+	public ArrayList<MovieSchedule> readNonPlatScheduleListingBasedOnPreview() throws IOException, ParseException{
 		ArrayList stringArray = (ArrayList)read("data/movieScheduleListing.txt");
 		ArrayList alr = new ArrayList() ;// to store data
 		ArrayList<Integer> showTimeArray=new ArrayList<Integer>();
@@ -110,18 +111,19 @@ public class MovieListingControl extends DataControl {
 				int typeOfDay=Integer.parseInt(star.nextToken().trim());
 				int status=Integer.parseInt(star.nextToken().trim());
 				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
+				int blockOrNot=Integer.parseInt(star.nextToken().trim());
 				int platOrNot=Integer.parseInt(star.nextToken().trim());
 				int previewStatus=Integer.parseInt(star.nextToken().trim());
 				
-				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,platOrNot,previewStatus);
-				if(previewStatus==1&& today.equals(startDate)||today.after(startDate)&&today.before(endDate))
+				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,blockOrNot,platOrNot,previewStatus);
+				if(previewStatus==1&& today.equals(startDate)||today.after(startDate)&&today.before(endDate)&& platOrNot==0)
 					alr.add(u) ;
 				
 			}
 			return alr ;
 	}
 	
-	public ArrayList<MovieSchedule> readScheduleListingBasedOnComingSoon() throws IOException, ParseException{
+	public ArrayList<MovieSchedule> readNonPlatScheduleListingBasedOnComingSoon() throws IOException, ParseException{
 		ArrayList stringArray = (ArrayList)read("data/movieScheduleListing.txt");
 		ArrayList alr = new ArrayList() ;// to store data
 		ArrayList<Integer> showTimeArray=new ArrayList<Integer>();
@@ -144,10 +146,12 @@ public class MovieListingControl extends DataControl {
 				int typeOfDay=Integer.parseInt(star.nextToken().trim());
 				int status=Integer.parseInt(star.nextToken().trim());
 				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
+				int blockOrNot=Integer.parseInt(star.nextToken().trim());
 				int platOrNot=Integer.parseInt(star.nextToken().trim());
 				int previewStatus=Integer.parseInt(star.nextToken().trim());
 				Date comingSoon=calculateComingSoon(startDate);
-				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,platOrNot,previewStatus);
+				
+				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,blockOrNot,platOrNot,previewStatus);
 				if(today.equals(comingSoon)||today.after(comingSoon)&&today.before(startDate))
 					alr.add(u) ;
 				
@@ -158,7 +162,7 @@ public class MovieListingControl extends DataControl {
 
 
 
-	public ArrayList<MovieSchedule> readScheduleListingBasedOnStartingDateAndMovieId(int moveId) throws ParseException, IOException {
+	public ArrayList<MovieSchedule> readNonPlatScheduleListingBasedOnStartingDateAndMovieId(int moveId) throws ParseException, IOException {
 		ArrayList stringArray = (ArrayList)read("data/movieScheduleListing.txt");
 		ArrayList alr = new ArrayList() ;// to store data
 		ArrayList<Integer> showTimeArray=new ArrayList<Integer>();
@@ -181,10 +185,11 @@ public class MovieListingControl extends DataControl {
 				int typeOfDay=Integer.parseInt(star.nextToken().trim());
 				int status=Integer.parseInt(star.nextToken().trim());
 				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
+				int blockOrNot=Integer.parseInt(star.nextToken().trim());
 				int platOrNot=Integer.parseInt(star.nextToken().trim());
 				int previewStatus=Integer.parseInt(star.nextToken().trim());
 				
-				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,platOrNot,previewStatus);
+				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,blockOrNot,platOrNot,previewStatus);
 				if(today.equals(startDate)||today.after(startDate)&&today.before(endDate)&&movieId==moveId)
 					alr.add(u) ;
 				
@@ -214,10 +219,12 @@ public ArrayList<ShowTime> readShowTimes() throws IOException, ParseException{
 				Date startDate=finalDateFormatter.parse(startDateString);
 				String endDateString=star.nextToken().trim();
 				Date endDate=finalDateFormatter.parse(endDateString);
+				double price=Double.parseDouble(star.nextToken().trim());
+				int preview = Integer.parseInt(star.nextToken().trim());
 				
 				
 				
-				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats);
+				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate,price,preview);
 				// add to  list
 				alr.add(u) ;
 				
@@ -225,9 +232,11 @@ public ArrayList<ShowTime> readShowTimes() throws IOException, ParseException{
 			return alr ;
 	}
 
-	public ArrayList<ShowTime> readShowTimesBasedOnCinemaId(int cinemaID,int dayT) throws IOException{
+	public ArrayList<ShowTime> readShowTimesBasedOnCinemaId(int cinemaID,int dayT,Date startClash) throws IOException, ParseException{
 		ArrayList stringArray = (ArrayList)read("data/showTimes.txt");
 		ArrayList alr = new ArrayList() ;// to store data
+		Calendar cal = Calendar.getInstance();
+	    Date today=cal.getTime();
 		
 		
 //1ListingId|1movieId|1cinemaid|1showTimeId|3noOfShowTimes|showTime1|showTime2|showTime3
@@ -247,13 +256,16 @@ public ArrayList<ShowTime> readShowTimes() throws IOException, ParseException{
 				Date startDate=finalDateFormatter.parse(startDateString);
 				String endDateString=star.nextToken().trim();
 				Date endDate=finalDateFormatter.parse(endDateString);
+				double price=Double.parseDouble(star.nextToken().trim());
+				int preview = Integer.parseInt(star.nextToken().trim());
+				if(preview==1){
+					startDate=TimeDateControl.calculatePreviewStartDate(startDate);
+				}
 				
-				
-				
-				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate);
+				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate,price,preview);
 				// add to  list
 				
-				if(cinemaID==cinemaId && dayType==dayT)
+				if(startClash.after(startDate)&&cinemaId==cinemaID&&dayType==dayT)
 				{	
 					// add to  list
 					alr.add(u) ;
@@ -285,10 +297,11 @@ public ArrayList<ShowTime> readShowTimes() throws IOException, ParseException{
 				Date startDate=finalDateFormatter.parse(startDateString);
 				String endDateString=star.nextToken().trim();
 				Date endDate=finalDateFormatter.parse(endDateString);
+				double price=Double.parseDouble(star.nextToken().trim());
+				int preview = Integer.parseInt(star.nextToken().trim());
 				
 				
-				
-				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate);
+				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate,price,preview);
 				// add to  list
 				
 				if(movieId==movieIDCheck && dayType==dayT)
@@ -301,7 +314,7 @@ public ArrayList<ShowTime> readShowTimes() throws IOException, ParseException{
 			return alr ;
 	}
 	
-	public ArrayList<ShowTime> readShowTimesBasedOnListingId(int listId,int dayT) throws IOException{
+	public ArrayList<ShowTime> readShowTimesBasedOnListingId(int listId,int dayT) throws IOException, ParseException{
 		ArrayList stringArray = (ArrayList)read("data/showTimes.txt");
 		ArrayList alr = new ArrayList() ;// to store data
 		
@@ -323,6 +336,10 @@ public ArrayList<ShowTime> readShowTimes() throws IOException, ParseException{
 				Date startDate=finalDateFormatter.parse(startDateString);
 				String endDateString=star.nextToken().trim();
 				Date endDate=finalDateFormatter.parse(endDateString);
+				double price=Double.parseDouble(star.nextToken().trim());
+				int preview = Integer.parseInt(star.nextToken().trim());
+				
+				
 				
 				
 				
@@ -331,7 +348,7 @@ public ArrayList<ShowTime> readShowTimes() throws IOException, ParseException{
 				if(listingId==listId && dayType==dayT)
 				{	
 					// add to  list
-					ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate);
+					ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate,price,preview);
 					alr.add(u) ;
 				}
 				
@@ -365,12 +382,13 @@ public ArrayList<ShowTime> readShowTimes() throws IOException, ParseException{
 				int typeOfDay=Integer.parseInt(star.nextToken().trim());
 				int status=Integer.parseInt(star.nextToken().trim());
 				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
+				int blockOrNot=Integer.parseInt(star.nextToken().trim());
 				int platOrNot=Integer.parseInt(star.nextToken().trim());
 				int previewStatus=Integer.parseInt(star.nextToken().trim());
 				
 				if(today.after(startDate)&&today.before(endDate)&&movieId==movie&&cinplexId==cineplex)
 				{
-					MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,platOrNot,previewStatus);
+					MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,blockOrNot,platOrNot,previewStatus);
 					alr.add(u) ;
 				}
 				
