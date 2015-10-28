@@ -5,9 +5,9 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
-import controllerClasses.MovieEntryController;
 import controllerClasses.ValidationControl;
 import data.Movie;
+import dataController.MovieDataControl;
 
 public class AdminMovieEntryUi {
 	
@@ -18,7 +18,7 @@ public class AdminMovieEntryUi {
 		String test;
 		boolean validation;
 		ValidationControl vl=new ValidationControl();
-		MovieEntryController mec=new MovieEntryController();
+		MovieDataControl mec=new MovieDataControl();
 		do{
 			System.out.println("#############################################");
 			System.out.println("#            Movie Manager Page             #");
@@ -99,7 +99,7 @@ public class AdminMovieEntryUi {
 			}
 		}while(choice<=-1);
 		
-		MovieEntryController mec=new MovieEntryController();
+		MovieDataControl mec=new MovieDataControl();
 		mec.createMovie(movie);
 		displayMain();
 			

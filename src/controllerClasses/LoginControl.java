@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import data.User;
+import dataController.DataControl;
+import dataController.LoginDataControl;
 
 public class LoginControl  {
 	
@@ -42,9 +44,8 @@ public class LoginControl  {
 	public boolean checkExist(String uN,String pW) throws IOException
 	{
 		boolean result=false;
-		DataControl dS=new DataControl();
 		ArrayList<User> adminList=new ArrayList<User>();
-		adminList=dS.readLogin();
+		adminList=LoginDataControl.readLogin();
 		pW=cryptWithMD5(pW);
 		//System.out.println(pW+"\n"+adminList.get(0).getPassword());
 		for(int i=0;i<adminList.size();i++)

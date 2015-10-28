@@ -8,7 +8,10 @@ import java.util.Scanner;
 import controllerClasses.SeatsControl;
 import controllerClasses.ValidationControl;
 import data.Seats;
+import data.SeatsInformation;
 import data.ShowTime;
+import dataController.SeatsDataControl;
+import dataController.ShowTimeDataControl;
 import misc.ObjectContainer;
 
 public class CustSeatsUi {
@@ -16,104 +19,23 @@ public class CustSeatsUi {
 	public void displaySeat(int showTimeId) throws IOException, ParseException
 	{
 		
-		SeatsControl sC=new SeatsControl();
-		ArrayList<ShowTime> sTList = sC.readShowTimesBasedOnShowTimeId(showTimeId);
-		ArrayList<Seats> seatList =new ArrayList<Seats>();
-		ArrayList<ObjectContainer> selectedSeats=new ArrayList<ObjectContainer> ();
-		
-		seatList=sC.readSeats(showTimeId);
-		Scanner sc=new Scanner(System.in);
-		
-		String seatName = "";
-		char fA='A';
-		int seatA=1,seatB=1;
-		int seatAmount=sTList.get(0).getNoOfSeats();
-		int seatId = 1;
-		
-		
-		if(seatList.isEmpty())
-		{
-			for(int i=0;i<seatAmount;i++)
-			{
-				seatName=fA+""+seatA;
-				
-				seatA=seatA+1;
-				if(seatA>20){
-					seatA=1;
-				}
-			
-				System.out.print("["+seatName+"]");
-				if((i+1)%10==0&& i!=0){
-					
-					System.out.print(" ");
-				}
-				if((i+1)%20==0 && i!=0)
-				{
-					fA=(char) ('A'+seatB);
-					System.out.println();
-					seatB++;
-				}
-			
-				Seats s=new Seats();
-				s.setOccupied(false);
-				s.setShowTimeId(sTList.get(0).getShowTimeId());
-				s.setMovieId(sTList.get(0).getMovieId());
-				s.setCinemaId(sTList.get(0).getCinemaId());
-				s.setSeatName(seatName);
-				s.setSeatId(seatId++);
-				seatList.add(s);
-				sC.createSeats(seatList);
-				ObjectContainer oS= new ObjectContainer();
-				oS.setName(seatName);
-				oS.setSeatList(seatList);
-				selectedSeats.add(oS);	
-			}
-		}
-		else
-		{
-			
-			
-			selectedSeats.clear();
-			for(int i=0;i<seatList.size();i++)
-			{
-				//System.out.println(seatList.size());
-				ObjectContainer oS= new ObjectContainer();
-				oS.setName(seatList.get(i).getSeatName());
-				oS.setId(seatList.get(i).getSeatId());
-				oS.setSeatList(seatList);
-				selectedSeats.add(oS);
-				
-				if(!seatList.get(i).isOccupied())
-				{
-					System.out.print("["+seatList.get(i).getSeatName()+"]");
-				}
-				else
-				{
-					System.out.print("[X]");
-				}
-				if((i+1)%10==0&& i!=0){
-					System.out.print(" ");
-				}
-				if((i+1)%20==0 && i!=0)
-				{
-					System.out.println();
-				}
-			}
-			
-		}
+		ArrayList<ObjectContainer> selectedSeats = SeatsControl.manageSeats(showTimeId);
+		Scanner sc= new Scanner(System.in);
 		System.out.println("1.Purchase Ticket");
 		System.out.println("2.Check Ticket Price");
 		String s=sc.nextLine();
 		int choice=ValidationControl.validateAndReturnIntegerValue(s);
 		if(choice==1)
 		{
-			displayPurchaseSeat(showTimeId,seatList,selectedSeats,sC);
+			ArrayList<Seats> seatList = SeatsDataControl.readSeats(selectedSeats.get(0).getI());
+			
+			displayPurchaseSeat(showTimeId,seatList,selectedSeats);
 		}
 		
 	}
 	
 	
-	public void displayPurchaseSeat(int showTimeId, ArrayList<Seats> seatList, ArrayList<ObjectContainer> selectedSeats, SeatsControl sC) throws IOException, ParseException{
+	public void displayPurchaseSeat(int showTimeId, ArrayList<Seats> seatList, ArrayList<ObjectContainer> selectedSeats) throws IOException, ParseException{
 		ArrayList<Seats> seatsToValidate =new ArrayList<Seats>();
 		ArrayList<Seats> actualSeats =new ArrayList<Seats>();
 		Scanner sc=new Scanner(System.in);
@@ -156,7 +78,7 @@ public class CustSeatsUi {
 				seatsToValidate.clear();
 			}
 		}while(!valid);
-		
+		SeatsControl sC=new SeatsControl();
 		sC.updateSeats(seatList,actualSeats);
 		displaySeat(showTimeId);
 	}

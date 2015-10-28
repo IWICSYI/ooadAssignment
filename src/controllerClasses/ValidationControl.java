@@ -11,6 +11,7 @@ import java.util.Set;
 
 import misc.ObjectContainer;
 import data.*;
+import dataController.MovieDataControl;
 
 public class ValidationControl extends MovieListingControl{
 
@@ -23,7 +24,7 @@ public class ValidationControl extends MovieListingControl{
 	{
 		ArrayList<Movie> movie=new ArrayList<Movie>();
 		ArrayList<ShowTime> showTime=new ArrayList<ShowTime>();
-		movie=readMovie();
+		movie=MovieDataControl.readMovie();
 		int movieLength;
 		for(int i=0;i<movie.size();i++)
 		{

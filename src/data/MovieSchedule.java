@@ -21,7 +21,6 @@ public class MovieSchedule implements Serializable{
 	private int blockBuster;
 	private int platOrNot;
 	private int previewStatus;
-	
 	private ArrayList<ShowTime> showTimeList;
 	
 	

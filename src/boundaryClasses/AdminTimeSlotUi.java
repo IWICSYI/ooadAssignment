@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import misc.ObjectContainer;
-import controllerClasses.DataControl;
 import controllerClasses.MiscControl;
 import controllerClasses.MovieListingControl;
 import controllerClasses.SchedulerController;
@@ -15,6 +14,8 @@ import controllerClasses.ValidationControl;
 import data.Cinema;
 import data.MovieSchedule;
 import data.ShowTime;
+import dataController.CinemaDataControl;
+import dataController.DataControl;
 
 public class AdminTimeSlotUi extends DataControl {
 
@@ -37,7 +38,7 @@ public class AdminTimeSlotUi extends DataControl {
 		ArrayList<ObjectContainer> pair=new ArrayList<ObjectContainer>();
 		
 		ArrayList<Cinema> cinemaList= new ArrayList<Cinema>();
-		cinemaList=readCinemaByCineplexId(sch.getCineplexId());
+		cinemaList=CinemaDataControl.readCinemaByCineplexId(sch.getCineplexId());
 		do{
 			System.out.println("Please choose Cinema Hall:");
 			for(int j=0;j<cinemaList.size();j++)
@@ -142,6 +143,7 @@ public class AdminTimeSlotUi extends DataControl {
 						sT.setNoOfSeats(noSeats);
 						sT.setStartDate(sch.getStartDate());
 						sT.setEndDate(sch.getEndDate());
+						sT.setCineplexId(sch.getCineplexId());
 						sControl.createTimeSlot(sT,sch);
 						showTimeList.add(sT);
 						counter++;

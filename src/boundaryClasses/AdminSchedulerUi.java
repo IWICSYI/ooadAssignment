@@ -7,8 +7,6 @@ import java.util.Date;
 import java.util.Scanner;
 
 import misc.ObjectContainer;
-import controllerClasses.DataControl;
-import controllerClasses.MovieEntryController;
 import controllerClasses.MiscControl;
 import controllerClasses.MovieListingControl;
 import controllerClasses.SchedulerController;
@@ -19,6 +17,9 @@ import data.Cineplex;
 import data.Movie;
 import data.MovieSchedule;
 import data.ShowTime;
+import dataController.CineplexDataControl;
+import dataController.DataControl;
+import dataController.MovieDataControl;
 
 public class AdminSchedulerUi extends DataControl {
 
@@ -29,7 +30,7 @@ public class AdminSchedulerUi extends DataControl {
 		boolean validation;
 		ValidationControl vl=new ValidationControl();
 		
-		MovieEntryController mec=new MovieEntryController();
+		MovieDataControl mec=new MovieDataControl();
 		do{
 			System.out.println("#############################################");
 			System.out.println("#            Schedule Manager Page          #");
@@ -73,10 +74,10 @@ public class AdminSchedulerUi extends DataControl {
 		MiscControl oC=new MiscControl();
 		
 		ArrayList<Cineplex> cnList= new ArrayList<Cineplex>();
-		cnList=readCineplex();
+		cnList=CineplexDataControl.readCineplex();
 		
 		ArrayList<Movie> movieList= new ArrayList<Movie>();
-		movieList=readMovie();
+		movieList=MovieDataControl.readMovie();
 		
 		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
 		

@@ -5,101 +5,174 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import misc.ObjectContainer;
 import data.Movie;
 import data.Seats;
+import data.SeatsInformation;
 import data.ShowTime;
+import dataController.DataControl;
+import dataController.SeatsDataControl;
+import dataController.ShowTimeDataControl;
 
 public class SeatsControl extends DataControl {
 	
-	public ArrayList<ShowTime> readShowTimesBasedOnShowTimeId(int showTime) throws IOException, ParseException{
-		ArrayList stringArray = (ArrayList)read("data/showTimes.txt");
-		ArrayList alr = new ArrayList() ;// to store data
+	
+	
+	public static ArrayList<ObjectContainer> manageSeats(int showTimeId) throws IOException, ParseException{
+		
+		ShowTime sTList = ShowTimeDataControl.readShowTimesBasedOnShowTimeId(showTimeId);
+		ArrayList<Seats> seatList =new ArrayList<Seats>();
+		ArrayList<ObjectContainer> selectedSeats=new ArrayList<ObjectContainer> ();
+		ArrayList<SeatsInformation> sINfoList=SeatsDataControl.readSeatInfor(sTList);
+		int id=sINfoList.size()+1;
+		
+		SeatsInformation sInfor=new SeatsInformation();
+		sInfor.setSeatInfoId(id);
+		sInfor.setCinemaId(sTList.getCinemaId());
+		sInfor.setMovieId(sTList.getMovieId());
+		sInfor.setCineplexId(sTList.getCineplexId());
+		sInfor.setNoOfSeats(sTList.getNoOfSeats());
+		sInfor.setPrice(sTList.getTicketPrice());
+		sInfor.setshowTimeId(showTimeId);
+		if(sINfoList.size()==0)
+		{
+			createSeatInformation(sInfor);
+		}
+		seatList=SeatsDataControl.readSeats(id);
+		Scanner sc=new Scanner(System.in);
+		
+		String seatName = "";
+		char fA='A';
+		int seatA=1,seatB=1;
+		int seatAmount=sTList.getNoOfSeats();
+		int seatId = 1;
 		
 		
-//1ListingId|1movieId|1cinemaid|1showTimeId|3noOfShowTimes|showTime1|showTime2|showTime3
-		 for (int i = 0 ; i < stringArray.size() ; i++) {
-				String st = (String)stringArray.get(i);
+		if(seatList.isEmpty())
+		{
+			for(int i=0;i<seatAmount;i++)
+			{
+				seatName=fA+""+seatA;
 				
-				// get individual 'fields' of the string separated by SEPARATOR
-				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
-				int listingId=Integer.parseInt(star.nextToken().trim());
-				int  movieId = Integer.parseInt(star.nextToken().trim());
-				int  cinemaId = Integer.parseInt(star.nextToken().trim());
-				int  showTimeId = Integer.parseInt(star.nextToken().trim());
-				int  dayType = Integer.parseInt(star.nextToken().trim());
-				String showTimeValue=star.nextToken().trim();
-				int seats = Integer.parseInt(star.nextToken().trim());
-				String startDateString=star.nextToken().trim();
-				Date startDate=finalDateFormatter.parse(startDateString);
-				String endDateString=star.nextToken().trim();
-				Date endDate=finalDateFormatter.parse(endDateString);
-				double price=Double.parseDouble(star.nextToken().trim());
-				int preview = Integer.parseInt(star.nextToken().trim());
+				seatA=seatA+1;
+				if(seatA>20){
+					seatA=1;
+				}
+			
+				System.out.print("["+seatName+"]");
+				if((i+1)%10==0&& i!=0){
+					
+					System.out.print(" ");
+				}
+				if((i+1)%20==0 && i!=0)
+				{
+					fA=(char) ('A'+seatB);
+					System.out.println();
+					seatB++;
+				}
+			
+				Seats s=new Seats();
+				s.setOccupied(false);
+				//s.setShowTimeId(sTList.getShowTimeId());
+				s.setMovieId(sTList.getMovieId());
+				s.setCinemaId(sTList.getCinemaId());
+				s.setSeatName(seatName);
+				s.setSeatId(seatId++);
+				s.setSeatsInformationId(id);
+				seatList.add(s);
+				createIndiviualSeat(seatList);
+				ObjectContainer oS= new ObjectContainer();
+				oS.setName(seatName);
+				oS.setSeatList(seatList);
+				selectedSeats.add(oS);	
+			}
+			
+			
+		}	
+		else
+		{
+			selectedSeats.clear();
+			for(int i=0;i<seatList.size();i++)
+			{
+				//System.out.println(seatList.size());
+				ObjectContainer oS= new ObjectContainer();
+				oS.setName(seatList.get(i).getSeatName());
+				oS.setId(seatList.get(i).getSeatId());
+				oS.setI(seatList.get(i).getSeatsInformationId());
+				oS.setSeatList(seatList);
+				selectedSeats.add(oS);
 				
-				// add to  list
-				
-				if(showTimeId==showTime)
-				{	
-					// add to  list
-					ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate,price,preview);
-					alr.add(u) ;
+				if(!seatList.get(i).isOccupied())
+				{
+					System.out.print("["+seatList.get(i).getSeatName()+"]");
+				}
+				else
+				{
+					System.out.print("[X]");
+				}
+				if((i+1)%10==0&& i!=0){
+					System.out.print(" ");
+				}
+				if((i+1)%20==0 && i!=0)
+				{
+					System.out.println();
 				}
 			}
-			return alr ;
-	}
-	
-	public ArrayList<Seats> readSeats(int showTime) throws IOException{
-		ArrayList alr = new ArrayList() ;
-		ArrayList stringArray =new ArrayList();
-		try
-		{
-			 stringArray = (ArrayList)read("data/seatsForShowTime"+showTime+".txt");
+			
 		}
-		catch(IOException e)
-		{
-				return alr;
-		}
-		// to store data
-		
-		
-//1ListingId|1movieId|1cinemaid|1showTimeId|3noOfShowTimes|showTime1|showTime2|showTime3
-		 for (int i = 0 ; i < stringArray.size() ; i++) {
-				String st = (String)stringArray.get(i);
-				
-				// get individual 'fields' of the string separated by SEPARATOR
-				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
-				int seatId=Integer.parseInt(star.nextToken().trim());
-				int  movieId = Integer.parseInt(star.nextToken().trim());
-				int  cinemaId = Integer.parseInt(star.nextToken().trim());
-				int  showTimeId = Integer.parseInt(star.nextToken().trim());
-				String seatName=star.nextToken().trim();
-				String ocu = star.nextToken().trim();
-				boolean occupied=Boolean.parseBoolean(ocu);
-				
-				// add to  list
-				
-				if(showTimeId==showTime)
-				{	
-					// add to  list
-					Seats u = new Seats(seatId,movieId,cinemaId,showTimeId,seatName,occupied);
-					alr.add(u) ;
-				}
-			}
-			return alr ;
+		return selectedSeats;
 	}
 	
 	
+	
+	public static void createSeatInformation(SeatsInformation seatInfos) throws IOException
+	{
+		List alw = new ArrayList() ;// to store Professors data
+		
+		
+		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
+		String ocu="";
+		
+		StringBuilder st =  new StringBuilder() ;
+			st.append(seatInfos.getSeatInfoId());
+			st.append(SEPARATOR);
+			st.append(seatInfos.getNoOfSeats());
+			st.append(SEPARATOR);
+			st.append(seatInfos.getNoOfEmptySeats());
+			st.append(SEPARATOR);
+			st.append(seatInfos.getMovieId());
+			st.append(SEPARATOR);
+			st.append(seatInfos.getCinemaId());
+			st.append(SEPARATOR);
+			st.append(seatInfos.getCineplexId());
+			st.append(SEPARATOR);
+			st.append(seatInfos.getShowTimeId());
+			st.append(SEPARATOR);
+			st.append(seatInfos.getPrice());
+			
+		
+			
+		//st.append("\n");
+		alw.add(st.toString()) ;
+		
+
+		write("data/seatsInformation.txt",alw);
+	
+		
+	}
 	
 	
 
-	public void createSeats(ArrayList<Seats> seatList) throws IOException {
+	public static void createIndiviualSeat(ArrayList<Seats> seatList) throws IOException, ParseException {
 		List alw = new ArrayList() ;// to store Professors data
-		ArrayList<Seats> movie=new ArrayList<Seats>();
+		ArrayList<SeatsInformation> sINfoList=SeatsDataControl.readSeatInfor(seatList.get(0).getSeatsInformationId());
+		int seatInforid=sINfoList.size()+1;
 		int id=0;
 		id=id+1;
+		
 		
 		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
 		String ocu="";
@@ -114,7 +187,7 @@ public class SeatsControl extends DataControl {
 			st.append(SEPARATOR);
 			st.append(seatList.get(i).getCinemaId());
 			st.append(SEPARATOR);
-			st.append(seatList.get(i).getShowTimeId());
+			st.append(seatInforid);
 			st.append(SEPARATOR);
 			st.append(seatList.get(i).getSeatName());
 			st.append(SEPARATOR);
@@ -126,13 +199,14 @@ public class SeatsControl extends DataControl {
 		alw.add(st.toString()) ;
 		
 
-		writeB("data/seatsForShowTime"+seatList.get(0).getShowTimeId()+".txt",alw);
+		writeB("data/seatsForSeatInfoId"+seatInforid+".txt",alw);
 	}
 	
 	
-	public void updateSeats(ArrayList<Seats> seatList, ArrayList<Seats> actualSeats) throws IOException {
+	public void updateSeats(ArrayList<Seats> seatList, ArrayList<Seats> actualSeats) throws IOException, ParseException {
 		List alw = new ArrayList() ;// to store Professors data
-		ArrayList<Seats> movie=new ArrayList<Seats>();
+		ArrayList<SeatsInformation> sINfoList=SeatsDataControl.readSeatInfor(seatList.get(0).getSeatsInformationId());
+		
 		int id=0;
 		id=id+1;
 		
@@ -157,7 +231,7 @@ public class SeatsControl extends DataControl {
 			st.append(SEPARATOR);
 			st.append(seatList.get(i).getCinemaId());
 			st.append(SEPARATOR);
-			st.append(seatList.get(i).getShowTimeId());
+			st.append(seatList.get(i).getSeatsInformationId());
 			st.append(SEPARATOR);
 			st.append(seatList.get(i).getSeatName());
 			st.append(SEPARATOR);
@@ -168,7 +242,7 @@ public class SeatsControl extends DataControl {
 		//st.append("\n");
 		alw.add(st.toString()) ;
 		
-		writeB("data/seatsForShowTime"+seatList.get(0).getShowTimeId()+".txt",alw);
+		writeB("data/seatsForSeatInfoId"+sINfoList.get(0).getSeatInfoId()+".txt",alw);
 	}
 	
 	

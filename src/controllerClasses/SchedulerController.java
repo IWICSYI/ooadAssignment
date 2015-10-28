@@ -15,6 +15,7 @@ import data.Movie;
 import data.MovieSchedule;
 import data.Prices;
 import data.ShowTime;
+import dataController.ShowTimeDataControl;
 
 public class SchedulerController extends MovieListingControl{
 	
@@ -86,7 +87,7 @@ public class SchedulerController extends MovieListingControl{
 		ArrayList<MovieSchedule> sch=new ArrayList<MovieSchedule>();
 		sch=readScheduleListing();
 		int id=sch.get(sch.size()-1).getListingId()+1;
-		ArrayList<ShowTime> existST = readShowTimes();
+		ArrayList<ShowTime> existST = ShowTimeDataControl.readShowTimes();
 		int stID=existST.size()+1;
 		int plat=sch2.getPlatOrNot();
 		int tD=sch2.getThreeDOrNot();
@@ -140,6 +141,8 @@ public class SchedulerController extends MovieListingControl{
 			st2.append(finalPrice);
 			st2.append(SEPARATOR);
 			st2.append(sch2.getPreviewStatus());
+			st2.append(SEPARATOR);
+			st2.append(sch2.getCineplexId());
 		
 		
 			alTS.add(st2.toString()) ;
@@ -181,40 +184,7 @@ public class SchedulerController extends MovieListingControl{
 			return alr ;
 	}
 
-	public ArrayList<MovieSchedule> readScheduleListingBasedonMovieandCineplexId(int movie,int cineplex) throws IOException, ParseException{
-		
-		ArrayList stringArray = (ArrayList)read("data/movieScheduleListing.txt");
-		ArrayList alr = new ArrayList() ;// to store data
-		ArrayList<Integer> showTimeArray=new ArrayList<Integer>();
-		//1cineplexId|1movieUniqueId|1listingId|startDate|endDate|1typeofDay|status
-        for (int i = 0 ; i < stringArray.size() ; i++) {
-				String st = (String)stringArray.get(i);
-				// get individual 'fields' of the string separated by SEPARATOR
-				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
-				int cinplexId=Integer.parseInt(star.nextToken().trim());
-				int  cinemaId = Integer.parseInt(star.nextToken().trim());
-				int  movieId = Integer.parseInt(star.nextToken().trim());
-				int  listingId = Integer.parseInt(star.nextToken().trim());
-				String startDateString=star.nextToken().trim();
-				Date startDate=finalDateFormatter.parse(startDateString);
-				String endDateString=star.nextToken().trim();
-				Date endDate=finalDateFormatter.parse(endDateString);
-				int typeOfDay=Integer.parseInt(star.nextToken().trim());
-				int status=Integer.parseInt(star.nextToken().trim());
-				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
-				int blockOrNot=Integer.parseInt(star.nextToken().trim());
-				int platOrNot=Integer.parseInt(star.nextToken().trim());
-				int previewStatus=Integer.parseInt(star.nextToken().trim());
-				
-				if(cineplex==cinplexId&&movie==movieId){
-					MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,blockOrNot,platOrNot,previewStatus);
-					alr.add(u) ;
-				}
-				
-			}
-			return alr ;
-	}
-
+	
 
 
 	public void updateSchedule(ArrayList<MovieSchedule> newschListWork,ArrayList<MovieSchedule> schList, int cinemaId, int movieId, int cinplexId) throws IOException

@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Scanner;
 
 import misc.ObjectContainer;
 import controllerClasses.BuyTicketControl;
-import controllerClasses.DataControl;
 import controllerClasses.MiscControl;
 import controllerClasses.MovieListingControl;
 import controllerClasses.TimeDateControl;
@@ -18,42 +19,37 @@ import data.Cineplex;
 import data.Movie;
 import data.MovieSchedule;
 import data.ShowTime;
+import dataController.CineplexDataControl;
+import dataController.DataControl;
+import dataController.MovieScheduleDataControl;
+import dataController.ShowTimeDataControl;
 
 public class CustBuyTicketUi {
 
-	
+	//to do:read holiday dates,remove timeslotaft
 	public void displayBuyTicket(int movieId,int hit,int cineplexId, Movie movieDetails) throws IOException, ParseException
 	{
-		MovieListingControl cl=new MovieListingControl();
-		BuyTicketControl bl=new BuyTicketControl();
 		Scanner sc =new Scanner(System.in);
-		
-		DataControl dl=new DataControl();
-		ArrayList<Cineplex> cnList= dl.readCineplex();
 		
 		int visit=hit;
 		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
+	
 		
 		//Variables that are needed to display cineplex with most timeslot;
-		ArrayList<MovieSchedule> startList=cl.readNonPlatScheduleListingBasedOnStartingDateAndMovieId(movieId);
-		ArrayList<Integer> cineList=new ArrayList<Integer>();
 		
-		//Start collecting timeslot size based on cineId
-		for(int i=0;i<startList.size();i++){
-			cineList.add(startList.get(i).getCineplexId());
-		}
 		
 		//this method will only run for the first time user visit this page
 		int cineId=0;
 		if(visit==0){
 			System.out.println();
-		 cineId=bl.chooseCineplexToDisplay(cineList);
+			cineId=BuyTicketControl.chooseCineplexToDisplay(movieId);
 		}
 		else{
 			cineId=cineplexId;
 		}
 		//grab cineplex name
 		String cineplexName="";
+		ArrayList<Cineplex> cnList= CineplexDataControl.readCineplex();
 		for(int i=0;i<cnList.size();i++){
 			if(cineId==cnList.get(i).getCinplexId()){
 				cineplexName=cnList.get(i).getCineplexName();
@@ -61,12 +57,11 @@ public class CustBuyTicketUi {
 		}
 		
 		//start retrieving schedule
-		ArrayList<MovieSchedule> schList=cl.readScheduleListingBasedonMovieandCineplexId(movieId, cineId);
+		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListingBasedonMovieandCineplexId(movieId, cineId);
 		
 		//intialize variables needed to display time slot in dynamic way
 		ArrayList<ShowTime> showTimeList=new ArrayList<ShowTime>();
 		ArrayList<Integer> listIdList=new ArrayList<Integer>();
-		ArrayList<Integer> showTimeId=new ArrayList<Integer>();
 		ArrayList<String> showTimeArray=new ArrayList<String>();
 
 		for(int i=0;i<schList.size();i++)
@@ -94,17 +89,14 @@ public class CustBuyTicketUi {
 		{
 			System.out.print(TimeDateControl.retrieveDaySpell(calTemp)+"|");
 			dayType=TimeDateControl.dayType(calTemp.getTime());
-			ArrayList<String> pairStringArray=new ArrayList<String>();
 			MiscControl mc=new MiscControl();
 			for(int k=0;k<listIdList.size();k++){
-				showTimeList=cl.readShowTimesBasedOnListingId(listIdList.get(k), dayType);
+				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingId(listIdList.get(k), dayType);
 				if(!showTimeList.isEmpty())
 				{
-				
 					for(int p=0;p<showTimeList.size();p++)
-					{	showTimeId.add(showTimeList.get(p).getShowTimeId());
+					{	
 						showTimeArray.add(showTimeList.get(p).getShowTimeValue());
-						pairStringArray.add(showTimeList.get(p).getShowTimeValue());
 						ObjectContainer o=new ObjectContainer();
 						o.setShowTimeId(showTimeList.get(p).getShowTimeId());
 						o.setsT(showTimeList.get(p));
@@ -156,11 +148,10 @@ public class CustBuyTicketUi {
 		System.out.println("\n8.Choose cineplex");
 		String s=sc.nextLine();
 		int choice=ValidationControl.validateAndReturnIntegerValue(s);
-
-		
 		if(choice==8){
 			displayBasedOnCineplex(movieId,visit,cnList,movieDetails);
 		}
+		
 		displayTicketForDay(pair,choice);
 	}
 	
@@ -205,7 +196,14 @@ public class CustBuyTicketUi {
 				pairingIdWithSlot.add(o);
 			}
 		}
+		
 		System.out.println("\nSelect number beside each time slot to purchase ticket for that time slot.");
+		Collections.sort(pairingIdWithSlot, new Comparator<ObjectContainer>() {
+	        @Override public int compare(ObjectContainer p1, ObjectContainer p2) {
+	            return p1.getTimeValue().compareTo(p2.getTimeValue());
+	        }
+
+	    });
 		for(int i=0;i<pairingIdWithSlot.size();i++){
 			System.out.print((i+1)+":"+pairingIdWithSlot.get(i).getTimeValue()+"	");
 		}

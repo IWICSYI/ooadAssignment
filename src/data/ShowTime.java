@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
-import controllerClasses.DataControl;
+import dataController.DataControl;
 
 
-public class ShowTime implements Serializable{
+public class ShowTime implements Comparator<ShowTime>{
 
 	private int listingId;
 	private int cinemaId;
@@ -20,12 +20,13 @@ public class ShowTime implements Serializable{
 	private Date endDate;
 	private double ticketPrice;
 	private int previewStatus;
+	private int cineplexId;
 	
 	private ArrayList<Seats> listOfSeats;
 	
 	
 	public ShowTime(int listingId, int cinemaId, int movieId, int showTimeId, int dayType,
-			String showTime,int seats,Date startDate,Date endDate,double ticketPrice,int prev){
+			String showTime,int seats,Date startDate,Date endDate,double ticketPrice,int prev, int cineId){
 		super();
 		this.listingId = listingId;
 		this.cinemaId = cinemaId;
@@ -38,6 +39,7 @@ public class ShowTime implements Serializable{
 		this.endDate=endDate;
 		this.ticketPrice=ticketPrice;
 		this.previewStatus=prev;
+		this.cineplexId=cineId;
 	}
 	
 	public ShowTime() {
@@ -126,6 +128,22 @@ public class ShowTime implements Serializable{
 
 	public void setPreviewStatus(int previewStatus) {
 		this.previewStatus = previewStatus;
+	}
+
+
+	
+
+	@Override
+	public int compare(ShowTime o1, ShowTime o2) {
+		return o1.getShowTimeValue().compareTo(o2.getShowTimeValue());
+	}
+
+	public int getCineplexId() {
+		return cineplexId;
+	}
+
+	public void setCineplexId(int cineplexId) {
+		this.cineplexId = cineplexId;
 	}
 	
 	

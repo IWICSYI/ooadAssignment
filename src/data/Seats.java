@@ -1,7 +1,7 @@
 package data;
 //showTimeId|TrueSeatStatus|A1seatName|seatId|transectionId
 public class Seats {
-	private int showTimeId;
+	private int seatsInformationId;
 	private int cinemaId;
 	private int movieId;
 	private boolean isOccupied;
@@ -21,7 +21,7 @@ public class Seats {
 		seatId=seatId2;
 		movieId=movieId2;
 		cinemaId=cinemaId2;
-		showTimeId=showTimeId2;
+		seatsInformationId=showTimeId2;
 		seatName=seatName2;
 		isOccupied=occupied;
 	}
@@ -31,12 +31,7 @@ public class Seats {
 
 
 
-	public int getShowTimeId() {
-		return showTimeId;
-	}
-	public void setShowTimeId(int showTimeId) {
-		this.showTimeId = showTimeId;
-	}
+	
 	public boolean isOccupied() {
 		return isOccupied;
 	}
@@ -72,6 +67,24 @@ public class Seats {
 	}
 	public void setCinemaId(int cinemaId) {
 		this.cinemaId = cinemaId;
+	}
+
+
+
+
+
+
+	public int getSeatsInformationId() {
+		return seatsInformationId;
+	}
+
+
+
+
+
+
+	public void setSeatsInformationId(int seatsInformationId) {
+		this.seatsInformationId = seatsInformationId;
 	}
 
 }

@@ -16,6 +16,8 @@ import data.Cinema;
 import data.Cineplex;
 import data.Movie;
 import data.MovieSchedule;
+import dataController.CinemaDataControl;
+import dataController.CineplexDataControl;
 
 public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 	
@@ -24,7 +26,7 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 		Scanner sc=new Scanner(System.in);
 		int cinplexId;
 		ArrayList<Cineplex> cnList= new ArrayList<Cineplex>();
-		cnList=readCineplex();
+		cnList=CineplexDataControl.readCineplex();
 		String cineplexName="";
 		do{
 			System.out.println("Please choose Cineplex");
@@ -82,7 +84,7 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 		}
 		ArrayList<Integer> uniquecinemaIdList = MiscControl.getUniqueInteger(cinemaIdList);
 		
-		ArrayList<Cinema> cinemaList=readCinema();
+		ArrayList<Cinema> cinemaList=CinemaDataControl.readCinema();
 		ArrayList<Cinema> cinemaListWork=new ArrayList<Cinema>();
 		for(int i=0;i<cinemaList.size();i++)
 		{

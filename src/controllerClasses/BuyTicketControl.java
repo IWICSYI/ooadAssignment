@@ -7,24 +7,34 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.StringTokenizer;
 
+import data.MovieSchedule;
 import data.ShowTime;
+import dataController.MovieScheduleDataControl;
 
 public class BuyTicketControl extends MovieListingControl {
 	
-	public int chooseCineplexToDisplay(ArrayList<Integer> cineId)
+	public static int chooseCineplexToDisplay(int movieId) throws ParseException, IOException//ArrayList<Integer> cineId)
 	{
+		ArrayList<MovieSchedule> startList=MovieScheduleDataControl.readScheduleListingBasedOnStartingDateAndMovieId(movieId);
+		ArrayList<Integer> cineList=new ArrayList<Integer>();
+		
+		//Start collecting timeslot size based on cineId
+		for(int i=0;i<startList.size();i++){
+			cineList.add(startList.get(i).getCineplexId());
+		}
+		
 		int a=0,b=0,c=0;
-		for(int i=0;i<cineId.size();i++)
+		for(int i=0;i<cineList.size();i++)
 		{
-			if(cineId.get(i)==1)
+			if(cineList.get(i)==1)
 			{
 				a++;
 			}
-			else if(cineId.get(i)==2)
+			else if(cineList.get(i)==2)
 			{
 				b++;
 			}
-			else if(cineId.get(i)==3){
+			else if(cineList.get(i)==3){
 				c++;
 			}
 		}
@@ -51,48 +61,6 @@ public class BuyTicketControl extends MovieListingControl {
 	
 	
 
-	
-	public ArrayList<ShowTime> readShowTimesBasedOnListingId(int movieIDCheck,int cinePlexId,int dayT) throws IOException, ParseException{
-		ArrayList stringArray = (ArrayList)read("data/showTimes.txt");
-		ArrayList alr = new ArrayList() ;// to store data
-		
-		
-//1ListingId|1movieId|1cinemaid|1showTimeId|3noOfShowTimes|showTime1|showTime2|showTime3
-		 for (int i = 0 ; i < stringArray.size() ; i++) {
-				String st = (String)stringArray.get(i);
-				System.out.println((String)stringArray.get(i));
-				// get individual 'fields' of the string separated by SEPARATOR
-				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
-				int listingId=Integer.parseInt(star.nextToken().trim());
-				int  movieId = Integer.parseInt(star.nextToken().trim());
-				int  cinemaId = Integer.parseInt(star.nextToken().trim());
-				int  showTimeId = Integer.parseInt(star.nextToken().trim());
-				int  dayType = Integer.parseInt(star.nextToken().trim());
-				String showTimeValue=star.nextToken().trim();
-				int seats = Integer.parseInt(star.nextToken().trim());
-				String startDateString=star.nextToken().trim();
-				Date startDate=finalDateFormatter.parse(startDateString);
-				String endDateString=star.nextToken().trim();
-				Date endDate=finalDateFormatter.parse(endDateString);
-				double price=Double.parseDouble(star.nextToken().trim());
-				int preview = Integer.parseInt(star.nextToken().trim());
-				
-				
-				
-				
-				
-				ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate,price,preview);
-				// add to  list
-				
-				if(movieId==movieIDCheck && dayType==dayT &&cinePlexId==listingId)
-				{	
-					// add to  list
-					alr.add(u) ;
-				}
-				
-			}
-			return alr ;
-	}
-	
+
 
 }

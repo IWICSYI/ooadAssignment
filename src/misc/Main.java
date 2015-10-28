@@ -11,13 +11,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import controllerClasses.DataControl;
 import controllerClasses.MiscControl;
 import controllerClasses.ShowTimeController;
 import controllerClasses.ValidationControl;
+import data.Movie;
 import data.MovieSchedule;
 import data.Seats;
 import data.ShowTime;
+import dataController.DataControl;
 import boundaryClasses.*;
 
 public class Main extends ValidationControl{
@@ -30,7 +31,7 @@ public class Main extends ValidationControl{
 		DataControl test=new DataControl();
 		//test.readMovie();
 		AdminSchedulerUi ui3=new AdminSchedulerUi();
-		ui3.displayCreatePage();
+	//	ui3.displayCreatePage();
 		
 		MovieSchedule sch=new MovieSchedule();
 		sch.setCineplexId(1);
@@ -63,9 +64,9 @@ public class Main extends ValidationControl{
 		
 		CustomerUi ui4=new CustomerUi();
 		//ui4.displayNowShowing();
-		
+		Movie m=new Movie();
 		CustBuyTicketUi u=new CustBuyTicketUi();
-		//u.displayBuyTicket(4);
+		u.displayBuyTicket(4, 0, 0, m);
 		//validateTimeSlotClash(1950);
 		int time = ValidationControl.validateAndReturnTime("1900");
 		CustSeatsUi a=new CustSeatsUi();

@@ -10,14 +10,14 @@ import controllerClasses.MovieListingControl;
 import controllerClasses.ValidationControl;
 import data.Movie;
 import data.MovieSchedule;
+import dataController.MovieScheduleDataControl;
 
 public class CustomerUi {
 
 	public void displayNowShowing() throws IOException, ParseException
 	{
-		MovieListingControl cl=new MovieListingControl();
-		ArrayList<MovieSchedule> schList=cl.readNonPlatScheduleListingBasedOnStartingDate();
-		ArrayList<Movie> movieList=cl.retrieveUniqueMovieListFromSchedule(schList);
+		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListingBasedOnStartingDate();
+		ArrayList<Movie> movieList=MovieListingControl.retrieveUniqueMovieListFromSchedule(schList);
 		System.out.println(movieList.size());
 		ArrayList<ObjectContainer> oList=new ArrayList<ObjectContainer>();
 		
@@ -29,6 +29,7 @@ public class CustomerUi {
 			ObjectContainer o=new ObjectContainer();
 			o.setI((i+1));
 			o.setM(movieList.get(i));
+			o.setMovieId(movieList.get(i).getMovieId());
 			oList.add(o);
 			System.out.print("Movie Name:"+movieList.get(i).getMovieName()+"	");
 			if(i==2)
@@ -37,23 +38,23 @@ public class CustomerUi {
 		System.out.println();
 		System.out.println("------------------------------------------------------");
 		
-		System.out.println("1.Display Comming Soon");
+		System.out.println("1.View Movie Details");
 		System.out.println("2.Display Preview");
-		System.out.println("3.View Movie Details");
+		System.out.println("3.Display Comming soon");
+		System.out.println("4.Switch to platinum suite movie listing");
 		
 		String s=sc.nextLine();
 		int choice=ValidationControl.validateAndReturnIntegerValue(s);
 		CustMovieDetailUi c=new CustMovieDetailUi();
-		c.displayNowShowingMovieDetailsSelection();
+		c.displayNowShowingMovieDetailsSelection(oList);
 		
 	}
 	
 	
 	public void displayPreview() throws IOException, ParseException
 	{
-		MovieListingControl cl=new MovieListingControl();
-		ArrayList<MovieSchedule> schList=cl.readNonPlatScheduleListingBasedOnPreview();
-		ArrayList<Movie> movieList=cl.retrieveUniqueMovieListFromSchedule(schList);
+		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListingBasedOnPreview();
+		ArrayList<Movie> movieList=MovieListingControl.retrieveUniqueMovieListFromSchedule(schList);
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Preview");
 		System.out.println("------------------------------------------------------");

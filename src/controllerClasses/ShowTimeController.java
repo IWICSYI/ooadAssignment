@@ -11,6 +11,7 @@ import data.Cinema;
 import data.Movie;
 import data.MovieSchedule;
 import data.ShowTime;
+import dataController.ShowTimeDataControl;
 
 public class ShowTimeController extends SchedulerController {
 	
@@ -50,7 +51,7 @@ public class ShowTimeController extends SchedulerController {
 	}
 
 	public ArrayList<String> cinemaallocatedTime(int cinemaId, int dayType,Date end) throws IOException, ParseException{
-		ArrayList<ShowTime> stC=readShowTimesBasedOnCinemaId(cinemaId,dayType,end);
+		ArrayList<ShowTime> stC=ShowTimeDataControl.readShowTimesBasedOnCinemaId(cinemaId,dayType,end);
 		//ArrayList<ObjectContainer> allocatedTime=new  ArrayList<ObjectContainer>();
 		MiscControl ms=new MiscControl();
 		ArrayList<String> unsorted=new  ArrayList<String>();
