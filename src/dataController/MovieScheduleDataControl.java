@@ -10,9 +10,47 @@ import java.util.StringTokenizer;
 import data.MovieSchedule;
 
 public class MovieScheduleDataControl extends DataControl{
+	
+	public static ArrayList<MovieSchedule> readScheduleListing() throws IOException, ParseException{
+		
+		ArrayList stringArray = (ArrayList)read("data/movieScheduleListing.txt");
+		ArrayList alr = new ArrayList() ;// to store data
+		ArrayList<Integer> showTimeArray=new ArrayList<Integer>();
+		
+		//1cineplexId|1movieUniqueId|1listingId|startDate|endDate|1typeofDay|status
+        for (int i = 0 ; i < stringArray.size() ; i++) {
+				String st = (String)stringArray.get(i);
+				// get individual 'fields' of the string separated by SEPARATOR
+				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
+				int cinplexId=Integer.parseInt(star.nextToken().trim());
+				int  cinemaId = Integer.parseInt(star.nextToken().trim());
+				int  movieId = Integer.parseInt(star.nextToken().trim());
+				int  listingId = Integer.parseInt(star.nextToken().trim());
+				String startDateString=star.nextToken().trim();
+				Date startDate=finalDateFormatter.parse(startDateString);
+				String endDateString=star.nextToken().trim();
+				Date endDate=finalDateFormatter.parse(endDateString);
+				int typeOfDay=Integer.parseInt(star.nextToken().trim());
+				int status=Integer.parseInt(star.nextToken().trim());
+				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
+				int blockOrNot=Integer.parseInt(star.nextToken().trim());
+				int platOrNot=Integer.parseInt(star.nextToken().trim());
+				int previewStatus=Integer.parseInt(star.nextToken().trim());
+				
+				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,blockOrNot,platOrNot,previewStatus);
+				
+				alr.add(u) ;
+				
+			}
+			return alr ;
+	}
 
 	
-public static ArrayList<MovieSchedule> readScheduleListingBasedOnStartingDate() throws IOException, ParseException{
+	
+	
+
+	
+	public static ArrayList<MovieSchedule> readScheduleListingBasedOnStartingDate() throws IOException, ParseException{
 		
 		ArrayList stringArray = (ArrayList)read("data/movieScheduleListing.txt");
 		ArrayList alr = new ArrayList() ;// to store data
@@ -39,8 +77,6 @@ public static ArrayList<MovieSchedule> readScheduleListingBasedOnStartingDate() 
 				int blockDOrNot=Integer.parseInt(star.nextToken().trim());
 				int platOrNot=Integer.parseInt(star.nextToken().trim());
 				int previewStatus=Integer.parseInt(star.nextToken().trim());
-				
-				
 				
 				MovieSchedule u = new MovieSchedule(cinplexId,cinemaId,movieId,listingId,startDate,endDate,typeOfDay,status,threeDOrNot,blockDOrNot,platOrNot,previewStatus);
 				if(today.after(startDate)&&today.before(endDate))
@@ -198,5 +234,7 @@ public static ArrayList<MovieSchedule> readScheduleListingBasedonMovieandCineple
 			}
 			return alr ;
 	}
+
+
 
 }

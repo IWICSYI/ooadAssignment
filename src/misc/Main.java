@@ -25,7 +25,7 @@ public class Main extends ValidationControl{
 
 	public static void main(String[] args) throws IOException, ParseException {
 		ModuleSelectionUi ui=new ModuleSelectionUi();
-	//	ui.display();
+		//ui.display();
 		AdminMovieEntryUi ui2=new AdminMovieEntryUi();
 		//ui2.displayMain();
 		DataControl test=new DataControl();
@@ -35,7 +35,7 @@ public class Main extends ValidationControl{
 		
 		MovieSchedule sch=new MovieSchedule();
 		sch.setCineplexId(1);
-		sch.setMovieId(4);
+		sch.setMovieId(1);
 		
 		sch.setThreeDOrNot(0);
 		
@@ -46,7 +46,7 @@ public class Main extends ValidationControl{
 		sch.setStartDate(startDate);
 		
 		
-		sch.setEndDate(calculateEndDate(startDate,20));
+		sch.setEndDate(calculateEndDate(startDate,5));
 		
 		sch.setPreviewStatus(1);
 		
@@ -55,21 +55,21 @@ public class Main extends ValidationControl{
 		ArrayList<ObjectContainer> pair=new ArrayList<ObjectContainer>()  ;
 		pair.add(MiscControl.idPairerWithMovieLength(1, 4, 90,1));
 		AdminTimeSlotUi sTC=new AdminTimeSlotUi();
-		//sTC.TimeSlotHandler(sch,1,90,1,1);
+		//sTC.TimeSlotHandler(sch,1,90,1,1, 5);
 		
 		
 		Calendar cal = Calendar.getInstance();
 	    Date today=cal.getTime();
 	    System.out.println(cal.getTime());
 		
-		CustomerUi ui4=new CustomerUi();
+		CustomerDisplayMovieListingUi ui4=new CustomerDisplayMovieListingUi();
 		//ui4.displayNowShowing();
 		Movie m=new Movie();
 		CustBuyTicketUi u=new CustBuyTicketUi();
-		u.displayBuyTicket(4, 0, 0, m);
+		u.displayBuyTicket(1, 0, 0, m);
 		//validateTimeSlotClash(1950);
 		int time = ValidationControl.validateAndReturnTime("1900");
-		CustSeatsUi a=new CustSeatsUi();
+		CustBuyTicketsWithSeatsSelectiionsUi a=new CustBuyTicketsWithSeatsSelectiionsUi();
 		a.displaySeat(4);
 		
 		String time2=minutesPlusTime2(20,0000);

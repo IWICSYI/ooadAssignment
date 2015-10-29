@@ -17,8 +17,10 @@ public class ObjectContainer {
 	private int dayType;
 	private int seatNo;
 	private int showTimeId;
+	private double price;
 	private Movie m;
 	private ShowTime sT;
+	private Seats seat;
 	private String name;
 	private ArrayList<Seats> seatList;
 	private ArrayList<Integer> newST;
@@ -251,6 +253,22 @@ public class ObjectContainer {
 
 	public void setsT(ShowTime sT) {
 		this.sT = sT;
+	}
+
+	public Seats getSeat() {
+		return seat;
+	}
+
+	public void setSeat(Seats seat) {
+		this.seat = seat;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 

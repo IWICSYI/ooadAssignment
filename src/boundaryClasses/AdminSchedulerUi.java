@@ -200,7 +200,7 @@ public class AdminSchedulerUi extends DataControl {
 		
 		
 		AdminTimeSlotUi sTC=new AdminTimeSlotUi();
-		sTC.TimeSlotHandler(sch,movieId,movieLen,movieType,cinplexId);
+		sTC.TimeSlotHandler(sch,movieId,movieLen,movieType,cinplexId,runDate);
 		
 		
 		displayMain();

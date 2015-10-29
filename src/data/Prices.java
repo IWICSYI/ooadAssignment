@@ -1,6 +1,7 @@
 package data;
 
 public class Prices {
+	
 	public Prices(double normal, double plat, double tD, double blockbuster,
 			double oldPrice, double childPrice, double holi, double weekend) {
 		super();
@@ -13,6 +14,7 @@ public class Prices {
 		this.holi = holi;
 		this.weekend = weekend;
 	}
+	
 	private double normal;
 	private double  plat;
 	private double tD;

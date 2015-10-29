@@ -3,6 +3,7 @@ package controllerClasses;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -18,11 +19,11 @@ public class ShowTimeController extends SchedulerController {
 	
 	
 	
-	public boolean validateTimeSlotClash(int movieId, int cinemaId, int dayT, int time, String showTimeArray,Date end) throws IOException, ParseException {
+	public boolean validateTimeSlotClash(int movieId, int cinemaId, int dayT, int time, String showTimeArray,MovieSchedule sch,Calendar cal) throws IOException, ParseException {
 		boolean valid=true;
 		
 		
-		ArrayList<String> allocatedShowTimeC = cinemaallocatedTime(cinemaId,dayT,end);
+		ArrayList<String> allocatedShowTimeC = cinemaallocatedTime(cinemaId,dayT,cal,sch);
 	
 		
 		System.out.println(cinemaId);
@@ -50,8 +51,8 @@ public class ShowTimeController extends SchedulerController {
 	
 	}
 
-	public ArrayList<String> cinemaallocatedTime(int cinemaId, int dayType,Date end) throws IOException, ParseException{
-		ArrayList<ShowTime> stC=ShowTimeDataControl.readShowTimesBasedOnCinemaId(cinemaId,dayType,end);
+	public ArrayList<String> cinemaallocatedTime(int cinemaId, int dayType,Calendar tmp,MovieSchedule sch) throws IOException, ParseException{
+		ArrayList<ShowTime> stC=ShowTimeDataControl.readShowTimesBasedOnCinemaIdAndNowShowing(cinemaId,dayType,sch);
 		//ArrayList<ObjectContainer> allocatedTime=new  ArrayList<ObjectContainer>();
 		MiscControl ms=new MiscControl();
 		ArrayList<String> unsorted=new  ArrayList<String>();

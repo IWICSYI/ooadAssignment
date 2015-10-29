@@ -16,7 +16,7 @@ public class SeatsDataControl extends DataControl {
 		ArrayList stringArray =new ArrayList();
 		try
 		{
-			 stringArray = (ArrayList)read("data/seatsForShowTime"+seatInfoId+".txt");
+			 stringArray = (ArrayList)read("data/seats/seatsForShowTime"+seatInfoId+".txt");
 		}
 		catch(IOException e)
 		{
@@ -43,6 +43,41 @@ public class SeatsDataControl extends DataControl {
 					Seats u = new Seats(seatId,movieId,cinemaId,seatInforId,seatName,occupied);
 					alr.add(u) ;
 				}
+			}
+			return alr ;
+	}
+	
+	
+	public static ArrayList<Seats> readTmpSeats() throws IOException{
+		ArrayList alr = new ArrayList() ;
+		ArrayList stringArray =new ArrayList();
+		try
+		{
+			 stringArray = (ArrayList)read("data/seatsTmp.txt");
+		}
+		catch(IOException e)
+		{
+				return alr;
+		}
+		for (int i = 0 ; i < stringArray.size() ; i++) {
+				String st = (String)stringArray.get(i);
+				
+				// get individual 'fields' of the string separated by SEPARATOR
+				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
+				int seatId=Integer.parseInt(star.nextToken().trim());
+				int  movieId = Integer.parseInt(star.nextToken().trim());
+				int  cinemaId = Integer.parseInt(star.nextToken().trim());
+				int  seatInforId = Integer.parseInt(star.nextToken().trim());
+				String seatName=star.nextToken().trim();
+				String ocu = star.nextToken().trim();
+				boolean occupied=Boolean.parseBoolean(ocu);
+				
+				// add to  list
+				
+				// add to  list
+					Seats u = new Seats(seatId,movieId,cinemaId,seatInforId,seatName,occupied);
+					alr.add(u) ;
+				
 			}
 			return alr ;
 	}

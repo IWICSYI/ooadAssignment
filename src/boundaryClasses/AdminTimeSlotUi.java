@@ -2,7 +2,10 @@ package boundaryClasses;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import misc.ObjectContainer;
@@ -10,6 +13,7 @@ import controllerClasses.MiscControl;
 import controllerClasses.MovieListingControl;
 import controllerClasses.SchedulerController;
 import controllerClasses.ShowTimeController;
+import controllerClasses.TimeDateControl;
 import controllerClasses.ValidationControl;
 import data.Cinema;
 import data.MovieSchedule;
@@ -19,11 +23,11 @@ import dataController.DataControl;
 
 public class AdminTimeSlotUi extends DataControl {
 
-	public void TimeSlotHandler(MovieSchedule sch, int movieId, int movieLen, int movieType,int cineplexID) throws IOException, ParseException {
+	public void TimeSlotHandler(MovieSchedule sch, int movieId, int movieLen, int movieType,int cineplexID,int runDate) throws IOException, ParseException {
 		Scanner sc=new Scanner(System.in);
 		int choice = 0, num=0,cinemaId,time,plat,dayType,noSeats;
 		String cinemaName;
-		String type;
+		String type = "";
 		String showTimeValue = null;
 		boolean valid=false,valid2=false;
 		
@@ -73,7 +77,7 @@ public class AdminTimeSlotUi extends DataControl {
 			}
 			else if(dChoice==2)
 			{
-				TimeSlotHandler(sch,  movieId,  movieLen,  movieType, cineplexID);
+				TimeSlotHandler(sch,  movieId,  movieLen,  movieType, cineplexID,runDate);
 				return;
 			}
 			
@@ -91,22 +95,23 @@ public class AdminTimeSlotUi extends DataControl {
 		noSeats=pair.get(choice-1).getSeatNo();
 		
 		pair.clear();
+		Calendar cal=Calendar.getInstance();
+		cal.setTime(sch.getStartDate());
+		Calendar temp=(Calendar) cal.clone();
 		
-		for(int d=1;d<=3;d++)
+		
+		for(int d=1;d<=runDate;d++)
 		{	
-			if(d==1)
-				type="weekdays";
-			else if(d==2)
-				type="weekends";
-			else
-				type="holiday";
+			type=TimeDateControl.retrieveDaySpell(temp);	
+			SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+			String tmpDate=sdf.format(temp.getTime());
 			
-			sch.setTypeofDay(d);
 			do
 			{
-				System.out.println("Please enter show time for "+type);
-				System.out.println("This "+cinemaName+" already have these time slot allocated on "+type);
-				allocatedShowTime=sControl.cinemaallocatedTime(cinemaId,d,sch.getEndDate());
+				System.out.println("Please enter show time for "+tmpDate);
+				//SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+				System.out.println("This "+cinemaName+" already have these time slot allocated on "+tmpDate);
+				allocatedShowTime=sControl.cinemaallocatedTime(cinemaId,d,temp,sch);
 				for(int l=0;l<allocatedShowTime.size();l++)
 				{
 					System.out.print(allocatedShowTime.get(l)+"	");
@@ -131,7 +136,7 @@ public class AdminTimeSlotUi extends DataControl {
 					System.out.print("Please enter show time(eg.1900 for 7pm) for slot number "+(counter+1)+".");
 					time=ValidationControl.validateAndReturnTime(sc.nextLine());
 					
-					valid2=sControl.validateTimeSlotClash(movieId,cinemaId,d,time,showTimeValue,sch.getEndDate());
+					valid2=sControl.validateTimeSlotClash(movieId,cinemaId,d,time,showTimeValue,sch,temp);
 					if(valid2 &&time!=-2)
 					{
 						showTimeValue=minutesPlusTime(movieLen, time);
@@ -141,8 +146,10 @@ public class AdminTimeSlotUi extends DataControl {
 						sT.setShowTimeValue(showTimeValue);
 						sT.setDayType(d);
 						sT.setNoOfSeats(noSeats);
-						sT.setStartDate(sch.getStartDate());
-						sT.setEndDate(sch.getEndDate());
+						//SimpleDateFormat a=new SimpleDateFormat("dd/MM/yyyy");
+						sT.setStartDate(temp.getTime());
+						temp.add(Calendar.DATE, 1);
+						sT.setEndDate(temp.getTime());
 						sT.setCineplexId(sch.getCineplexId());
 						sControl.createTimeSlot(sT,sch);
 						showTimeList.add(sT);
@@ -154,9 +161,9 @@ public class AdminTimeSlotUi extends DataControl {
 						
 			}
 				sch.setShowTimeList(showTimeList);
-				sControl.createSchedule(sch);
+				
 			}
-		
+		sControl.createSchedule(sch);
 		AdminSchedulerUi ui=new AdminSchedulerUi();
 		ui.displayMain();
 		

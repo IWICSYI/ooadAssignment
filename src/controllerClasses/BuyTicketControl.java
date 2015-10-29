@@ -5,9 +5,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import data.MovieSchedule;
+import data.SeatsInformation;
 import data.ShowTime;
 import dataController.MovieScheduleDataControl;
 
@@ -56,6 +59,16 @@ public class BuyTicketControl extends MovieListingControl {
 			return 3;
 		}
 		return 0;
+		
+	}
+	
+	
+	public static void purchaseTicket(double price, ShowTime stList){
+		int movieId=stList.getMovieId();
+		int cineplexId=stList.getCineplexId();
+		int cinemaId=stList.getCinemaId();
+		SeatsInformation sInfo=new SeatsInformation();
+		
 		
 	}
 	

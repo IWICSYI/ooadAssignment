@@ -14,7 +14,7 @@ update ticketsales in movie
 transcation
 validate date input(done)
 
-update movie
+update movie	
 
 sort by ticket sales
 sort by rating

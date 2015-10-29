@@ -33,7 +33,7 @@ public class ModuleSelectionUi {
 			}
 			else if(choice==2){
 
-				CustomerUi cu=new CustomerUi();
+				CustomerDisplayMovieListingUi cu=new CustomerDisplayMovieListingUi();
 				cu.displayNowShowing();
 			}
 

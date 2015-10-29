@@ -60,7 +60,7 @@ public class CustMovieDetailUi {
 			u.displayBuyTicket(movieId,0,0,movieDetails);
 		}
 		if(choice==3){
-			CustomerUi ui=new CustomerUi();
+			CustomerDisplayMovieListingUi ui=new CustomerDisplayMovieListingUi();
 			ui.displayNowShowing();
 		}
 	}

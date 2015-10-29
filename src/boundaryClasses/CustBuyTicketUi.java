@@ -7,7 +7,9 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import misc.ObjectContainer;
 import controllerClasses.BuyTicketControl;
@@ -80,7 +82,7 @@ public class CustBuyTicketUi {
 		{
 			endDate=schList.get(0).getEndDate();
 			aDate.setTime(endDate);
-			System.out.println("Not empty");
+			System.out.println(endDate);
 		}
 		System.out.println("Time slot for "+movieDetails.getMovieName()+" in "+cineplexName);
 		System.out.println("Date                     |TimeSlot                     ");
@@ -91,7 +93,7 @@ public class CustBuyTicketUi {
 			dayType=TimeDateControl.dayType(calTemp.getTime());
 			MiscControl mc=new MiscControl();
 			for(int k=0;k<listIdList.size();k++){
-				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingId(listIdList.get(k), dayType);
+				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingIdAndNowShowing(listIdList.get(k), calTemp);
 				if(!showTimeList.isEmpty())
 				{
 					for(int p=0;p<showTimeList.size();p++)
@@ -127,9 +129,10 @@ public class CustBuyTicketUi {
 				}
 			}
 			else
-			{		System.out.print("No timeslot on this movie for this cinplex");
+			{		System.out.print("No any further timeslot ");
 					calTemp.add(calTemp.DATE, 1);
 					System.out.println();
+					break;
 			}
 		}
 		System.out.println("------------------------------------------------------");
@@ -149,34 +152,49 @@ public class CustBuyTicketUi {
 		String s=sc.nextLine();
 		int choice=ValidationControl.validateAndReturnIntegerValue(s);
 		if(choice==8){
-			displayBasedOnCineplex(movieId,visit,cnList,movieDetails);
+			displayBasedOnCineplex(movieId,visit,cineId,movieDetails);
 		}
 		
 		displayTicketForDay(pair,choice);
 	}
 	
 	
-	public void displayBasedOnCineplex(int movieId,int visit, ArrayList<Cineplex> cnList, Movie movieDetails) throws IOException, ParseException
+	public void displayBasedOnCineplex(int movieId,int visit,int cineId, Movie movieDetails) throws IOException, ParseException
 	{
 		
 		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
+		ArrayList<Cineplex> cnList= CineplexDataControl.readCineplex();
+		
 		Scanner sc=new Scanner(System.in);
 		int cinplexId=0;
+		ArrayList<MovieSchedule> startList=MovieScheduleDataControl.readScheduleListingBasedOnStartingDateAndMovieId(movieId);
+		Set<Integer> cineList=new HashSet<Integer>();
+
+		for(int i=0;i<startList.size();i++){
+			cineList.add(startList.get(i).getCineplexId());
+		}
 		
-		do{
-			System.out.println("Please choose Cineplex");
-		
-			for(int i=0;i<cnList.size();i++)
-			{
-				System.out.print((i+1)+":"+cnList.get(i).getCineplexName()+"");
-			}
-			cinplexId=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-				
-		}while(cinplexId==-2|| cinplexId>cnList.size());
-		visit++;
-		displayBuyTicket(movieId,visit,cinplexId,movieDetails);
+		if(cineList.size()==1){
+			System.out.println("Sorry, no other cineplex show this movie!");
+			displayBuyTicket(movieId,visit,cineId,movieDetails);
+		}
+		else
+		{
+			do{
+				System.out.println("Please choose Cineplex");
+			
+				for(int i=0;i<cnList.size();i++)
+				{
+					System.out.print((i+1)+":"+cnList.get(i).getCineplexName()+"");
+				}
+				cinplexId=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+					
+			}while(cinplexId==-2|| cinplexId>cnList.size());
+			visit++;
+			displayBuyTicket(movieId,visit,cinplexId,movieDetails);
+		}
 	}
-	
+		
 	
 	
 	
@@ -188,9 +206,10 @@ public class CustBuyTicketUi {
 		{
 			if(pair.get(i).getI()==choice2)
 			{
+				System.out.println(pair.get(i).getShowTimeId());
 				ObjectContainer o=new ObjectContainer();
 				o.setI(i+1);
-				o.setShowTimeId(pair.get(i).getShowTimeId());
+				o.setShowTimeId(pair.get(i).getsT().getShowTimeId());
 				o.setTimeValue(pair.get(i).getTimeValue());
 				o.setsT(pair.get(i).getsT());
 				pairingIdWithSlot.add(o);
@@ -213,7 +232,7 @@ public class CustBuyTicketUi {
 		int choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
 		int showTimeId=pairingIdWithSlot.get(choice-1).getShowTimeId();
 		System.out.println(showTimeId);
-		CustSeatsUi ui=new CustSeatsUi();
+		CustBuyTicketsWithSeatsSelectiionsUi ui=new CustBuyTicketsWithSeatsSelectiionsUi();
 		ui.displaySeat(showTimeId);
 		//
 		

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
+import controllerClasses.MovieEntryControl;
 import controllerClasses.ValidationControl;
 import data.Movie;
 import dataController.MovieDataControl;
@@ -99,8 +100,7 @@ public class AdminMovieEntryUi {
 			}
 		}while(choice<=-1);
 		
-		MovieDataControl mec=new MovieDataControl();
-		mec.createMovie(movie);
+		MovieEntryControl.createMovie(movie);
 		displayMain();
 			
 	

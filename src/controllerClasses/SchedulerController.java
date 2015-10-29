@@ -16,6 +16,7 @@ import data.MovieSchedule;
 import data.Prices;
 import data.ShowTime;
 import dataController.ShowTimeDataControl;
+import dataController.TicketPriceAndHolidayDataControl;
 
 public class SchedulerController extends MovieListingControl{
 	
@@ -47,7 +48,14 @@ public class SchedulerController extends MovieListingControl{
 			sch=readScheduleListing();
 			String startDate=finalDateFormatter.format(m.getStartDate());
 			String endDate=finalDateFormatter.format(m.getEndDate());
-			int id=sch.get(sch.size()-1).getListingId()+1;
+			int id;
+			if(!sch.isEmpty()){
+				 id=sch.get(sch.size()-1).getListingId()+1;
+			}
+			else
+			{
+				id=1;
+			}
 			//1cineplexId|1movieUniqueId|1listingId|startEndDate|1typeofDay|status;		
 			StringBuilder st =  new StringBuilder() ;
 			st.append(m.getCineplexId());
@@ -86,15 +94,29 @@ public class SchedulerController extends MovieListingControl{
 	{
 		ArrayList<MovieSchedule> sch=new ArrayList<MovieSchedule>();
 		sch=readScheduleListing();
-		int id=sch.get(sch.size()-1).getListingId()+1;
+		int id;
+		if(!sch.isEmpty()){
+			 id=sch.get(sch.size()-1).getListingId()+1;
+		}
+		else
+		{
+			id=1;
+		}
 		ArrayList<ShowTime> existST = ShowTimeDataControl.readShowTimes();
-		int stID=existST.size()+1;
+		int stID;
+		if(!existST.isEmpty())
+		{
+			stID=existST.get(existST.size()-1).getShowTimeId();
+		}
+		else{
+			stID=1;
+		}
 		int plat=sch2.getPlatOrNot();
 		int tD=sch2.getThreeDOrNot();
 		int bB=sch2.getBlockBuster();
 		int dtype=sch2.getTypeofDay();
 		
-		ArrayList<Prices>prices=readPrice();
+		ArrayList<Prices>prices=TicketPriceAndHolidayDataControl.readPrice();
 		double finalPrice=prices.get(0).getNormal();;
 		if(plat==1){
 			finalPrice=finalPrice+prices.get(0).getPlat();
