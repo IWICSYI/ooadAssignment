@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 import misc.ObjectContainer;
 import data.Cinema;
 import data.Cineplex;
+import data.HolidayDate;
 import data.Movie;
 import data.MovieSchedule;
 import data.Prices;
@@ -114,7 +115,23 @@ public class SchedulerController extends MovieListingControl{
 		int plat=sch2.getPlatOrNot();
 		int tD=sch2.getThreeDOrNot();
 		int bB=sch2.getBlockBuster();
-		int dtype=sch2.getTypeofDay();
+		int dtype=sT.getDayType();
+		
+		String startDate=finalDateFormatter.format(sT.getStartDate());
+		String endDate=finalDateFormatter.format(sT.getEndDate());
+
+		ArrayList<HolidayDate> hDList=new ArrayList<HolidayDate>();
+		for(int i=0;i<hDList.size();i++)
+		{
+			String date1=finalDateFormatter.format(hDList.get(i).getHolidayDate());
+			if(date1.equals(startDate)){
+				dtype=8;
+				break;
+			}
+			
+		}
+		
+		
 		
 		ArrayList<Prices>prices=TicketPriceAndHolidayDataControl.readPrice();
 		double finalPrice=prices.get(0).getNormal();;
@@ -128,17 +145,15 @@ public class SchedulerController extends MovieListingControl{
 		if(bB==1){
 			finalPrice=finalPrice+prices.get(0).getBlockbuster();
 		}
-		if(dtype==2){
+		if(dtype==0||dtype==6){
 			finalPrice=finalPrice+prices.get(0).getWeekend();
 		}
-		else if(dtype==3){
+		else if(dtype==8){
 			finalPrice=finalPrice+prices.get(0).getHoli();
 		}
 		
 		
-		String startDate=finalDateFormatter.format(sT.getStartDate());
-		String endDate=finalDateFormatter.format(sT.getEndDate());
-		
+			
 		
 		StringBuilder st2 =  new StringBuilder() ;
 		List alTS = new ArrayList() ;

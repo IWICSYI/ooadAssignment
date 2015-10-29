@@ -16,6 +16,7 @@ import controllerClasses.ShowTimeController;
 import controllerClasses.TimeDateControl;
 import controllerClasses.ValidationControl;
 import data.Cinema;
+import data.HolidayDate;
 import data.MovieSchedule;
 import data.ShowTime;
 import dataController.CinemaDataControl;
@@ -25,7 +26,7 @@ public class AdminTimeSlotUi extends DataControl {
 
 	public void TimeSlotHandler(MovieSchedule sch, int movieId, int movieLen, int movieType,int cineplexID,int runDate) throws IOException, ParseException {
 		Scanner sc=new Scanner(System.in);
-		int choice = 0, num=0,cinemaId,time,plat,dayType,noSeats;
+		int choice = 0, num=0,cinemaId,time,plat,noSeats;
 		String cinemaName;
 		String type = "";
 		String showTimeValue = null;
@@ -33,7 +34,6 @@ public class AdminTimeSlotUi extends DataControl {
 		
 		ShowTimeController sControl=new ShowTimeController();
 		ValidationControl vl=new ValidationControl();
-		MiscControl oC=new MiscControl();
 		
 		
 		
@@ -79,10 +79,7 @@ public class AdminTimeSlotUi extends DataControl {
 			{
 				TimeSlotHandler(sch,  movieId,  movieLen,  movieType, cineplexID,runDate);
 				return;
-			}
-			
-			
-			
+			}	
 			
 		}
 		
@@ -98,7 +95,6 @@ public class AdminTimeSlotUi extends DataControl {
 		Calendar cal=Calendar.getInstance();
 		cal.setTime(sch.getStartDate());
 		Calendar temp=(Calendar) cal.clone();
-		
 		
 		for(int d=1;d<=runDate;d++)
 		{	
@@ -144,7 +140,7 @@ public class AdminTimeSlotUi extends DataControl {
 						sT.setCinemaId(cinemaId);
 						sT.setMovieId(movieId);
 						sT.setShowTimeValue(showTimeValue);
-						sT.setDayType(d);
+						sT.setDayType(temp.get(Calendar.DAY_OF_WEEK));
 						sT.setNoOfSeats(noSeats);
 						//SimpleDateFormat a=new SimpleDateFormat("dd/MM/yyyy");
 						sT.setStartDate(temp.getTime());

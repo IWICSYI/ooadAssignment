@@ -1,3 +1,4 @@
+package controllerClasses;
 import java.util.*;
 import java.io.*;
 import java.text.DateFormat;
@@ -5,142 +6,122 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import data.HolidayDate;
+import data.Movie;
 import dataController.DataControl;
+import dataController.MovieDataControl;
+import dataController.TicketPriceAndHolidayDataControl;
 
 public class HolidayDateControl extends DataControl {
-	
 
-	int uID;
-	int count;
-	String fileName;
-	HolidayDate HDE = new HolidayDate();
-	public void createHoliday()
-	{
-		//loop out all the entries in Holiday txt
+	public static void createHoliday(HolidayDate hD) throws IOException, ParseException {
+		List alw = new ArrayList() ;// to store Professors data
+		int id=0;
 		
-		
-		
-		uID = HDE.getHolidayId();
-		//count = HDE.getCount();
-		//fileName = HDE.getFileName();
-		//System.out.println(al.toString());
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the Holiday Date (dd/MM/yyyy): ");
-		
-		Date date;
-		String tempDate = sc.nextLine();
-		try {
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		date = dateFormat.parse(tempDate);
-		String inDate = date.toString();
-		
-		
-		PrintWriter out = null;
-		try {
-		    out = new PrintWriter(new BufferedWriter(new FileWriter(fileName, true)));
-		    out.println(uID+1 + " " + tempDate);
-		    System.out.println("Succeeded in creating a holiday date");
-		}catch (IOException e) {
-		    System.err.println(e);
-		}finally{
-		    if(out != null){
-		        out.close();
-		    }
-		} 
-            
-		
-		 } catch (ParseException e) {
-		        System.out.println("Not valid format");
-		}
-	}
-	
-	public void showHoliday()
-	{
-		al = HDE.getAL();
-		uIDList = HDE.getuIDList();
-		uID = HDE.getuID();
-		count = HDE.getCount();
-		fileName = HDE.getFileName();
-		
-		System.out.println("Index\tUniqueID\tDate");
-		for(int i = 0 ; i < count; i++)
+		ArrayList<HolidayDate> holidayList=TicketPriceAndHolidayDataControl.readHoliday();
+		if(!holidayList.isEmpty())
 		{
-			System.out.println(i+1 + "\t" +uIDList.get(i)+"\t\t"+ al.get(i));
+			id=holidayList.get(holidayList.size()-1).getHolidayId()+1;
 		}
+		else
+			id=1;
+		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
+		String date=finalDateFormatter.format(hD.getHolidayDate());
+				
+		StringBuilder st =  new StringBuilder() ;
+		st.append(id);
+		st.append(SEPARATOR);
+		st.append(date);
+		
+		
+		alw.add(st.toString()) ;
+		
+
+		write("data/holidayDates.txt",alw);
 	}
+
 	
-	public void updateHoliday()
-	{
-		al = HDE.getAL();
-		uIDList = HDE.getuIDList();
-		uID = HDE.getuID();
-		count = HDE.getCount();
-		fileName = HDE.getFileName();
+	public static void updateHoliday(int hDid,HolidayDate hD) throws IOException, ParseException {
+		List alw = new ArrayList() ;// to store Professors data
+		int id=0;
+		String updateDate=finalDateFormatter.format(hD.getHolidayDate());
 		
-		System.out.println("Index\tUniqueID\tDate");
-		for(int i = 0 ; i < count; i++)
-		{
-			System.out.println(i+1 + "\t" +uIDList.get(i)+"\t\t"+ al.get(i));
-		}
+		ArrayList<HolidayDate> holidayList=TicketPriceAndHolidayDataControl.readHoliday();
 		
-		System.out.println("Please select one(index) to update : ");
-		Scanner sc = new Scanner(System.in);
-		String uniqueID = sc.nextLine();
-		String refer = uIDList.get(Integer.parseInt(uniqueID)-1) +" "+ al.get(Integer.parseInt(uniqueID)-1);
-		
-		System.out.println("Please enter date to update entry: ");
-		Date date;
-		String tempDate = sc.nextLine();
-		try {
-			String replace = uIDList.get(Integer.parseInt(uniqueID)-1) +" "+ tempDate;
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-			date = dateFormat.parse(tempDate);
-			String inDate = date.toString();
-			
-			replaceLineFromFile(fileName,replace,refer);
-	            
-			System.out.println("Succeeded in updating the holiday date.");
-			 } catch (ParseException e) {
-			        System.out.println("Not valid format");
+		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
+
+		for(int i=0;i<holidayList.size();i++)
+		{		
+			StringBuilder st =  new StringBuilder() ;
+			if(hDid==holidayList.get(i).getHolidayId()){
+				st.append(hDid);
+				st.append(SEPARATOR);
+				st.append(updateDate);
+				st.append("\n");
+				alw.add(st.toString()) ;
 			}
-		
-		
-		
-		
-		
-		
-		
-		
+			else
+			{
+				st.append(holidayList.get(i).getHolidayId());
+				st.append(SEPARATOR);
+				String hDExist=finalDateFormatter.format(holidayList.get(i).getHolidayDate());
+				st.append(hDExist);
+				st.append("\n");
+				alw.add(st.toString()) ;
+				
+			}
+		}
+
+		writeB("data/holidayDates.txt",alw);
 	}
-	
-	public void removeHoliday()
-	{
-		al = HDE.getAL();
-		uIDList = HDE.getuIDList();
-		uID = HDE.getuID();
-		count = HDE.getCount();
-		fileName = HDE.getFileName();
-		System.out.println(al.toString());
-		
-		
-		System.out.println("Index\tUniqueID\tDate");
-		for(int i = 0 ; i < count; i++)
+
+
+	public static boolean validateDuplicatedHoliday(String s) throws IOException, ParseException {
+		String existDate="";
+				//
+		boolean valid=false;
+		ArrayList<HolidayDate> holidayList=TicketPriceAndHolidayDataControl.readHoliday();
+		for(int i=0;i<holidayList.size();i++)
 		{
-			System.out.println(i+1 + "\t" +uIDList.get(i)+"\t\t"+ al.get(i));
+			existDate=finalDateFormatter.format(holidayList.get(i).getHolidayDate());
+			if(existDate.equals(s))
+			{
+				valid=false;
+				break;
+			}
+			else{
+				valid=true;
+			}
 		}
 		
-		//no error check for invalid values
-		System.out.println("Please select one(index) to delete : ");
-		Scanner sc = new Scanner(System.in);
-		String uniqueID = sc.nextLine();
-		String delete = uIDList.get(Integer.parseInt(uniqueID)-1) +" "+ al.get(Integer.parseInt(uniqueID)-1);
-		System.out.println(delete);
-		removeLineFromFile(fileName,delete);
-		System.out.println("Succeeded in removing the holiday date.");
+		return valid;
 	}
+
+
+	public static void removeHolidayDate(int id) throws IOException, ParseException {
+		List alw = new ArrayList() ;// to store Professors data
 	
-	
-	//taken from somewhere
+		ArrayList<HolidayDate> holidayList=TicketPriceAndHolidayDataControl.readHoliday();
+		
+		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
+
+		for(int i=0;i<holidayList.size();i++)
+		{		
+			StringBuilder st =  new StringBuilder() ;
+			if(id!=holidayList.get(i).getHolidayId()){
+				st.append(holidayList.get(i).getHolidayId());
+				st.append(SEPARATOR);
+				String hDExist=finalDateFormatter.format(holidayList.get(i).getHolidayDate());
+				st.append(hDExist);
+				st.append("\n");
+				alw.add(st.toString()) ;
+			}
+		}
+
+		writeB("data/holidayDates.txt",alw);
+		
+	}
+
+
+
 	
 }

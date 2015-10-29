@@ -2,12 +2,14 @@ package boundaryClasses;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import controllerClasses.BuyTicketControl;
 import controllerClasses.SeatsControl;
 import controllerClasses.ValidationControl;
+import data.HolidayDate;
 import data.Seats;
 import data.SeatsInformation;
 import data.ShowTime;
@@ -21,6 +23,20 @@ public class CustBuyTicketsWithSeatsSelectiionsUi {
 	{
 		ShowTime sTList = ShowTimeDataControl.readShowTimesBasedOnShowTimeId(showTimeId);
 		double price=sTList.getTicketPrice();
+		SimpleDateFormat finalDateFormatter=new SimpleDateFormat("dd/MM/yyyy");
+		String startDate=finalDateFormatter.format(sTList.getStartDate());
+		boolean holiday=false;
+		ArrayList<HolidayDate> hDList=new ArrayList<HolidayDate>();
+		for(int i=0;i<hDList.size();i++)
+		{
+			String date1=finalDateFormatter.format(hDList.get(i).getHolidayDate());
+			if(date1.equals(startDate)){
+				price=price+1;
+				holiday=true;
+				break;
+			}
+			
+		}
 		
 		ArrayList<ObjectContainer> selectedSeats = SeatsControl.manageSeats(sTList,showTimeId);
 		Scanner sc= new Scanner(System.in);
@@ -35,7 +51,9 @@ public class CustBuyTicketsWithSeatsSelectiionsUi {
 			displayPurchaseSeat(showTimeId,seatList,selectedSeats,price,sTList);
 		}
 		else if(choice==2)
-		{
+		{	if(holiday){
+				System.out.println("Holiday surcharged applied");
+			}
 			System.out.println("Price for 1 ticket $"+price);
 		}
 	}

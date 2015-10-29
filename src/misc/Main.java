@@ -24,6 +24,9 @@ import boundaryClasses.*;
 public class Main extends ValidationControl{
 
 	public static void main(String[] args) throws IOException, ParseException {
+		AdminHolidayConfigure ui5=new AdminHolidayConfigure();
+		ui5.displayHolidayMain();
+		
 		ModuleSelectionUi ui=new ModuleSelectionUi();
 		//ui.display();
 		AdminMovieEntryUi ui2=new AdminMovieEntryUi();

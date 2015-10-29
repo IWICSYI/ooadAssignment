@@ -9,10 +9,12 @@ show coming soon
 show preview
 
 calculate price(done)
-purchase ticket (done)
-update ticketsales in movie 
+purchase ticket (done) left age goer and stuff
+update ticketsales in movie (left grabbing moive shit)
 transcation
 validate date input(done)
+
+holiday(done)
 
 update movie	
 

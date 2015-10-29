@@ -4,6 +4,14 @@ import java.util.Date;
 
 public class HolidayDate {
 
+	public HolidayDate(int holidayId, Date holidayDate) {
+		super();
+		this.holidayId = holidayId;
+		this.holidayDate = holidayDate;
+	}
+	public HolidayDate() {
+		// TODO Auto-generated constructor stub
+	}
 	private int holidayId;
 	private Date holidayDate;
 	
