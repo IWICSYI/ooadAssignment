@@ -49,9 +49,9 @@ public class MiscControl {
 		return pair;
 	}
 	
-	public static ObjectContainer idPairerWithMovieLength(int i, int id, int len, int movieType)
+	public static ObjectContainer idPairerWithMovieLength(int i, int id, int len, int movieType, int j)
 	{
-		ObjectContainer pair=new ObjectContainer(i,id,len,movieType);
+		ObjectContainer pair=new ObjectContainer(i,id,len,movieType,j);
 		return pair;
 	}
 	

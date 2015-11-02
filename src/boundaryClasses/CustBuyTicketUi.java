@@ -180,16 +180,7 @@ public class CustBuyTicketUi {
 		}
 		else
 		{
-			do{
-				System.out.println("Please choose Cineplex");
-			
-				for(int i=0;i<cnList.size();i++)
-				{
-					System.out.print((i+1)+":"+cnList.get(i).getCineplexName()+"");
-				}
-				cinplexId=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-					
-			}while(cinplexId==-2|| cinplexId>cnList.size());
+			cinplexId=MovieListingControl.filterNowShowingListingByCineplexId(movieId);
 			visit++;
 			displayBuyTicket(movieId,visit,cinplexId,movieDetails);
 		}

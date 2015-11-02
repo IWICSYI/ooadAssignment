@@ -7,7 +7,7 @@ public class Movie implements Serializable{
 	
 	private int movieId;
 	private String movieName;	
-	private int movieType;
+	private int threeD;
 	private String ageRating;
 	private String director;
 	private String synopsis;
@@ -15,17 +15,18 @@ public class Movie implements Serializable{
 	private double overallRating;
 	private long ticketSales;
 	private int movieLength;
+	private int blockbuster;
 	private ArrayList<Reviews> reviewList;
 	
 	public Movie(){}
 	
-	public Movie(int movieId, String movieName, int movieType,
+	public Movie(int movieId, String movieName, int threeD,
 			String ageRating, String director, String synopsis, String cast,
-			double overallRating, long ticketSales, int movieLength) {
+			double overallRating, long ticketSales, int movieLength, int block) {
 		super();
 		this.movieId = movieId;
 		this.movieName = movieName;
-		this.movieType = movieType;
+		this.threeD = threeD;
 		this.ageRating = ageRating;
 		this.director = director;
 		this.synopsis = synopsis;
@@ -33,6 +34,7 @@ public class Movie implements Serializable{
 		this.overallRating = overallRating;
 		this.ticketSales = ticketSales;
 		this.movieLength = movieLength;
+		blockbuster=block;
 	}
 	public int getMovieId() {
 		return movieId;
@@ -47,10 +49,10 @@ public class Movie implements Serializable{
 		this.movieName = movieName;
 	}
 	public int getMovieType() {
-		return movieType;
+		return threeD;
 	}
 	public void setMovieType(int movieType) {
-		this.movieType = movieType;
+		this.threeD = movieType;
 	}
 	public String getAgeRating() {
 		return ageRating;
@@ -99,6 +101,33 @@ public class Movie implements Serializable{
 	}
 	public void setReviewList(ArrayList<Reviews> reviewList) {
 		this.reviewList = reviewList;
+	}
+
+	public int getThreeD() {
+		return threeD;
+	}
+
+	public void setThreeD(int threeD) {
+		this.threeD = threeD;
+	}
+
+	public int getBlockbuster() {
+		return blockbuster;
+	}
+
+	public void setBlockbuster(int blockbuster) {
+		this.blockbuster = blockbuster;
+	}
+	
+	
+	public void printMovieDetails(){
+		System.out.println("Movie Name:"+movieName);
+		System.out.println("Age Rating:"+ageRating);
+		System.out.println("Director:"+director);
+		System.out.println("Cast:"+cast);
+		System.out.println("Synopsis:"+synopsis);
+		System.out.println("Overall Rating:"+overallRating);
+	
 	}
 }
 	

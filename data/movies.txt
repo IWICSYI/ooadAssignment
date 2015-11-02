@@ -1,4 +1,4 @@
-1|moviName|1|ageRating|directer|synopsis|cast|4.0|100|120
-2|3|3|3|3|3|3|-1.1|0|130
-3|1|1|1|1|1|1|-1.1|0|130
-4|Enter the Dragon|1|PG13|Bruce Lee|You enter the dragon den|Bruce Lee, Ann|-1.1|0|90
+1|moviName|1|ageRating|directer|synopsis|cast|4.0|100|120|1
+2|3|3|3|3|3|3|-1.1|0|130|1
+3|1|1|1|1|1|1|-1.1|0|130|1
+4|Enter the Dragon Bruce|1|PG13|Bruce Lee|You enter the dragon den|Bruce Lee, Ann|-1.1|0|90|1

@@ -51,9 +51,10 @@ public class MovieDataControl extends DataControl {
 					double  overallRating=Double.parseDouble(star.nextToken().trim());
 					long ticketSales=Long.parseLong(star.nextToken().trim());
 					int time=Integer.parseInt(star.nextToken().trim());
+					int block=Integer.parseInt(star.nextToken().trim());
 
 					// create Admin User object from file data
-					Movie m = new Movie(movieId,movieName,movieType,ageRating,director,synopsis,cast,overallRating,ticketSales,time);
+					Movie m = new Movie(movieId,movieName,movieType,ageRating,director,synopsis,cast,overallRating,ticketSales,time,block);
 					// add to  list
 					alr.add(m) ;
 					//System.out.println(stringArray.size()+st);
@@ -82,12 +83,13 @@ public class MovieDataControl extends DataControl {
 						double  overallRating=Double.parseDouble(star.nextToken().trim());
 						long ticketSales=Long.parseLong(star.nextToken().trim());
 						int time=Integer.parseInt(star.nextToken().trim());
+						int block=Integer.parseInt(star.nextToken().trim());
 
 						// create Admin User object from file data
 						// add to  list
 						
 						if(movieId==moveId){
-							Movie m = new Movie(movieId,movieName,movieType,ageRating,director,synopsis,cast,overallRating,ticketSales,time);
+							Movie m = new Movie(movieId,movieName,movieType,ageRating,director,synopsis,cast,overallRating,ticketSales,time,block);
 							return m ;
 						}
 						

@@ -6,7 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
 
 import misc.ObjectContainer;
 import controllerClasses.MiscControl;
@@ -25,14 +28,34 @@ import dataController.MovieScheduleDataControl;
 public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 	
 	
-	public void displayUpdateMain()
+	public void displayUpdateMain() throws IOException, ParseException
 	{
-		System.out.println("#############################################");
-		System.out.println("#            Schedule Update Page           #");
-		System.out.println("#############################################");
-		System.out.println("1.Search and list now showing listing to edit");
-		System.out.println("2.Search and list comming soon listing to edit");
-		System.out.println("3.Search and list ended listing to edit");
+		Scanner sc=new Scanner(System.in);
+		int choice=0;
+		do{
+			System.out.println("#############################################");
+			System.out.println("#            Schedule Update Page           #");
+			System.out.println("#############################################");
+			System.out.println("1.Search and list now showing show time to edit");
+			System.out.println("2.Search and list comming soon show time to edit");	
+			System.out.println("3.Go Back");	
+			choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+		}while(choice<0||choice>3);
+			
+		if(choice==1)
+		{
+			displayUpdatePageForNowShowingListing();
+		}
+		else if(choice==2)
+		{
+			//tobedone displayUpdatePageForNowShowingListing()
+		}
+		else if(choice==3){
+			AdminSchedulerUi s=new AdminSchedulerUi();
+			s.displayMain();
+		}
+		
+		
 		
 	}
 	
@@ -49,8 +72,6 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 		ArrayList<ObjectContainer> oList=new ArrayList<ObjectContainer>();
 		
 		
-		System.out.println("These are the movies that are currently now Showing");
-		System.out.println("------------------------------------------------------");
 		for(int i=0;i<movieList.size();i++)
 		{
 			ObjectContainer o=new ObjectContainer();
@@ -59,10 +80,9 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 			o.setMovieId(movieList.get(i).getMovieId());
 			oList.add(o);
 		}
-		
-		System.out.println();
+		System.out.println("These are the movies that are currently now Showing");
 		System.out.println("------------------------------------------------------");
-		System.out.println("Select number beside the movie to edit the listing");
+		
 		
 		for(int i=0;i<oList.size();i++)
 		{
@@ -72,44 +92,22 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 			if(i==2)
 				System.out.println();
 		}
+		System.out.println();
+		System.out.println("------------------------------------------------------");
+		System.out.println("Select number beside the movie to edit the listing");
+		
+		
 		int choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-		filterByCineplexId(schList,oList.get(choice-1).getM().getMovieId());
-	
+		
+		int cinplexId=MovieListingControl.filterNowShowingListingByCineplexId(oList.get(choice-1).getM().getMovieId());
+		
+		ArrayList<MovieSchedule> schWork=MovieScheduleDataControl.readScheduleListingBasedonMovieandCineplexId(oList.get(choice-1).getM().getMovieId(), choice);
+		
 		
 		
 	}
 
-	public void filterByCineplexId(ArrayList<MovieSchedule> schList, int movieId) throws IOException, ParseException{
-		SchedulerController cl=new SchedulerController();
-		Scanner sc=new Scanner(System.in);
-		int cinplexId;
-		
-		ArrayList<Cineplex> cnList= new ArrayList<Cineplex>();
-		cnList=CineplexDataControl.readCineplex();
-		String cineplexName="";
-		do{
-			System.out.println("Please choose Cineplex");
-		
-			for(int i=0;i<cnList.size();i++)
-			{
-				System.out.println((i+1)+":"+cnList.get(i).getCineplexName());
-			}
-			cinplexId=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-			cineplexName=cnList.get(cinplexId-1).getCineplexName();
-				
-		}while(cinplexId==-2|| cinplexId>cnList.size());
-		
-		ArrayList<MovieSchedule> schListWork=new ArrayList<MovieSchedule>();
-		
-		for(int i=0;i<schList.size();i++)
-		{
-			if(schList.get(i).getCineplexId()==cinplexId)
-			{
-				schListWork.add(schList.get(i));
-			}
-			
-		}
-	}
+	
 	
 	
 	public void displayUpdateExistPage(MovieSchedule sch) {

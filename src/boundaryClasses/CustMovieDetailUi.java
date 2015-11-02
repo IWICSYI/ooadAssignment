@@ -46,7 +46,7 @@ public class CustMovieDetailUi {
 		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
 		Scanner sc=new Scanner(System.in);
 		
-		System.out.println("Movie Name:"+movieDetails.getMovieName()+" ");
+		movieDetails.printMovieDetails();
 		System.out.println("1.Read Review");
 		System.out.println("2.Buy Ticket");
 		System.out.println("3.Go Back");

@@ -1,9 +1,10 @@
 package controllerClasses;
 
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -58,6 +59,18 @@ public class ValidationControl extends MovieListingControl{
 	    return true;
 	}
 	
+	public static boolean isDouble(String s) {
+	    try { 
+	        Double.parseDouble(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
 	
 	
 	
@@ -72,6 +85,18 @@ public class ValidationControl extends MovieListingControl{
 			return -2;
 		}
 	}
+	
+	public static Double validateAndReturnDoubleValue(String s)
+	{
+		boolean DoubleValid=isDouble(s);
+		if(DoubleValid && Double.parseDouble(s)>=0.0){
+			return Double.parseDouble(s);
+		}
+		else{
+			System.out.println("Invalid integer input!");
+			return -2.0;
+		}
+	}
 
 	public static int validateYesNoAndReturnIntegerValue(String s)
 	{
@@ -83,6 +108,8 @@ public class ValidationControl extends MovieListingControl{
 			return -2;
 		
 	}
+	
+
 
 
 	public static Date validateDate(String dateString) {

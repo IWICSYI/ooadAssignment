@@ -14,6 +14,7 @@ public class ObjectContainer {
 	private int movieId;
 	private int movieLen;
 	private int movieType;
+	private int block;
 	private int dayType;
 	private int seatNo;
 	private int showTimeId;
@@ -60,12 +61,13 @@ public class ObjectContainer {
 		this.setTimeValue(string);
 	}
 	
-	public ObjectContainer(int i, int id, int len, int movieType) {
+	public ObjectContainer(int i, int id, int len, int movieType, int block) {
 		super();
 		this.i = i;
 		this.id = id;
 		this.movieLen = len;
 		this.movieType=movieType;
+		this.block=block;
 	}
 	
 	//Constructor to pair id and choice 
@@ -269,6 +271,14 @@ public class ObjectContainer {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public int getBlock() {
+		return block;
+	}
+
+	public void setBlock(int block) {
+		this.block = block;
 	}
 
 

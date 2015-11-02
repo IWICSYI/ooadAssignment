@@ -52,6 +52,13 @@ public class AdminSchedulerUi extends DataControl {
 			{
 				displayCreatePage();
 			}
+			else if(choice==2){
+				AdminSchedulerUpdateUi up=new AdminSchedulerUpdateUi();
+				up.displayUpdateMain();
+			}
+			else if(choice==3){
+				//tobedone
+			}
 			else if(choice==4){
 				AdminMainUi ui=new AdminMainUi();
 				ui.display();
@@ -106,7 +113,7 @@ public class AdminSchedulerUi extends DataControl {
 			for(int i=0;i<movieList.size();i++)
 			{
 				System.out.print((i+1)+":"+movieList.get(i).getMovieName()+" ");
-				pair.add(oC.idPairerWithMovieLength(i, movieList.get(i).getMovieId(), movieList.get(i).getMovieLength(),movieList.get(i).getMovieType()));
+				pair.add(MiscControl.idPairerWithMovieLength(i, movieList.get(i).getMovieId(), movieList.get(i).getMovieLength(),movieList.get(i).getMovieType(),movieList.get(i).getBlockbuster()));
 			}
 			System.out.println();
 			choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
@@ -116,49 +123,14 @@ public class AdminSchedulerUi extends DataControl {
 		movieId=pair.get(choice-1).getId();
 		movieLen=pair.get(choice-1).getMovieLen();
 		movieType=pair.get(choice-1).getMovieType();
-		
+		int movieBlock=pair.get(choice-1).getBlock();
 		
 		sch.setMovieId(movieId);
 		pair.clear();
-		int choice2=0;
-		do
-		{
-			if(movieType==2)
-			{
-				System.out.println("Please select whether movie will be shown in 3D?");
-				System.out.println("1.No");
-				System.out.println("2.Yes");
-				choice2=vl.validateYesNoAndReturnIntegerValue(sc.nextLine());
-				if(choice2<1||choice2>2)
-				{
-					System.out.println("Invalid input, please try again");
-					choice2=200;
-				}
-				else
-				{
-					sch.setThreeDOrNot(choice2-1);
-				}
-			}
-		}while(choice2>3);
-		
-		int choice3=0;
-		do
-		{
-				System.out.println("Please select whether this movie is a blockbuster?");
-				System.out.println("1.No");
-				System.out.println("2.Yes");
-				choice3=vl.validateYesNoAndReturnIntegerValue(sc.nextLine());
-				if(choice3<1||choice3>2)
-				{
-					System.out.println("Invalid input, please try again");
-					choice3=200;
-				}
-				else
-				{
-					sch.setBlockBuster(choice3-1);
-				}
+		sch.setThreeDOrNot(movieType-1);
+	
+		sch.setBlockBuster(movieBlock-1);
 			
-		}while(choice3>3);
 		
 		Date startDate;
 		int choice4=0;

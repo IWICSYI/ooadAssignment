@@ -25,10 +25,10 @@ public class Main extends ValidationControl{
 
 	public static void main(String[] args) throws IOException, ParseException {
 		AdminHolidayConfigure ui5=new AdminHolidayConfigure();
-		ui5.displayHolidayMain();
+		//ui5.displayHolidayMain();
 		
 		ModuleSelectionUi ui=new ModuleSelectionUi();
-		//ui.display();
+		ui.display();
 		AdminMovieEntryUi ui2=new AdminMovieEntryUi();
 		//ui2.displayMain();
 		DataControl test=new DataControl();
@@ -56,7 +56,7 @@ public class Main extends ValidationControl{
 		
 
 		ArrayList<ObjectContainer> pair=new ArrayList<ObjectContainer>()  ;
-		pair.add(MiscControl.idPairerWithMovieLength(1, 4, 90,1));
+		pair.add(MiscControl.idPairerWithMovieLength(1, 4, 90,1,1));
 		AdminTimeSlotUi sTC=new AdminTimeSlotUi();
 		//sTC.TimeSlotHandler(sch,1,90,1,1, 5);
 		

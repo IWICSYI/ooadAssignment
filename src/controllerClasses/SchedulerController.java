@@ -3,6 +3,7 @@ package controllerClasses;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -24,12 +25,16 @@ public class SchedulerController extends MovieListingControl{
 	public boolean checkDuplicatedSchedule(MovieSchedule sch) throws IOException, ParseException{
 		ArrayList<MovieSchedule> schList=readScheduleListing();
 		int cineplex=0,cinema=0,movie=0;
+		Date startDate= new Date();
+		Date endDate= new Date();
 		for(int i=0;i<schList.size();i++)
 		{
+			startDate=schList.get(i).getStartDate();
+			endDate=schList.get(i).getEndDate();
 			cineplex=schList.get(i).getCineplexId();
 			cinema=schList.get(i).getCinemaId();
 			movie=schList.get(i).getMovieId();
-			if(cineplex==sch.getCineplexId()&&cinema==sch.getCinemaId()&&movie==sch.getMovieId())
+			if(cineplex==sch.getCineplexId()&&cinema==sch.getCinemaId()&&movie==sch.getMovieId()&& startDate.after(sch.getStartDate())&&endDate.before(sch.getEndDate()))
 			{	
 				return true;
 			}

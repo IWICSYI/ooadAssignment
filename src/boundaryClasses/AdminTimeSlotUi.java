@@ -144,7 +144,7 @@ public class AdminTimeSlotUi extends DataControl {
 						sT.setNoOfSeats(noSeats);
 						//SimpleDateFormat a=new SimpleDateFormat("dd/MM/yyyy");
 						sT.setStartDate(temp.getTime());
-						temp.add(Calendar.DATE, 1);
+						
 						sT.setEndDate(temp.getTime());
 						sT.setCineplexId(sch.getCineplexId());
 						sControl.createTimeSlot(sT,sch);
@@ -154,8 +154,9 @@ public class AdminTimeSlotUi extends DataControl {
 					else
 						System.out.println("fail!!!");
 				}while(!valid2 && time<=-2);
-						
+				
 			}
+				temp.add(Calendar.DATE, 1);
 				sch.setShowTimeList(showTimeList);
 				
 			}
