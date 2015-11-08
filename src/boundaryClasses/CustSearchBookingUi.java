@@ -15,7 +15,7 @@ public class CustSearchBookingUi extends CustMain{
 		String email="";
 		do
 		{
-			System.out.println("Please enter your email");
+			System.out.println("Please enter your email(abc@hotmail.com):");
 			email=sc.nextLine();
 			valid=ValidationControl.validateEmptyString(email);
 		}while(!valid);

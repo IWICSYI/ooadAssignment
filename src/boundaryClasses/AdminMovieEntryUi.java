@@ -132,13 +132,14 @@ public class AdminMovieEntryUi extends AdminMainUi{
 			
 		}
 		movie.setCast(cast);
-		
+		String synopsis="";
 		do{
 			System.out.println("Please enter synopsis");
-			valid=ValidationControl.validateEmptyString(sc.nextLine());
+			synopsis=sc.nextLine();
+			valid=ValidationControl.validateEmptyString(synopsis);
 		}while(!valid);
 			
-		movie.setSynopsis(sc.nextLine());
+		movie.setSynopsis(synopsis);
 		
 		
 		int len=0;
@@ -152,7 +153,7 @@ public class AdminMovieEntryUi extends AdminMainUi{
 		
 		do
 		{	
-			System.out.println("Please choose whehter movie is a 3D movie or not?");
+			System.out.println("Please choose whether movie is a 3D movie or not?");
 			System.out.println("1.No");
 			System.out.println("2.Yes");
 			choice=ValidationControl.validateYesNoAndReturnIntegerValue(sc.nextLine());
