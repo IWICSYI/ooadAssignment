@@ -3,65 +3,159 @@ package boundaryClasses;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import misc.ObjectContainer;
+import controllerClasses.CustReviewControl;
 import controllerClasses.MiscControl;
 import controllerClasses.MovieListingControl;
 import controllerClasses.ValidationControl;
 import data.Movie;
 import data.MovieSchedule;
+import data.Review;
 import dataController.MovieDataControl;
+import dataController.ReviewDataControl;
 
-public class CustMovieDetailUi {
+public class CustMovieDetailUi extends CustDisplayMovieListingUi {
 	
-	public void displayNowShowingMovieDetailsSelection(ArrayList<ObjectContainer> oList) throws IOException, ParseException
+	public void displayNowShowingMovieDetailsSelection(ArrayList<ObjectContainer> oList, int plat,String type) throws IOException, ParseException
 	{
-		//ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
+		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Now Showing");
 		System.out.println("------------------------------------------------------");
 		for(int i=0;i<oList.size();i++)
 		{
-			System.out.print((i+1)+":"+oList.get(i).getM().getMovieName()+" ");
-			//pair.add(MiscControl.idPairerWithMovie((i+1), movieList.get(i)));
+			System.out.print((i+1)+":"+oList.get(i).getM().getMovieName()+" 	");
 			
-			if(i==2)
+			if((i+1)%2==0)
 				System.out.println();
 		}
 		System.out.println();	
 		System.out.println("------------------------------------------------------");
-		
-		System.out.println("1.Select number beside movie to view details");
-		int choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-		displayMovieDetails(oList.get(choice-1).getM().getMovieId());
+		int choice=0;
+		do{
+			System.out.println("1.Select number beside movie to view details");
+			choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+		}while(choice<=0||choice>oList.size());
+		displayMovieDetails(oList.get(choice-1).getM().getMovieId(),oList.get(choice-1).getMovieListing().getListingId(), type,plat);
 	}
 	
 	
-	public void displayMovieDetails(int movieId) throws IOException, ParseException
+	public static void displayMovieDetails(int movieId, int listingId,String type, int plat) throws IOException, ParseException
 	{
-		MovieListingControl cl=new MovieListingControl();
 		//ArrayList<MovieSchedule> schList=cl.readScheduleListingBasedOnStartingDate();
 		Movie movieDetails=MovieDataControl.readMovieBasedOnId(movieId);
 		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
 		Scanner sc=new Scanner(System.in);
 		
 		movieDetails.printMovieDetails();
-		System.out.println("1.Read Review");
-		System.out.println("2.Buy Ticket");
-		System.out.println("3.Go Back");
-		String s=sc.nextLine();
-		int choice=ValidationControl.validateAndReturnIntegerValue(s);
-		if(choice==1){
-			System.out.println("Haven't implement yet");//havent done yet
+		if(type.equals("now"))
+		{
+			int choice=0;
+				do{
+					System.out.println("1.Read Review");
+					System.out.println("2.Write Review");
+					System.out.println("3.Buy Ticket");
+					System.out.println("4.Go Back");
+					String s=sc.nextLine();
+					choice=ValidationControl.validateAndReturnIntegerValue(s);
+				}while(choice<=0||choice>4);
+	
+				
+			if(choice==1){
+				CustReviewControl.retrieveReviewList(movieId, listingId, type,  plat);
+				
+			}
+			//Write review
+			if(choice==2){
+				Review review=new Review();
+				//DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+				Date date = new Date();
+				review.setReviewDate(date);
+				review.setMovieId(movieId);
+				
+				boolean valid=false;
+				String check="";
+				do
+				{
+					System.out.println("Enter your name:");
+					check=sc.nextLine();
+					valid=ValidationControl.validateEmptyString(check);
+				}while(!valid);
+				review.setReviewerName(check);
+		
+				int score=0;
+				do
+				{
+					System.out.println("Enter score(1-5):");
+					score = ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+				}while(score<=0||score>5);
+				
+				
+				if(score>0 && score<=5){
+					review.setScore(score);
+				}
+				
+				String reviewWords="";
+				boolean valid2=false;
+				do
+				{
+					System.out.println("Enter review:");
+					reviewWords=sc.nextLine();
+					valid2=ValidationControl.validateEmptyString(reviewWords);
+				}while(!valid2);
+				review.setReview(reviewWords);
+				
+				ReviewDataControl.createReview(review);
+				ReviewDataControl.updateMovieReviewAverageScore(movieId);
+				displayMovieDetails(movieId, listingId, type, plat);
+			}
+			if(choice==3){
+				CustBuyTicketUiChooseTimeSlot u=new CustBuyTicketUiChooseTimeSlot();
+				u.displayBuyTicket(type, movieId,0,0,movieDetails,listingId);
+			}
+			if(choice==4){
+				CustDisplayMovieListingUi.displayNowShowing(plat);
+			}
 		}
-		if(choice==2){
-			CustBuyTicketUi u=new CustBuyTicketUi();
-			u.displayBuyTicket(movieId,0,0,movieDetails);
+		
+		else if(type.equals("preview"))
+		{
+			int choice=0;
+			do{
+				System.out.println("1.Buy Ticket");
+				System.out.println("2.Go Back");
+				String s=sc.nextLine();
+				choice=ValidationControl.validateAndReturnIntegerValue(s);
+			}while(choice<=0||choice>2);
+			if(choice==1){
+				CustBuyTicketUiChooseTimeSlot u=new CustBuyTicketUiChooseTimeSlot();
+				u.displayBuyTicket(type, movieId,0,0,movieDetails,listingId);
+			}
+			else if(choice==2){
+				CustDisplayMovieListingUi.displayPreview(plat);
+			}
 		}
-		if(choice==3){
-			CustomerDisplayMovieListingUi ui=new CustomerDisplayMovieListingUi();
-			ui.displayNowShowing();
+		else if(type.equals("ComingSoon"))
+		{
+
+			int choice=0;
+			do{
+				System.out.println("1.Go Back");
+				String s=sc.nextLine();
+				choice=ValidationControl.validateAndReturnIntegerValue(s);
+			}while(choice<=0||choice>1);
+			
+			 if(choice==1){
+				CustDisplayMovieListingUi.displayComingSoon(plat);
+			}
 		}
-	}
+		
+	
+	
+	
+	
+	}//end of method
 }

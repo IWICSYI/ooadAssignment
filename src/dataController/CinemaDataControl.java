@@ -35,7 +35,7 @@ public class CinemaDataControl extends DataControl{
 	}
 	
 	
-	public static  ArrayList<Cinema> readCinemaByCinemaId(int cId) throws IOException{
+	public static  Cinema readCinemaByCinemaId(int cId) throws IOException{
 		
 		ArrayList stringArray = (ArrayList)read("data/cinemas.txt");
 		ArrayList alr = new ArrayList() ;// to store data
@@ -54,10 +54,10 @@ public class CinemaDataControl extends DataControl{
 				{
 					Cinema u = new Cinema(cineplexId,cinemaId,cinemaName,cinemaType,seats);
 					// add to  list
-					alr.add(u) ;
+					return u ;
 				}
 			}
-			return alr ;
+			return null ;
 	}
 	
 

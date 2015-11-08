@@ -9,8 +9,7 @@ public class MovieSchedule implements Serializable{
 	public MovieSchedule(){}
 	
 
-	private int cineplexId;
-	private int cinemaId;
+
 	private int movieId;
 	private int listingId;
 	private Date startDate;
@@ -25,12 +24,11 @@ public class MovieSchedule implements Serializable{
 	
 	
 	
-	public MovieSchedule(int cineplexId, int cinemaId, int movieId,
+	public MovieSchedule(int movieId,
 			int listingId, Date startDate, Date endDate, int typeofDay,
 			int status, int threeDOrNot,int blockOrNot, int platOrNot, int previewStatus) {
 		super();
-		this.cineplexId = cineplexId;
-		this.cinemaId = cinemaId;
+		
 		this.movieId = movieId;
 		this.listingId = listingId;
 		this.startDate = startDate;
@@ -54,12 +52,7 @@ public class MovieSchedule implements Serializable{
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public int getCineplexId() {
-		return cineplexId;
-	}
-	public void setCineplexId(int cineplexId) {
-		this.cineplexId = cineplexId;
-	}
+
 	public int getMovieId() {
 		return movieId;
 	}
@@ -97,12 +90,7 @@ public class MovieSchedule implements Serializable{
 	public void setShowTimeList(ArrayList<ShowTime> showTimeList) {
 		this.showTimeList = showTimeList;
 	}
-	public int getCinemaId() {
-		return cinemaId;
-	}
-	public void setCinemaId(int cinemaId) {
-		this.cinemaId = cinemaId;
-	}
+	
 
 	public int getThreeDOrNot() {
 		return threeDOrNot;

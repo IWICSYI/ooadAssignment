@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 //import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -81,7 +82,8 @@ public class ValidationControl extends MovieListingControl{
 			return Integer.parseInt(s);
 		}
 		else{
-			System.out.println("Invalid integer input!");
+			if(!s.equals("-1"))
+				System.out.println("Invalid integer input!");
 			return -2;
 		}
 	}
@@ -110,9 +112,18 @@ public class ValidationControl extends MovieListingControl{
 	}
 	
 
+	public static boolean validateEmptyString(String s)
+	{
+		if(s.isEmpty()){
+			System.out.println("Cannot leave empty string!");
+			return false;
+		}
+		else
+			return true;
+	}
+	
 
-
-	public static Date validateDate(String dateString) {
+	public static Date validateDate(String dateString, int type) {
 		String[] formats= {"d/M/yyyy", "d-M-yyyy", 
                 "dd/MM/yyyy", "dd-mm-yyyy", 
                 "d/MM/yyyy", "d-MM-yyyy", 
@@ -120,6 +131,11 @@ public class ValidationControl extends MovieListingControl{
 		Date date = null;
 		boolean valid=false;
 		SimpleDateFormat finalDateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+		Calendar today=Calendar.getInstance();
+		today.set(Calendar.HOUR, 0);
+		today.set(Calendar.MINUTE, 0);
+		Calendar tmr=(Calendar) today.clone();
+		tmr.add(Calendar.DATE, 1);
 		
 		if(dateString.length()<8||dateString.length()>10)
 		{
@@ -162,8 +178,46 @@ public class ValidationControl extends MovieListingControl{
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(formats[i]);
 			try {
 				date=dateFormatter.parse(dateString);
-				valid=true;
-				break;
+				date.setHours(23);
+				date.setMinutes(59);
+				
+				if(type==0)
+				{
+					valid=true;
+					break;
+				}
+				
+				if(type==3||type==2){
+					
+					if(date.after(today.getTime())&&date.before(tmr.getTime()))
+					{
+						valid=false;
+						System.out.println("Invalid, date entered is today.");
+						break;
+					}
+					else if(date.after(tmr.getTime()))
+					{
+						valid=true;
+						break;
+					}
+				}
+				if(type==1)
+				{
+					 if(date.before(today.getTime())){
+						valid=false;
+						System.out.println("Invalid, date entered is before today.");
+						
+					 }
+					else if(date.after(today.getTime())&&date.before(tmr.getTime())) {
+						valid=true;
+						}
+					else{
+						valid=false;
+						System.out.println("Invalid, date entered must be today.");
+						
+					}
+					break;
+				}
 			}
 			catch (ParseException e) {
 
@@ -172,8 +226,10 @@ public class ValidationControl extends MovieListingControl{
 	      
 		}
 	
-	if(valid)
-		return date;
+	if(valid){
+		date.setHours(00);
+		date.setMinutes(00);
+		return date;}
 	else
 		return null;
 

@@ -30,7 +30,7 @@ public static  ArrayList<Cineplex> readCineplex() throws IOException{
 
 
 
-public static  ArrayList<Cineplex> readCineplexBasedonCinplexId(int id) throws IOException{
+public static  Cineplex readCineplexBasedonCinplexId(int id) throws IOException{
 	ArrayList stringArray = (ArrayList)read("data/cineplexes.txt");
 	ArrayList alr = new ArrayList() ;// to store data
 
@@ -44,8 +44,9 @@ public static  ArrayList<Cineplex> readCineplexBasedonCinplexId(int id) throws I
 			if(cineplexId==id){
 			Cineplex u = new Cineplex(cineplexId,cineplexName);
 			// add to  list
-			alr.add(u) ;}
+			return u;
+			}
 		}
-		return alr ;
+		return null ;
 }
 }

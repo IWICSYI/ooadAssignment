@@ -25,7 +25,7 @@ public class ShowTime implements Comparator<ShowTime>{
 	private ArrayList<Seats> listOfSeats;
 	
 	
-	public ShowTime(int listingId, int cinemaId, int movieId, int showTimeId, int dayType,
+	public ShowTime(int listingId, int movieId, int cinemaId, int showTimeId, int dayType,
 			String showTime,int seats,Date startDate,Date endDate,double ticketPrice,int prev, int cineId){
 		super();
 		this.listingId = listingId;

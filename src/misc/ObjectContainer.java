@@ -7,8 +7,16 @@ import java.util.Set;
 import data.*;
 
 public class ObjectContainer {
+	private boolean old;
+	private boolean child;
+	private boolean holiday;
+	private boolean plat;
+	private boolean blockBuster;
+	private boolean tD;
+	private boolean weekEnd;
 	private int i;
 	private int id;
+	private int cineplexId;
 	private int cinemaId;
 	private int cineType;
 	private int movieId;
@@ -18,17 +26,31 @@ public class ObjectContainer {
 	private int dayType;
 	private int seatNo;
 	private int showTimeId;
+	private int listingId;
+	private String date;
 	private double price;
 	private Movie m;
 	private ShowTime sT;
 	private Seats seat;
+	private MovieSchedule movieListing;
+	private Transaction transcation;
 	private String name;
+	private ArrayList<ShowTime> showTimeList;
 	private ArrayList<Seats> seatList;
 	private ArrayList<Integer> newST;
 	private ArrayList<String> stringArray;
 	private String timeValue;
 	private ArrayList<Integer> sTIdList;
 	public ObjectContainer(){}
+	
+	public int getCineplexId() {
+		return cineplexId;
+	}
+
+	public void setCineplexId(int cineplexId) {
+		this.cineplexId = cineplexId;
+	}
+
 	
 	//Constructor to pair id and choice with name
 	public ObjectContainer(int i, int id, String name, int cineType, int seatNo) {
@@ -279,6 +301,102 @@ public class ObjectContainer {
 
 	public void setBlock(int block) {
 		this.block = block;
+	}
+
+	public MovieSchedule getMovieListing() {
+		return movieListing;
+	}
+
+	public void setMovieListing(MovieSchedule movieListing) {
+		this.movieListing = movieListing;
+	}
+
+	public int getListingId() {
+		return listingId;
+	}
+
+	public void setListingId(int listingId) {
+		this.listingId = listingId;
+	}
+
+	public ArrayList<ShowTime> getShowTimeList() {
+		return showTimeList;
+	}
+
+	public void setShowTimeList(ArrayList<ShowTime> showTimeList) {
+		this.showTimeList = showTimeList;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public boolean isOld() {
+		return old;
+	}
+
+	public void setOld(boolean old) {
+		this.old = old;
+	}
+
+	public boolean isChild() {
+		return child;
+	}
+
+	public void setChild(boolean child) {
+		this.child = child;
+	}
+
+	public boolean isHoliday() {
+		return holiday;
+	}
+
+	public void setHoliday(boolean holiday) {
+		this.holiday = holiday;
+	}
+
+	public Transaction getTranscation() {
+		return transcation;
+	}
+
+	public void setTranscation(Transaction transcation) {
+		this.transcation = transcation;
+	}
+
+	public boolean isPlat() {
+		return plat;
+	}
+
+	public void setPlat(boolean plat) {
+		this.plat = plat;
+	}
+
+	public boolean isBlockBuster() {
+		return blockBuster;
+	}
+
+	public void setBlockBuster(boolean blockBuster) {
+		this.blockBuster = blockBuster;
+	}
+
+	public boolean istD() {
+		return tD;
+	}
+
+	public void settD(boolean tD) {
+		this.tD = tD;
+	}
+
+	public boolean isWeekEnd() {
+		return weekEnd;
+	}
+
+	public void setWeekEnd(boolean weekEnd) {
+		this.weekEnd = weekEnd;
 	}
 
 

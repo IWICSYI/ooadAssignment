@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import data.HolidayDate;
@@ -19,7 +20,6 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
 
         for (int i = 0 ; i < stringArray.size() ; i++) {
 				String st = (String)stringArray.get(i);
-				//normal price=8*platinum=6*3D=1*blockbuster=*0.5*Age65>-2*holidayPrice=2*weekEndPrice=2
 				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
 				double normal=Double.parseDouble(star.nextToken().trim());
 				double  plat = Double.parseDouble(star.nextToken().trim());	
@@ -39,7 +39,7 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
 			}
 			
 	
-public static ArrayList<HolidayDate> readHoliday() throws IOException, ParseException{
+	public static ArrayList<HolidayDate> readHoliday() throws IOException, ParseException{
 		
 		ArrayList stringArray = (ArrayList)read("data/holidayDates.txt");
 		ArrayList alr = new ArrayList() ;// to store data
@@ -60,6 +60,40 @@ public static ArrayList<HolidayDate> readHoliday() throws IOException, ParseExce
         return alr ;
 			}
 	
+	public static void updatePrice(Prices prices) throws IOException {
+		List alw = new ArrayList() ;// to store Professors data
+		int id=0;
+		
+		
+		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
+	
+				
+		StringBuilder st =  new StringBuilder() ;
+		st.append(prices.getNormal());
+		st.append(SEPARATOR);
+		st.append(prices.getPlat());
+		st.append(SEPARATOR);
+		st.append(prices.gettD());
+		st.append(SEPARATOR);
+		st.append(prices.getBlockbuster());
+		st.append(SEPARATOR);
+		st.append(prices.getOldPrice());
+		st.append(SEPARATOR);
+		st.append(prices.getChildPrice());
+		st.append(SEPARATOR);
+		st.append(prices.getHoli());
+		st.append(SEPARATOR);
+		st.append(prices.getWeekend());
+		
+		
+		alw.add(st.toString()) ;
+		
+	
+		writeB("data/ticketPrice.txt",alw);
+		
+	}
+
+
 
 
 }

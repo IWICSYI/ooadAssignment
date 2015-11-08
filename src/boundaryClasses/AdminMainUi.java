@@ -12,7 +12,7 @@ public class AdminMainUi {
 		
 	}
 
-	public void display() throws IOException, ParseException {
+	public static void displayAdminMain() throws IOException, ParseException {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("#############################################");
 		System.out.println("#                 Admin Page                #");
@@ -36,16 +36,17 @@ public class AdminMainUi {
 					mUI.displayMain();
 				}
 				else if(choice==2){
-					AdminSchedulerUi sUI=new AdminSchedulerUi();
-					sUI.displayMain();
+					AdminSchedulerUi.displaySchedulerMain();
+				}
+				else if(choice==3){
+					AdminConfigureUi.displayConfigMain();
 				}
 				else if(choice==4){
-					ModuleSelectionUi sUI=new ModuleSelectionUi();
-					sUI.display();
+					ModuleSelectionUi.display();
 				}
 			
 			
-		}while(choice>5);
+		}while(choice>4);
 		
 	}
 

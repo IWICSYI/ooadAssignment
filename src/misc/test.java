@@ -2,29 +2,26 @@ package misc;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 
+import controllerClasses.AdminShowTimeController;
+import controllerClasses.TimeDateControl;
+import data.Movie;
+import dataController.MovieDataControl;
 import boundaryClasses.AdminSchedulerUpdateUi;
+import boundaryClasses.CustBuyTicketsWithSeatsSelectionsUi;
 
 public class test {
 	
 	public static void main(String []agrs) throws IOException, ParseException{
+		//Movie m=MovieDataControl.readMovieBasedOnId(2);
+		//CustBuyTicketsWithSeatsSelectiionsUi.displayCustomerInfo( 2, m);
 		
-		ArrayList<Integer> cineId=new ArrayList<Integer>();
-		cineId.add(1);
-		cineId.add(2);
-		cineId.add(3);
-		cineId.add(1);
-		cineId.add(2);
-		cineId.add(3);
-		cineId.add(1);
-		cineId.add(2);
-		cineId.add(3);
-		cineId.add(3);
-		//System.out.println(chooseCineplexToDisplay(cineId));
-		AdminSchedulerUpdateUi ui=new AdminSchedulerUpdateUi();
-		ui.displayUpdatePage();
+		System.out.println(TimeDateControl.minutesPlusTime(99,"0040"));
 		
 	}
 	public static int chooseCineplexToDisplay(ArrayList<Integer> cineId)

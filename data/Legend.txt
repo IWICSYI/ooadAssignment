@@ -1,0 +1,16 @@
+				int listingId=Integer.parseInt(star.nextToken().trim());
+				int  movieId = Integer.parseInt(star.nextToken().trim());
+				int  cinemaId = Integer.parseInt(star.nextToken().trim());
+				int  showTimeId = Integer.parseInt(star.nextToken().trim());
+				int  dayType = Integer.parseInt(star.nextToken().trim());
+				String showTimeValue=star.nextToken().trim();
+				int seats = Integer.parseInt(star.nextToken().trim());
+				String startDateString=star.nextToken().trim();
+				Date startDate=finalDateFormatter.parse(startDateString);
+				String endDateString=star.nextToken().trim();
+				Date endDate=finalDateFormatter.parse(endDateString);
+				double price=Double.parseDouble(star.nextToken().trim());
+				int preview = Integer.parseInt(star.nextToken().trim());
+				int cineId = Integer.parseInt(star.nextToken().trim());
+				
+				

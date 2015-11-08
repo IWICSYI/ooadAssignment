@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.Scanner;
 
-import controllerClasses.LoginControl;
+import controllerClasses.AdminLoginControl;
 
 public class AdminLoginUi {
 	
@@ -43,13 +43,13 @@ public class AdminLoginUi {
 			    password=sc.nextLine();
 			}
 			
-			LoginControl lg=new LoginControl();
+			AdminLoginControl lg=new AdminLoginControl();
 		    result=lg.checkExist(userName, password);
 			if(result)
 			{
 				check=true;
-				AdminMainUi a=new AdminMainUi();
-				a.display();
+				AdminMainUi.displayAdminMain();
+				
 			}
 			else
 				System.out.println("Invalid username and password,please try again.\n");

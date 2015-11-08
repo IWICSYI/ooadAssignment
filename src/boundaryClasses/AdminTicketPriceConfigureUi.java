@@ -4,14 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import controllerClasses.ConfigTicketPriceControl;
+import controllerClasses.AdminConfigTicketPriceControl;
 import controllerClasses.ValidationControl;
 import data.Prices;
 import dataController.TicketPriceAndHolidayDataControl;
 
-public class AdminTicketPriceConfigureUi {
+public class AdminTicketPriceConfigureUi extends AdminConfigureUi {
 	
-	public void displayTicketConfigureMain() throws IOException{
+	public static void displayTicketConfigureMain() throws IOException{
+		System.out.println("#############################################");
+		System.out.println("#        Ticket Configuration Page          #");
+		System.out.println("#############################################");
+
 		System.out.println("These are the ticket prices");
 		Scanner sc=new Scanner(System.in);
 		ArrayList<Prices>  priceList=TicketPriceAndHolidayDataControl.readPrice();
@@ -46,13 +50,13 @@ public class AdminTicketPriceConfigureUi {
 			System.out.println("9.Go back to previous menu");
 			choice = ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
 		
-		}while(choice == -2 || choice > 9 || choice ==0);
+		}while(choice <=0|| choice > 9 );
 		displayUpdateTicketConfigureMain(choice,priceList);
 	
 	}
 	
 	
-	public void displayUpdateTicketConfigureMain(int choice,ArrayList<Prices> priceList) throws IOException{
+	public static void displayUpdateTicketConfigureMain(int choice,ArrayList<Prices> priceList) throws IOException{
 		double tempprice;
 		double base=priceList.get(0).getNormal();
 		boolean valid = false;
@@ -70,7 +74,7 @@ public class AdminTicketPriceConfigureUi {
 				valid=true;
 				break;
 			case 2:
-				valid=ConfigTicketPriceControl.validatePrice(choice, base, tempprice);
+				valid=AdminConfigTicketPriceControl.checkPrice(choice, base, tempprice);
 				System.out.println(valid);
 				if(valid)
 				{
@@ -78,51 +82,51 @@ public class AdminTicketPriceConfigureUi {
 				}
 				break;
 			case 3:
-				valid=ConfigTicketPriceControl.validatePrice(choice, base, tempprice);
+				valid=AdminConfigTicketPriceControl.checkPrice(choice, base, tempprice);
 				if(valid)
 				{
 					priceList.get(0).settD(tempprice-base);
 				}
 				break;
 			case 4:
-				valid=ConfigTicketPriceControl.validatePrice(choice, base, tempprice);
+				valid=AdminConfigTicketPriceControl.checkPrice(choice, base, tempprice);
 				if(valid)
 				{
 					priceList.get(0).setBlockbuster(tempprice-base);
 				}
 				break;
 			case 5:
-				valid=ConfigTicketPriceControl.validatePrice(choice, base, tempprice);
+				valid=AdminConfigTicketPriceControl.checkPrice(choice, base, tempprice);
 				if(valid)
 				{
 					priceList.get(0).setHoli(tempprice-base);
 				}
 				break;
 			case 6:
-				valid=ConfigTicketPriceControl.validatePrice(choice, base, tempprice);
+				valid=AdminConfigTicketPriceControl.checkPrice(choice, base, tempprice);
 				if(valid)
 				{
 					priceList.get(0).setWeekend(tempprice-base);
 				}
 				break;
 			case 7:
-				valid=ConfigTicketPriceControl.validatePrice(choice, base, tempprice);
+				valid=AdminConfigTicketPriceControl.checkPrice(choice, base, tempprice);
 				if(valid)
 				{
 					priceList.get(0).setOldPrice(tempprice-base);
 				}
 				break;
 			case 8:
-				valid=ConfigTicketPriceControl.validatePrice(choice, base, tempprice);
+				valid=AdminConfigTicketPriceControl.checkPrice(choice, base, tempprice);
 				if(valid)
 				{
 					priceList.get(0).setChildPrice(tempprice-base);
 				}
 				break;
 	    }
-		}while(tempprice == -2.0||valid==false);
+		}while(tempprice <0||valid==false);
 		
-		ConfigTicketPriceControl.updatePrice(priceList.get(0));
+		TicketPriceAndHolidayDataControl.updatePrice(priceList.get(0));
 		
 		displayTicketConfigureMain();
 		

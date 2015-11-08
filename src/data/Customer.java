@@ -7,6 +7,7 @@ public class Customer implements Serializable {
 	private String goerName;
 	private String mobilePhone;
 	private String email;
+	private int age;
 	public Customer(String gN,String mP,String eM)
 	{
 		goerName=gN;

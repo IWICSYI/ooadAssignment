@@ -7,12 +7,12 @@ import java.util.Date;
 import java.util.Scanner;
 
 import misc.ObjectContainer;
-import controllerClasses.MovieEntryControl;
+import controllerClasses.AdminMovieEntryControl;
 import controllerClasses.ValidationControl;
 import data.Movie;
 import dataController.MovieDataControl;
 
-public class AdminMovieEntryUi {
+public class AdminMovieEntryUi extends AdminMainUi{
 	
 	
 	public static void displayMain() throws IOException, ParseException{
@@ -50,10 +50,8 @@ public class AdminMovieEntryUi {
 			}
 			else if(choice==4)
 			{
-				AdminMainUi a=new AdminMainUi();
-				a.display();
+				AdminMainUi.displayAdminMain();
 			}
-			
 		}while(choice<5);
 		
 		
@@ -67,25 +65,77 @@ public class AdminMovieEntryUi {
 		System.out.println("#############################################");
 		System.out.println("#            Movie Creation Page            #");
 		System.out.println("#############################################");
-		System.out.println("Please enter movie name");
-		movie.setMovieName(sc.nextLine());
+		String check="";
+		boolean valid=false;
+		do
+		{
+			System.out.println("Please enter movie name:");
+			check=sc.nextLine();
+			valid=ValidationControl.validateEmptyString(check);
 		
+		}while(!valid);
+		movie.setMovieName(check);
 		
+		do
+		{
+			System.out.println("Please enter age rating(Eg.PG13):");
+			check=sc.nextLine();
+			valid=ValidationControl.validateEmptyString(check);
 		
-		System.out.println("Please enter age rating");
-		movie.setAgeRating(sc.nextLine());
+		}while(!valid);
+		movie.setAgeRating(check);
 		
-		System.out.println("Please enter director names");
-		movie.setDirector(sc.nextLine());
+		do
+		{
+			System.out.println("Please enter director name:");
+			check=sc.nextLine();
+			valid=ValidationControl.validateEmptyString(check);
 		
-		System.out.println("Please enter cast names");
-		movie.setCast(sc.nextLine());
+		}while(!valid);
+		movie.setDirector(check);
 		
-		System.out.println("Please enter synopsis");
+		int num=0;
+		String cast="";
+		String checkcast="";
+		
+		do
+		{
+			System.out.println("Please enter number of cast members:");
+			num=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+		}while(num<=0|| num>20);
+		
+		for(int i=0;i<num;i++){
+			
+			do
+			{
+				System.out.println("Please enter cast member no.:"+(i+1));
+				checkcast=sc.nextLine();
+				valid=ValidationControl.validateEmptyString(checkcast);
+			
+			}while(!valid);
+			cast=cast+checkcast;
+			
+			if(i!=(num-1))
+			{
+				cast=cast+",";
+			}
+			
+		}
+		movie.setCast(cast);
+		
+		do{
+			System.out.println("Please enter synopsis");
+			valid=ValidationControl.validateEmptyString(sc.nextLine());
+		}while(!valid);
+			
 		movie.setSynopsis(sc.nextLine());
 		
-		System.out.println("Please enter movie length in minutes(Eg:130)");
-		int len=vl.validateAndReturnIntegerValue(sc.nextLine());
+		
+		int len=0;
+		do{
+			System.out.println("Please enter movie length in minutes(Eg:130)");
+			len=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+		}while(len<=0||len>1000);
 		
 		movie.setMovieLength(len);
 		
@@ -95,7 +145,7 @@ public class AdminMovieEntryUi {
 			System.out.println("Please choose whehter movie is a 3D movie or not?");
 			System.out.println("1.No");
 			System.out.println("2.Yes");
-			choice=vl.validateYesNoAndReturnIntegerValue(sc.nextLine());
+			choice=ValidationControl.validateYesNoAndReturnIntegerValue(sc.nextLine());
 			if(choice<1||choice>2)
 			{
 				System.out.println("Invalid input, please try again");
@@ -113,7 +163,7 @@ public class AdminMovieEntryUi {
 			System.out.println("Please choose whehter movie is a blockbuster or not?");
 			System.out.println("1.No");
 			System.out.println("2.Yes");
-			choice=vl.validateYesNoAndReturnIntegerValue(sc.nextLine());
+			choice=ValidationControl.validateYesNoAndReturnIntegerValue(sc.nextLine());
 			if(choice<1||choice>2)
 			{
 				System.out.println("Invalid input, please try again");
@@ -135,9 +185,7 @@ public class AdminMovieEntryUi {
 			movie.setMovieName(movie.getMovieName()+" (BLOCKBUSTER!)");
 		}
 		
-		
-		
-		MovieEntryControl.createMovie(movie);
+		MovieDataControl.createMovie(movie);
 		displayMain();
 			
 	
@@ -150,7 +198,7 @@ public class AdminMovieEntryUi {
 		Scanner sc=new Scanner(System.in);
 		int choice = 0;
 		ValidationControl vl=new ValidationControl();
-		Movie movie=new Movie();
+		//Movie movie=new Movie();
 		System.out.println("#############################################");
 		System.out.println("#            Movie Update Page              #");
 		System.out.println("#############################################");
@@ -168,7 +216,7 @@ public class AdminMovieEntryUi {
 				oList.add(o);
 			}
 			choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-		}while(choice==-2||choice>movieList.size()||choice<0);
+		}while(choice<=0||choice>movieList.size());
 		Movie temp=new Movie();
 		for(int i=0;i<oList.size();i++){
 			if(choice==oList.get(i).getI()){
@@ -185,35 +233,113 @@ public class AdminMovieEntryUi {
 			System.out.println("5.Edit Synopsis");
 			System.out.println("6.Go back to main movie entry page");
 			 choice2=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-		}while(choice2==-2||choice2>6||choice2<0);
+		}while(choice2<=0||choice2>6);
 		
-		if(choice2==1){
-			System.out.println("Enter new movie name:");
-			temp.setMovieName(sc.nextLine());
+		if(choice2==1)
+		{
+			String check="";
+			boolean valid=false;
+			do
+			{
+				System.out.println("Please enter movie name(input -1 to return):");
+				check=sc.nextLine();
+				valid=ValidationControl.validateEmptyString(check);
+				if(check.equals("-1"))
+				{
+					choice2=0;
+				}
+			
+			}while(!valid);
+			temp.setMovieName(check);
 		}
 		else if(choice2==2){
-			System.out.println("Enter new age rating:");
-			temp.setAgeRating(sc.nextLine());
+			String check="";
+			boolean valid=false;
+			do
+			{
+				System.out.println("Please enter age rating(input -1 to return):");
+				check=sc.nextLine();
+				valid=ValidationControl.validateEmptyString(check);
+				if(check.equals("-1"))
+				{
+					choice2=0;
+				}
+			
+			}while(!valid);
+			temp.setAgeRating(check);
 		}
 		
 		else if(choice2==3){
-			System.out.println("Enter new director:");
-			temp.setDirector(sc.nextLine());
+			String check="";
+			boolean valid=false;
+			do
+			{
+				System.out.println("Please enter director name(input -1 to return):");
+				check=sc.nextLine();
+				valid=ValidationControl.validateEmptyString(check);
+				if(check.equals("-1"))
+				{
+					choice2=0;
+				}
+			}while(!valid);
+			temp.setDirector(check);
 		}
 		else if(choice2==4){
-			System.out.println("Enter new casts members:");
-			temp.setCast(sc.nextLine());
+			int castChoice=0;
+			String newCast="";
+			do{
+				System.out.println("1.Remove cast member");
+				System.out.println("2.Add cast member");
+				System.out.println("3.Edit cast member");
+				System.out.println("4.Return to previous page");
+				castChoice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+			}while(castChoice<=0);
+			
+			if(castChoice==1)
+			{
+				newCast=AdminMovieEntryControl.removeCast(temp);
+				System.out.println("Successfully removed cast member!");
+				temp.setCast(newCast);
+				choice2=4;
+			}
+			hh
+			else if(castChoice>=4){
+				choice2=0;
+			}
+			
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		
 		}
+		
+		
+		
+		
 		else if(choice2==5){
-			System.out.println("Enter new synopsis:");
-			temp.setSynopsis(sc.nextLine());
+			String check="";
+			boolean valid=false;
+			do
+			{
+				System.out.println("Enter new synopsis:");
+				check=sc.nextLine();
+				valid=ValidationControl.validateEmptyString(check);
+			
+			}while(!valid);
+			temp.setSynopsis(check);
 		}
 		else if(choice2==6){
 			displayMain();
 		}
 		
 		
-		MovieEntryControl.updateMovie(temp);
+		MovieDataControl.updateMovie(temp);
 		displayUpdatePage();
 			
 	

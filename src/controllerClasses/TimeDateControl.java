@@ -9,71 +9,60 @@ import java.util.GregorianCalendar;
 public class TimeDateControl {
 	
 	public static String retrieveDaySpell(Calendar t){
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE");
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yy EEEE");
 	    String a=dateFormatter.format(t.getTime());
 	    return a;
 		
 	}
-
-	public String minutesPlusTime(int minutes,int time)
+	
+	public static Calendar resetTodayTime(){
+		Calendar today=Calendar.getInstance();
+		
+		today.set(Calendar.HOUR_OF_DAY, 0);
+		today.set(Calendar.MINUTE, 0);
+		today.set(Calendar.SECOND, 0);
+		today.set(Calendar.MILLISECOND, 0);
+		return today;
+		
+		
+	}
+	
+	public static int calculateRunDate(Date sD,Date eD)
 	{
-		int hr=minutes/60;
-		int min=minutes-(hr*60);
-		int endTime=time+hr*100+min;
-		String startTimeSt = Integer.toString(time);
-		String endTimeSt = Integer.toString(endTime);
-		if(startTimeSt.length()==4){
-			String a=startTimeSt.substring(0, 2);
-			int check=Integer.parseInt(a);
-			if(check>=24){
-				check=check-24;
-				a=Integer.toString(check);
-				if(a.length()==0||a.length()==1){
-					a="0"+a;
-				}
-			}
-			startTimeSt=a+startTimeSt.substring(2, 4);
-			
+		Calendar a=Calendar.getInstance();
+		Calendar b=(Calendar) a.clone();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		a.setTime(sD);
+		b.setTime(eD);
+		int minusDays = 0;
+		while (true) {
+		  minusDays++;
+
+		  // Day increasing by 1
+		  a.add(Calendar.DAY_OF_MONTH, 1);
+
+		  if (dateFormat.format(a.getTime()).
+		            equals(dateFormat.format(b.getTime()))) {
+		    break;
+		  }
 		}
-		else if(startTimeSt.length()==3)
-		{
-			startTimeSt="0"+startTimeSt;
-		}
-		else if(startTimeSt.length()==2)
-		{
-			startTimeSt="00"+startTimeSt;
-		}
-		else if(startTimeSt.length()==1)
-		{
-			startTimeSt="000"+startTimeSt;
-		}
+		System.out.println("The subtraction between two days is " + (minusDays + 1));
 		
+		return minusDays+1;
 		
-		if(endTimeSt.length()==4){
-			String a=endTimeSt.substring(0, 2);
-			int check=Integer.parseInt(a);
-			if(check>=24){
-				check=check-24;
-				a=Integer.toString(check);
-				if(a.length()==0||a.length()==1)
-				{
-					a="0"+a;
-				}
-			}
-			endTimeSt=a+endTimeSt.substring(2, 4);;
-		}
-		else if(endTimeSt.length()==3)
-		{
-			endTimeSt="0"+endTimeSt;
-		}
-		else if(endTimeSt.length()==2)
-		{
-			endTimeSt="00"+endTimeSt;
-		}
-		else if(endTimeSt.length()==1)
-		{
-			endTimeSt="000"+endTimeSt;
-		}
+	}
+
+	public static String minutesPlusTime(int minutes,String s)
+	{
+		SimpleDateFormat sdf=new SimpleDateFormat("HHmm");
+		Calendar temp= Calendar.getInstance();
+		temp.set(Calendar.HOUR_OF_DAY, Integer.parseInt(s.substring(0, 2)));
+		temp.set(Calendar.MINUTE,Integer.parseInt(s.substring(2, 4)));
+		String startTimeSt=sdf.format(temp.getTime());
+		temp.add(Calendar.MINUTE, minutes);
+		String endTimeSt=sdf.format(temp.getTime());
+		
 		
 		String finalTime=startTimeSt+"-"+endTimeSt;
 		return finalTime;
@@ -94,6 +83,7 @@ public class TimeDateControl {
 
 	      // add time
 	     calTemp.add(Calendar.DATE, runDate );
+	     
 	      System.out.println("Ending date will be: " + calTemp.getTime());
 	      Date endDate = calTemp.getTime();
 		return endDate;

@@ -12,8 +12,6 @@ public class ModuleSelectionUi {
 	{
 		Scanner sc = new Scanner(System.in);
 		int choice = 0;
-	
-		
 		do
 		{
 			System.out.println("Enter Module Choice");
@@ -33,8 +31,7 @@ public class ModuleSelectionUi {
 			}
 			else if(choice==2){
 
-				CustomerDisplayMovieListingUi cu=new CustomerDisplayMovieListingUi();
-				cu.displayNowShowing();
+				CustMain.displayCustMain();
 			}
 
 

@@ -9,8 +9,8 @@ import java.util.Scanner;
 import misc.ObjectContainer;
 import controllerClasses.MiscControl;
 import controllerClasses.MovieListingControl;
-import controllerClasses.SchedulerController;
-import controllerClasses.ShowTimeController;
+import controllerClasses.AdminSchedulerController;
+import controllerClasses.AdminShowTimeController;
 import controllerClasses.ValidationControl;
 import data.Cinema;
 import data.Cineplex;
@@ -21,9 +21,9 @@ import dataController.CineplexDataControl;
 import dataController.DataControl;
 import dataController.MovieDataControl;
 
-public class AdminSchedulerUi extends DataControl {
+public class AdminSchedulerUi extends AdminMainUi {
 
-	public void displayMain() throws IOException, ParseException {
+	public static void displaySchedulerMain() throws IOException, ParseException {
 		Scanner sc=new Scanner(System.in);
 		int choice = 0;
 		String test;
@@ -50,7 +50,7 @@ public class AdminSchedulerUi extends DataControl {
 			}
 			if(choice==1)
 			{
-				displayCreatePage();
+				displaySchedulerCreatePageMain();
 			}
 			else if(choice==2){
 				AdminSchedulerUpdateUi up=new AdminSchedulerUpdateUi();
@@ -60,8 +60,8 @@ public class AdminSchedulerUi extends DataControl {
 				//tobedone
 			}
 			else if(choice==4){
-				AdminMainUi ui=new AdminMainUi();
-				ui.display();
+				AdminMainUi.displayAdminMain();
+			
 			}
 		}while(choice<5);
 		
@@ -71,113 +71,32 @@ public class AdminSchedulerUi extends DataControl {
 	
 	
 	
-	public void displayCreatePage() throws IOException, ParseException {
+	public static void displaySchedulerCreatePageMain() throws IOException, ParseException {
 		Scanner sc=new Scanner(System.in);
-		int choice = 0, num=0,cinemaId,movieId,movieLen,movieType, cinplexId;
-		boolean validDate;
-		MovieSchedule sch=new MovieSchedule();
-		
-		ValidationControl vl=new ValidationControl();
-		MiscControl oC=new MiscControl();
-		
-		ArrayList<Cineplex> cnList= new ArrayList<Cineplex>();
-		cnList=CineplexDataControl.readCineplex();
-		
-		ArrayList<Movie> movieList= new ArrayList<Movie>();
-		movieList=MovieDataControl.readMovie();
-		
-		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
-		
-	
-	
-		
-		
 		System.out.println("#############################################");
 		System.out.println("#            Schedule Creation Page         #");
 		System.out.println("#############################################");
-		
-		do{
-			System.out.println("Please choose Cineplex");
-		
-			for(int i=0;i<cnList.size();i++)
-			{
-				System.out.println((i+1)+":"+cnList.get(i).getCineplexName());
-			}
-			cinplexId=vl.validateAndReturnIntegerValue(sc.nextLine());
-				
-		}while(cinplexId==-2|| cinplexId>cnList.size());
-		sch.setCineplexId(cinplexId);
-		
-		do{
-			System.out.println("Please select which movie to be scheduled");
-			for(int i=0;i<movieList.size();i++)
-			{
-				System.out.print((i+1)+":"+movieList.get(i).getMovieName()+" ");
-				pair.add(MiscControl.idPairerWithMovieLength(i, movieList.get(i).getMovieId(), movieList.get(i).getMovieLength(),movieList.get(i).getMovieType(),movieList.get(i).getBlockbuster()));
-			}
-			System.out.println();
-			choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-			
-		}while(choice==-2|| choice>(movieList.size()+2));
-		
-		movieId=pair.get(choice-1).getId();
-		movieLen=pair.get(choice-1).getMovieLen();
-		movieType=pair.get(choice-1).getMovieType();
-		int movieBlock=pair.get(choice-1).getBlock();
-		
-		sch.setMovieId(movieId);
-		pair.clear();
-		sch.setThreeDOrNot(movieType-1);
-	
-		sch.setBlockBuster(movieBlock-1);
-			
-		
-		Date startDate;
-		int choice4=0;
-		do{
-			System.out.println("Please enter starting date(Eg.25/10/2015) of the movie:");
-			String tmp=sc.nextLine();
-			startDate=ValidationControl.validateDate(tmp);
-			
-			}
-		while(startDate==null);
-		
-		sch.setStartDate(startDate);
-		
-		int runDate=-2;
+		int choice=0;
 	do{
-		System.out.println("How many days will the movie be shown?");
-		 runDate=vl.validateAndReturnIntegerValue(sc.nextLine());
+		System.out.println("1.Create listing for now showing.");
+		System.out.println("2.Create listing for preview.");
+		System.out.println("3.Create listing for comming soon.");
+		System.out.println("4.Go Back.");
+		choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+		
+		if(choice==4){
+			displaySchedulerMain();
 		}
-	while(runDate==-2);
-		sch.setEndDate(calculateEndDate(startDate,runDate));
-		
-		do
-		{
-				System.out.println("Please select whether this movie will have a preivew?");
-				System.out.println("1.No");
-				System.out.println("2.Yes");
-				choice4=vl.validateYesNoAndReturnIntegerValue(sc.nextLine());
-				if(choice4<1||choice4>2)
-				{
-					System.out.println("Invalid input, please try again");
-					choice4=200;
-				}
-				else
-				{
-					sch.setPreviewStatus(choice4-1);
-				}
-			
-		}while(choice4>3);
-		
-		
-		AdminTimeSlotUi sTC=new AdminTimeSlotUi();
-		sTC.TimeSlotHandler(sch,movieId,movieLen,movieType,cinplexId,runDate);
-		
-		
-		displayMain();
+	
+	}while(choice<0||choice>4);
+	
+	AdminSchedulerController.createScheduleGeneric(choice);
+		//displayMain();
 			
 		
 	}
+	
+	
+	
 
 }

@@ -16,7 +16,7 @@ public class Movie implements Serializable{
 	private long ticketSales;
 	private int movieLength;
 	private int blockbuster;
-	private ArrayList<Reviews> reviewList;
+	private ArrayList<Review> reviewList;
 	
 	public Movie(){}
 	
@@ -96,10 +96,10 @@ public class Movie implements Serializable{
 	public void setMovieLength(int movieLength) {
 		this.movieLength = movieLength;
 	}
-	public ArrayList<Reviews> getReviewList() {
+	public ArrayList<Review> getReviewList() {
 		return reviewList;
 	}
-	public void setReviewList(ArrayList<Reviews> reviewList) {
+	public void setReviewList(ArrayList<Review> reviewList) {
 		this.reviewList = reviewList;
 	}
 
@@ -121,12 +121,26 @@ public class Movie implements Serializable{
 	
 	
 	public void printMovieDetails(){
-		System.out.println("Movie Name:"+movieName);
+		System.out.println("\nMovie Name:"+movieName);
 		System.out.println("Age Rating:"+ageRating);
 		System.out.println("Director:"+director);
-		System.out.println("Cast:"+cast);
-		System.out.println("Synopsis:"+synopsis);
-		System.out.println("Overall Rating:"+overallRating);
+		System.out.println("\nCast:"+cast);
+		System.out.print("\nSynopsis:");
+		String[] strArr = synopsis.split(" ");
+		for(int i=0;i<strArr.length;i++){
+			System.out.print(strArr[i]+" ");
+			if((i+1)%8==0){
+				System.out.println(" ");
+			}
+		}
+		System.out.println();
+		String rating=String.valueOf(overallRating);
+		if(overallRating<=0){
+			 rating="N/A";
+		}
+	
+			
+		System.out.println("\nOverall Rating:"+rating+"\n");
 	
 	}
 }
