@@ -214,6 +214,72 @@ public static ArrayList<ShowTime> readShowTimes() throws IOException, ParseExcep
 		Calendar end=(Calendar) today.clone();
 		end.add(Calendar.DATE, 1);
 		
+		Calendar timeCheck=Calendar.getInstance();
+		Calendar timeCheck2=Calendar.getInstance();
+		
+		
+//1ListingId|1movieId|1cinemaid|1showTimeId|3noOfShowTimes|showTime1|showTime2|showTime3
+		 for (int i = 0 ; i < stringArray.size() ; i++) {
+				String st = (String)stringArray.get(i);
+				
+				// get individual 'fields' of the string separated by SEPARATOR
+				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
+				int listingId=Integer.parseInt(star.nextToken().trim());
+				int  movieId = Integer.parseInt(star.nextToken().trim());
+				int  cinemaId = Integer.parseInt(star.nextToken().trim());
+				int  showTimeId = Integer.parseInt(star.nextToken().trim());
+				int  dayType = Integer.parseInt(star.nextToken().trim());
+				String showTimeValue=star.nextToken().trim();
+				int seats = Integer.parseInt(star.nextToken().trim());
+				String startDateString=star.nextToken().trim();
+				Date startDate=finalDateFormatter.parse(startDateString);
+				String endDateString=star.nextToken().trim();
+				Date endDate=finalDateFormatter.parse(endDateString);
+				double price=Double.parseDouble(star.nextToken().trim());
+				int preview = Integer.parseInt(star.nextToken().trim());
+				String arr[]=showTimeValue.split("-");
+				
+				timeCheck2.setTime(startDate);
+				timeCheck2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(arr[0].substring(0, 2)));
+				timeCheck2.set(Calendar.MINUTE, Integer.parseInt(arr[0].substring(2, 4)));
+				timeCheck2.set(Calendar.SECOND, 0);
+				timeCheck2.set(Calendar.MILLISECOND, 0);
+				//System.out.println(timeCheck.getTime()+"	"+timeCheck2.getTime()+""+timeCheck2.getTime().after(timeCheck.getTime()));
+				
+				//startDate.setHours(10);
+				
+				// add to  list
+				int cineId = Integer.parseInt(star.nextToken().trim());
+				if(listingId==listId && today.getTime().equals(startDate)&&end.getTime().equals(endDate)&&cId==cineId)
+				{	
+					// add to  list
+					if(timeCheck2.getTime().after(timeCheck.getTime())){
+						ShowTime u = new ShowTime(listingId,movieId,cinemaId,showTimeId,dayType,showTimeValue,seats,startDate,endDate,price,preview,cineId);
+						alr.add(u) ;
+					}
+					
+				}
+				
+				
+			}
+			return alr ;
+	}
+	
+	
+	
+	public static ArrayList<ShowTime> readShowTimesBasedOnListingIdAndCineplexId(int listId,Calendar calTemp,int cId) throws IOException, ParseException{
+		ArrayList stringArray = (ArrayList)read("data/showTimes.txt");
+		ArrayList alr = new ArrayList() ;// to store data
+		
+		Calendar today=(Calendar) calTemp.clone();
+		today.set(Calendar.HOUR_OF_DAY, 0);
+		today.set(Calendar.MINUTE, 0);
+		today.set(Calendar.SECOND, 0);
+		today.set(Calendar.MILLISECOND, 0);
+		
+		Calendar end=(Calendar) today.clone();
+		end.add(Calendar.DATE, 1);
+		
 		
 //1ListingId|1movieId|1cinemaid|1showTimeId|3noOfShowTimes|showTime1|showTime2|showTime3
 		 for (int i = 0 ; i < stringArray.size() ; i++) {

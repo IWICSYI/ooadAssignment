@@ -84,6 +84,7 @@ public class MovieListingControl extends DataControl {
 		int dayType=0;
 		boolean crud=false;
 		boolean holiday=false;
+		int allowance=0;
 		
 		Calendar cal = Calendar.getInstance();
 		Calendar calTemp = (Calendar) cal.clone(),calTemp2, aDate=Calendar.getInstance();
@@ -112,7 +113,7 @@ public class MovieListingControl extends DataControl {
 			else if(type.equals("update")||type.equals("preview"))
 			{
 				
-				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingIdAndCineplexIdAndNowShowing(listingid, calTemp,cineplexid);
+				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingIdAndCineplexId(listingid, calTemp,cineplexid);
 				
 			}
 			for(int h=0;h<hDList.size();h++)
@@ -189,7 +190,8 @@ public class MovieListingControl extends DataControl {
 					System.out.print("No timeslot ");
 					System.out.println();
 					calTemp.add(calTemp.DATE, 1);
-					if(type.equals("now"))
+					allowance++;
+					if(type.equals("now")&&allowance>2)
 					{
 						break;
 					}
