@@ -220,6 +220,7 @@ public class CustBuyTicketControl extends MovieListingControl {
 		o.settD(tD);
 		o.setPlat(plat);
 		o.setPrice(price);
+		o.setInitialprice(price);
 		return o;
 		
 	}

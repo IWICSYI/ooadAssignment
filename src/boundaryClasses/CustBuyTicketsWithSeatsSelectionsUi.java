@@ -64,11 +64,15 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketUiChooseTi
 		}
 		System.out.println();
 		
-		double initalprice=cust.getPrice();
-		System.out.println("Price for 1 ticket $"+initalprice);
-		System.out.println("1.Purchase Ticket");
-		String s=sc.nextLine();
-		int choice=ValidationControl.validateAndReturnIntegerValue(s);
+		final double initalprice=cust.getInitialprice();
+		int choice=0;
+		do{
+			System.out.println("Price for 1 ticket $"+initalprice);
+			System.out.println("1.Purchase Ticket");
+			String s=sc.nextLine();
+			choice=ValidationControl.validateAndReturnIntegerValue(s);
+		}while(choice<=0||choice>1);
+			
 		if(choice==1)
 		{
 			ArrayList<Seats> seatList = SeatsDataControl.readSeats(showTimeId);
@@ -84,11 +88,15 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketUiChooseTi
 		ArrayList<Seats> actualSeats =new ArrayList<Seats>();
 		Scanner sc=new Scanner(System.in);
 		
-		
-		System.out.println("Choose number of seats you want to purchase");
-		String s=sc.nextLine();
+		int num=0;
 		boolean valid=false;
-		int num=ValidationControl.validateAndReturnIntegerValue(s);
+		do{
+			System.out.println("Choose number of seats you want to purchase");
+			String s=sc.nextLine();
+			num=ValidationControl.validateAndReturnIntegerValue(s);
+		}while(num<=0||num>seatList.size());
+		
+		
 		CustSeatsControl scon=new CustSeatsControl();
 		String temp;
 		boolean occuValid;

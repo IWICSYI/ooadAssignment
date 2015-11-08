@@ -52,8 +52,10 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListing();
 		ArrayList<Movie> movieList=MovieDataControl.readMovie();
 		String status = null;
-		System.out.println("-------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("|S/N|	|Movie Name|                   |Status|		|Starting Date|		|Ending Date|		|Platinum/Normal|");
+		
+		
+		System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("|S/N|	|Movie Name|                	     	|Status|		|Starting Date|		|Ending Date|		|Platinum/Normal|");
 		for(int i=0;i<schList.size();i++)
 		{
 			for(int j=0;j<movieList.size();j++)
@@ -70,13 +72,9 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 					}else if(schList.get(i).getStatus()==4){
 						status="End Showing";
 					}
-					String white="";
+					
 					String plati="";
-					int spacing=29-movieList.get(j).getMovieName().length();
-					for(int k=0;k<spacing;k++)
-					{
-						white=white+" ";
-					}
+					
 					int plat=schList.get(i).getPlatOrNot();
 					
 					if(plat==1)
@@ -87,8 +85,25 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 					{
 						plati="Normal";
 					}
+					String movieName=movieList.get(j).getMovieName();
+					if(movieName.length()>=23)
+					{
+						movieName=movieName.substring(0, 23);
+						movieName=movieName+"......";
+					}
 					
-					System.out.println("   "+(i+1)+"|	"+movieList.get(j).getMovieName()+white+status+"	"+sdf.format(schList.get(i).getStartDate())+"		"+sdf.format(schList.get(i).getEndDate())+"		     "+plati);
+					System.out.format("%3d",(i+1));
+					System.out.print("	");
+					System.out.printf("%-25s",movieName);
+					System.out.print("		");
+					System.out.format("%-8s",status);
+					System.out.print("		");
+					System.out.format("%-10s",sdf.format(schList.get(i).getStartDate()));
+					System.out.print("		");
+					System.out.format("%-10s",sdf.format(schList.get(i).getEndDate()));
+					System.out.print("		");
+					System.out.format("%-8s",plati);
+					System.out.println();
 					ObjectContainer o=new ObjectContainer();
 					o.setM(movieList.get(j));
 					o.setI((i+1));
@@ -97,7 +112,8 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 				}
 			}
 		}
-		System.out.println("-------------------------------------------------------------------------------------------------------------------------------");do{	
+		System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+		do{	
 			System.out.print("Select number beside the listing to edit (input 0 to retun back to previous page):");
 			 choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
 			 if(choice<0||choice>schList.size())
@@ -123,6 +139,7 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 	{
 		String eOrSListing="";
 		int choice=0;
+		
 		if(movieSchedule.getStatus()<4){
 			eOrSListing="1.End Listing";
 		}
@@ -147,7 +164,7 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 			}
 			else if(movieSchedule.getStatus()==4)
 			{
-				MovieScheduleDataControl.updateScheduleStatus();
+				MovieScheduleDataControl.updateReListStatus();
 				displayUpdateMain();
 			}
 			

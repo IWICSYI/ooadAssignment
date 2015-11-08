@@ -53,6 +53,8 @@ public class CustSeatsControl extends DataControl {
 		int seatAmount=sTList.getNoOfSeats();
 		int seatId = 1;
 		
+		System.out.println("-------------------------------------SCREEN----------------------------------");
+		
 		//create new seats!
 		if(seatList.isEmpty())
 		{
@@ -118,7 +120,7 @@ public class CustSeatsControl extends DataControl {
 	
 	
 	public static void designSeats(ArrayList<Seats> seatList){
-		System.out.println("------------------SCREEN----------------------");
+		System.out.println("-------------------------------------SCREEN----------------------------------");
 		for(int i=0;i<seatList.size();i++)
 		{
 			
@@ -130,10 +132,10 @@ public class CustSeatsControl extends DataControl {
 			}
 			else
 			{
-				System.out.print("[X]");
+				System.out.print("[X ]");
 			}
 			if((i+1)%10==0&& i!=0){
-				System.out.print(" ");
+				System.out.print("|     |");
 			}
 			if((i+1)%20==0 && i!=0)
 			{

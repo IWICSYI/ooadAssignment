@@ -19,7 +19,7 @@ public class AdminLoginUi {
 	{
 		Console console= System.console();
 		 if (console == null) {
-		        System.out.println("Couldn't get Console instance");
+		       // System.out.println("Couldn't get Console instance");
 		        
 		    }
 

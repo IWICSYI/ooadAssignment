@@ -21,7 +21,7 @@ public class CustDisplayMovieListingUi extends CustMain{
 		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListingBasedOnStatus(1,plat);
 		ArrayList<Movie> movieList=MovieListingControl.filterUniqueMovieListFromSchedule(schList,plat);
 		ArrayList<ObjectContainer> oList=new ArrayList<ObjectContainer>();
-		
+		String movieName = "";
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Now Showing");
 		System.out.println("------------------------------------------------------");
@@ -38,8 +38,10 @@ public class CustDisplayMovieListingUi extends CustMain{
 			o.setMovieListing(schList.get(i));
 			o.setListingId(schList.get(i).getListingId());
 			
+			
 			oList.add(o);
-			System.out.print("Movie Name:"+movieList.get(i).getMovieName()+"	");
+			System.out.print(movieList.get(i).getMovieName()+"		");
+			movieName="";
 			if((i+1)%2==0)
 				System.out.println();
 		}

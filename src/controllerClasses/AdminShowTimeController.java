@@ -313,34 +313,15 @@ public class AdminShowTimeController extends AdminSchedulerController {
 	}
 	else if(repeat==2)
 	{
-		int copy=0;
-		if(!operation.equals("r"))
-		{
-			do
-			{	
-				System.out.println("Do you want to copy the same timeslots to other cineplex?");
-				System.out.println("1.Yes");
-				System.out.println("2.No");
-				copy=ValidationControl.validateYesNoAndReturnIntegerValue(sc.nextLine());
-			}while(copy<=0);
-			
-			if(copy==1){
-				
-				TimeSlotCopier(sch,cineplexId);
-			}
-			else if(copy==2)
-			{
-					AdminSchedulerUi.displaySchedulerMain();
-			}
-			
-		}
-			
+			AdminSchedulerUi.displaySchedulerMain();		
 	}
 		
 	
 		
   }
 
+	/* data entry function, not for real time use
+	
 	public static void TimeSlotCopier(MovieSchedule sch, int cineplexId) throws IOException, ParseException
 	{
 		ArrayList<ShowTime> stList=ShowTimeDataControl.readShowTimesBasedOnListingId(sch.getListingId());
@@ -378,6 +359,26 @@ public class AdminShowTimeController extends AdminSchedulerController {
 		
 	}
 
-	
+	int copy=0;
+		if(!operation.equals("r"))
+		{
+			do
+			{	
+				System.out.println("Do you want to copy the same timeslots to other cineplex?");
+				System.out.println("1.Yes");
+				System.out.println("2.No");
+				copy=ValidationControl.validateYesNoAndReturnIntegerValue(sc.nextLine());
+			}while(copy<=0);
+			
+			if(copy==1){
+				
+				TimeSlotCopier(sch,cineplexId);
+			}
+			else if(copy==2)
+			{
+					
+			}
+
+	*/
 	
 }

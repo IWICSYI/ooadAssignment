@@ -29,6 +29,7 @@ public class ObjectContainer {
 	private int listingId;
 	private String date;
 	private double price;
+	private double initialprice;
 	private Movie m;
 	private ShowTime sT;
 	private Seats seat;
@@ -397,6 +398,14 @@ public class ObjectContainer {
 
 	public void setWeekEnd(boolean weekEnd) {
 		this.weekEnd = weekEnd;
+	}
+
+	public double getInitialprice() {
+		return initialprice;
+	}
+
+	public void setInitialprice(double initialprice) {
+		this.initialprice = initialprice;
 	}
 
 

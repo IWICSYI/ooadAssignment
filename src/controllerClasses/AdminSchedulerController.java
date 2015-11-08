@@ -215,12 +215,14 @@ public class AdminSchedulerController extends MovieListingControl{
 		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListing();
 		Calendar cal=Calendar.getInstance();
 		
-		String startDate=finalDateFormatter.format(movieSchedule.getStartDate());
-		String endDate=finalDateFormatter.format(movieSchedule.getEndDate());
 		
 		
 		int status=0;
 		for(int i=0;i<schList.size();i++){
+			
+			String startDate=finalDateFormatter.format(schList.get(i).getStartDate());
+			String endDate=finalDateFormatter.format(schList.get(i).getEndDate());
+			
 			if(schList.get(i).getListingId()==movieSchedule.getListingId()){
 				status=4;
 			}

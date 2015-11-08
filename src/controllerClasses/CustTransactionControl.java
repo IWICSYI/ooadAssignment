@@ -35,7 +35,7 @@ public class CustTransactionControl {
 				System.out.println("Cineplex:"+c.getCineplexName());
 				System.out.println("Cinema hall:"+ch.getCinemaHallName());
 				System.out.println("Seats:"+tList.get(i).getSeats());
-				System.out.println("Price:"+tList.get(i).getPrice());
+				System.out.println("Total Price:"+(tList.get(i).getPrice()*tList.get(i).getNumSeat()));
 				exist=true;
 			}
 			System.out.println();

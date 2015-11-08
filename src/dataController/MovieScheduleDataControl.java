@@ -234,7 +234,68 @@ public class MovieScheduleDataControl extends DataControl{
 	
 		write("data/movieScheduleListing.txt",alMS);
 	}
+	
+	
+	
+	public static void updateReListStatus() throws IOException, ParseException
+	{
+		List alMS = new ArrayList() ;// to store Professors data
+		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListing();
+		Calendar cal=Calendar.getInstance();
+		int preview=0;
+		for(int i=0;i<schList.size();i++){
+			
+			preview=schList.get(i).getPreviewStatus();
+			
+			//1cineplexId|1movieUniqueId|1listingId|startEndDate|1typeofDay|status;		
+			StringBuilder st =  new StringBuilder() ;
+			st.append(schList.get(i).getMovieId());
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getListingId());
+			st.append(SEPARATOR);
+			st.append(finalDateFormatter.format(schList.get(i).getStartDate()));
+			st.append(SEPARATOR);
+			st.append(finalDateFormatter.format(schList.get(i).getEndDate()));
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getTypeofDay());
+			st.append(SEPARATOR);
+			if(cal.getTime().after(schList.get(i).getStartDate())&&cal.getTime().before(schList.get(i).getEndDate()))
+			{	
+				st.append(1);
+				preview=0;
+			}
+			else if(preview==1 ){
+				st.append(2);
+			}
+			
+			else if(cal.getTime().before(schList.get(i).getStartDate())&&cal.getTime().before(schList.get(i).getEndDate())&&preview==0)
+			{	
+				st.append(3);
+			}
+			else if(cal.getTime().after(schList.get(i).getEndDate()))
+			{	
+				st.append(4);
+			}
+			else
+			{
+				st.append(schList.get(i).getStatus());
+			}
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getThreeDOrNot());
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getBlockBuster());
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getPlatOrNot());
+			st.append(SEPARATOR);
+			st.append(preview+"\n");
+			
+			alMS.add(st.toString()) ;
+	}
+	
+	writeB("data/movieScheduleListing.txt",alMS);
 
+	
+}
 
 
 
@@ -247,47 +308,51 @@ public class MovieScheduleDataControl extends DataControl{
 		int preview=0;
 		for(int i=0;i<schList.size();i++){
 			
-		preview=schList.get(i).getPreviewStatus();
-		
-		//1cineplexId|1movieUniqueId|1listingId|startEndDate|1typeofDay|status;		
-		StringBuilder st =  new StringBuilder() ;
-		st.append(schList.get(i).getMovieId());
-		st.append(SEPARATOR);
-		st.append(schList.get(i).getListingId());
-		st.append(SEPARATOR);
-		st.append(finalDateFormatter.format(schList.get(i).getStartDate()));
-		st.append(SEPARATOR);
-		st.append(finalDateFormatter.format(schList.get(i).getEndDate()));
-		st.append(SEPARATOR);
-		st.append(schList.get(i).getTypeofDay());
-		st.append(SEPARATOR);
-		if(cal.getTime().after(schList.get(i).getStartDate())&&cal.getTime().before(schList.get(i).getEndDate()))
-		{	
-			st.append(1);
-			preview=0;
-		}
-		else if(preview==1){
-			st.append(2);
-		}
-		
-		else if(cal.getTime().before(schList.get(i).getStartDate())&&cal.getTime().before(schList.get(i).getEndDate())&&preview==0)
-		{	
-			st.append(3);
-		}
-		else if(cal.getTime().after(schList.get(i).getEndDate()))
-		{	
-			st.append(4);
-		}
-		st.append(SEPARATOR);
-		st.append(schList.get(i).getThreeDOrNot());
-		st.append(SEPARATOR);
-		st.append(schList.get(i).getBlockBuster());
-		st.append(SEPARATOR);
-		st.append(schList.get(i).getPlatOrNot());
-		st.append(SEPARATOR);
-		st.append(preview+"\n");
-		
-		alMS.add(st.toString()) ;
+			preview=schList.get(i).getPreviewStatus();
+			
+			//1cineplexId|1movieUniqueId|1listingId|startEndDate|1typeofDay|status;		
+			StringBuilder st =  new StringBuilder() ;
+			st.append(schList.get(i).getMovieId());
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getListingId());
+			st.append(SEPARATOR);
+			st.append(finalDateFormatter.format(schList.get(i).getStartDate()));
+			st.append(SEPARATOR);
+			st.append(finalDateFormatter.format(schList.get(i).getEndDate()));
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getTypeofDay());
+			st.append(SEPARATOR);
+			if(cal.getTime().after(schList.get(i).getStartDate())&&cal.getTime().before(schList.get(i).getEndDate())&&schList.get(i).getStatus()!=4)
+			{	
+				st.append(1);
+				preview=0;
+			}
+			else if(preview==1 && schList.get(i).getStatus()!=4){
+				st.append(2);
+			}
+			
+			else if(cal.getTime().before(schList.get(i).getStartDate())&&cal.getTime().before(schList.get(i).getEndDate())&&preview==0&& schList.get(i).getStatus()!=4)
+			{	
+				st.append(3);
+			}
+			else if(cal.getTime().after(schList.get(i).getEndDate()))
+			{	
+				st.append(4);
+			}
+			else
+			{
+				st.append(schList.get(i).getStatus());
+			}
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getThreeDOrNot());
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getBlockBuster());
+			st.append(SEPARATOR);
+			st.append(schList.get(i).getPlatOrNot());
+			st.append(SEPARATOR);
+			st.append(preview+"\n");
+			
+			alMS.add(st.toString()) ;
 	}
 	
 	writeB("data/movieScheduleListing.txt",alMS);
