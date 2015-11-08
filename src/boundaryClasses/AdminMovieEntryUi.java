@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import misc.ObjectContainer;
 import controllerClasses.AdminMovieEntryControl;
+import controllerClasses.SortTop5;
 import controllerClasses.ValidationControl;
 import data.Movie;
 import dataController.MovieDataControl;
@@ -15,7 +16,7 @@ import dataController.MovieDataControl;
 public class AdminMovieEntryUi extends AdminMainUi{
 	
 	
-	public static void displayMain() throws IOException, ParseException{
+	public static void displayMovieMain() throws IOException, ParseException{
 		Scanner sc=new Scanner(System.in);
 		int choice = 0;
 		String test;
@@ -27,18 +28,13 @@ public class AdminMovieEntryUi extends AdminMainUi{
 			System.out.println("#            Movie Manager Page             #");
 			System.out.println("#          1.Create Movie Entry             #");
 			System.out.println("#          2.Update Movie Details           #");
-			System.out.println("#          3.Sort Movies by Rankings        #");
-			System.out.println("#          4.Return to main menu            #");
+			System.out.println("#          3.Sort Movies by Rating          #");
+			System.out.println("#          4.Sort Movies by Ticket Sales    #");
+			System.out.println("#          5.Return to main menu            #");
 			System.out.println("#############################################");
 			test=sc.nextLine();
-			validation=vl.isInteger(test);
-			if(validation)
-				choice=Integer.parseInt(test);
-			else
-			{
-				System.out.println("Invalid choice, please try again");
-				choice=200;
-			}
+			choice=ValidationControl.validateAndReturnIntegerValue(test);
+			
 			if(choice==1)
 			{
 				displayCreatePage();
@@ -48,11 +44,25 @@ public class AdminMovieEntryUi extends AdminMainUi{
 			{
 				displayUpdatePage();
 			}
+			else if(choice==3)
+			{
+				SortTop5.sortTopScore();
+				System.out.println("Ready to resume?");
+				sc.nextLine();
+				displayMovieMain();
+			}
 			else if(choice==4)
+			{
+				SortTop5.sortTopSales();
+				System.out.println("Ready to resume?");
+				sc.nextLine();
+				displayMovieMain();
+			}
+			else if(choice==5)
 			{
 				AdminMainUi.displayAdminMain();
 			}
-		}while(choice<5);
+		}while(choice>5||choice<=0);
 		
 		
 	}
@@ -186,7 +196,7 @@ public class AdminMovieEntryUi extends AdminMainUi{
 		}
 		
 		MovieDataControl.createMovie(movie);
-		displayMain();
+		displayMovieMain();
 			
 	
 		
@@ -199,9 +209,9 @@ public class AdminMovieEntryUi extends AdminMainUi{
 		int choice = 0;
 		ValidationControl vl=new ValidationControl();
 		//Movie movie=new Movie();
-		System.out.println("#############################################");
-		System.out.println("#            Movie Update Page              #");
-		System.out.println("#############################################");
+		System.out.println("			#############################################");
+		System.out.println("			#            Movie Update Page              #");
+		System.out.println("			#############################################");
 		
 		ArrayList<Movie> movieList=MovieDataControl.readMovie();
 		ArrayList<ObjectContainer> oList=new ArrayList<ObjectContainer>();
@@ -209,143 +219,36 @@ public class AdminMovieEntryUi extends AdminMainUi{
 			System.out.println("Please select movie to edit");
 			for(int i=0;i<movieList.size();i++)
 			{
-				System.out.println((i+1)+":"+movieList.get(i).getMovieName());
+				System.out.print((i+1)+":"+movieList.get(i).getMovieName()+"		");
+				if((i+1)%4==0)
+				{
+					System.out.println();
+				}
 				ObjectContainer o= new ObjectContainer();
 				o.setI(i+1);
 				o.setM(movieList.get(i));
 				oList.add(o);
 			}
+			System.out.println();
+			System.out.println(movieList.size()+1+":Go to Movie Manager Page");
 			choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-		}while(choice<=0||choice>movieList.size());
+		}while(choice<=0||choice>movieList.size()+1);
+		if(choice==movieList.size()+1)
+		{
+			displayMovieMain();
+			return;
+		}
+		
 		Movie temp=new Movie();
 		for(int i=0;i<oList.size();i++){
 			if(choice==oList.get(i).getI()){
 				temp=oList.get(i).getM();
 			}
 		}
-		int choice2=0;
-		do{
-			temp.printMovieDetails();
-			System.out.println("1.Edit Movie Name");
-			System.out.println("2.Edit Age Rating");
-			System.out.println("3.Edit Director");
-			System.out.println("4.Edit Casts");
-			System.out.println("5.Edit Synopsis");
-			System.out.println("6.Go back to main movie entry page");
-			 choice2=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-		}while(choice2<=0||choice2>6);
-		
-		if(choice2==1)
-		{
-			String check="";
-			boolean valid=false;
-			do
-			{
-				System.out.println("Please enter movie name(input -1 to return):");
-				check=sc.nextLine();
-				valid=ValidationControl.validateEmptyString(check);
-				if(check.equals("-1"))
-				{
-					choice2=0;
-				}
-			
-			}while(!valid);
-			temp.setMovieName(check);
-		}
-		else if(choice2==2){
-			String check="";
-			boolean valid=false;
-			do
-			{
-				System.out.println("Please enter age rating(input -1 to return):");
-				check=sc.nextLine();
-				valid=ValidationControl.validateEmptyString(check);
-				if(check.equals("-1"))
-				{
-					choice2=0;
-				}
-			
-			}while(!valid);
-			temp.setAgeRating(check);
-		}
-		
-		else if(choice2==3){
-			String check="";
-			boolean valid=false;
-			do
-			{
-				System.out.println("Please enter director name(input -1 to return):");
-				check=sc.nextLine();
-				valid=ValidationControl.validateEmptyString(check);
-				if(check.equals("-1"))
-				{
-					choice2=0;
-				}
-			}while(!valid);
-			temp.setDirector(check);
-		}
-		else if(choice2==4){
-			int castChoice=0;
-			String newCast="";
-			do{
-				System.out.println("1.Remove cast member");
-				System.out.println("2.Add cast member");
-				System.out.println("3.Edit cast member");
-				System.out.println("4.Return to previous page");
-				castChoice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-			}while(castChoice<=0);
-			
-			if(castChoice==1)
-			{
-				newCast=AdminMovieEntryControl.removeCast(temp);
-				System.out.println("Successfully removed cast member!");
-				temp.setCast(newCast);
-				choice2=4;
-			}
-			hh
-			else if(castChoice>=4){
-				choice2=0;
-			}
-			
-			
-			
-		
-		
-		
-		
-		
-		
-		
-		
-		}
-		
-		
-		
-		
-		else if(choice2==5){
-			String check="";
-			boolean valid=false;
-			do
-			{
-				System.out.println("Enter new synopsis:");
-				check=sc.nextLine();
-				valid=ValidationControl.validateEmptyString(check);
-			
-			}while(!valid);
-			temp.setSynopsis(check);
-		}
-		else if(choice2==6){
-			displayMain();
-		}
-		
-		
-		MovieDataControl.updateMovie(temp);
-		displayUpdatePage();
-			
+		AdminMovieEntryControl.handleMovieEdit(temp);
 	
-		
 	}
-	
+		
 	
 	
 	

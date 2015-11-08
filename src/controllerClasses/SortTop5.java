@@ -30,7 +30,7 @@ import dataController.MovieDataControl;
 		
 		Collections.reverse(movie);
 		for(i=0;i<=movie.size();i++){
-			if(movie.get(i).getOverallRating()<0)
+			if(movie.get(i).getOverallRating()<=0)
 			{
 				
 			}

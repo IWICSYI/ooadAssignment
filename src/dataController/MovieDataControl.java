@@ -220,4 +220,53 @@ public class MovieDataControl extends DataControl {
 		}
 
 
+
+
+		public static void removeMovie(int movieId) throws IOException {
+			List alw = new ArrayList() ;// to store Professors data
+			ArrayList<Movie> movie=new ArrayList<Movie>();
+			movie=MovieDataControl.readMovie();
+			
+			//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
+
+			for(int i=0;i<movie.size();i++)	
+			{
+				StringBuilder st =  new StringBuilder() ;
+				if(movieId!=movie.get(i).getMovieId()){
+					st.append(movie.get(i).getMovieId());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getMovieName());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getMovieType());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getAgeRating());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getDirector());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getSynopsis());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getCast());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getOverallRating());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getTicketSales());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getMovieLength());
+					st.append(SEPARATOR);
+					st.append(movie.get(i).getBlockbuster());
+					st.append("\n");
+					alw.add(st.toString()) ;
+				}
+				
+			}
+				
+			
+
+			writeB("data/movies.txt",alw);
+			// TODO Auto-generated method stub
+
+			
+		}
+
+
 }

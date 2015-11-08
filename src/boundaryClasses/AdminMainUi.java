@@ -33,7 +33,7 @@ public class AdminMainUi {
 				}
 				else if(choice==1){
 					AdminMovieEntryUi mUI=new AdminMovieEntryUi();
-					mUI.displayMain();
+					mUI.displayMovieMain();
 				}
 				else if(choice==2){
 					AdminSchedulerUi.displaySchedulerMain();

@@ -5,11 +5,13 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 import controllerClasses.ValidationControl;
+import dataController.MovieScheduleDataControl;
 
 public class ModuleSelectionUi {
 	
 	public static void display() throws IOException, ParseException
 	{
+		MovieScheduleDataControl.updateScheduleStatus();
 		Scanner sc = new Scanner(System.in);
 		int choice = 0;
 		do

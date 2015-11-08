@@ -125,7 +125,7 @@ public class Movie implements Serializable{
 		System.out.println("Age Rating:"+ageRating);
 		System.out.println("Director:"+director);
 		System.out.println("\nCast:"+cast);
-		System.out.print("\nSynopsis:");
+		System.out.print("\nSynopsis:\n");
 		String[] strArr = synopsis.split(" ");
 		for(int i=0;i<strArr.length;i++){
 			System.out.print(strArr[i]+" ");

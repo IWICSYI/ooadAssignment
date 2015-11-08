@@ -19,12 +19,13 @@ import data.MovieSchedule;
 import data.Seats;
 import data.ShowTime;
 import dataController.DataControl;
+import dataController.MovieScheduleDataControl;
 import boundaryClasses.*;
 
 public class Main extends ValidationControl{
 
 	public static void main(String[] args) throws IOException, ParseException {
-		
+		MovieScheduleDataControl.updateScheduleStatus();
 		ModuleSelectionUi.display();
 	}
 }

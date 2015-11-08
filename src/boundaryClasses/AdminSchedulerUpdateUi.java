@@ -285,11 +285,12 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 			{
 				int remove=0;
 				do{
-					System.out.println("Select number remove timeslot(input -1 to return).");
+					System.out.println("Select number to remove timeslot(input -1 to return).");
 					for(int i=0;i<pairingIdWithSlot.size();i++)
 					{
 						System.out.print((i+1)+":"+pairingIdWithSlot.get(i).getTimeValue()+"	");
 					}
+					System.out.println();
 					String s=sc.nextLine();
 					 remove=ValidationControl.validateAndReturnIntegerValue(s);
 					if(s.equals("-1")){

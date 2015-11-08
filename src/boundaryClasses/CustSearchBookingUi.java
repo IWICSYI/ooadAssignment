@@ -31,6 +31,7 @@ public class CustSearchBookingUi extends CustMain{
 		
 		System.out.println("Ready to resume?");
 		sc.nextLine();
+		
 		CustMain.displayCustMain();
 		
 		

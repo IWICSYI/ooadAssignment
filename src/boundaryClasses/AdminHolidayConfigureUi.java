@@ -84,7 +84,7 @@ public class AdminHolidayConfigureUi extends AdminConfigureUi {
 		hD.setHolidayDate(day);
 		
 		}while(day==null);
-		AdminHolidayDateControl.createHoliday(hD);
+		TicketPriceAndHolidayDataControl.createHoliday(hD);
 		displayHolidayMain();
 	
 	}
@@ -171,7 +171,7 @@ public class AdminHolidayConfigureUi extends AdminConfigureUi {
 						HolidayDate hD=new HolidayDate();
 						hD.setHolidayDate(nHD);
 						hD.setHolidayId(id);
-						AdminHolidayDateControl.updateHoliday(id,hD);
+						TicketPriceAndHolidayDataControl.updateHoliday(id,hD);
 					}
 					else
 					{
@@ -188,7 +188,7 @@ public class AdminHolidayConfigureUi extends AdminConfigureUi {
 					System.out.println("2.No");
 					confirm=ValidationControl.validateYesNoAndReturnIntegerValue(sc.nextLine());
 					if(confirm==1){
-						AdminHolidayDateControl.removeHolidayDate(id);
+						TicketPriceAndHolidayDataControl.removeHolidayDate(id);
 					}
 					else if(confirm==2)
 					{
