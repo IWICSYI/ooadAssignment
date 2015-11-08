@@ -46,14 +46,14 @@ public class AdminMovieEntryUi extends AdminMainUi{
 			}
 			else if(choice==3)
 			{
-				SortTop5.sortTopScore();
+				SortTop5.sortTopScoreForAdmin();
 				System.out.println("Ready to resume?");
 				sc.nextLine();
 				displayMovieMain();
 			}
 			else if(choice==4)
 			{
-				SortTop5.sortTopSales();
+				SortTop5.sortTopSalesForAdmin();
 				System.out.println("Ready to resume?");
 				sc.nextLine();
 				displayMovieMain();

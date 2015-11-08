@@ -36,18 +36,11 @@ public class AdminSchedulerUi extends AdminMainUi {
 			System.out.println("#            Schedule Manager Page          #");
 			System.out.println("#          1.Create Movie Listing           #");
 			System.out.println("#          2.Update Movie Listing           #");
-			System.out.println("#          3.Sort Movies by Rankings        #");
-			System.out.println("#          4.Return to main menu            #");
+			System.out.println("#          3.Return to main menu            #");
 			System.out.println("#############################################");
 			test=sc.nextLine();
-			validation=vl.isInteger(test);
-			if(validation)
-				choice=Integer.parseInt(test);
-			else
-			{
-				System.out.println("Invalid choice, please try again");
-				choice=200;
-			}
+			choice=ValidationControl.validateAndReturnIntegerValue(test);
+			
 			if(choice==1)
 			{
 				displaySchedulerCreatePageMain();
@@ -57,13 +50,10 @@ public class AdminSchedulerUi extends AdminMainUi {
 				up.displayUpdateMain();
 			}
 			else if(choice==3){
-				//tobedone
-			}
-			else if(choice==4){
 				AdminMainUi.displayAdminMain();
 			
 			}
-		}while(choice<5);
+		}while(choice>3||choice<=0);
 		
 		
 	}

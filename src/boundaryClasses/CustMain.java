@@ -35,13 +35,13 @@ public class CustMain {
 			CustDisplayMovieListingUi.displayNowShowing(1);
 		}
 		else if(choice==3){
-			SortTop5.sortTopScore();
+			SortTop5.sortTopScoreForCustomer();
 			System.out.println("Ready to resume?");
 			sc.nextLine();
 			displayCustMain();
 		}
 		else if(choice==4){
-			SortTop5.sortTopSales();
+			SortTop5.sortTopSalesForCustomer();
 			System.out.println("Ready to resume?");
 			sc.nextLine();
 			displayCustMain();
