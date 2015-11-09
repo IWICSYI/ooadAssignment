@@ -3,7 +3,7 @@ package data;
 import java.util.Date;
 
 public class HolidayDate {
-
+	
 	public HolidayDate(int holidayId, Date holidayDate) {
 		super();
 		this.holidayId = holidayId;

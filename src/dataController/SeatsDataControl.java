@@ -9,8 +9,18 @@ import java.util.StringTokenizer;
 import data.Seats;
 import data.SeatsInformation;
 
+/**
+ * Class that deals with actual CRUD of seats
+ * @author Chang En Kai
+ *
+ */
 public class SeatsDataControl extends DataControl {
-	
+	/**
+	 * Read seats based on seat info Id
+	 * @param seatInfoId
+	 * @return
+	 * @throws IOException
+	 */
 	public static ArrayList<Seats> readSeats(int seatInfoId) throws IOException{
 		ArrayList alr = new ArrayList() ;
 		ArrayList stringArray =new ArrayList();
@@ -48,6 +58,11 @@ public class SeatsDataControl extends DataControl {
 	}
 	
 	
+	/**
+	 * Read seats that are created temporary to show selections
+	 * @return
+	 * @throws IOException
+	 */
 	public static ArrayList<Seats> readTmpSeats() throws IOException{
 		ArrayList alr = new ArrayList() ;
 		ArrayList stringArray =new ArrayList();
@@ -82,7 +97,13 @@ public class SeatsDataControl extends DataControl {
 			return alr ;
 	}
 	
-	
+	/**
+	 * Read seat information
+	 * @param j
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static ArrayList<SeatsInformation> readSeatInfor(int j) throws IOException, ParseException{
 		ArrayList alr = new ArrayList() ;
 		ArrayList stringArray =new ArrayList();

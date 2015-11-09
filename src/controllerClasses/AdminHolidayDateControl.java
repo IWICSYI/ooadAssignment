@@ -14,7 +14,13 @@ import dataController.TicketPriceAndHolidayDataControl;
 public class AdminHolidayDateControl extends DataControl {
 
 	
-
+/**
+ * Check if holiday dates are duplicated.
+ * @param s
+ * @return
+ * @throws IOException
+ * @throws ParseException
+ */
 	public static boolean checkDuplicatedHoliday(String s) throws IOException, ParseException {
 		String existDate="";
 				//

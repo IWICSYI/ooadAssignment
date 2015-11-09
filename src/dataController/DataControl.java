@@ -27,12 +27,22 @@ import java.util.StringTokenizer;
 import controllerClasses.TimeDateControl;
 import data.*;
 
-public class DataControl extends TimeDateControl {
+/**
+ * Main data control file, all data controllers extend it to use its write and read functions.
+ * @author Chang En Kai
+ *
+ */
+public class DataControl {
 	
 	protected static final String SEPARATOR = "|";
 	protected static final SimpleDateFormat finalDateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 	
-	
+	/**
+	 * Read file.
+	 * @param fileName
+	 * @return
+	 * @throws IOException
+	 */
 	 protected static ArrayList<String> read(String fileName) throws IOException {
 			ArrayList<String> data = new ArrayList<String>() ;
 		    Scanner scanner = new Scanner(new FileInputStream(fileName));
@@ -53,8 +63,13 @@ public class DataControl extends TimeDateControl {
 	
 		
 
-
-	public static void write(String fileName, List data) throws IOException  {
+/**
+ * Append new lines to file, mostly use for creating
+ * @param fileName
+ * @param data
+ * @throws IOException
+ */
+	protected static void write(String fileName, List data) throws IOException  {
 	PrintWriter out = new PrintWriter(new FileWriter(fileName,true));
 		
 		try {
@@ -67,7 +82,14 @@ public class DataControl extends TimeDateControl {
 		}
 	}
 	
-	public static void writeB(String fileName, List data) throws IOException  {
+	
+	/**
+	 * Overwrite everything, mainly used for update/remove
+	 * @param fileName
+	 * @param data
+	 * @throws IOException
+	 */
+	protected static void writeB(String fileName, List data) throws IOException  {
 		PrintWriter out = new PrintWriter(new FileWriter(fileName));
 			
 			try {

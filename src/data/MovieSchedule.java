@@ -5,7 +5,8 @@ import data.Movie;
 import java.io.Serializable;
 import java.util.*;
 //1cineplexId|1movieUniqueId|4listingId|startDate|endDate|1typeofDay|status
-public class MovieSchedule implements Serializable{
+public class MovieSchedule {
+	
 	public MovieSchedule(){}
 	
 
@@ -78,11 +79,64 @@ public class MovieSchedule implements Serializable{
 	public void setTypeofDay(int typeofDay) {
 		this.typeofDay = typeofDay;
 	}
+	/**
+	 * 
+	 * @return status of movie showing 1=now showing, 2=preview, 3=coming soon, 4=end of showing
+	 */
 	public int getStatus() {
 		return status;
 	}
+	/**
+	 * set movie showing status 1=now showing, 2=preview, 3=coming soon, 4=end of showing
+	 * @param status
+	 */
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+/**
+ * 
+ * @return if movie is in 3D or not. 1=yes 0=no
+ */
+	public int getThreeDOrNot() {
+		return threeDOrNot;
+	}
+/**
+ * set if movie is in 3D or not 1=yes, 0=no
+ * @param threeDOrNot
+ */
+	public void setThreeDOrNot(int threeDOrNot) {
+		this.threeDOrNot = threeDOrNot;
+	}
+/**
+ * 
+ * @return if movie is showing in platinum suite or not 1=yes, 0=no
+ */
+	public int getPlatOrNot() {
+		return platOrNot;
+	}
+/**
+ * Set if movie is showing in platinum suite or not, 1=yes, 0=no
+ * @param platOrNot
+ */
+	public void setPlatOrNot(int platOrNot) {
+		this.platOrNot = platOrNot;
+	}
+	
+	/**
+	 * 
+	 * @return if movie is a block buster or not 1=yes, 0=now
+	 */
+	public int getBlockBuster() {
+		return blockBuster;
+	}
+	
+	/**
+	 * set if movie is a blockbuster, 1=yes, 0=now
+	 * @param blockBuster
+	 */
+	public void setBlockBuster(int blockBuster) {
+		this.blockBuster = blockBuster;
 	}
 	public ArrayList<ShowTime> getShowTimeList() {
 		return showTimeList;
@@ -91,27 +145,5 @@ public class MovieSchedule implements Serializable{
 		this.showTimeList = showTimeList;
 	}
 	
-
-	public int getThreeDOrNot() {
-		return threeDOrNot;
-	}
-
-	public void setThreeDOrNot(int threeDOrNot) {
-		this.threeDOrNot = threeDOrNot;
-	}
-
-	public int getPlatOrNot() {
-		return platOrNot;
-	}
-
-	public void setPlatOrNot(int platOrNot) {
-		this.platOrNot = platOrNot;
-	}
-	public int getBlockBuster() {
-		return blockBuster;
-	}
-	public void setBlockBuster(int blockBuster) {
-		this.blockBuster = blockBuster;
-	}
 
 }

@@ -9,6 +9,11 @@ import dataController.MovieScheduleDataControl;
 
 public class ModuleSelectionUi {
 	
+	/**
+	 * First page to choose which module you want to work with
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void display() throws IOException, ParseException
 	{
 		MovieScheduleDataControl.updateScheduleStatus();
@@ -29,7 +34,7 @@ public class ModuleSelectionUi {
 			else if(choice==1){
 
 				AdminLoginUi lg=new AdminLoginUi();
-				lg.display();
+				lg.displayLogin();
 			}
 			else if(choice==2){
 

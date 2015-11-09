@@ -3,15 +3,27 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cinema implements Serializable{
+public class Cinema{
+	
+	/**
+	 * 
+	 * 
+	 */
 	private int cinplexId;
 	private int cinemaId;
 	private String cinemaHallName;
 	private int cinemaType;
 	private int seats;
-	private ArrayList<ShowTime> showTimes;
 	
 	
+	/**
+	 * Constructor for cinema, use by data controller to read cinema details.
+	 * @param cinplexId
+	 * @param cinemaId
+	 * @param cinemaHallName
+	 * @param cinemaType
+	 * @param seats
+	 */
 	public Cinema(int cinplexId, int cinemaId, String cinemaHallName,
 			int cinemaType, int seats) {
 		super();
@@ -23,27 +35,47 @@ public class Cinema implements Serializable{
 		
 	}
 
-	
+	/**
+	 * Empty constructor
+	 */
 	public Cinema() {
 		// TODO Auto-generated constructor stub
 	}
 
+/**
+ * 
+ * @return cineplexId
+ */
 	public int getCinplexId() {
 		return cinplexId;
 	}
 
+	/**
+	 * 
+	 * @param cinplexId
+	 */
 	public void setCinplexId(int cinplexId) {
 		this.cinplexId = cinplexId;
 	}
-
+/**
+ * 
+ * @return cinemaId
+ */
 	public int getCinemaId() {
 		return cinemaId;
 	}
 
+	/**
+	 * 
+	 * @param cinemaId
+	 */
 	public void setCinemaId(int cinemaId) {
 		this.cinemaId = cinemaId;
 	}
-
+/**
+ * 
+ * @return cinemaHallName
+ */
 	public String getCinemaHallName() {
 		return cinemaHallName;
 	}
@@ -68,12 +100,6 @@ public class Cinema implements Serializable{
 		this.seats = seats;
 	}
 
-	public ArrayList<ShowTime> getShowTimes() {
-		return showTimes;
-	}
-
-	public void setShowTimes(ArrayList<ShowTime> showTimes) {
-		this.showTimes = showTimes;
-	}
+	
 
 }

@@ -19,6 +19,14 @@ import dataController.ReviewDataControl;
 
 public class CustMovieDetailUi extends CustDisplayMovieListingUi {
 	
+	/**
+	 * Display movie selection to view movie details
+	 * @param oList
+	 * @param plat
+	 * @param type
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public void displayNowShowingMovieDetailsSelection(ArrayList<ObjectContainer> oList, int plat,String type) throws IOException, ParseException
 	{
 		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
@@ -42,7 +50,15 @@ public class CustMovieDetailUi extends CustDisplayMovieListingUi {
 		displayMovieDetails(oList.get(choice-1).getM().getMovieId(),oList.get(choice-1).getMovieListing().getListingId(), type,plat);
 	}
 	
-	
+	/**
+	 * display movie details
+	 * @param movieId
+	 * @param listingId
+	 * @param type
+	 * @param plat
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayMovieDetails(int movieId, int listingId,String type, int plat) throws IOException, ParseException
 	{
 		//ArrayList<MovieSchedule> schList=cl.readScheduleListingBasedOnStartingDate();
@@ -113,7 +129,7 @@ public class CustMovieDetailUi extends CustDisplayMovieListingUi {
 				displayMovieDetails(movieId, listingId, type, plat);
 			}
 			if(choice==3){
-				CustBuyTicketUiChooseTimeSlot u=new CustBuyTicketUiChooseTimeSlot();
+				CustBuyTicketChooseTimeSlotUi u=new CustBuyTicketChooseTimeSlotUi();
 				u.displayBuyTicket(type, movieId,0,0,movieDetails,listingId);
 			}
 			if(choice==4){
@@ -131,7 +147,7 @@ public class CustMovieDetailUi extends CustDisplayMovieListingUi {
 				choice=ValidationControl.validateAndReturnIntegerValue(s);
 			}while(choice<=0||choice>2);
 			if(choice==1){
-				CustBuyTicketUiChooseTimeSlot u=new CustBuyTicketUiChooseTimeSlot();
+				CustBuyTicketChooseTimeSlotUi u=new CustBuyTicketChooseTimeSlotUi();
 				u.displayBuyTicket(type, movieId,0,0,movieDetails,listingId);
 			}
 			else if(choice==2){

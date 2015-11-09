@@ -15,39 +15,24 @@ import misc.ObjectContainer;
 import data.*;
 import dataController.MovieDataControl;
 
+
+/**
+ * Class use for common input validation
+ * @author Chang En Kai
+ *
+ */
 public class ValidationControl extends MovieListingControl{
 
 	public ValidationControl(){
 		
 	}
 	
-	
-	public boolean validateShowTime(int movieId) throws IOException
-	{
-		ArrayList<Movie> movie=new ArrayList<Movie>();
-		ArrayList<ShowTime> showTime=new ArrayList<ShowTime>();
-		movie=MovieDataControl.readMovie();
-		int movieLength;
-		for(int i=0;i<movie.size();i++)
-		{
-			if(movie.get(i).getMovieId()==movieId)
-			{
-				movieLength=movie.get(i).getMovieLength();
-				break;
-			}
-			else{
-				System.out.println("Movie not found");
-			}
-		}
-		
-		
-		return true;
-	}
-	
-	
 
-	
-	
+	/**
+	 * Validate if input is integer or not
+	 * @param s
+	 * @return
+	 */
 	public static boolean isInteger(String s) {
 	    try { 
 	        Integer.parseInt(s); 
@@ -60,6 +45,11 @@ public class ValidationControl extends MovieListingControl{
 	    return true;
 	}
 	
+	/**
+	 * Validate if input is double or not
+	 * @param s
+	 * @return
+	 */
 	public static boolean isDouble(String s) {
 	    try { 
 	        Double.parseDouble(s); 
@@ -74,7 +64,11 @@ public class ValidationControl extends MovieListingControl{
 	
 	
 	
-	
+	/**
+	 * Validate if input is integer, if it is, return inputed integer, if not, return -2
+	 * @param s
+	 * @return
+	 */
 	public static int validateAndReturnIntegerValue(String s)
 	{
 		boolean intValid=isInteger(s);
@@ -87,7 +81,11 @@ public class ValidationControl extends MovieListingControl{
 			return -2;
 		}
 	}
-	
+	/**
+	 * Validate if input is double, if it is, return inputed double, if not, return -2
+	 * @param s
+	 * @return
+	 */
 	public static Double validateAndReturnDoubleValue(String s)
 	{
 		boolean DoubleValid=isDouble(s);
@@ -99,7 +97,13 @@ public class ValidationControl extends MovieListingControl{
 			return -2.0;
 		}
 	}
-
+	
+	
+/**
+ * Valid input for yes not choice.
+ * @param s
+ * @return
+ */
 	public static int validateYesNoAndReturnIntegerValue(String s)
 	{
 		boolean intValid=isInteger(s);
@@ -123,6 +127,12 @@ public class ValidationControl extends MovieListingControl{
 	}
 	
 
+	/**
+	 * Validate if date is of format dd/MM/yyyy
+	 * @param dateString
+	 * @param type
+	 * @return
+	 */
 	public static Date validateDate(String dateString, int type) {
 		String[] formats= {"d/M/yyyy", "d-M-yyyy", 
                 "dd/MM/yyyy", "dd-mm-yyyy", 
@@ -244,6 +254,11 @@ public class ValidationControl extends MovieListingControl{
 	}
 
 
+	/**
+	 * Validate if inputed time is of value HHmm
+	 * @param s
+	 * @return
+	 */
 	public static int validateAndReturnTime(String s) {
 		boolean intValid=isInteger(s);
 		boolean valid=true;

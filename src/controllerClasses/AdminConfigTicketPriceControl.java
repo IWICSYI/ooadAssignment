@@ -9,9 +9,15 @@ import data.Prices;
 import dataController.DataControl;
 import dataController.TicketPriceAndHolidayDataControl;
 
-public class AdminConfigTicketPriceControl extends DataControl {
-
+public class AdminConfigTicketPriceControl {
 	
+	/**
+	 * Check if price is logical
+	 * @param choice
+	 * @param baseprice
+	 * @param price
+	 * @return
+	 */
 	public static boolean checkPrice(int choice,double baseprice , double price)
 	{
 		

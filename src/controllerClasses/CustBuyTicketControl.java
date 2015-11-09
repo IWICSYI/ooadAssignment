@@ -33,8 +33,21 @@ import dataController.ShowTimeDataControl;
 import dataController.TicketPriceAndHolidayDataControl;
 import dataController.TransactionDataControl;
 
-public class CustBuyTicketControl extends MovieListingControl {
+/**
+ * Class that deals with the purchase of a ticket. Mainly deal formating of show time for customer to select and work in conjunction with CustSeatsControl
+ * @author Chang En Kai
+ *
+ */
+public class CustBuyTicketControl   {
 	
+	/**
+	 * Choose the cineplex that has the most time slot when customer first select time slot of a movie to purcahse
+	 * @param movieId
+	 * @param listId
+	 * @return
+	 * @throws ParseException
+	 * @throws IOException
+	 */
 	public static int chooseCineplexToDisplay(int movieId,int listId) throws ParseException, IOException//ArrayList<Integer> cineId)
 	{
 		Calendar calTemp=Calendar.getInstance();
@@ -82,7 +95,14 @@ public class CustBuyTicketControl extends MovieListingControl {
 		
 	}
 	
-	
+	/**
+	 * Method to handle purchase ticket. Will comunicate with data controllers to create new transactions. 
+	 * @param cust
+	 * @param stList
+	 * @param actualSeats
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void purchaseTicket(ObjectContainer cust, ShowTime stList, ArrayList<Seats> actualSeats) throws IOException, ParseException{
 		int movieId=stList.getMovieId();
 		
@@ -114,7 +134,15 @@ public class CustBuyTicketControl extends MovieListingControl {
 		
 	}
 	
-	
+	/**
+	 * Format forms to take to obtain customer's information
+	 * @param sTList
+	 * @param m
+	 * @param listingId
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static ObjectContainer customerManagement(ShowTime sTList,Movie m, int listingId) throws IOException, ParseException{
 		double price=sTList.getTicketPrice();
 		MovieSchedule sch=MovieScheduleDataControl.readScheduleListingBasedOnListingId(listingId);
@@ -226,7 +254,13 @@ public class CustBuyTicketControl extends MovieListingControl {
 	}
 	
 	
-	
+	/**
+	 * Communicate with data controllers to filter a list of time slots that are showing in a cineplex
+	 * @param listId
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static int filterNowShowingListingByCineplexId(int listId) throws IOException, ParseException{
 		Calendar cal=Calendar.getInstance();
 		Scanner sc=new Scanner(System.in);

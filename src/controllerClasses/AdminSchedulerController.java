@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import boundaryClasses.AdminSchedulerUi;
+import boundaryClasses.AdminSchedulerMainUi;
 import boundaryClasses.AdminSchedulerUpdateUi;
 import misc.ObjectContainer;
 import data.Cinema;
@@ -28,8 +28,23 @@ import dataController.ShowTimeDataControl;
 import dataController.TicketPriceAndHolidayDataControl;
 import dataController.TransactionDataControl;
 
+/**
+ * Class that deals with formatting and controlling the UI for CRUD of schedule.
+ * @author Chang En Kai
+ *
+ */
 public class AdminSchedulerController extends MovieListingControl{
 	
+/**
+ * Check if schedule is duplicated during movie schedule creation, if it is, redirect to update page.
+ * The condition of duplicated is if the same movie has the same movie listing that are of now showing and coming soon status.	 * A movie listing is not duplicated if one of the same movie is showing on a platinum suite and one isn't. 
+ * A movie listing is not duplicated if  one of the same movie had already ended its showing. 
+ * This is to make sure that cinema staff can rerun new showing after it a list has ended.
+ * @param sch
+ * @return
+ * @throws IOException
+ * @throws ParseException
+ */
 	public boolean checkDuplicatedSchedule(MovieSchedule sch) throws IOException, ParseException{
 		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListing();
 		int movie=0, plat=0,preview;
@@ -42,7 +57,7 @@ public class AdminSchedulerController extends MovieListingControl{
 			movie=schList.get(i).getMovieId();
 			plat=schList.get(i).getPlatOrNot();
 			preview=schList.get(i).getPreviewStatus();
-			if(movie==sch.getMovieId()&&plat==sch.getPlatOrNot()&&preview==schList.get(i).getPreviewStatus())
+			if(movie==sch.getMovieId()&&plat==sch.getPlatOrNot()&&preview==schList.get(i).getPreviewStatus()&&schList.get(i).getStatus()!=4)
 			{	
 				return true;
 			}
@@ -51,6 +66,12 @@ public class AdminSchedulerController extends MovieListingControl{
 		return false;
 	}
 	
+	/**
+	 * Format forms to create movie schedule based on types such as now showing or coming soon
+	 * @param type
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void createScheduleGeneric(int type) throws IOException, ParseException{
 		Scanner sc=new Scanner(System.in);
 		int choice = 0, num=0,cinemaId,movieId,movieLen,movieType, cinplexId;
@@ -147,7 +168,7 @@ public class AdminSchedulerController extends MovieListingControl{
 		 runDate=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
 		}
 	while(runDate<=0);
-	sch.setEndDate(calculateEndDate(startDate,runDate));
+	sch.setEndDate(TimeDateControl.calculateEndDate(startDate,runDate));
 	
 	int plat=0;
 	do{
@@ -198,7 +219,7 @@ public class AdminSchedulerController extends MovieListingControl{
 		schid=1;
 	}
 	sch.setListingId(schid);
-	AdminShowTimeController.TimeSlotHandler("c",0,sch,movieId,movieLen,movieType,runDate);
+	AdminShowTimeController.timeSlotHandler("c",0,sch,movieId,movieLen,movieType,runDate);
 
 
 		
@@ -209,8 +230,13 @@ public class AdminSchedulerController extends MovieListingControl{
 	
 
 	
-
-	public static void endListing(MovieSchedule movieSchedule) throws IOException, ParseException {
+/**
+ * Method to end a movie listing, can be assesed only on update movie schedule page
+ * @param sch
+ * @throws IOException
+ * @throws ParseException
+ */
+	public static void endListing(MovieSchedule sch) throws IOException, ParseException {
 		List alMS = new ArrayList() ;// to store Professors data
 		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListing();
 		Calendar cal=Calendar.getInstance();
@@ -223,7 +249,7 @@ public class AdminSchedulerController extends MovieListingControl{
 			String startDate=finalDateFormatter.format(schList.get(i).getStartDate());
 			String endDate=finalDateFormatter.format(schList.get(i).getEndDate());
 			
-			if(schList.get(i).getListingId()==movieSchedule.getListingId()){
+			if(schList.get(i).getListingId()==sch.getListingId()){
 				status=4;
 			}
 			else
@@ -263,13 +289,21 @@ public class AdminSchedulerController extends MovieListingControl{
 		
 		
 	}
-
-	public static void extendDate(int i, MovieSchedule movieSchedule,Movie m, int cineId) throws IOException, ParseException {
+/**
+ * Method to extend either the start or end date of a movie listing
+ * @param sOrE
+ * @param movieSchedule
+ * @param m
+ * @param cineId
+ * @throws IOException
+ * @throws ParseException
+ */
+	public static void extendDate(int sOrE, MovieSchedule movieSchedule,Movie m, int cineId) throws IOException, ParseException {
 		MovieSchedule sch=movieSchedule;
 		int extend=0;
 		
 		Scanner sc=new Scanner(System.in);
-		if(i==1){
+		if(sOrE==1){
 			do{
 				System.out.println("Enter how long you want to extend the start date(input -1 to return):");
 				String s=sc.nextLine();
@@ -286,9 +320,9 @@ public class AdminSchedulerController extends MovieListingControl{
 			cal.add(Calendar.DATE, -extend);
 			sch.setStartDate(cal.getTime());
 			MovieScheduleDataControl.updateSchedule(sch);
-			AdminShowTimeController.TimeSlotHandler("u",0, sch,m.getMovieId(),m.getMovieLength(),m.getMovieType(),extend);
+			AdminShowTimeController.timeSlotHandler("u",0, sch,m.getMovieId(),m.getMovieLength(),m.getMovieType(),extend);
 		}
-		else if(i==2){
+		else if(sOrE==2){
 			do{
 				System.out.println("Enter how long you want to extend the end date(input -1 to return):");
 				String s=sc.nextLine();
@@ -307,13 +341,23 @@ public class AdminSchedulerController extends MovieListingControl{
 			MovieScheduleDataControl.updateSchedule(sch);
 			sch.setStartDate(endDate);
 			
-		   AdminShowTimeController.TimeSlotHandler("u",0,sch,m.getMovieId(),m.getMovieLength(),m.getMovieType(),extend);
+		   AdminShowTimeController.timeSlotHandler("u",0,sch,m.getMovieId(),m.getMovieLength(),m.getMovieType(),extend);
 			
 		}
 	}
 
-	
-	public static void handleEditTimeSlot(ArrayList<ObjectContainer>pairingIdWithSlot,ArrayList<ObjectContainer>pair,int choice,MovieSchedule movieSchedule,Movie  movie,int cineId) throws IOException, ParseException{
+	/**
+	 * Method to handle the form of editing specific timeslot
+	 * @param pairingIdWithSlot
+	 * @param pair
+	 * @param choice
+	 * @param sch
+	 * @param m
+	 * @param cineId
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public static void handleEditTimeSlot(ArrayList<ObjectContainer>pairingIdWithSlot,ArrayList<ObjectContainer>pair,int choice,MovieSchedule sch,Movie  m,int cineId) throws IOException, ParseException{
 		Scanner sc=new Scanner(System.in);
 		int choose=0;
 		do{
@@ -326,7 +370,7 @@ public class AdminSchedulerController extends MovieListingControl{
 			String s=sc.nextLine();
 			choose=ValidationControl.validateAndReturnIntegerValue(s);
 			if(s.equals("-1")){
-				AdminSchedulerUpdateUi.displayUpdatePageDetails( movieSchedule,movie, cineId);	
+				AdminSchedulerUpdateUi.displayUpdatePageDetails( sch,m, cineId);	
 				
 			}
 			
@@ -370,11 +414,11 @@ public class AdminSchedulerController extends MovieListingControl{
 				String s=sc.nextLine();
 				time = ValidationControl.validateAndReturnTime(s);
 				if(time!=-2){
-					valid2 = AdminShowTimeController.checkTimeSlotClashforUpdate(movie.getMovieLength(),cinemaId, s,intTime,temp);
+					valid2 = AdminShowTimeController.checkTimeSlotClashforUpdate(m.getMovieLength(),cinemaId, s,intTime,temp);
 				}
 				if(valid2 &&time!=-2)
 				{
-					String showTimeValue=TimeDateControl.minutesPlusTime(movie.getMovieLength(), s);
+					String showTimeValue=TimeDateControl.minutesPlusTime(m.getMovieLength(), s);
 					ShowTimeDataControl.updateShowTime(showTimeId, showTimeValue);
 					
 				}
@@ -382,7 +426,7 @@ public class AdminSchedulerController extends MovieListingControl{
 		
 		}
 		else{
-			AdminSchedulerUpdateUi.displayUpdateTimeSlot( pair,  choice, movieSchedule,  movie, cineId);
+			AdminSchedulerUpdateUi.displayUpdateTimeSlot( pair,  choice, sch,  m, cineId);
 		}
 	}
 	

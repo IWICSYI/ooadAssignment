@@ -9,9 +9,22 @@ import boundaryClasses.CustMovieDetailUi;
 import data.Review;
 import dataController.ReviewDataControl;
 
+/**
+ * Class that deals with customer's review.
+ * @author Chang En Kai
+ *
+ */
 public class CustReviewControl {
 
-	
+	/**
+	 * Communicate with ReviewDataControl to retrieve and format reviews
+	 * @param movieId
+	 * @param listingId
+	 * @param type
+	 * @param plat
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void retrieveReviewList(int movieId, int listingId, String type, int plat) throws IOException, ParseException
 	{
 		ArrayList<Review> review= new ArrayList<Review>();

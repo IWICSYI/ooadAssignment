@@ -25,9 +25,22 @@ import dataController.MovieScheduleDataControl;
 import dataController.ShowTimeDataControl;
 import dataController.TicketPriceAndHolidayDataControl;
 
+/**
+ * Control class used by both the customer and admin side of thing to deal with the dynamic formating of show time based on today's date.
+ * @author Chang En Kai
+ *
+ */
 public class MovieListingControl extends DataControl {
 	
-	
+	/**
+	 * 
+	 * Filter out all the movies details in a list of movie schedule
+	 * @param schList
+	 * @param plat
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static ArrayList<Movie> filterUniqueMovieListFromSchedule(ArrayList<MovieSchedule>schList,int plat) throws IOException, ParseException
 	{
 		ArrayList<Integer> movieIdList=new ArrayList<Integer>();
@@ -50,6 +63,21 @@ public class MovieListingControl extends DataControl {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * Format show time of movies depending on type. It's use for selecting movie time slot to purchase and to edit specific timeslot
+	 * 
+	 * @param listingid
+	 * @param cineplexid
+	 * @param movieid
+	 * @param type
+	 * @param max
+	 * @param movieDetails
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 
 	public static ArrayList<ObjectContainer> formatShowtimeforListing(int listingid,int cineplexid,int movieid,String type,int max,Movie movieDetails) throws IOException, ParseException{
 		ArrayList<MovieSchedule> schList=new ArrayList<MovieSchedule>();

@@ -33,9 +33,13 @@ import dataController.MovieScheduleDataControl;
 import dataController.ShowTimeDataControl;
 import dataController.TransactionDataControl;
 
-public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
+public class AdminSchedulerUpdateUi extends AdminSchedulerMainUi{
 	
-	
+	/**
+	 * Display schedule update main page for user to select which listing to edit
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayUpdateMain() throws IOException, ParseException
 	{
 		Scanner sc=new Scanner(System.in);
@@ -124,6 +128,11 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 		
 		}while(choice<0||choice>schList.size());
 			
+		if(choice==0){
+			displaySchedulerMain();
+			
+		}
+		
 		for(int i=0;i<pair.size();i++)
 		{
 				if(pair.get(i).getI()==choice)
@@ -134,7 +143,14 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 	}
 	
 	
-	
+	/**
+	 * display listing details that user choose from the displayUpdate main method.
+	 * @param movieSchedule
+	 * @param movie
+	 * @param cineId
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayUpdatePageDetails(MovieSchedule movieSchedule, Movie movie,int cineId) throws IOException, ParseException
 	{
 		String eOrSListing="";
@@ -164,7 +180,7 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 			}
 			else if(movieSchedule.getStatus()==4)
 			{
-				MovieScheduleDataControl.updateReListStatus();
+				MovieScheduleDataControl.updateReListStatus(movieSchedule);
 				displayUpdateMain();
 			}
 			
@@ -179,7 +195,7 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 		}
 		else if(choice==4)
 		{
-			editExistingTimeSlot(movieSchedule, movie.getMovieId(), 0, movie);
+			displayEditExistingTimeSlot(movieSchedule, movie.getMovieId(), 0, movie);
 		
 		}
 		else if(choice==5)
@@ -190,7 +206,16 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 		
 	}
 	
-	public static void editExistingTimeSlot(MovieSchedule movieSchedule,int movieId,int cineId, Movie movie) throws IOException, ParseException{
+	/**
+	 * display page to choose which specific timeslot to edit
+	 * @param movieSchedule
+	 * @param movieId
+	 * @param cineId
+	 * @param movie
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public static void displayEditExistingTimeSlot(MovieSchedule movieSchedule,int movieId,int cineId, Movie movie) throws IOException, ParseException{
 		Scanner sc=new Scanner(System.in);
 		int run=TimeDateControl.calculateRunDate(movieSchedule.getStartDate(), movieSchedule.getEndDate());
 		int ucinI;
@@ -212,7 +237,7 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 				System.out.println((i+1)+":"+cineList.get(i).getCineplexName());
 			}
 			ucinI=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-			editExistingTimeSlot(movieSchedule, movieId, ucinI, movie);
+			displayEditExistingTimeSlot(movieSchedule, movieId, ucinI, movie);
 		}
 		else if(choice3==2)
 		{
@@ -238,7 +263,16 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 	}
 	
 	
-
+/**
+ * Display timeslots detail choosen during displayEditExistingTimeSlot() method.
+ * @param pair
+ * @param choice
+ * @param movieSchedule
+ * @param movie
+ * @param cineId
+ * @throws IOException
+ * @throws ParseException
+ */
 	public static void displayUpdateTimeSlot(ArrayList<ObjectContainer> pair, int choice,MovieSchedule movieSchedule, Movie movie,int cineId) throws IOException, ParseException {
 		ArrayList<ObjectContainer> pairingIdWithSlot=new ArrayList<ObjectContainer>();
 		String dateChoosen = "";
@@ -282,14 +316,14 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 		int choice2=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
 		int showTimeId=0;
 		if(choice2==1){
-			editExistingTimeSlot(movieSchedule, movie.getMovieId(), cineId, movie);
+			displayEditExistingTimeSlot(movieSchedule, movie.getMovieId(), cineId, movie);
 		}
 		if(choice2==2)
 		{
 			SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
 			MovieSchedule tmpSch = movieSchedule;
 			tmpSch.setStartDate(sdf.parse(dateChoosen));
-			AdminShowTimeController.TimeSlotHandler("add",cineId,tmpSch , movie.getMovieId(), movie.getMovieLength(), movie.getMovieType(), 1);
+			AdminShowTimeController.timeSlotHandler("add",cineId,tmpSch , movie.getMovieId(), movie.getMovieLength(), movie.getMovieType(), 1);
 		}
 		
 		
@@ -336,7 +370,7 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerUi{
 				}
 			}
 		}
-		editExistingTimeSlot(movieSchedule, movie.getMovieId(), cineId, movie);
+		displayEditExistingTimeSlot(movieSchedule, movie.getMovieId(), cineId, movie);
 		
 	}
 	

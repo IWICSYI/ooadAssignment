@@ -1,7 +1,6 @@
 package boundaryClasses;
 
 import java.io.IOException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,8 +21,16 @@ import dataController.ShowTimeDataControl;
 import dataController.TicketPriceAndHolidayDataControl;
 import misc.ObjectContainer;
 
-public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketUiChooseTimeSlot {
+public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTimeSlotUi {
 	
+	/**
+	 * Display page to record customer information
+	 * @param showTimeId
+	 * @param m
+	 * @param listingId
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayCustomerInfo(int showTimeId,Movie m, int listingId) throws IOException, ParseException{
 		ShowTime sTList = ShowTimeDataControl.readShowTimesBasedOnShowTimeId(showTimeId);
 		ObjectContainer cust=CustBuyTicketControl.customerManagement(sTList, m,listingId);
@@ -31,6 +38,14 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketUiChooseTi
 	}
 	
 	
+	/**
+	 * Display seat selctions
+	 * @param showTimeId
+	 * @param m
+	 * @param cust
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displaySeat(int showTimeId,Movie m,ObjectContainer cust) throws IOException, ParseException
 	{
 		ShowTime sTList = ShowTimeDataControl.readShowTimesBasedOnShowTimeId(showTimeId);
@@ -82,7 +97,17 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketUiChooseTi
 		
 	}
 	
-	
+	/**
+	 * Display page to purchase seats
+	 * @param showTimeId
+	 * @param seatList
+	 * @param selectedSeats
+	 * @param cust
+	 * @param sTlist
+	 * @param m
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayPurchaseSeat(int showTimeId, ArrayList<Seats> seatList, ArrayList<ObjectContainer> selectedSeats,ObjectContainer cust,ShowTime sTlist,Movie m) throws IOException, ParseException{
 		ArrayList<Seats> seatsToValidate =new ArrayList<Seats>();
 		ArrayList<Seats> actualSeats =new ArrayList<Seats>();
@@ -141,7 +166,7 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketUiChooseTi
 			}
 		}while(!valid);
 		CustSeatsControl sC=new CustSeatsControl();
-		 sC.updatechoosenSeats(seatList,actualSeats);
+		 sC.reflectSeatSelections(seatList,actualSeats);
 		ArrayList<Seats> tmpSeats = SeatsDataControl.readTmpSeats();
 		CustSeatsControl.designSeats(tmpSeats);
 		System.out.print("Seats selected=");
@@ -159,11 +184,12 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketUiChooseTi
 		
 		if(choice==1)
 		{
-			sC.updateSeats(seatList, actualSeats);
+			sC.reflectAndConfirmSeatSelections(seatList, actualSeats);
 			CustBuyTicketControl.purchaseTicket(cust, sTlist,actualSeats);
 		}
 		else if(choice==2)
 		{
+			cust.setPrice(cust.getInitialprice());
 			displaySeat(showTimeId,m,cust);
 		}
 			

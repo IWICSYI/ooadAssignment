@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-import boundaryClasses.AdminSchedulerUi;
+import boundaryClasses.AdminSchedulerMainUi;
 import misc.ObjectContainer;
 import data.Cinema;
 import data.Cineplex;
@@ -20,12 +20,28 @@ import dataController.CineplexDataControl;
 import dataController.MovieScheduleDataControl;
 import dataController.ShowTimeDataControl;
 
+
+/**
+ * Class that communicate with ShowTimeDataControl and deal with mainly the formating the UI that deals with CRUD of time slots
+ * @author Chang En Kai
+ *
+ */
 public class AdminShowTimeController extends AdminSchedulerController {
 	
-
-	public static boolean checkTimeSlotClashforUpdate(int movieLen,int cinemaId,String s, String time2,Calendar cal) throws IOException, ParseException {
+/**
+ * Check for timeslot clash when admin insert new time slot for movie. This method is used during update of timeslot.
+ * @param movieLen
+ * @param cinemaId
+ * @param inputTime
+ * @param time2
+ * @param cal
+ * @return
+ * @throws IOException
+ * @throws ParseException
+ */
+	public static boolean checkTimeSlotClashforUpdate(int movieLen,int cinemaId,String inputTime, String time2,Calendar cal) throws IOException, ParseException {
 		boolean valid=true;
-		String sED=TimeDateControl.minutesPlusTime(movieLen,s);
+		String sED=TimeDateControl.minutesPlusTime(movieLen,inputTime);
 		
 		String[] seDarr=sED.split("-");
 		ArrayList<String> allocatedShowTimeC = cinemaallocatedTime(cinemaId,cal);
@@ -70,10 +86,20 @@ public class AdminShowTimeController extends AdminSchedulerController {
 	}
 
 	
+	/**
+	 * Check for timeslot clash when admin insert new time slot for movie. This method is used during creation of timeslot for the first time.
+	 * @param cinemaId
+	 * @param inputTime
+	 * @param cal
+	 * @param movieLen
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	
-	public static boolean validateTimeSlotClash(int cinemaId,String s,Calendar cal, int movieLen) throws IOException, ParseException {
+	public static boolean checkTimeSlotClash(int cinemaId,String inputTime,Calendar cal, int movieLen) throws IOException, ParseException {
 		boolean valid=true;
-		String sED=TimeDateControl.minutesPlusTime(movieLen,s);
+		String sED=TimeDateControl.minutesPlusTime(movieLen,inputTime);
 		String[] seDarr=sED.split("-");
 		ArrayList<String> allocatedShowTimeC = cinemaallocatedTime(cinemaId,cal);
 		Date startTime = new SimpleDateFormat("HHmm").parse(seDarr[0]);
@@ -108,6 +134,14 @@ public class AdminShowTimeController extends AdminSchedulerController {
 		return valid;
 	}
 
+	/**
+	 * Retrieve timeslot allocated on each cinema screen.
+	 * @param cinemaId
+	 * @param tmp
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static ArrayList<String> cinemaallocatedTime(int cinemaId,Calendar tmp) throws IOException, ParseException{
 		ArrayList<ShowTime> stC=ShowTimeDataControl.readShowTimesBasedOnCinemaIdAndNowShowing(cinemaId,tmp);
 		//ArrayList<ObjectContainer> allocatedTime=new  ArrayList<ObjectContainer>();
@@ -138,7 +172,19 @@ public class AdminShowTimeController extends AdminSchedulerController {
 		
 	}
 	
-	public static void TimeSlotHandler(String operation,int cinpleId,MovieSchedule sch, int movieId, int movieLen, int movieType,int runDate) throws IOException, ParseException {	
+	/**
+	 * Format form to handle creation/update of timeslots.
+	 * @param operation
+	 * @param cinpleId
+	 * @param sch
+	 * @param movieId
+	 * @param movieLen
+	 * @param movieType
+	 * @param runDate
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public static void timeSlotHandler(String operation,int cinpleId,MovieSchedule sch, int movieId, int movieLen, int movieType,int runDate) throws IOException, ParseException {	
 		Scanner sc=new Scanner(System.in);
 		int choice = 0, num=0,cinemaId,time,plat,noSeats;
 		String cinemaName;
@@ -263,11 +309,11 @@ public class AdminShowTimeController extends AdminSchedulerController {
 					time=ValidationControl.validateAndReturnTime(s);
 					if(time!=-2)
 					{
-						valid2=validateTimeSlotClash(cinemaId,s,temp,movieLen);
+						valid2=checkTimeSlotClash(cinemaId,s,temp,movieLen);
 					}
 					if(valid2 &&time!=-2)
 					{
-						showTimeValue=minutesPlusTime(movieLen, s);
+						showTimeValue=TimeDateControl.minutesPlusTime(movieLen, s);
 						ShowTime sT=new ShowTime();
 						sT.setCinemaId(cinemaId);
 						sT.setMovieId(movieId);
@@ -309,11 +355,11 @@ public class AdminShowTimeController extends AdminSchedulerController {
 	}while(repeat<=0);
 	
 	if(repeat==1){
-		TimeSlotHandler("r",0, sch,movieId,movieLen,movieType,runDate);
+		timeSlotHandler("r",0, sch,movieId,movieLen,movieType,runDate);
 	}
 	else if(repeat==2)
 	{
-			AdminSchedulerUi.displaySchedulerMain();		
+			AdminSchedulerMainUi.displaySchedulerMain();		
 	}
 		
 	

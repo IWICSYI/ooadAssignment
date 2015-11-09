@@ -14,7 +14,13 @@ import data.MovieSchedule;
 import dataController.MovieScheduleDataControl;
 
 public class CustDisplayMovieListingUi extends CustMain{
-
+	
+	/**
+	 * Display movies that are now showing
+	 * @param plat
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayNowShowing(int plat) throws IOException, ParseException
 	{
 		int type=1;
@@ -74,7 +80,12 @@ public class CustDisplayMovieListingUi extends CustMain{
 		
 	}
 	
-	
+	/**
+	 * Display movies that are coming soon
+	 * @param plat
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayComingSoon(int plat) throws IOException, ParseException
 	{
 		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListingBasedOnStatus(3, plat);
@@ -134,7 +145,12 @@ public class CustDisplayMovieListingUi extends CustMain{
 			}
 		
 	}
-
+/**
+ * Display movies that are on preview
+ * @param plat
+ * @throws IOException
+ * @throws ParseException
+ */
 	public static void displayPreview(int plat) throws IOException, ParseException
 	{
 		int type=1;

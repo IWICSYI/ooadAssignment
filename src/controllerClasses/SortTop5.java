@@ -12,13 +12,21 @@ import data.MovieSchedule;
 import dataController.MovieDataControl;
 import dataController.MovieScheduleDataControl;
 
+/**
+ * Class that deals with ranking of the movies based on different criteria
+ * @author Chang En Kai
+ *
+ */
   public class SortTop5 implements Comparable<Movie>{
 	//Sort movies by top 5 score in descending order in array and print
 	
 	  
 	  
 	  
-	  
+	  /**
+	   * Rank movies based on top score for admin, does not care if movie has ended already. 
+	   * @throws IOException
+	   */
 	  public static void sortTopScoreForAdmin() throws IOException{
 		List<Movie> movie = new ArrayList<Movie>();
 		int i=0;
@@ -48,7 +56,11 @@ import dataController.MovieScheduleDataControl;
 		}
 	}
 	  
-	  
+	  /**
+	   * Rank movie based on rating for customer. Will not display movies that already ended showing
+	   * @throws IOException
+	   * @throws ParseException
+	   */
 	  public static void sortTopScoreForCustomer() throws IOException, ParseException{
 			List<Movie> movie = new ArrayList<Movie>();
 			ArrayList<MovieSchedule> schList= MovieScheduleDataControl.readScheduleListing();
@@ -87,7 +99,11 @@ import dataController.MovieScheduleDataControl;
 					break;
 			}
 		}
-	//Sort movies by top 5 ticket sales in descending order in array and print
+	  
+	/**
+	 * Rank movie based on top sales for admin. Does not care if movie already ended its showing.
+	 * @throws IOException
+	 */
 	public static void sortTopSalesForAdmin() throws IOException{
 		List<Movie> movie = new ArrayList<Movie>();
 
@@ -118,7 +134,11 @@ import dataController.MovieScheduleDataControl;
 
     }
 
-	
+	/**
+	 * Rank movie based of top sale, for customer use only. Will not rank movies that are not showing.
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void sortTopSalesForCustomer() throws IOException, ParseException{
 		List<Movie> movie = new ArrayList<Movie>();
 		ArrayList<MovieSchedule> schList= MovieScheduleDataControl.readScheduleListing();

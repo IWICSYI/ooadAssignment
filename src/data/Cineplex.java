@@ -3,7 +3,7 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cineplex implements Serializable {
+public class Cineplex  {
 	
 	public Cineplex(int cinplexId, String cineplexName) {
 		super();

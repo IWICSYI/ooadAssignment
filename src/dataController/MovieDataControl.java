@@ -9,20 +9,13 @@ import controllerClasses.MiscControl;
 import misc.ObjectContainer;
 import data.Movie;
 
-public class MovieDataControl extends DataControl {
-/*
- * Need to add a method that goes like this
- * switch case to choose cineplex
- * switch case to choose cinemahall and rechoose cineplex
- * once cinema is choosen , query day and display movies and their showtime in a table by weeks
- * 
- * Create method to create new movie(specify show times and whether still showing and such)
- * 
- * Update method to update movie
- * 
- * Remove method to remove movie
- * 
+/**
+ * Class that deals with actual CRUD of movie entries
+ * @author Chang En Kai
+ *
  */
+public class MovieDataControl extends DataControl {
+
 	public MovieDataControl() {
 		// TODO Auto-generated constructor stub
 		
@@ -31,7 +24,11 @@ public class MovieDataControl extends DataControl {
 
 	
 	
-	
+	/**
+	 * Read all movies
+	 * @return
+	 * @throws IOException
+	 */
 	public static ArrayList<Movie> readMovie() throws IOException{
 		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
 			ArrayList stringArray = (ArrayList)read("data/movies.txt");
@@ -63,8 +60,13 @@ public class MovieDataControl extends DataControl {
 	        
 				return alr ;
 		}
-		
-		public static  Movie readMovieBasedOnId(int moveId) throws IOException{
+		/**
+		 * Read single movie based on movie id
+		 * @param mId
+		 * @return
+		 * @throws IOException
+		 */
+		public static  Movie readMovieBasedOnId(int mId) throws IOException{
 			//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
 				ArrayList stringArray = (ArrayList)read("data/movies.txt");
 				ArrayList alr = new ArrayList() ;// to store data
@@ -88,7 +90,7 @@ public class MovieDataControl extends DataControl {
 						// create Admin User object from file data
 						// add to  list
 						
-						if(movieId==moveId){
+						if(movieId==mId){
 							Movie m = new Movie(movieId,movieName,movieType,ageRating,director,synopsis,cast,overallRating,ticketSales,time,block);
 							return m ;
 						}
@@ -103,7 +105,11 @@ public class MovieDataControl extends DataControl {
 		
 		
 		
-
+/**
+ * Create movie entry
+ * @param m
+ * @throws IOException
+ */
 		public static void createMovie(Movie m) throws IOException {
 			List alw = new ArrayList() ;// to store Professors data
 			ArrayList<Movie> movie=new ArrayList<Movie>();
@@ -147,7 +153,11 @@ public class MovieDataControl extends DataControl {
 
 			write("data/movies.txt",alw);
 		}
-
+/**
+ * Update movie by passing in edited Movie m
+ * @param m
+ * @throws IOException
+ */
 		public static void updateMovie(Movie m) throws IOException {
 			
 			List alw = new ArrayList() ;// to store Professors data
@@ -221,7 +231,11 @@ public class MovieDataControl extends DataControl {
 
 
 
-
+/**
+ * Remove a movie entry based on its movieID
+ * @param movieId
+ * @throws IOException
+ */
 		public static void removeMovie(int movieId) throws IOException {
 			List alw = new ArrayList() ;// to store Professors data
 			ArrayList<Movie> movie=new ArrayList<Movie>();

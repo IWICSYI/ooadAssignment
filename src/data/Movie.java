@@ -3,7 +3,7 @@ package data;
 import java.io.Serializable;
 import java.util.*;
 
-public class Movie implements Serializable{
+public class Movie{
 	
 	private int movieId;
 	private String movieName;	
@@ -102,7 +102,10 @@ public class Movie implements Serializable{
 	public void setReviewList(ArrayList<Review> reviewList) {
 		this.reviewList = reviewList;
 	}
-
+/**
+ * 
+ * @return if movie is in 3D or not, 1=is/0=not
+ */
 	public int getThreeD() {
 		return threeD;
 	}
@@ -110,7 +113,10 @@ public class Movie implements Serializable{
 	public void setThreeD(int threeD) {
 		this.threeD = threeD;
 	}
-
+/**
+ * 
+ * @return if movie is blockbuster or not(1=is/0=not)
+ */
 	public int getBlockbuster() {
 		return blockbuster;
 	}

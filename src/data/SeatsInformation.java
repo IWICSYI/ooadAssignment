@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SeatsInformation {
-
+	
 	
 	private Date startDate;
 	private String startEndTime;

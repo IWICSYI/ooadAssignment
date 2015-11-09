@@ -8,7 +8,7 @@ import dataController.DataControl;
 
 
 public class ShowTime implements Comparator<ShowTime>{
-
+	
 	private int listingId;
 	private int cinemaId;
 	private int movieId;
@@ -24,7 +24,21 @@ public class ShowTime implements Comparator<ShowTime>{
 	
 	private ArrayList<Seats> listOfSeats;
 	
-	
+	/**
+	 * Constructor for creation/update of showTime
+	 * @param listingId
+	 * @param movieId
+	 * @param cinemaId
+	 * @param showTimeId
+	 * @param dayType
+	 * @param showTime
+	 * @param seats
+	 * @param startDate
+	 * @param endDate
+	 * @param ticketPrice
+	 * @param prev
+	 * @param cineId
+	 */
 	public ShowTime(int listingId, int movieId, int cinemaId, int showTimeId, int dayType,
 			String showTime,int seats,Date startDate,Date endDate,double ticketPrice,int prev, int cineId){
 		super();

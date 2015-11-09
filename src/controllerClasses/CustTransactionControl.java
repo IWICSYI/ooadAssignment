@@ -12,8 +12,18 @@ import dataController.CineplexDataControl;
 import dataController.MovieDataControl;
 import dataController.TransactionDataControl;
 
+/**
+ * Class use to keep track of all the transcations.
+ * @author Chang
+ *
+ */
 public class CustTransactionControl {
-
+/**
+ * Method to search through booking history based on email.
+ * @param email
+ * @return
+ * @throws IOException
+ */
 	public static boolean searchTransaction(String email) throws IOException{
 		
 		ArrayList<Transaction> tList = TransactionDataControl.readTranscation();

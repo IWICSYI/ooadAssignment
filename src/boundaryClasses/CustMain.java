@@ -8,7 +8,12 @@ import controllerClasses.SortTop5;
 import controllerClasses.ValidationControl;
 
 public class CustMain {
-
+	
+	/**
+	 * Display the first page the customer will see. They can choose to display movies, look at best rated movies and search their booking history
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayCustMain() throws IOException, ParseException{
 		System.out.println("#############################################");
 		System.out.println("#            Customer Main Page             #");

@@ -10,19 +10,22 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import data.User;
+import data.LoginData;
 import dataController.DataControl;
 import dataController.LoginDataControl;
 
 public class AdminLoginControl  {
 	
-	
+	/**
+	 * attribute for secret message
+	 */
 	private static MessageDigest md;
-	
-	public AdminLoginControl() {
-		// TODO Auto-generated constructor stub
-	}
-	private static String cryptWithMD5(String pass){
+	/**
+	 * Encrypt password
+	 * @param pass
+	 * @return
+	 */
+	private static String encrypt(String pass){
 	    try {
 	        md = MessageDigest.getInstance("MD5");
 	        byte[] passBytes = pass.getBytes();
@@ -41,12 +44,19 @@ public class AdminLoginControl  {
 
 	   }
 
+	/**
+	 * Check if user exist or not
+	 * @param uN
+	 * @param pW
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean checkExist(String uN,String pW) throws IOException
 	{
 		boolean result=false;
-		ArrayList<User> adminList=new ArrayList<User>();
+		ArrayList<LoginData> adminList=new ArrayList<LoginData>();
 		adminList=LoginDataControl.readLogin();
-		pW=cryptWithMD5(pW);
+		pW=encrypt(pW);
 		//System.out.println(pW+"\n"+adminList.get(0).getPassword());
 		for(int i=0;i<adminList.size();i++)
 		{

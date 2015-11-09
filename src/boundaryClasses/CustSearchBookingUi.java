@@ -9,6 +9,11 @@ import controllerClasses.ValidationControl;
 
 public class CustSearchBookingUi extends CustMain{
 	
+	/**
+	 * Display page to search booking history.
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displaySearchBooking() throws IOException, ParseException{
 		Scanner sc=new Scanner(System.in);
 		boolean valid=false;

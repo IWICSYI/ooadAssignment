@@ -12,11 +12,21 @@ import data.Movie;
 import data.Prices;
 import data.Transaction;
 
+
+/**
+ * Class that deals with actual CRUD of transaction. Transactions happen when a customer buys movie tickets/
+ * @author Chang En Kai
+ *
+ */
 public class TransactionDataControl extends DataControl{
 	
+
 	
-	
-	
+	/**
+	 * Read all transcation
+	 * @return every transactions
+	 * @throws IOException
+	 */
 	public static ArrayList<Transaction> readTranscation() throws IOException{
 		
 		ArrayList stringArray = (ArrayList)read("data/transaction.txt");
@@ -47,7 +57,11 @@ public class TransactionDataControl extends DataControl{
         return alr ;
 			}
 			
-
+/**
+ * Create transaction
+ * @param t new transcation
+ * @throws IOException
+ */
 	
 	public static void createTranscation(Transaction t) throws IOException {
 		List alw = new ArrayList() ;// to store Professors data

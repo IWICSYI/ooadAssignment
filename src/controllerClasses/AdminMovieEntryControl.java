@@ -12,8 +12,17 @@ import dataController.MovieDataControl;
 import dataController.ShowTimeDataControl;
 import dataController.TransactionDataControl;
 
+/**
+ * Class that communicate with MovieData Control to deal with CRUD of movie entries.
+ * @author Chang En Kai
+ *
+ */
 public class AdminMovieEntryControl {
-
+/**
+ * Method to remove cast member from cast list
+ * @param m
+ * @return
+ */
 	public static String removeCast(Movie m){
 		Scanner sc=new Scanner(System.in);
 		int choice=0;
@@ -48,7 +57,11 @@ public class AdminMovieEntryControl {
 		
 	}
 	
-	
+	/**
+	 * Method to add cast members
+	 * @param m
+	 * @return
+	 */
 	public static String addCast(Movie m){
 		Scanner sc=new Scanner(System.in);
 		boolean choice=false;
@@ -73,7 +86,11 @@ public class AdminMovieEntryControl {
 		
 	}
 	
-	
+	/**
+	 * Method to update cast list
+	 * @param m
+	 * @return
+	 */
 	public static String updateCast(Movie m){
 		Scanner sc=new Scanner(System.in);
 		int choice=0;
@@ -119,8 +136,13 @@ public class AdminMovieEntryControl {
 		
 	}
 
-
-	public static void removeMovie(Movie temp) throws IOException, ParseException {
+/**
+ * Check to see if movie can remove or not, if transcation of movie exist, it will stop user from removing the movie
+ * @param temp
+ * @throws IOException
+ * @throws ParseException
+ */
+	public static void removeMovieCheckHandler(Movie temp) throws IOException, ParseException {
 		boolean tClash=false;
 		ArrayList<Transaction>tList2=TransactionDataControl.readTranscation();
 		for(int i=0;i<tList2.size();i++)
@@ -131,6 +153,7 @@ public class AdminMovieEntryControl {
 				tClash=true;
 				break;
 			}
+			
 		}
 		if(!tClash)
 		{
@@ -139,7 +162,7 @@ public class AdminMovieEntryControl {
 		}
 		else{
 		
-			AdminMovieEntryUi.displayUpdatePage();
+			AdminMovieEntryUi.displayMovieUpdatePage();
 		
 		}
 	
@@ -273,7 +296,7 @@ public class AdminMovieEntryControl {
 			
 			
 			else if(castChoice>=4){
-				AdminMovieEntryUi.displayUpdatePage();
+				AdminMovieEntryUi.displayMovieUpdatePage();
 			}
 		}
 		
@@ -298,8 +321,8 @@ public class AdminMovieEntryControl {
 			
 		}
 		else if(choice2==6){
-			AdminMovieEntryControl.removeMovie(temp);
-			AdminMovieEntryUi.displayUpdatePage();
+			AdminMovieEntryControl.removeMovieCheckHandler(temp);
+			AdminMovieEntryUi.displayMovieUpdatePage();
 		}
 		
 		else if(choice2==7){

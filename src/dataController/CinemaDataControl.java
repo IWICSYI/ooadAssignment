@@ -7,9 +7,18 @@ import java.util.StringTokenizer;
 import data.Cinema;
 import data.Cineplex;
 
+/**
+ * Class used for the actual CRUD of cinema.
+ * @author Chang En Kai
+ *
+ */
 public class CinemaDataControl extends DataControl{
 	
-	
+	/**
+	 * Read all cinema
+	 * @return
+	 * @throws IOException
+	 */
 	public static ArrayList<Cinema> readCinema() throws IOException{
 	
 		
@@ -34,7 +43,12 @@ public class CinemaDataControl extends DataControl{
 			return alr ;
 	}
 	
-	
+	/**
+	 * Read one cinema by its unique id
+	 * @param cId
+	 * @return
+	 * @throws IOException
+	 */
 	public static  Cinema readCinemaByCinemaId(int cId) throws IOException{
 		
 		ArrayList stringArray = (ArrayList)read("data/cinemas.txt");
@@ -61,7 +75,12 @@ public class CinemaDataControl extends DataControl{
 	}
 	
 
-	
+	/**
+	 * Read all cinema in 1 cineplex
+	 * @param cId
+	 * @return
+	 * @throws IOException
+	 */
 	public static  ArrayList<Cinema> readCinemaByCineplexId(int cId) throws IOException{
 		
 		ArrayList stringArray = (ArrayList)read("data/cinemas.txt");

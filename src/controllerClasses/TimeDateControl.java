@@ -6,8 +6,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+
+/**
+ * Class that deals with things related to time and date.
+ * @author Chang En Kai
+ *
+ */
 public class TimeDateControl {
-	
+	/**
+	 * Spell the day(Monday,Tuesday... ...) of the date.
+	 * @param t
+	 * @return
+	 */
 	public static String retrieveDaySpell(Calendar t){
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yy EEEE");
 	    String a=dateFormatter.format(t.getTime());
@@ -15,6 +25,10 @@ public class TimeDateControl {
 		
 	}
 	
+	/**
+	 * Reset today's time to 00:00:00:00 to specify start of day
+	 * @return
+	 */
 	public static Calendar resetTodayTime(){
 		Calendar today=Calendar.getInstance();
 		
@@ -27,6 +41,12 @@ public class TimeDateControl {
 		
 	}
 	
+	/**
+	 * Calculate how long a movie is showing based on starting date and ending date
+	 * @param sD
+	 * @param eD
+	 * @return
+	 */
 	public static int calculateRunDate(Date sD,Date eD)
 	{
 		Calendar a=Calendar.getInstance();
@@ -52,13 +72,18 @@ public class TimeDateControl {
 		return minusDays+1;
 		
 	}
-
-	public static String minutesPlusTime(int minutes,String s)
+/**
+ * Calculate the time range a movie will be showing by taking in the starting date and adding the movie length.
+ * @param minutes
+ * @param sD
+ * @return
+ */
+	public static String minutesPlusTime(int minutes,String sD)
 	{
 		SimpleDateFormat sdf=new SimpleDateFormat("HHmm");
 		Calendar temp= Calendar.getInstance();
-		temp.set(Calendar.HOUR_OF_DAY, Integer.parseInt(s.substring(0, 2)));
-		temp.set(Calendar.MINUTE,Integer.parseInt(s.substring(2, 4)));
+		temp.set(Calendar.HOUR_OF_DAY, Integer.parseInt(sD.substring(0, 2)));
+		temp.set(Calendar.MINUTE,Integer.parseInt(sD.substring(2, 4)));
 		String startTimeSt=sdf.format(temp.getTime());
 		temp.add(Calendar.MINUTE, minutes);
 		String endTimeSt=sdf.format(temp.getTime());
@@ -69,6 +94,13 @@ public class TimeDateControl {
 		
 	}
 	
+	/**
+	 * Given a start date and how long a movie will be showing, calculate the end date dynamically
+	 * @param startDate
+	 * @param runDate
+	 * @return
+	 * @throws ParseException
+	 */
 	public static Date calculateEndDate(Date startDate, int runDate) throws ParseException
 	{
 		Calendar cal = Calendar.getInstance();
@@ -92,49 +124,13 @@ public class TimeDateControl {
 	
 	
 	
-	public static Date calculatePreviewStartDate(Date startDate) throws ParseException
-	{
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat finalDateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-			
-		cal.setTime(startDate);
-		Calendar calTemp;
 
-		// // NOTE!!! : Month from 0 to 11 => 3 is April
-		calTemp = (Calendar) cal.clone();
-
-		// add time
-
-		calTemp.add(Calendar.DATE, -1 );
-		startDate = calTemp.getTime();
-		return startDate;
-		
-	}
-	
-	
-	
-
-	public static Date calculateComingSoon(Date startDate) throws ParseException
-	{
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat finalDateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-			
-		cal.setTime(startDate);
-		Calendar calTemp;
-	  
-	      // // NOTE!!! : Month from 0 to 11 => 3 is April
-	      calTemp = (Calendar) cal.clone();
-	      System.out.println(" Starting Date will be: " + calTemp.getTime());
-
-	      // add time
-	     
-	     calTemp.add(Calendar.DATE, -7 );
-	      System.out.println("1 days before, it will be: " + calTemp.getTime());
-	      Date coming = calTemp.getTime();
-		return coming;
-		
-	}
-	
+	/**
+	 * Determine if day is a weekend or week day
+	 * @param startDate
+	 * @return
+	 * @throws ParseException
+	 */
 	public static int dayType(Date startDate) throws ParseException
 	{
 		Calendar cal = Calendar.getInstance();

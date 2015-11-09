@@ -3,7 +3,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.Serializable;
 
-public class Review implements Serializable {
+public class Review {
+	
 	private int movieId;
 	private int reviewId;
 	private String reviewerName;

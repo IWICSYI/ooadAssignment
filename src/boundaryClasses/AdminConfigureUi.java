@@ -8,6 +8,12 @@ import controllerClasses.ValidationControl;
 
 public class AdminConfigureUi extends AdminMainUi{
 
+	
+	/**
+	 * Display main configuration page that can access holiday and price configuration pages/
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayConfigMain() throws IOException, ParseException{
 		
 		Scanner sc=new Scanner(System.in);
@@ -25,10 +31,10 @@ public class AdminConfigureUi extends AdminMainUi{
 			 choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
 			
 			if(choice==1){
-				AdminHolidayConfigureUi.displayHolidayMain();
+				AdminConfigureHolidayUi.displayHolidayMain();
 			}
 			else if(choice==2){
-				AdminTicketPriceConfigureUi.displayTicketConfigureMain();
+				AdminConfigureTicketPriceUi.displayTicketConfigureMain();
 			}
 			else if(choice==3){
 				AdminMainUi.displayAdminMain();

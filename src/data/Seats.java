@@ -1,6 +1,7 @@
 package data;
 //showTimeId|TrueSeatStatus|A1seatName|seatId|transectionId
 public class Seats {
+	
 	private int seatsInformationId;
 	private int cinemaId;
 	private int movieId;

@@ -16,7 +16,7 @@ public class Transaction {
 	private int cineplexId;
 	private int cinemaId;
 	private int movieId;
-	private int numSeat;
+	private int numOfSeats;
 	private String seats;
 	private double price;
 	private int showtimeId;
@@ -33,7 +33,7 @@ public class Transaction {
 		this.cineplexId = cineplexId;
 		this.cinemaId = cinemaId;
 		this.movieId = movieId;
-		this.numSeat = numSeat;
+		this.numOfSeats = numSeat;
 		this.seats = seats;
 		this.price = price;
 		this.setShowtimeId(showtimeId);
@@ -106,12 +106,12 @@ public class Transaction {
 
 
 	public int getNumSeat() {
-		return numSeat;
+		return numOfSeats;
 	}
 
 
 	public void setNumSeat(int numSeat) {
-		this.numSeat = numSeat;
+		this.numOfSeats = numSeat;
 	}
 
 

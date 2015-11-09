@@ -15,7 +15,11 @@ import dataController.MovieDataControl;
 
 public class AdminMovieEntryUi extends AdminMainUi{
 	
-	
+	/**
+	 * display Movie manager page that redirect to page that creates/update movie entry and sort movie by rating or ticket sales
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayMovieMain() throws IOException, ParseException{
 		Scanner sc=new Scanner(System.in);
 		int choice = 0;
@@ -37,12 +41,12 @@ public class AdminMovieEntryUi extends AdminMainUi{
 			
 			if(choice==1)
 			{
-				displayCreatePage();
+				displayMovieCreatePage();
 			}
 			
 			else if(choice==2)
 			{
-				displayUpdatePage();
+				displayMovieUpdatePage();
 			}
 			else if(choice==3)
 			{
@@ -67,8 +71,14 @@ public class AdminMovieEntryUi extends AdminMainUi{
 		
 	}
 
-	public static void displayCreatePage() throws IOException, ParseException{
+	/**
+	 * Display movie page to deal with creation of movie data
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public static void displayMovieCreatePage() throws IOException, ParseException{
 		Scanner sc=new Scanner(System.in);
+		
 		int choice = 0;
 		ValidationControl vl=new ValidationControl();
 		Movie movie=new Movie();
@@ -204,8 +214,12 @@ public class AdminMovieEntryUi extends AdminMainUi{
 	}
 	
 	
-	
-	public static void displayUpdatePage() throws IOException, ParseException{
+	/**
+	 * Display update page of movie to edit movie details or remove movie
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public static void displayMovieUpdatePage() throws IOException, ParseException{
 		Scanner sc=new Scanner(System.in);
 		int choice = 0;
 		ValidationControl vl=new ValidationControl();

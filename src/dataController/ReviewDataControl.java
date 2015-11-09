@@ -12,9 +12,19 @@ import java.util.StringTokenizer;
 import data.Movie;
 import data.Review;
 
+/**
+ * Class that deals with actual CRUD of reviews
+ * @author Chang En Kai
+ *
+ */
 public class ReviewDataControl extends DataControl {
 
-
+/**
+ * Read all reviews
+ * @return
+ * @throws IOException
+ * @throws ParseException
+ */
 	public static ArrayList<Review> readReview() throws IOException, ParseException{
 	//reviewid|movieId|reviewerName|review|score|reviewDate
 		ArrayList stringArray = (ArrayList)read("data/reviews.txt");
@@ -45,7 +55,13 @@ public class ReviewDataControl extends DataControl {
 	}
 	
 	
-	
+	/**
+	 * Read the review of a specific movie
+	 * @param movieIdC
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static ArrayList<Review> readReviewBasedOnMovieId(int movieIdC) throws IOException, ParseException{
 		//reviewid|movieId|reviewerName|review|score|reviewDate
 			ArrayList stringArray = (ArrayList)read("data/reviews.txt");
@@ -78,7 +94,12 @@ public class ReviewDataControl extends DataControl {
 				return alr ;
 		}
 	
-
+/**
+ * Create review
+ * @param m
+ * @throws IOException
+ * @throws ParseException
+ */
 	public static void createReview(Review m) throws IOException, ParseException {
 		List alw = new ArrayList() ;
 		ArrayList<Review> review=new ArrayList<Review>();
@@ -110,7 +131,12 @@ public class ReviewDataControl extends DataControl {
 
 	//method for printing list of reviews based on current movie id
 
-	
+	/**
+	 * Update review
+	 * @param movieId
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	//method for updating movie avg ratings
 	public static void updateMovieReviewAverageScore(int movieId) throws IOException, ParseException {
 		List alw = new ArrayList() ;// to store Professors data

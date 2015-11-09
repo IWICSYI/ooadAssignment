@@ -10,9 +10,19 @@ import java.util.StringTokenizer;
 import data.HolidayDate;
 import data.Prices;
 
+
+/**
+ * Class that deals with actual CRUD of holiday and ticket prices. They are combined together because they are very related.
+ * @author Chang En Kai
+ *
+ */
 public class TicketPriceAndHolidayDataControl extends DataControl {
 	
-
+/**
+ * Read all prices
+ * @return
+ * @throws IOException
+ */
 	public static ArrayList<Prices> readPrice() throws IOException{
 		
 		ArrayList stringArray = (ArrayList)read("data/ticketPrice.txt");
@@ -38,7 +48,12 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
         return alr ;
 			}
 			
-	
+	/**
+	 * Read all holiday, use to make sure today is a holiday or not.
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static ArrayList<HolidayDate> readHoliday() throws IOException, ParseException{
 		
 		ArrayList stringArray = (ArrayList)read("data/holidayDates.txt");
@@ -59,7 +74,11 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
 				}
         return alr ;
 			}
-	
+	/**
+	 * Update ticket price
+	 * @param prices
+	 * @throws IOException
+	 */
 	public static void updatePrice(Prices prices) throws IOException {
 		List alw = new ArrayList() ;// to store Professors data
 		int id=0;
@@ -92,7 +111,12 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
 		writeB("data/ticketPrice.txt",alw);
 		
 	}
-
+/**
+ * Create new holiday date!
+ * @param hD
+ * @throws IOException
+ * @throws ParseException
+ */
 	public static void createHoliday(HolidayDate hD) throws IOException, ParseException {
 		List alw = new ArrayList() ;// to store Professors data
 		int id=0;
@@ -119,7 +143,13 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
 		write("data/holidayDates.txt",alw);
 	}
 
-	
+	/**
+	 * Update holiday date
+	 * @param hDid
+	 * @param hD
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void updateHoliday(int hDid,HolidayDate hD) throws IOException, ParseException {
 		List alw = new ArrayList() ;// to store Professors data
 		int id=0;
@@ -154,6 +184,12 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
 		writeB("data/holidayDates.txt",alw);
 	}
 
+	/**
+	 * Remove holiday date
+	 * @param id
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void removeHolidayDate(int id) throws IOException, ParseException {
 		List alw = new ArrayList() ;// to store Professors data
 	

@@ -7,11 +7,12 @@ import java.util.Scanner;
 import controllerClasses.ValidationControl;
 
 public class AdminMainUi {
-
-	public AdminMainUi(){
-		
-	}
-
+	
+	/**
+	 * Display main admin page where user can choose to create/update remove movie, movie schedule and configure ticket price and price
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void displayAdminMain() throws IOException, ParseException {
 		int choice = 0;
 		Scanner sc=new Scanner(System.in);
@@ -39,7 +40,7 @@ public class AdminMainUi {
 				mUI.displayMovieMain();
 			}
 			else if(choice==2){
-				AdminSchedulerUi.displaySchedulerMain();
+				AdminSchedulerMainUi.displaySchedulerMain();
 			}
 			else if(choice==3){
 				AdminConfigureUi.displayConfigMain();

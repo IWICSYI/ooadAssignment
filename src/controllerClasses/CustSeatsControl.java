@@ -19,10 +19,22 @@ import dataController.DataControl;
 import dataController.SeatsDataControl;
 import dataController.ShowTimeDataControl;
 
+/**
+ * Class that works in conjunction with CustBuyTickets to deal with the nitty gritty of seats selections.
+ * @author Chang En Kai
+ *
+ */
 public class CustSeatsControl extends DataControl {
 	
 	
-	
+	/**
+	 * Manage and generate seats selection information
+	 * @param sTList
+	 * @param showTimeId
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static ArrayList<ObjectContainer> manageSeats(ShowTime sTList, int showTimeId) throws IOException, ParseException{
 		
 		
@@ -53,7 +65,6 @@ public class CustSeatsControl extends DataControl {
 		int seatAmount=sTList.getNoOfSeats();
 		int seatId = 1;
 		
-		System.out.println("-------------------------------------SCREEN----------------------------------");
 		
 		//create new seats!
 		if(seatList.isEmpty())
@@ -118,9 +129,12 @@ public class CustSeatsControl extends DataControl {
 	}
 	
 	
-	
+	/**
+	 * Design seats to be displayed for selections
+	 * @param seatList
+	 */
 	public static void designSeats(ArrayList<Seats> seatList){
-		System.out.println("-------------------------------------SCREEN----------------------------------");
+		System.out.println("-------------------------------------------SCREEN----------------------------------------------");
 		for(int i=0;i<seatList.size();i++)
 		{
 			
@@ -144,7 +158,11 @@ public class CustSeatsControl extends DataControl {
 	}
 	}
 	
-	
+	/**
+	 * Create seat informations for back up in case database of show time and transacation can't match-
+	 * @param seatInfos
+	 * @throws IOException
+	 */
 	public static void createSeatInformation(SeatsInformation seatInfos) throws IOException
 	{
 		List alw = new ArrayList() ;// to store Professors data
@@ -186,7 +204,12 @@ public class CustSeatsControl extends DataControl {
 	}
 	
 	
-
+/**
+ * Specific characteristics of each indiviual seat in a cinema hall
+ * @param seatList
+ * @throws IOException
+ * @throws ParseException
+ */
 	public static void createIndiviualSeat(ArrayList<Seats> seatList) throws IOException, ParseException {
 		List alw = new ArrayList() ;// to store Professors data
 		ArrayList<SeatsInformation> sINfoList=SeatsDataControl.readSeatInfor(seatList.get(0).getSeatsInformationId());
@@ -223,7 +246,12 @@ public class CustSeatsControl extends DataControl {
 	
 	
 	
-	
+	/**
+	 * Search seat information by seat name.
+	 * @param seatList
+	 * @param name
+	 * @return
+	 */
 	public Seats searchSeat(ArrayList<Seats> seatList,String name)
 	{
 		Seats a=new Seats();
@@ -242,7 +270,12 @@ public class CustSeatsControl extends DataControl {
 		return null;
 	}
 	
-	
+	/**
+	 * Check if selected seats are occupied or not.
+	 * @param seatList
+	 * @param name
+	 * @return
+	 */
 	public boolean checkOccupied(ArrayList<Seats> seatList,String name)
 	{
 		Seats a=new Seats();
@@ -263,6 +296,11 @@ public class CustSeatsControl extends DataControl {
 		return false;
 	}
 	
+	/**
+	 * Method to deal check if seat selections are valid, if valid, confirm the purchase
+	 * @param selectedSeats
+	 * @return
+	 */
 	public boolean confirmSeats(ArrayList<Seats> selectedSeats)
 	{
 		ArrayList<String> seatName=new ArrayList<String>();
@@ -335,7 +373,14 @@ public class CustSeatsControl extends DataControl {
 		return valid;
 	}
 
-	public void updateSeats(ArrayList<Seats> seatList, ArrayList<Seats> actualSeats) throws IOException, ParseException {
+	/**
+	 * Update and reflect seat selections
+	 * @param seatList
+	 * @param actualSeats
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public void reflectAndConfirmSeatSelections(ArrayList<Seats> seatList, ArrayList<Seats> actualSeats) throws IOException, ParseException {
 		File file = new File("data/seatsTmp.txt");
     	
 		if(file.delete()){
@@ -384,7 +429,14 @@ public class CustSeatsControl extends DataControl {
 		writeB("data/seats/seatsForShowTime"+sINfoList.get(0).getSeatInfoId()+".txt",alw);
 	}
 
-	public void updatechoosenSeats(ArrayList<Seats> seatList,
+/**
+ * Reflect seat selections by creating a temp file that will display seats that customer selected without commiting to anything.
+ * @param seatList
+ * @param actualSeats
+ * @throws IOException
+ * @throws ParseException
+ */
+	public void reflectSeatSelections(ArrayList<Seats> seatList,
 		ArrayList<Seats> actualSeats) throws IOException, ParseException {
 		List alw = new ArrayList() ;// to store Professors data
 		ArrayList<SeatsInformation> sINfoList=SeatsDataControl.readSeatInfor(seatList.get(0).getSeatsInformationId());
