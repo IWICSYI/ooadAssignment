@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 
 /**
@@ -49,27 +51,14 @@ public class TimeDateControl {
 	 */
 	public static int calculateRunDate(Date sD,Date eD)
 	{
-		Calendar a=Calendar.getInstance();
-		Calendar b=(Calendar) a.clone();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-		a.setTime(sD);
-		b.setTime(eD);
-		int minusDays = 0;
-		while (true) {
-		  minusDays++;
-
-		  // Day increasing by 1
-		  a.add(Calendar.DAY_OF_MONTH, 1);
-
-		  if (dateFormat.format(a.getTime()).
-		            equals(dateFormat.format(b.getTime()))) {
-		    break;
-		  }
-		}
-		System.out.println("The subtraction between two days is " + (minusDays + 1));
 		
-		return minusDays+1;
+		int minusDays = 0;
+		DateTime dt1 = new DateTime(sD);
+		DateTime dt2 = new DateTime(eD);
+
+		minusDays=Days.daysBetween(dt1, dt2).getDays();
+		
+		return minusDays;
 		
 	}
 /**
@@ -107,17 +96,22 @@ public class TimeDateControl {
 		SimpleDateFormat finalDateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 			
 		cal.setTime(startDate);
-		Calendar calTemp;
+		Calendar calTemp,calTemp2;
 	  
 	      // // NOTE!!! : Month from 0 to 11 => 3 is April
 	      calTemp = (Calendar) cal.clone();
 	      System.out.println("Starting date will be: " + calTemp.getTime());
-
-	      // add time
-	     calTemp.add(Calendar.DATE, runDate );
 	     
-	      System.out.println("Ending date will be: " + calTemp.getTime());
-	      Date endDate = calTemp.getTime();
+	      // add time
+	     calTemp.add(Calendar.DATE, runDate);
+	   
+	     calTemp.add(Calendar.DATE, -1);
+	     calTemp.set(Calendar.HOUR_OF_DAY,23);
+	     calTemp.set(Calendar.MINUTE,59);
+	     calTemp.set(Calendar.SECOND,59);
+	     System.out.println("Ending date will be: " + calTemp.getTime());
+	     Date endDate = calTemp.getTime();
+	     
 		return endDate;
 		
 	}

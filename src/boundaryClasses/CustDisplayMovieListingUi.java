@@ -23,7 +23,7 @@ public class CustDisplayMovieListingUi extends CustMain{
 	 */
 	public static void displayNowShowing(int plat) throws IOException, ParseException
 	{
-		int type=1;
+		
 		ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListingBasedOnStatus(1,plat);
 		ArrayList<Movie> movieList=MovieListingControl.filterUniqueMovieListFromSchedule(schList,plat);
 		ArrayList<ObjectContainer> oList=new ArrayList<ObjectContainer>();

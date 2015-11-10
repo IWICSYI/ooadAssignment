@@ -1,9 +1,6 @@
 package data;
-import data.Cineplex;
-import data.Movie;
-
-import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 //1cineplexId|1movieUniqueId|4listingId|startDate|endDate|1typeofDay|status
 public class MovieSchedule {
 	

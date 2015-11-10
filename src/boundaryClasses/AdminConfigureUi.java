@@ -39,7 +39,7 @@ public class AdminConfigureUi extends AdminMainUi{
 			else if(choice==3){
 				AdminMainUi.displayAdminMain();
 			}
-		}while(choice<0||choice>3);
+		}while(choice<=0||choice>3);
 		
 		
 	}

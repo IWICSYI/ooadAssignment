@@ -8,8 +8,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-import boundaryClasses.AdminSchedulerMainUi;
 import misc.ObjectContainer;
+import boundaryClasses.AdminSchedulerMainUi;
+import boundaryClasses.AdminSchedulerUpdateUi;
 import data.Cinema;
 import data.Cineplex;
 import data.Movie;
@@ -168,6 +169,7 @@ public class AdminShowTimeController extends AdminSchedulerController {
 			}
 			
 		}
+		
 		return sorted;
 		
 	}
@@ -184,7 +186,7 @@ public class AdminShowTimeController extends AdminSchedulerController {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static void timeSlotHandler(String operation,int cinpleId,MovieSchedule sch, int movieId, int movieLen, int movieType,int runDate) throws IOException, ParseException {	
+	public static void timeSlotHandler(String operation,int cinpleId,MovieSchedule sch, int movieId, int movieLen, int movieType,int runDate,Movie movie) throws IOException, ParseException {	
 		Scanner sc=new Scanner(System.in);
 		int choice = 0, num=0,cinemaId,time,plat,noSeats;
 		String cinemaName;
@@ -302,9 +304,13 @@ public class AdminShowTimeController extends AdminSchedulerController {
 					for(int l=0;l<allocatedShowTime.size();l++)
 					{
 						System.out.print(allocatedShowTime.get(l)+"	");
-						
+						if(allocatedShowTime.isEmpty()){
+							System.out.println("No timeslot for this cinema hall!");
+							
+						}
 					}
-					System.out.print("\nPlease enter show time(eg.1900 for 7pm) for slot number "+(counter+1)+".");
+					System.out.println();
+					System.out.print("Please enter show time(eg.1900 for 7pm) for slot number "+(counter+1)+".");
 					String s=sc.nextLine();
 					time=ValidationControl.validateAndReturnTime(s);
 					if(time!=-2)
@@ -355,12 +361,20 @@ public class AdminShowTimeController extends AdminSchedulerController {
 	}while(repeat<=0);
 	
 	if(repeat==1){
-		timeSlotHandler("r",0, sch,movieId,movieLen,movieType,runDate);
+		timeSlotHandler("r",0, sch,movieId,movieLen,movieType,runDate,movie);
 	}
 	else if(repeat==2)
 	{
-			AdminSchedulerMainUi.displaySchedulerMain();		
+		if(operation.equals("c"))
+		{
+			AdminSchedulerMainUi.displaySchedulerMain();
+		}
+		else if(operation.equals("u"))
+			AdminSchedulerUpdateUi.displayUpdateMain();
+		else if(operation.equals("add"))
+			AdminSchedulerUpdateUi.displayEditExistingTimeSlot( sch, movieId, cinpleId,  movie);
 	}
+	
 		
 	
 		

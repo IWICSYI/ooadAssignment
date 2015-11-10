@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import data.Movie;
-import data.ShowTime;
 import misc.ObjectContainer;
+import data.Movie;
 
 public class MiscControl {
 
@@ -49,9 +48,9 @@ public class MiscControl {
 		return pair;
 	}
 	
-	public static ObjectContainer idPairerWithMovieLength(int i, int id, int len, int movieType, int j)
+	public static ObjectContainer idPairerWithMovieLength(int i, int id, int len, int movieType, int j, Movie movie)
 	{
-		ObjectContainer pair=new ObjectContainer(i,id,len,movieType,j);
+		ObjectContainer pair=new ObjectContainer(i,id,len,movieType,j,movie);
 		return pair;
 	}
 	

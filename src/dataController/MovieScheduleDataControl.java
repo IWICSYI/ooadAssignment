@@ -2,17 +2,16 @@ package dataController;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import boundaryClasses.AdminSchedulerUpdateUi;
 import controllerClasses.TimeDateControl;
-import data.HolidayDate;
 import data.MovieSchedule;
-import data.Prices;
-import data.ShowTime;
 
 /**
  * Class that deals with the actual crud of Movie Schedule
@@ -20,6 +19,7 @@ import data.ShowTime;
  *
  */
 public class MovieScheduleDataControl extends DataControl{
+	protected static final SimpleDateFormat finalDateFormatter2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	
 	/**
 	 * Retrieve all movie listings schedule
@@ -39,9 +39,9 @@ public class MovieScheduleDataControl extends DataControl{
 				int  movieId = Integer.parseInt(star.nextToken().trim());
 				int  listingId = Integer.parseInt(star.nextToken().trim());
 				String startDateString=star.nextToken().trim();
-				Date startDate=finalDateFormatter.parse(startDateString);
+				Date startDate=finalDateFormatter2.parse(startDateString);
 				String endDateString=star.nextToken().trim();
-				Date endDate=finalDateFormatter.parse(endDateString);
+				Date endDate=finalDateFormatter2.parse(endDateString);
 				int typeOfDay=Integer.parseInt(star.nextToken().trim());
 				int status=Integer.parseInt(star.nextToken().trim());
 				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
@@ -77,9 +77,9 @@ public class MovieScheduleDataControl extends DataControl{
 				int  movieId = Integer.parseInt(star.nextToken().trim());
 				int  listingId = Integer.parseInt(star.nextToken().trim());
 				String startDateString=star.nextToken().trim();
-				Date startDate=finalDateFormatter.parse(startDateString);
+				Date startDate=finalDateFormatter2.parse(startDateString);
 				String endDateString=star.nextToken().trim();
-				Date endDate=finalDateFormatter.parse(endDateString);
+				Date endDate=finalDateFormatter2.parse(endDateString);
 				int typeOfDay=Integer.parseInt(star.nextToken().trim());
 				int status=Integer.parseInt(star.nextToken().trim());
 				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
@@ -124,9 +124,9 @@ public class MovieScheduleDataControl extends DataControl{
 				int  movieId = Integer.parseInt(star.nextToken().trim());
 				int  listingId = Integer.parseInt(star.nextToken().trim());
 				String startDateString=star.nextToken().trim();
-				Date startDate=finalDateFormatter.parse(startDateString);
+				Date startDate=finalDateFormatter2.parse(startDateString);
 				String endDateString=star.nextToken().trim();
-				Date endDate=finalDateFormatter.parse(endDateString);
+				Date endDate=finalDateFormatter2.parse(endDateString);
 				int typeOfDay=Integer.parseInt(star.nextToken().trim());
 				int status=Integer.parseInt(star.nextToken().trim());
 				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
@@ -172,9 +172,9 @@ public class MovieScheduleDataControl extends DataControl{
 				int  movieId = Integer.parseInt(star.nextToken().trim());
 				int  listingId = Integer.parseInt(star.nextToken().trim());
 				String startDateString=star.nextToken().trim();
-				Date startDate=finalDateFormatter.parse(startDateString);
+				Date startDate=finalDateFormatter2.parse(startDateString);
 				String endDateString=star.nextToken().trim();
-				Date endDate=finalDateFormatter.parse(endDateString);
+				Date endDate=finalDateFormatter2.parse(endDateString);
 				int typeOfDay=Integer.parseInt(star.nextToken().trim());
 				int status=Integer.parseInt(star.nextToken().trim());
 				int threeDOrNot=Integer.parseInt(star.nextToken().trim());
@@ -202,8 +202,8 @@ public class MovieScheduleDataControl extends DataControl{
 	
 		List alMS = new ArrayList() ;// to store Professors data
 	
-		String startDate=finalDateFormatter.format(m.getStartDate());
-		String endDate=finalDateFormatter.format(m.getEndDate());
+		String startDate=finalDateFormatter2.format(m.getStartDate());
+		String endDate=finalDateFormatter2.format(m.getEndDate());
 		
 		
 		int movieid;
@@ -274,9 +274,9 @@ public class MovieScheduleDataControl extends DataControl{
 				st.append(SEPARATOR);
 				st.append(schList.get(i).getListingId());
 				st.append(SEPARATOR);
-				st.append(finalDateFormatter.format(schList.get(i).getStartDate()));
+				st.append(finalDateFormatter2.format(schList.get(i).getStartDate()));
 				st.append(SEPARATOR);
-				st.append(finalDateFormatter.format(schList.get(i).getEndDate()));
+				st.append(finalDateFormatter2.format(schList.get(i).getEndDate()));
 				st.append(SEPARATOR);
 				st.append(schList.get(i).getTypeofDay());
 				st.append(SEPARATOR);
@@ -320,9 +320,9 @@ public class MovieScheduleDataControl extends DataControl{
 				st.append(SEPARATOR);
 				st.append(schList.get(i).getListingId());
 				st.append(SEPARATOR);
-				st.append(finalDateFormatter.format(schList.get(i).getStartDate()));
+				st.append(finalDateFormatter2.format(schList.get(i).getStartDate()));
 				st.append(SEPARATOR);
-				st.append(finalDateFormatter.format(schList.get(i).getEndDate()));
+				st.append(finalDateFormatter2.format(schList.get(i).getEndDate()));
 				st.append(SEPARATOR);
 				st.append(schList.get(i).getTypeofDay());
 				st.append(SEPARATOR);
@@ -368,9 +368,9 @@ public class MovieScheduleDataControl extends DataControl{
 			st.append(SEPARATOR);
 			st.append(schList.get(i).getListingId());
 			st.append(SEPARATOR);
-			st.append(finalDateFormatter.format(schList.get(i).getStartDate()));
+			st.append(finalDateFormatter2.format(schList.get(i).getStartDate()));
 			st.append(SEPARATOR);
-			st.append(finalDateFormatter.format(schList.get(i).getEndDate()));
+			st.append(finalDateFormatter2.format(schList.get(i).getEndDate()));
 			st.append(SEPARATOR);
 			st.append(schList.get(i).getTypeofDay());
 			st.append(SEPARATOR);
@@ -431,9 +431,9 @@ public class MovieScheduleDataControl extends DataControl{
 			st.append(SEPARATOR);
 			st.append(schList.get(i).getListingId());
 			st.append(SEPARATOR);
-			st.append(finalDateFormatter.format(schList.get(i).getStartDate()));
+			st.append(finalDateFormatter2.format(schList.get(i).getStartDate()));
 			st.append(SEPARATOR);
-			st.append(finalDateFormatter.format(schList.get(i).getEndDate()));
+			st.append(finalDateFormatter2.format(schList.get(i).getEndDate()));
 			st.append(SEPARATOR);
 			st.append(schList.get(i).getTypeofDay());
 			st.append(SEPARATOR);
@@ -451,14 +451,16 @@ public class MovieScheduleDataControl extends DataControl{
 		}
 		 else
 		 {
+			 sch.getEndDate().setHours(23);
+			 sch.getEndDate().setMinutes(59);
 			 StringBuilder st =  new StringBuilder() ;
 				st.append(sch.getMovieId());
 				st.append(SEPARATOR);
 				st.append(sch.getListingId());
 				st.append(SEPARATOR);
-				st.append(finalDateFormatter.format(sch.getStartDate()));
+				st.append(finalDateFormatter2.format(sch.getStartDate()));
 				st.append(SEPARATOR);
-				st.append(finalDateFormatter.format(sch.getEndDate()));
+				st.append(finalDateFormatter2.format(sch.getEndDate()));
 				st.append(SEPARATOR);
 				st.append(SEPARATOR);
 				st.append(sch.getTypeofDay());
@@ -482,6 +484,63 @@ public class MovieScheduleDataControl extends DataControl{
 }
 
 
+	/**
+	 * Method to end a movie listing, can be assesed only on update movie schedule page
+	 * @param sch
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+		public static void endListing(MovieSchedule sch) throws IOException, ParseException {
+			List alMS = new ArrayList() ;// to store Professors data
+			ArrayList<MovieSchedule> schList=MovieScheduleDataControl.readScheduleListing();
+			Calendar cal=Calendar.getInstance();
+			
+			
+			int status=0;
+			for(int i=0;i<schList.size();i++){
+				
+				String startDate=finalDateFormatter2.format(schList.get(i).getStartDate());
+				String endDate=finalDateFormatter2.format(schList.get(i).getEndDate());
+				
+				if(schList.get(i).getListingId()==sch.getListingId()){
+					status=4;
+				}
+				else
+				{
+					status=schList.get(i).getStatus();
+				}
+					
 
+				//1cineplexId|1movieUniqueId|1listingId|startEndDate|1typeofDay|status;		
+				StringBuilder st =  new StringBuilder() ;
+				st.append(schList.get(i).getMovieId());
+				st.append(SEPARATOR);
+				st.append(schList.get(i).getListingId());
+				st.append(SEPARATOR);
+				st.append(startDate);
+				st.append(SEPARATOR);
+				st.append(endDate);
+				st.append(SEPARATOR);
+				st.append(schList.get(i).getTypeofDay());
+				st.append(SEPARATOR);
+				st.append(status);
+				st.append(SEPARATOR);
+				st.append(schList.get(i).getThreeDOrNot());
+				st.append(SEPARATOR);
+				st.append(schList.get(i).getBlockBuster());
+				st.append(SEPARATOR);
+				st.append(schList.get(i).getPlatOrNot());
+				st.append(SEPARATOR);
+				st.append(schList.get(i).getPreviewStatus()+"\n");
+
+				alMS.add(st.toString()) ;
+			}
+
+			writeB("data/movieScheduleListing.txt",alMS);
+			System.out.println("Movie is set to end of showing!");
+			AdminSchedulerUpdateUi.displayUpdateMain();
+			
+			
+		}
 
 }

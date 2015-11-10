@@ -1,19 +1,11 @@
 package controllerClasses;
 
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-//import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import misc.ObjectContainer;
-import data.*;
-import dataController.MovieDataControl;
+//import java.time.format.DateTimeFormatter;
 
 
 /**

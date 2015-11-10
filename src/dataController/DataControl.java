@@ -1,31 +1,17 @@
 package dataController;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.Writer;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
-import java.util.StringTokenizer;
-
-import controllerClasses.TimeDateControl;
-import data.*;
 
 /**
  * Main data control file, all data controllers extend it to use its write and read functions.

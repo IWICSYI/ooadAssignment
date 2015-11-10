@@ -1,13 +1,5 @@
 package controllerClasses;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import data.HolidayDate;
-import data.Prices;
-import dataController.DataControl;
-import dataController.TicketPriceAndHolidayDataControl;
 
 public class AdminConfigTicketPriceControl {
 	

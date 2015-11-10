@@ -1,31 +1,23 @@
 package boundaryClasses;
 
 import java.io.IOException;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
 import misc.ObjectContainer;
 import controllerClasses.CustBuyTicketControl;
-import controllerClasses.MiscControl;
 import controllerClasses.MovieListingControl;
-import controllerClasses.AdminShowTimeController;
-import controllerClasses.TimeDateControl;
 import controllerClasses.ValidationControl;
 import data.Cineplex;
 import data.Movie;
-import data.MovieSchedule;
 import data.ShowTime;
 import dataController.CineplexDataControl;
-import dataController.DataControl;
-import dataController.MovieScheduleDataControl;
 import dataController.ShowTimeDataControl;
 
 public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
@@ -123,7 +115,7 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 			cineList.add(startList.get(i).getCineplexId());
 		}
 
-		if(cineList.size()==1){
+		if(cineList.size()<=1){
 			System.out.println("Sorry, no other cineplex show this movie!");
 			displayBuyTicket(lType, movieId,visit,cineId,movieDetails, listingId);
 		}

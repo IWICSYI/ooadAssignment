@@ -1,7 +1,6 @@
 package data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.io.Serializable;
 
 public class Review {
 	

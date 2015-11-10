@@ -122,7 +122,7 @@ import dataController.MovieScheduleDataControl;
 		System.out.println("These are the best selling movies throughout the entire history:");
 		
 		for(i=0;i<=movie.size();i++){
-			if(movie.get(i).getTicketSales()<0)
+			if(movie.get(i).getTicketSales()<=0)
 			{
 				
 			}
@@ -157,7 +157,7 @@ import dataController.MovieScheduleDataControl;
 		
 		System.out.println("These are the best selling movies that are showing!!!");
 		for(i=0;i<=movie.size();i++){
-			if(movie.get(i).getTicketSales()<0)
+			if(movie.get(i).getTicketSales()<=0)
 			{
 				
 			}

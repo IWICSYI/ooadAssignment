@@ -3,7 +3,6 @@ package boundaryClasses;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 import misc.ObjectContainer;
@@ -167,17 +166,10 @@ public class AdminMovieEntryUi extends AdminMainUi{
 			System.out.println("1.No");
 			System.out.println("2.Yes");
 			choice=ValidationControl.validateYesNoAndReturnIntegerValue(sc.nextLine());
-			if(choice<1||choice>2)
-			{
-				System.out.println("Invalid input, please try again");
-				choice=200;
-			}
-			else
-			{
-				movie.setMovieType(choice);
-				break;
-			}
-		}while(choice<=-1);
+			
+				
+		}while(choice<=0);
+		movie.setMovieType(choice-1);
 		
 		do
 		{	
@@ -192,16 +184,16 @@ public class AdminMovieEntryUi extends AdminMainUi{
 			}
 			else
 			{
-				movie.setBlockbuster(choice);
+				movie.setBlockbuster(choice-1);
 				break;
 			}
-		}while(choice<=-1);
+		}while(choice<=0 ||choice==200);
 		
-		if(movie.getThreeD()==2){
+		if(movie.getThreeD()==1){
 			movie.setMovieName(movie.getMovieName()+" (3D)");
 		}
 		
-		if(movie.getBlockbuster()==2)
+		if(movie.getBlockbuster()==1)
 		{
 			movie.setMovieName(movie.getMovieName()+" (BLOCKBUSTER!)");
 		}

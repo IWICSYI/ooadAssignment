@@ -1,17 +1,13 @@
 package controllerClasses;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import data.LoginData;
-import dataController.DataControl;
 import dataController.LoginDataControl;
 
 public class AdminLoginControl  {

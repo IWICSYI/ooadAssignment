@@ -1,6 +1,7 @@
 package boundaryClasses;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,8 +15,9 @@ public class AdminConfigureTicketPriceUi extends AdminConfigureUi {
 	/**
 	 * Display UI of ticket configuration page
 	 * @throws IOException
+	 * @throws ParseException 
 	 */
-	public static void displayTicketConfigureMain() throws IOException{
+	public static void displayTicketConfigureMain() throws IOException, ParseException{
 		System.out.println("#############################################");
 		System.out.println("#        Ticket Configuration Page          #");
 		System.out.println("#############################################");
@@ -53,7 +55,11 @@ public class AdminConfigureTicketPriceUi extends AdminConfigureUi {
 			System.out.println("8.Children");
 			System.out.println("9.Go back to previous menu");
 			choice = ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
-		
+			
+			if(choice==9){
+				displayConfigMain();
+			}
+			
 		}while(choice <=0|| choice > 9 );
 		displayUpdateTicketConfigureMain(choice,priceList);
 	
@@ -64,8 +70,9 @@ public class AdminConfigureTicketPriceUi extends AdminConfigureUi {
 	 * @param choice
 	 * @param priceList
 	 * @throws IOException
+	 * @throws ParseException 
 	 */
-	public static void displayUpdateTicketConfigureMain(int choice,ArrayList<Prices> priceList) throws IOException{
+	public static void displayUpdateTicketConfigureMain(int choice,ArrayList<Prices> priceList) throws IOException, ParseException{
 		double tempprice;
 		double base=priceList.get(0).getNormal();
 		boolean valid = false;

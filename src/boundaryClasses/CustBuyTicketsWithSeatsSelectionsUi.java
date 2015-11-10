@@ -2,24 +2,18 @@ package boundaryClasses;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import misc.ObjectContainer;
 import controllerClasses.CustBuyTicketControl;
 import controllerClasses.CustSeatsControl;
 import controllerClasses.ValidationControl;
-import data.HolidayDate;
 import data.Movie;
-import data.Prices;
 import data.Seats;
-import data.SeatsInformation;
 import data.ShowTime;
-import data.Transaction;
 import dataController.SeatsDataControl;
 import dataController.ShowTimeDataControl;
-import dataController.TicketPriceAndHolidayDataControl;
-import misc.ObjectContainer;
 
 public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTimeSlotUi {
 	
@@ -165,8 +159,8 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTime
 				seatsToValidate.clear();
 			}
 		}while(!valid);
-		CustSeatsControl sC=new CustSeatsControl();
-		 sC.reflectSeatSelections(seatList,actualSeats);
+		
+		SeatsDataControl.reflectSeatSelections(seatList,actualSeats);
 		ArrayList<Seats> tmpSeats = SeatsDataControl.readTmpSeats();
 		CustSeatsControl.designSeats(tmpSeats);
 		System.out.print("Seats selected=");
@@ -184,7 +178,7 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTime
 		
 		if(choice==1)
 		{
-			sC.reflectAndConfirmSeatSelections(seatList, actualSeats);
+			SeatsDataControl.reflectAndConfirmSeatSelections(seatList, actualSeats);
 			CustBuyTicketControl.purchaseTicket(cust, sTlist,actualSeats);
 		}
 		else if(choice==2)

@@ -1,30 +1,22 @@
 package controllerClasses;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 import misc.ObjectContainer;
-import data.Movie;
 import data.Seats;
 import data.SeatsInformation;
 import data.ShowTime;
-import dataController.DataControl;
 import dataController.SeatsDataControl;
-import dataController.ShowTimeDataControl;
 
 /**
  * Class that works in conjunction with CustBuyTickets to deal with the nitty gritty of seats selections.
  * @author Chang En Kai
  *
  */
-public class CustSeatsControl extends DataControl {
+public class CustSeatsControl  {
 	
 	
 	/**
@@ -54,7 +46,7 @@ public class CustSeatsControl extends DataControl {
 		sInfor.setStartDate(sTList.getStartDate());
 		if(sINfoList.size()==0)
 		{
-			createSeatInformation(sInfor);
+			SeatsDataControl.createSeatInformation(sInfor);
 		}
 		seatList=SeatsDataControl.readSeats(showTimeId);
 		Scanner sc=new Scanner(System.in);
@@ -99,7 +91,7 @@ public class CustSeatsControl extends DataControl {
 				s.setSeatId(seatId++);
 				s.setSeatsInformationId(showTimeId);
 				seatList.add(s);
-				createIndiviualSeat(seatList);
+				SeatsDataControl.createIndiviualSeat(seatList);
 				ObjectContainer oS= new ObjectContainer();
 				oS.setName(seatName);
 				oS.setSeatList(seatList);
@@ -157,95 +149,6 @@ public class CustSeatsControl extends DataControl {
 			}
 	}
 	}
-	
-	/**
-	 * Create seat informations for back up in case database of show time and transacation can't match-
-	 * @param seatInfos
-	 * @throws IOException
-	 */
-	public static void createSeatInformation(SeatsInformation seatInfos) throws IOException
-	{
-		List alw = new ArrayList() ;// to store Professors data
-		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
-		
-		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
-		String ocu="";
-		
-		StringBuilder st =  new StringBuilder() ;
-			st.append(sdf.format(seatInfos.getStartDate()));
-			st.append(SEPARATOR);
-			st.append(seatInfos.getStartEndTime());
-			st.append(SEPARATOR);
-			st.append(seatInfos.getSeatInfoId());
-			st.append(SEPARATOR);
-			st.append(seatInfos.getNoOfSeats());
-			st.append(SEPARATOR);
-			st.append(seatInfos.getNoOfEmptySeats());
-			st.append(SEPARATOR);
-			st.append(seatInfos.getMovieId());
-			st.append(SEPARATOR);
-			st.append(seatInfos.getCinemaId());
-			st.append(SEPARATOR);
-			st.append(seatInfos.getCineplexId());
-			st.append(SEPARATOR);
-			st.append(seatInfos.getShowTimeId());
-			st.append(SEPARATOR);
-			st.append(seatInfos.getPrice());
-			
-		
-			
-		//st.append("\n");
-		alw.add(st.toString()) ;
-		
-
-		write("data/seatsInformation.txt",alw);
-	
-		
-	}
-	
-	
-/**
- * Specific characteristics of each indiviual seat in a cinema hall
- * @param seatList
- * @throws IOException
- * @throws ParseException
- */
-	public static void createIndiviualSeat(ArrayList<Seats> seatList) throws IOException, ParseException {
-		List alw = new ArrayList() ;// to store Professors data
-		ArrayList<SeatsInformation> sINfoList=SeatsDataControl.readSeatInfor(seatList.get(0).getSeatsInformationId());
-		
-		
-		
-		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
-		String ocu="";
-		int seatInfoId=seatList.get(0).getSeatsInformationId();
-		StringBuilder st =  new StringBuilder() ;
-		for(int i=0;i<seatList.size();i++){
-			ocu=String.valueOf(seatList.get(i).isOccupied());
-		
-			st.append(seatList.get(i).getSeatId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getMovieId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getCinemaId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getSeatsInformationId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getSeatName());
-			st.append(SEPARATOR);
-			st.append(ocu);
-			st.append("\n");
-		}
-			
-		//st.append("\n");
-		alw.add(st.toString()) ;
-		
-
-		writeB("data/seats/seatsForShowTime"+seatInfoId+".txt",alw);
-	}
-	
-	
-	
 	/**
 	 * Search seat information by seat name.
 	 * @param seatList
@@ -373,112 +276,7 @@ public class CustSeatsControl extends DataControl {
 		return valid;
 	}
 
-	/**
-	 * Update and reflect seat selections
-	 * @param seatList
-	 * @param actualSeats
-	 * @throws IOException
-	 * @throws ParseException
-	 */
-	public void reflectAndConfirmSeatSelections(ArrayList<Seats> seatList, ArrayList<Seats> actualSeats) throws IOException, ParseException {
-		File file = new File("data/seatsTmp.txt");
-    	
-		if(file.delete()){
-			
-		}else{
-			System.out.println("Delete operation failed.");
-		}
-	   
-		
-		
-		List alw = new ArrayList() ;// to store Professors data
-		ArrayList<SeatsInformation> sINfoList=SeatsDataControl.readSeatInfor(seatList.get(0).getSeatsInformationId());
-		
-		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
-		String ocu="";
-		
-		StringBuilder st =  new StringBuilder() ;
-		for(int i=0;i<seatList.size();i++){
-			for(int j=0;j<actualSeats.size();j++)
-			{
-				if(seatList.get(i).getSeatId()==actualSeats.get(j).getSeatId())
-				{
-					ocu=String.valueOf(actualSeats.get(j).isOccupied());
-					break;
-				}else{
-					ocu=String.valueOf(seatList.get(i).isOccupied());
-				}
-			}
-			st.append(seatList.get(i).getSeatId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getMovieId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getCinemaId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getSeatsInformationId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getSeatName());
-			st.append(SEPARATOR);
-			st.append(ocu);
-			st.append("\n");
-		}
-			
-		//st.append("\n");
-		alw.add(st.toString()) ;
-		
-		writeB("data/seats/seatsForShowTime"+sINfoList.get(0).getSeatInfoId()+".txt",alw);
-	}
-
-/**
- * Reflect seat selections by creating a temp file that will display seats that customer selected without commiting to anything.
- * @param seatList
- * @param actualSeats
- * @throws IOException
- * @throws ParseException
- */
-	public void reflectSeatSelections(ArrayList<Seats> seatList,
-		ArrayList<Seats> actualSeats) throws IOException, ParseException {
-		List alw = new ArrayList() ;// to store Professors data
-		ArrayList<SeatsInformation> sINfoList=SeatsDataControl.readSeatInfor(seatList.get(0).getSeatsInformationId());
-		
-		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
-		String ocu="";
-		
-		StringBuilder st =  new StringBuilder() ;
-		for(int i=0;i<seatList.size();i++){
-			for(int j=0;j<actualSeats.size();j++)
-			{
-				if(seatList.get(i).getSeatId()==actualSeats.get(j).getSeatId())
-				{
-					ocu=String.valueOf(actualSeats.get(j).isOccupied());
-					break;
-				}else{
-					ocu=String.valueOf(seatList.get(i).isOccupied());
-				}
-			}
-			st.append(seatList.get(i).getSeatId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getMovieId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getCinemaId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getSeatsInformationId());
-			st.append(SEPARATOR);
-			st.append(seatList.get(i).getSeatName());
-			st.append(SEPARATOR);
-			st.append(ocu);
-			st.append("\n");
-		}
-			
-		//st.append("\n");
-		alw.add(st.toString()) ;
-		
-		writeB("data/seatsTmp.txt",alw);
-
-		
-	}
-		
-		
+	
 		
 		
 	}

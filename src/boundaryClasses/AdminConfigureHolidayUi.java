@@ -27,7 +27,7 @@ public class AdminConfigureHolidayUi extends AdminConfigureUi {
 		int choice;
 		Scanner sc = new Scanner(System.in);
 
-		AdminHolidayDateControl HDC = new AdminHolidayDateControl();
+		
 		System.out.println("#############################################");
 		System.out.println("#         Holiday Configuration Page        #");
 		System.out.println("#############################################");
@@ -87,14 +87,21 @@ public class AdminConfigureHolidayUi extends AdminConfigureUi {
 		Scanner sc=new Scanner(System.in);
 		Date day;
 		HolidayDate hD;
+		String s="";
+		boolean valid=false;
 	do{
-		System.out.println("Enter holiday date you want to create(Eg.25/12/2015)");
-	
-		day=ValidationControl.validateDate(sc.nextLine(), 0);
+		System.out.println("Enter holiday date you want to create(Eg.25/12/2015)(input -1 to return");
+		s=sc.nextLine();
+		if(s.equals("-1"))
+		{
+			displayCreate();
+		}
+		day=ValidationControl.validateDate(s, 0);
+		valid=AdminHolidayDateControl.checkDuplicatedHoliday(day);
+		
+		}while(day==null||!valid);
 		hD=new HolidayDate();
 		hD.setHolidayDate(day);
-		
-		}while(day==null);
 		TicketPriceAndHolidayDataControl.createHoliday(hD);
 		displayHolidayMain();
 	
@@ -182,12 +189,18 @@ public class AdminConfigureHolidayUi extends AdminConfigureUi {
 			Scanner sc=new Scanner(System.in);
 			selected=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
 			boolean valid=false;
+			Date nHD;
 			if(selected==1){
 				do{
-					System.out.println("Enter new updated date:");
+					System.out.println("Enter new updated date(input -1 to return:");
 					String s=sc.nextLine();
-					Date nHD=ValidationControl.validateDate(s,0);
-					valid=AdminHolidayDateControl.checkDuplicatedHoliday(s);
+					if(s.equals("-1"))
+					{
+						displayUpdatePage(oList,choice);
+					}
+						
+					 nHD=ValidationControl.validateDate(s,0);
+					valid=AdminHolidayDateControl.checkDuplicatedHoliday(nHD);
 					if(valid)
 					{
 						HolidayDate hD=new HolidayDate();
@@ -195,11 +208,8 @@ public class AdminConfigureHolidayUi extends AdminConfigureUi {
 						hD.setHolidayId(id);
 						TicketPriceAndHolidayDataControl.updateHoliday(id,hD);
 					}
-					else
-					{
-						System.out.println("Duplicated date found, please try again.");
-					}
-				}while(valid==false);
+				
+				}while(valid==false|| nHD==null);
 			}
 			if(selected==2){
 				int confirm=0;

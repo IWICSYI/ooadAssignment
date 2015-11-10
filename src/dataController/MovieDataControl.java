@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import controllerClasses.MiscControl;
-import misc.ObjectContainer;
 import data.Movie;
 
 /**

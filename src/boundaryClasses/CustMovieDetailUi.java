@@ -8,11 +8,8 @@ import java.util.Scanner;
 
 import misc.ObjectContainer;
 import controllerClasses.CustReviewControl;
-import controllerClasses.MiscControl;
-import controllerClasses.MovieListingControl;
 import controllerClasses.ValidationControl;
 import data.Movie;
-import data.MovieSchedule;
 import data.Review;
 import dataController.MovieDataControl;
 import dataController.ReviewDataControl;

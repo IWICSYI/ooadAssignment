@@ -2,13 +2,13 @@ package dataController;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import controllerClasses.TimeDateControl;
 import data.HolidayDate;
 import data.MovieSchedule;
 import data.Prices;
@@ -26,6 +26,9 @@ public class ShowTimeDataControl extends DataControl {
  * @throws IOException
  * @throws ParseException
  */
+	
+	protected static final SimpleDateFormat finalDateFormatter2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	
 	public static ArrayList<ShowTime> readShowTimes() throws IOException, ParseException{
 
 		ArrayList stringArray = (ArrayList)read("data/showTimes.txt");
@@ -45,9 +48,9 @@ public class ShowTimeDataControl extends DataControl {
 			String showTimeValue=star.nextToken().trim();
 			int seats = Integer.parseInt(star.nextToken().trim());
 			String startDateString=star.nextToken().trim();
-			Date startDate=finalDateFormatter.parse(startDateString);
+			Date startDate=finalDateFormatter2.parse(startDateString);
 			String endDateString=star.nextToken().trim();
-			Date endDate=finalDateFormatter.parse(endDateString);
+			Date endDate=finalDateFormatter2.parse(endDateString);
 			double price=Double.parseDouble(star.nextToken().trim());
 			int preview = Integer.parseInt(star.nextToken().trim());
 			int cineId = Integer.parseInt(star.nextToken().trim());
@@ -81,7 +84,6 @@ public class ShowTimeDataControl extends DataControl {
 		temp.set(Calendar.MILLISECOND, 0);
 		Date sD=temp.getTime();
 		temp.add(Calendar.DATE, 1);
-
 		Date eD=temp.getTime();
 
 
@@ -100,9 +102,9 @@ public class ShowTimeDataControl extends DataControl {
 			String showTimeValue=star.nextToken().trim();
 			int seats = Integer.parseInt(star.nextToken().trim());
 			String startDateString=star.nextToken().trim();
-			Date startDate=finalDateFormatter.parse(startDateString);
+			Date startDate=finalDateFormatter2.parse(startDateString);
 			String endDateString=star.nextToken().trim();
-			Date endDate=finalDateFormatter.parse(endDateString);
+			Date endDate=finalDateFormatter2.parse(endDateString);
 			double price=Double.parseDouble(star.nextToken().trim());
 			int preview = Integer.parseInt(star.nextToken().trim());
 			
@@ -165,9 +167,9 @@ public class ShowTimeDataControl extends DataControl {
 			String showTimeValue=star.nextToken().trim();
 			int seats = Integer.parseInt(star.nextToken().trim());
 			String startDateString=star.nextToken().trim();
-			Date startDate=finalDateFormatter.parse(startDateString);
+			Date startDate=finalDateFormatter2.parse(startDateString);
 			String endDateString=star.nextToken().trim();
-			Date endDate=finalDateFormatter.parse(endDateString);
+			Date endDate=finalDateFormatter2.parse(endDateString);
 			double price=Double.parseDouble(star.nextToken().trim());
 			int preview = Integer.parseInt(star.nextToken().trim());
 			String arr[]=showTimeValue.split("-");
@@ -236,9 +238,9 @@ public class ShowTimeDataControl extends DataControl {
 			String showTimeValue=star.nextToken().trim();
 			int seats = Integer.parseInt(star.nextToken().trim());
 			String startDateString=star.nextToken().trim();
-			Date startDate=finalDateFormatter.parse(startDateString);
+			Date startDate=finalDateFormatter2.parse(startDateString);
 			String endDateString=star.nextToken().trim();
-			Date endDate=finalDateFormatter.parse(endDateString);
+			Date endDate=finalDateFormatter2.parse(endDateString);
 			double price=Double.parseDouble(star.nextToken().trim());
 			int preview = Integer.parseInt(star.nextToken().trim());
 			String arr[]=showTimeValue.split("-");
@@ -288,9 +290,9 @@ public class ShowTimeDataControl extends DataControl {
 			String showTimeValue=star.nextToken().trim();
 			int seats = Integer.parseInt(star.nextToken().trim());
 			String startDateString=star.nextToken().trim();
-			Date startDate=finalDateFormatter.parse(startDateString);
+			Date startDate=finalDateFormatter2.parse(startDateString);
 			String endDateString=star.nextToken().trim();
-			Date endDate=finalDateFormatter.parse(endDateString);
+			Date endDate=finalDateFormatter2.parse(endDateString);
 			double price=Double.parseDouble(star.nextToken().trim());
 			int preview = Integer.parseInt(star.nextToken().trim());
 			String arr[]=showTimeValue.split("-");
@@ -344,9 +346,9 @@ public class ShowTimeDataControl extends DataControl {
 			String showTimeValue=star.nextToken().trim();
 			int seats = Integer.parseInt(star.nextToken().trim());
 			String startDateString=star.nextToken().trim();
-			Date startDate=finalDateFormatter.parse(startDateString);
+			Date startDate=finalDateFormatter2.parse(startDateString);
 			String endDateString=star.nextToken().trim();
-			Date endDate=finalDateFormatter.parse(endDateString);
+			Date endDate=finalDateFormatter2.parse(endDateString);
 			double price=Double.parseDouble(star.nextToken().trim());
 			int preview = Integer.parseInt(star.nextToken().trim());
 
@@ -374,6 +376,7 @@ public class ShowTimeDataControl extends DataControl {
  * @throws IOException
  * @throws ParseException
  */
+	@SuppressWarnings("deprecation")
 	public static void createTimeSlot(ShowTime sT, MovieSchedule sch2) throws IOException, ParseException
 	{
 
@@ -390,14 +393,19 @@ public class ShowTimeDataControl extends DataControl {
 		int tD=sch2.getThreeDOrNot();
 		int bB=sch2.getBlockBuster();
 		int dtype=sT.getDayType();
-
-		String startDate=finalDateFormatter.format(sT.getStartDate());
-		String endDate=finalDateFormatter.format(sT.getEndDate());
+		
+		
+		sT.getStartDate().setHours(00);
+		sT.getEndDate().setHours(00);
+		sT.getStartDate().setMinutes(00);
+		sT.getEndDate().setMinutes(00);
+		String startDate=finalDateFormatter2.format(sT.getStartDate());
+		String endDate=finalDateFormatter2.format(sT.getEndDate());
 
 		ArrayList<HolidayDate> hDList=new ArrayList<HolidayDate>();
 		for(int i=0;i<hDList.size();i++)
 		{
-			String date1=finalDateFormatter.format(hDList.get(i).getHolidayDate());
+			String date1=finalDateFormatter2.format(hDList.get(i).getHolidayDate());
 			if(date1.equals(startDate)){
 				dtype=8;
 				break;
@@ -491,9 +499,9 @@ public class ShowTimeDataControl extends DataControl {
 				st2.append(SEPARATOR);
 				st2.append(eList.get(i).getNoOfSeats());
 				st2.append(SEPARATOR);
-				st2.append(finalDateFormatter.format(eList.get(i).getStartDate()));
+				st2.append(finalDateFormatter2.format(eList.get(i).getStartDate()));
 				st2.append(SEPARATOR);
-				st2.append(finalDateFormatter.format(eList.get(i).getEndDate()));
+				st2.append(finalDateFormatter2.format(eList.get(i).getEndDate()));
 				st2.append(SEPARATOR);
 				st2.append(eList.get(i).getTicketPrice());
 				st2.append(SEPARATOR);
@@ -542,9 +550,9 @@ public class ShowTimeDataControl extends DataControl {
 				st2.append(SEPARATOR);
 				st2.append(eList.get(i).getNoOfSeats());
 				st2.append(SEPARATOR);
-				st2.append(finalDateFormatter.format(eList.get(i).getStartDate()));
+				st2.append(finalDateFormatter2.format(eList.get(i).getStartDate()));
 				st2.append(SEPARATOR);
-				st2.append(finalDateFormatter.format(eList.get(i).getEndDate()));
+				st2.append(finalDateFormatter2.format(eList.get(i).getEndDate()));
 				st2.append(SEPARATOR);
 				st2.append(eList.get(i).getTicketPrice());
 				st2.append(SEPARATOR);
@@ -572,9 +580,9 @@ public class ShowTimeDataControl extends DataControl {
 				st2.append(SEPARATOR);
 				st2.append(eList.get(i).getNoOfSeats());
 				st2.append(SEPARATOR);
-				st2.append(finalDateFormatter.format(eList.get(i).getStartDate()));
+				st2.append(finalDateFormatter2.format(eList.get(i).getStartDate()));
 				st2.append(SEPARATOR);
-				st2.append(finalDateFormatter.format(eList.get(i).getEndDate()));
+				st2.append(finalDateFormatter2.format(eList.get(i).getEndDate()));
 				st2.append(SEPARATOR);
 				st2.append(eList.get(i).getTicketPrice());
 				st2.append(SEPARATOR);
@@ -591,6 +599,111 @@ public class ShowTimeDataControl extends DataControl {
 		System.out.println("Update Completed!");
 	}
 
+	
+	
+	public static void removeShowTimeWhenEditStartDate(int listID,Calendar newSD) throws IOException, ParseException {
+		List alw = new ArrayList() ;// to store Professors data
+		String sD="";
+		ArrayList<ShowTime> eList=readShowTimes();
+		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
+
+		for(int i=0;i<eList.size();i++)
+		{		
+			Date existStartDate=eList.get(i).getStartDate();
+			sD=finalDateFormatter.format(existStartDate);
+			StringBuilder st2 =  new StringBuilder() ;
+			if(listID==eList.get(i).getListingId()&& newSD.getTime().after(existStartDate)){
+				System.out.println(sD+" showtime deleted for this movie.");
+				
+			}
+			else{
+				st2.append(eList.get(i).getListingId());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getMovieId());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getCinemaId());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getShowTimeId());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getDayType());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getShowTimeValue());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getNoOfSeats());
+				st2.append(SEPARATOR);
+				st2.append(finalDateFormatter2.format(eList.get(i).getStartDate()));
+				st2.append(SEPARATOR);
+				st2.append(finalDateFormatter2.format(eList.get(i).getEndDate()));
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getTicketPrice());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getPreviewStatus());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getCineplexId());
+				st2.append("\n");
+
+				alw.add(st2.toString()) ;
+			}
+
+		}
+		writeB("data/showTimes.txt",alw);
+		System.out.println("Show times not within start/end date sucessfully removed!");
+	}
+	
+	
+	
+	public static void removeShowTimeWhenEditEndDate(int listID,Calendar newSD) throws IOException, ParseException {
+		List alw = new ArrayList() ;// to store Professors data
+		String eD="";
+		ArrayList<ShowTime> eList=readShowTimes();
+		//1movieUniqueId|moviName|movieType|ageRating|directer|synopsis|cast|4Overallrating|100longticketSales|120lengthMinutes
+		newSD.set(Calendar.HOUR_OF_DAY,00);
+		newSD.set(Calendar.MINUTE,00);
+		for(int i=0;i<eList.size();i++)
+		{		
+			Date existEndDate=eList.get(i).getStartDate();
+			eD=finalDateFormatter.format(existEndDate);
+			
+			//System.out.println(newSD.getTime()+" "+existEndDate+" "+newSD.getTime().before(existEndDate));
+			StringBuilder st2 =  new StringBuilder() ;
+			if(listID==eList.get(i).getListingId()&& newSD.getTime().before(existEndDate)){
+		
+				System.out.println(eD+" showtime deleted for this movie.");
+				
+			}
+			else{
+				st2.append(eList.get(i).getListingId());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getMovieId());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getCinemaId());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getShowTimeId());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getDayType());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getShowTimeValue());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getNoOfSeats());
+				st2.append(SEPARATOR);
+				st2.append(finalDateFormatter2.format(eList.get(i).getStartDate()));
+				st2.append(SEPARATOR);
+				st2.append(finalDateFormatter2.format(eList.get(i).getEndDate()));
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getTicketPrice());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getPreviewStatus());
+				st2.append(SEPARATOR);
+				st2.append(eList.get(i).getCineplexId());
+				st2.append("\n");
+
+				alw.add(st2.toString()) ;
+			}
+
+		}
+		writeB("data/showTimes.txt",alw);
+		System.out.println("Show times not within start/end date sucessfully removed!");
+	}
 
 }
 

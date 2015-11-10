@@ -1,9 +1,9 @@
-1|The First|1|G|May|First ever movie directed by May|May,Peter|3.375|-1|120|0
-2|Love Exposure|1|M18|Sono Sion|Raised by an extremely strict Roman Catholic, a young man, who sneaks snapshots of women's panties, meets a gal who becomes his Virgin Mary.|Takahiro Nishijima,Atsuro Watabe,Hikari Mitsushima,Sakura Ando,|5.0|4|240|0
-3|Avatar(3D)(BlockBuster)|2|PG13|James Cameron|On the lush alien world of Pandora live the Na'vi, beings who appear primitive but are highly evolved. Because the planet's environment is poisonous, human/Na'vi hybrids, called Avatars, must link to human minds to allow for free movement on Pandora.|Zoe Saldana,Stephen Lang,Sam Worthington|-1.0|-1|162|1
-4|Avatar(BlockBuster)|1|PG13|James Cameron|On the lush alien world of Pandora live the Na'vi, beings who appear primitive but are highly evolved. Because the planet's environment is poisonous, human/Na'vi hybrids, called Avatars, must link to human minds to allow for free movement on Pandora.|Zoe Saldana,Stephen Lang,Sam Worthington|4.0|-1|162|1
-5|One Person|1|PG13|John Doe|A 30 minutes movie with only one cast member|John Doe|0.0|-1|30|0
-6|One Person(3D)|2|PG13|John Doe|A 30 minutes movie with only one cast member|John Doe|-1.0|-1|30|0
-7|Enter the Dragon|1|PG13|Bruce Lee,Robert Clause|Bruce Lee plays a martial-arts expert determined to help capture the narcotics dealer whose gang was responsible for the death of his sister. Lee enters a kung fu competition in an attempt to fight his way to the dealer's headquarters with the help of some friends.|Bruce Lee,John Saxxon|-1.0|-1|99|0
-8|Movie Ken Soon|1|PG13|Ken Soon|This movie might be coming soon, but is it?|Ken Soon,Soon Ken|-1.0|-1|90|0
-9|Preview Destiny|1|PG13|Ken Soon|Hey, new synopsis is cool. This movie is for testing purpose maybe? Who knows?|Ken Soon,Soon Ken|-1.0|-1|90|0
+1|The First|0|G|May|First ever movie directed by May|May,Peter|3.375|-1|120|0
+2|Love Exposure|0|M18|Sono Sion|Raised by an extremely strict Roman Catholic, a young man, who sneaks snapshots of women's panties, meets a gal who becomes his Virgin Mary.|Takahiro Nishijima,Atsuro Watabe,Hikari Mitsushima,Sakura Ando,|5.0|4|240|0
+3|Avatar(3D)(BlockBuster)|1|PG13|James Cameron|On the lush alien world of Pandora live the Na'vi, beings who appear primitive but are highly evolved. Because the planet's environment is poisonous, human/Na'vi hybrids, called Avatars, must link to human minds to allow for free movement on Pandora.|Zoe Saldana,Stephen Lang,Sam Worthington|-1.0|-1|162|1
+4|Avatar(BlockBuster)|0|PG13|James Cameron|On the lush alien world of Pandora live the Na'vi, beings who appear primitive but are highly evolved. Because the planet's environment is poisonous, human/Na'vi hybrids, called Avatars, must link to human minds to allow for free movement on Pandora.|Zoe Saldana,Stephen Lang,Sam Worthington|4.0|-1|162|1
+5|One Person|0|PG13|John Doe|A 30 minutes movie with only one cast member|John Doe|3.0|-1|30|0
+6|One Person(3D)|1|PG13|John Doe|A 30 minutes movie with only one cast member|John Doe|-1.0|-1|30|0
+7|Enter the Dragon|0|PG13|Bruce Lee,Robert Clause|Bruce Lee plays a martial-arts expert determined to help capture the narcotics dealer whose gang was responsible for the death of his sister. Lee enters a kung fu competition in an attempt to fight his way to the dealer's headquarters with the help of some friends.|Bruce Lee,John Saxxon|-1.0|-1|99|0
+8|Movie Ken Soon|0|PG13|Ken Soon|This movie might be coming soon, but is it?|Ken Soon,Soon Ken|-1.0|-1|90|0
+9|Preview Destiny|0|PG13|Ken Soon|Hey, new synopsis is cool. This movie is for testing purpose maybe? Who knows?|Ken Soon,Soon Ken|-1.0|-1|90|0

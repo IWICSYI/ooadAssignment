@@ -6,11 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.StringTokenizer;
 
 import misc.ObjectContainer;
 import data.Cineplex;
@@ -30,7 +25,7 @@ import dataController.TicketPriceAndHolidayDataControl;
  * @author Chang En Kai
  *
  */
-public class MovieListingControl extends DataControl {
+public class MovieListingControl {
 	
 	/**
 	 * 
@@ -80,10 +75,11 @@ public class MovieListingControl extends DataControl {
 	 */
 
 	public static ArrayList<ObjectContainer> formatShowtimeforListing(int listingid,int cineplexid,int movieid,String type,int max,Movie movieDetails) throws IOException, ParseException{
-		ArrayList<MovieSchedule> schList=new ArrayList<MovieSchedule>();
+		MovieSchedule schList=new MovieSchedule();
+		MovieSchedule ms=new MovieSchedule();
 		ArrayList<ShowTime> stListUpdate=new ArrayList<ShowTime>();
 		if(type.equals("now")){
-		schList=MovieScheduleDataControl.readScheduleListingBasedonMovieId(movieid);
+			schList=MovieScheduleDataControl.readScheduleListingBasedOnListingId(listingid);
 		}
 		else if(type.equals("update")||type.equals("preview"))
 		{
@@ -91,6 +87,8 @@ public class MovieListingControl extends DataControl {
 			{
 				cineplexid=CustBuyTicketControl.chooseCineplexToDisplay(movieid,listingid);
 			}
+			ms=MovieScheduleDataControl.readScheduleListingBasedOnListingId(listingid);
+			
 			stListUpdate = ShowTimeDataControl.readShowTimesBasedOnListingId(listingid);
 		}
 		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
@@ -115,35 +113,23 @@ public class MovieListingControl extends DataControl {
 		int allowance=0;
 		
 		Calendar cal = Calendar.getInstance();
-		Calendar calTemp = (Calendar) cal.clone(),calTemp2, aDate=Calendar.getInstance();
+		Calendar calTemp = (Calendar) cal.clone();
 		if(type.equals("update")||type.equals("preview"))
 		{
-			calTemp.setTime(stListUpdate.get(0).getStartDate());
+			calTemp.setTime(ms.getStartDate());
 		}
 		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
-		calTemp2 = (Calendar) cal.clone();
-		Date endDate = cal.getTime();
-		if(!schList.isEmpty())
-		{
-			endDate=schList.get(0).getEndDate();
-			aDate.setTime(endDate);
-			//System.out.println(endDate);
-		}
+	
+		
 		System.out.println("Time slot for "+movieDetails.getMovieName()+" in "+cineplexName);
 		System.out.println("Date                     |TimeSlot                     ");
 		System.out.println("------------------------------------------------------");
 		for(int i=1;i<=max;i++)
 		{
-			if(type.equals("now"))
-			{
-				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingIdAndCineplexIdAndNowShowing(schList.get(0).getListingId(), calTemp,cineplexid);
-			}
-			else if(type.equals("update")||type.equals("preview"))
-			{
-				
-				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingIdAndCineplexId(listingid, calTemp,cineplexid);
-				
-			}
+			
+
+			showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingIdAndCineplexId(listingid, calTemp,cineplexid);
+			
 			for(int h=0;h<hDList.size();h++)
 			{
 				String d1=sdf.format(calTemp.getTime());
@@ -176,10 +162,7 @@ public class MovieListingControl extends DataControl {
 				ArrayList<ShowTime> showTimeListTemp=new ArrayList<ShowTime>();
 				for(int p=0;p<showTimeList.size();p++)
 				{	
-					if(showTimeList.get(p).getEndDate().after(endDate)){
-						aDate.setTime(showTimeList.get(p).getEndDate());
-					}
-					
+				
 					showTimeArray.add(showTimeList.get(p).getShowTimeValue());
 					ShowTime s=showTimeList.get(p);
 					showTimeListTemp.add(s);
@@ -207,11 +190,10 @@ public class MovieListingControl extends DataControl {
 				showTimeArray.clear();
 				
 				System.out.println();
-				if(calTemp.before(aDate))
-				{
+				
 					calTemp.add(calTemp.DATE, 1);
 					
-				}
+				
 			}
 			else
 			{		
@@ -219,9 +201,9 @@ public class MovieListingControl extends DataControl {
 					System.out.println();
 					calTemp.add(calTemp.DATE, 1);
 					allowance++;
-					if(type.equals("now")&&allowance>2)
+					if(type.equals("now")&&allowance>=2)
 					{
-						break;
+						max=0;
 					}
 					
 			}

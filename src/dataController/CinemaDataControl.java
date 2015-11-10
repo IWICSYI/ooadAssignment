@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import data.Cinema;
-import data.Cineplex;
 
 /**
  * Class used for the actual CRUD of cinema.

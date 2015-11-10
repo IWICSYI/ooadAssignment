@@ -2,24 +2,9 @@ package boundaryClasses;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
-import misc.ObjectContainer;
-import controllerClasses.MiscControl;
-import controllerClasses.MovieListingControl;
-import controllerClasses.AdminSchedulerController;
-import controllerClasses.AdminShowTimeController;
 import controllerClasses.ValidationControl;
-import data.Cinema;
-import data.Cineplex;
-import data.Movie;
-import data.MovieSchedule;
-import data.ShowTime;
-import dataController.CineplexDataControl;
-import dataController.DataControl;
-import dataController.MovieDataControl;
 
 public class AdminSchedulerMainUi extends AdminMainUi {
 	
@@ -32,10 +17,8 @@ public class AdminSchedulerMainUi extends AdminMainUi {
 		Scanner sc=new Scanner(System.in);
 		int choice = 0;
 		String test;
-		boolean validation;
-		ValidationControl vl=new ValidationControl();
 		
-		MovieDataControl mec=new MovieDataControl();
+		
 		do{
 			System.out.println("#############################################");
 			System.out.println("#            Schedule Manager Page          #");

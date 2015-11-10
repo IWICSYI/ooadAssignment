@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import data.*;
+import data.Movie;
+import data.MovieSchedule;
+import data.Seats;
+import data.ShowTime;
+import data.Transaction;
 
 public class ObjectContainer {
 	private boolean old;
@@ -84,13 +88,14 @@ public class ObjectContainer {
 		this.setTimeValue(string);
 	}
 	
-	public ObjectContainer(int i, int id, int len, int movieType, int block) {
+	public ObjectContainer(int i, int id, int len, int movieType, int block, Movie movie) {
 		super();
 		this.i = i;
 		this.id = id;
 		this.movieLen = len;
 		this.movieType=movieType;
 		this.block=block;
+		this.m=movie;
 	}
 	
 	//Constructor to pair id and choice 
