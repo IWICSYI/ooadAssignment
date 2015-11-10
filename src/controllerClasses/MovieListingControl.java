@@ -120,6 +120,7 @@ public class MovieListingControl {
 		}
 		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
 	
+		System.out.println("------------------------------------------------------");
 		
 		System.out.println("Time slot for "+movieDetails.getMovieName()+" in "+cineplexName);
 		System.out.println("Date                     |TimeSlot                     ");

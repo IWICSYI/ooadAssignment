@@ -40,9 +40,9 @@ import dataController.MovieScheduleDataControl;
 		 });
 		
 		Collections.reverse(movie);
-		
-		System.out.println("These are the top rated movies throughout the entire history:");
-		
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println("|These are the top rated movies throughout the entire history:   |");
+		System.out.println("-----------------------------------------------------------------");
 		for(i=0;i<=movie.size();i++){
 			if(movie.get(i).getOverallRating()<=0)
 			{
@@ -54,6 +54,7 @@ import dataController.MovieScheduleDataControl;
 			if(i==5)
 				break;
 		}
+		System.out.println("-----------------------------------------------------------------");
 	}
 	  
 	  /**
@@ -76,9 +77,9 @@ import dataController.MovieScheduleDataControl;
 			 });
 			
 			Collections.reverse(movie);
-		
-			System.out.println("These are the top rated movies that are showing!!!");
-				
+			System.out.println("---------------------------------------------------");
+			System.out.println("|These are the top rated movies that are showing!!!|");
+			System.out.println("----------------------------------------------------");	
 			for(i=0;i<=movie.size();i++){
 				if(movie.get(i).getOverallRating()<=0)
 				{
@@ -98,6 +99,8 @@ import dataController.MovieScheduleDataControl;
 				if(i==5)
 					break;
 			}
+			System.out.println("----------------------------------------------------");	
+			
 		}
 	  
 	/**
@@ -118,8 +121,10 @@ import dataController.MovieScheduleDataControl;
 		});
 			
 		Collections.reverse(movie);
+		System.out.println("-----------------------------------------------------------------");
 		
-		System.out.println("These are the best selling movies throughout the entire history:");
+		System.out.println("|These are the best selling movies throughout the entire history:|");
+		System.out.println("------------------------------------------------------------------");
 		
 		for(i=0;i<=movie.size();i++){
 			if(movie.get(i).getTicketSales()<=0)
@@ -131,7 +136,7 @@ import dataController.MovieScheduleDataControl;
 			if(i==5)
 				break;
 		}
-
+		System.out.println("------------------------------------------------------------------");
     }
 
 	/**
@@ -154,8 +159,11 @@ import dataController.MovieScheduleDataControl;
 		});
 			
 		Collections.reverse(movie);
+		System.out.println("------------------------------------------------------");
 		
-		System.out.println("These are the best selling movies that are showing!!!");
+		System.out.println("|These are the best selling movies that are showing!!!|");
+		System.out.println("------------------------------------------------------");
+		
 		for(i=0;i<=movie.size();i++){
 			if(movie.get(i).getTicketSales()<=0)
 			{
@@ -175,6 +183,8 @@ import dataController.MovieScheduleDataControl;
 			if(i==5)
 				break;
 		}
+		System.out.println("------------------------------------------------------");
+		
 
     }
 	

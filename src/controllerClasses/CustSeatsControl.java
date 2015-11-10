@@ -213,13 +213,14 @@ public class CustSeatsControl  {
 			return true;
 		
 		}
-		
+		System.out.print("Selected Seats=");
 		for(int i=0;i<selectedSeats.size();i++)
 		{
-			System.out.println(selectedSeats.get(i).getSeatName());
+			System.out.print(selectedSeats.get(i).getSeatName()+" ");
 			seatName.add(selectedSeats.get(i).getSeatName());
 			
 		}
+		System.out.println();
 		boolean valid=false;
 		MiscControl ms=new MiscControl();
 		ms.setStringList(seatName);
@@ -268,8 +269,8 @@ public class CustSeatsControl  {
 				{
 					System.out.println("Invalid seat combination, there might be a gap between your choosen seats!");
 					valid=false;
+					return valid;
 					
-					break;
 				}
 			}
 		}

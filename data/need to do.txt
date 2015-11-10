@@ -2,6 +2,8 @@ Things to do
 
 
 update showtime->end of showing && alot of shit(half done!)
+Update movie(done)
+
 
 
 show movie details(done) left validation

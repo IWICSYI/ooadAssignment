@@ -17,10 +17,11 @@ import dataController.ShowTimeDataControl;
 public class test {
 	
 	public static void main(String[]args) throws IOException, ParseException{
-		MovieSchedule newsch = MovieScheduleDataControl.readScheduleListingBasedOnListingId(1);
+		MovieSchedule newsch = MovieScheduleDataControl.readScheduleListingBasedOnListingId(12);
 		//must create movie listing in amk cineplex to work.
 		
-		//TimeSlotCopier(newsch,1); uncomment this to copy time slot data to all cineplex, the 1 is listingId, change
+		TimeSlotCopier(newsch,1); //uncomment this to copy time slot data to all cineplex, the 1 is listingId, change
+		System.out.println("copy success");
 		//it if you want to copy every show time in that listingid.
 	}
 	

@@ -46,7 +46,7 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTime
 		Scanner sc=new Scanner(System.in);
 		System.out.println(m.getMovieName());
 		ArrayList<ObjectContainer> selectedSeats = CustSeatsControl.manageSeats(sTList,showTimeId);
-		
+		System.out.println();
 		if(cust.isOld()){
 			System.out.println("Senior citizen discount applied		");
 		}
@@ -157,6 +157,11 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTime
 					seatsToValidate.get(i).setOccupied(false);
 				}
 				seatsToValidate.clear();
+				valid=false;
+				System.out.println("Press anything to resume.");
+				sc.nextLine();
+				displaySeat( showTimeId, m, cust);
+				
 			}
 		}while(!valid);
 		

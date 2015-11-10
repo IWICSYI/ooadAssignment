@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import misc.ObjectContainer;
+import boundaryClasses.AdminSchedulerCreateUi;
 import boundaryClasses.AdminSchedulerMainUi;
 import boundaryClasses.AdminSchedulerUpdateUi;
 import data.Cinema;
@@ -195,15 +196,28 @@ public class AdminShowTimeController extends AdminSchedulerController {
 		boolean valid=false,valid2=false;
 		int cineplexId=0;
 		
+		
 		if(cinpleId==0)
 		{
 			ArrayList<Cineplex> cnList= CineplexDataControl.readCineplex();
 			do{
-				System.out.println("Please choose which cineplex to create time slot for selected movie");
+				System.out.println("Please choose which cineplex to create time slot for selected movie(input -1 to exit).");
 				for(int i=0;i<cnList.size();i++){
 					System.out.println((i+1)+":"+cnList.get(i).getCineplexName());
 				}
-				 cineplexId=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+				String tmps=sc.nextLine();
+				if(tmps.equals("-1"))
+				{
+					if(operation.equals("c"))
+					{
+						AdminSchedulerCreateUi.displaySchedulerCreatePageMain();
+					}
+					else if(operation.equals("u"))
+						AdminSchedulerUpdateUi.displayUpdateMain();
+					else if(operation.equals("add"))
+						AdminSchedulerUpdateUi.displayEditExistingTimeSlot( sch, movieId, cinpleId,  movie);
+				}
+				cineplexId=ValidationControl.validateAndReturnIntegerValue(tmps);
 			}while(cineplexId<=0||cineplexId>cnList.size());
 		}
 		else
@@ -220,7 +234,7 @@ public class AdminShowTimeController extends AdminSchedulerController {
 		cinemaList=CinemaDataControl.readCinemaByCineplexId(cineplexId);
 		int count=1;
 		do{
-			System.out.println("Please choose Cinema Hall:");
+			System.out.println("Please choose Cinema Hall(input -1 to exist):");
 			for(int j=0;j<cinemaList.size();j++)
 			{
 				if(cinemaList.get(j).getCinemaType()==platOrNot)
@@ -231,7 +245,19 @@ public class AdminShowTimeController extends AdminSchedulerController {
 				}
 			}
 			System.out.println();
-			choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+			String tmps2=sc.nextLine();
+			if(tmps2.equals("-1"))
+			{
+				if(operation.equals("c"))
+				{
+					AdminSchedulerCreateUi.displaySchedulerCreatePageMain();
+				}
+				else if(operation.equals("u"))
+					AdminSchedulerUpdateUi.displayUpdateMain();
+				else if(operation.equals("add"))
+					AdminSchedulerUpdateUi.displayEditExistingTimeSlot( sch, movieId, cinpleId,  movie);
+			}
+			choice=ValidationControl.validateAndReturnIntegerValue(tmps2);
 		}while(choice<=0||choice>pair.size());
 		
 		
@@ -310,8 +336,13 @@ public class AdminShowTimeController extends AdminSchedulerController {
 						}
 					}
 					System.out.println();
-					System.out.print("Please enter show time(eg.1900 for 7pm) for slot number "+(counter+1)+".");
+					System.out.print("Please enter show time(eg.1900 for 7pm) for slot number "+(counter+1)+"(input -1 to rechoose everything).");
 					String s=sc.nextLine();
+					if(s.equals("-1"))
+					{
+						timeSlotHandler( operation, cinpleId, sch,  movieId,  movieLen,  movieType, runDate, movie);
+					}
+					
 					time=ValidationControl.validateAndReturnTime(s);
 					if(time!=-2)
 					{
@@ -349,7 +380,8 @@ public class AdminShowTimeController extends AdminSchedulerController {
 				
 			}
 	if(operation.equals("c")){
-		MovieScheduleDataControl.createSchedule(sch);}
+		MovieScheduleDataControl.createSchedule(sch);
+		}
 	
 	int repeat=0;
 	do

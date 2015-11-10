@@ -13,6 +13,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 
 import misc.ObjectContainer;
+import boundaryClasses.AdminSchedulerCreateUi;
 import boundaryClasses.AdminSchedulerUpdateUi;
 import data.Movie;
 import data.MovieSchedule;
@@ -79,7 +80,7 @@ public class AdminSchedulerController {
 		
 	
 		do{
-			System.out.println("Please select which movie to be scheduled");
+			System.out.println("Please select which movie to be scheduled(input -1 to return)");
 			for(int i=0;i<movieList.size();i++)
 			{
 				System.out.print((i+1)+":"+movieList.get(i).getMovieName()+" ");
@@ -89,9 +90,14 @@ public class AdminSchedulerController {
 				pair.add(MiscControl.idPairerWithMovieLength(i, movieList.get(i).getMovieId(), movieList.get(i).getMovieLength(),movieList.get(i).getMovieType(),movieList.get(i).getBlockbuster(),movieList.get(i)));
 			}
 			System.out.println();
-			choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
+			String s=sc.nextLine();
+			choice=ValidationControl.validateAndReturnIntegerValue(s);
 			if(choice>movieList.size()){
 				System.out.println("Invalid input, please try again.");
+			}
+			else if(s.equals("-1"))
+			{
+				AdminSchedulerCreateUi.displaySchedulerCreatePageMain();
 			}
 			
 		}while(choice<=0|| choice>(movieList.size()));
@@ -140,13 +146,22 @@ public class AdminSchedulerController {
 			if(type==1)
 				sch.setStartDate(today.getTime());
 			else if(type==2){
+				System.out.println("Preview date must not be today(input -1 to choose movie again).");
 				System.out.println("Please enter preview date(Eg.25/10/2015) of the movie:");
-				tmp=sc.nextLine();	
+				tmp=sc.nextLine();
+				if(tmp.equals("-1"))
+				{
+					createScheduleGeneric( type);
+				}
 			}
 			else if(type==3){
-				System.out.println("Coming soon date must not be today.");
+				System.out.println("Coming soon date must not be today(input -1 to choose movie again).");
 				System.out.println("Please enter comning soon date(Eg.25/10/2015) of the movie:");
 				tmp=sc.nextLine();	
+				if(tmp.equals("-1"))
+				{
+					createScheduleGeneric( type);
+				}
 			}
 			
 			startDate=ValidationControl.validateDate(tmp,type);
