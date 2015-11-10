@@ -6,16 +6,28 @@ public class Movie{
 	
 	private int movieId;
 	private String movieName;	
+	/**
+	 * 3D, to check if it is in 3D or not
+	 */
 	private int threeD;
+	/**
+	 * Age rating (PG13)
+	 */
 	private String ageRating;
+	
 	private String director;
 	private String synopsis;
 	private String cast;
 	private double overallRating;
 	private long ticketSales;
 	private int movieLength;
+	
+	/**
+	 * To check if movie is block buster or not
+	 */
 	private int blockbuster;
-	private ArrayList<Review> reviewList;
+	
+	
 	
 	public Movie(){}
 	
@@ -95,12 +107,7 @@ public class Movie{
 	public void setMovieLength(int movieLength) {
 		this.movieLength = movieLength;
 	}
-	public ArrayList<Review> getReviewList() {
-		return reviewList;
-	}
-	public void setReviewList(ArrayList<Review> reviewList) {
-		this.reviewList = reviewList;
-	}
+	
 /**
  * 
  * @return if movie is in 3D or not, 1=is/0=not

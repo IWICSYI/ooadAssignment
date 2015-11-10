@@ -1,6 +1,16 @@
 package data;
 
+import java.io.IOException;
 
+import dataController.CinemaDataControl;
+import dataController.CineplexDataControl;
+import dataController.MovieDataControl;
+
+/**
+ * Transaction object to print receipt. Contains reference to seats information, cinema, movie and cineplex via their IDs.
+ * @author Chang En Kai
+ *
+ */
 public class Transaction {
 
 	
@@ -144,8 +154,20 @@ public class Transaction {
 	}
 
 
-	public void printTranscation() {
+	public void printTranscation() throws IOException {
 		
+		Movie m=MovieDataControl.readMovieBasedOnId(movieId);
+		Cineplex c=CineplexDataControl.readCineplexBasedonCinplexId(cineplexId);
+		Cinema ch=CinemaDataControl.readCinemaByCinemaId(cinemaId);
+		System.out.println("Transcation Id:"+transcationId);
+		System.out.println("Customer Name:"+custName);
+		System.out.println("Mobile Phone:"+mobilePhone);
+		System.out.println("Email:"+email);
+		System.out.println("Movie Name:"+m.getMovieName());
+		System.out.println("Cineplex:"+c.getCineplexName());
+		System.out.println("Cinema hall:"+ch.getCinemaHallName());
+		System.out.println("Seats:"+seats);
+		System.out.println("Total Price:"+(price*numOfSeats));
 		
 		
 		

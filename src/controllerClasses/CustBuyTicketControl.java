@@ -38,8 +38,8 @@ public class CustBuyTicketControl   {
 	
 	/**
 	 * Choose the cineplex that has the most time slot when customer first select time slot of a movie to purcahse
-	 * @param movieId
-	 * @param listId
+	 * @param movieId movie id
+	 * @param listId listing id
 	 * @return
 	 * @throws ParseException
 	 * @throws IOException
@@ -93,17 +93,17 @@ public class CustBuyTicketControl   {
 	
 	/**
 	 * Method to handle purchase ticket. Will comunicate with data controllers to create new transactions. 
-	 * @param cust
-	 * @param stList
-	 * @param actualSeats
+	 * @param cust Customer information
+	 * @param sT Show time
+	 * @param actualSeats A list of actual seat user selected
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static void purchaseTicket(ObjectContainer cust, ShowTime stList, ArrayList<Seats> actualSeats) throws IOException, ParseException{
-		int movieId=stList.getMovieId();
+	public static void purchaseTicket(ObjectContainer cust, ShowTime sT, ArrayList<Seats> actualSeats) throws IOException, ParseException{
+		int movieId=sT.getMovieId();
 		
-		int cineplexId=stList.getCineplexId();
-		int cinemaId=stList.getCinemaId();
+		int cineplexId=sT.getCineplexId();
+		int cinemaId=sT.getCinemaId();
 		SeatsInformation sInfo=new SeatsInformation();
 		Movie movie=MovieDataControl.readMovieBasedOnId(movieId);
 	//	Cinema cinema=CinemaDataControl.readCinemaByCinemaId(cinemaId);
@@ -122,7 +122,7 @@ public class CustBuyTicketControl   {
 			}
 		}
 		t.setSeats(seats);
-		t.setShowtimeId(stList.getShowTimeId());
+		t.setShowtimeId(sT.getShowTimeId());
 		TransactionDataControl.createTranscation(t);
 		System.out.println("Purchase successful!");
 		System.out.println("Transcation Code:"+t.getTranscationId());
@@ -132,18 +132,18 @@ public class CustBuyTicketControl   {
 	
 	/**
 	 * Format forms to take to obtain customer's information
-	 * @param sTList
-	 * @param m
-	 * @param listingId
+	 * @param sT Show time to get show time information
+	 * @param m Movie object with movie details
+	 * @param listingId 
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static ObjectContainer customerManagement(ShowTime sTList,Movie m, int listingId) throws IOException, ParseException{
-		double price=sTList.getTicketPrice();
+	public static ObjectContainer customerManagement(ShowTime sT,Movie m, int listingId) throws IOException, ParseException{
+		double price=sT.getTicketPrice();
 		MovieSchedule sch=MovieScheduleDataControl.readScheduleListingBasedOnListingId(listingId);
 		SimpleDateFormat finalDateFormatter=new SimpleDateFormat("dd/MM/yyyy");
-		String startDate=finalDateFormatter.format(sTList.getStartDate());
+		String startDate=finalDateFormatter.format(sT.getStartDate());
 		boolean holiday=false, oldcheck=false,childcheck=false,block=false,plat=false,tD=false,weekEnd=false;
 		
 		if(sch.getBlockBuster()==1)
@@ -160,7 +160,7 @@ public class CustBuyTicketControl   {
 			tD=true;
 		}
 		
-		if(sTList.getStartDate().getDay()==6||sTList.getStartDate().getDay()==0)
+		if(sT.getStartDate().getDay()==6||sT.getStartDate().getDay()==0)
 		{
 			weekEnd=true;
 		}
@@ -233,7 +233,7 @@ public class CustBuyTicketControl   {
 		//public Transcation(String transcationId, String email, String mobilePhone,
 	//	String custName, int age, int cineplexId, int cinemaId, Movie movie) {
 	
-		Transaction cust=new Transaction(transcationId, email, mobile, name, age, sTList.getCineplexId(), sTList.getCinemaId(), m.getMovieId(),price);
+		Transaction cust=new Transaction(transcationId, email, mobile, name, age, sT.getCineplexId(), sT.getCinemaId(), m.getMovieId(),price);
 		ObjectContainer o=new ObjectContainer();
 		o.setTranscation(cust);
 		o.setHoliday(holiday);
@@ -252,7 +252,7 @@ public class CustBuyTicketControl   {
 	
 	/**
 	 * Communicate with data controllers to filter a list of time slots that are showing in a cineplex
-	 * @param listId
+	 * @param listId Listing id for filter
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
@@ -311,7 +311,83 @@ public class CustBuyTicketControl   {
 	}
 	
 	
-
+	/**
+	 * Method to deal check if seat selections are valid, if valid, confirm the purchase
+	 * @param selectedSeats
+	 * @return
+	 */
+	public static boolean confirmSeats(ArrayList<Seats> selectedSeats)
+	{
+		ArrayList<String> seatName=new ArrayList<String>();
+		int seatNum=0,seatNum2 = 2;
+		if(selectedSeats.size()==1)
+		{
+			return true;
+		
+		}
+		System.out.print("Selected Seats=");
+		for(int i=0;i<selectedSeats.size();i++)
+		{
+			System.out.print(selectedSeats.get(i).getSeatName()+" ");
+			seatName.add(selectedSeats.get(i).getSeatName());
+			
+		}
+		System.out.println();
+		boolean valid=false;
+		MiscControl ms=new MiscControl();
+		ms.setStringList(seatName);
+		ms.sort();
+		ArrayList<String> sorted=ms.getStringList();
+		int k=1;
+		
+		for(int i=0;i<sorted.size();i++)
+		{
+			//System.out.print(sorted.get(i));
+			char a=sorted.get(i).toUpperCase().charAt(0);
+			//System.out.println("a="+a);
+			if (sorted.get(i).length()==2)
+			{
+				 seatNum=Integer.parseInt(sorted.get(i).substring(1, 2));
+				//System.out.println("seatA="+seatNum);
+			}
+			else if(sorted.get(i).length()==3)
+			{
+				 seatNum=Integer.parseInt(sorted.get(i).substring(1, 3));
+				// System.out.println("seatb="+seatNum);
+				
+			}
+			for(int j=k;j<sorted.size();j++)
+			{
+				k++;
+				if (sorted.get(j).length()==2)
+				{
+					 seatNum2=Integer.parseInt(sorted.get(j).substring(1, 2));
+					// System.out.println("seatA2="+seatNum2);
+				}
+				else if(sorted.get(j).length()==3)
+				{
+					 seatNum2=Integer.parseInt(sorted.get(j).substring(1, 3));
+						//	 System.out.println("seatB2="+seatNum2);
+					
+				}
+				char b=sorted.get(j).toUpperCase().charAt(0);
+				 
+				if(a==b && seatNum2!=(seatNum+2)&& seatNum<20 && seatNum>0)
+				{
+					valid=true;
+					break;
+				}
+				else
+				{
+					System.out.println("Invalid seat combination, there might be a gap between your choosen seats!");
+					valid=false;
+					return valid;
+					
+				}
+			}
+		}
+		return valid;
+	}
 
 
 }

@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 
-
+/**
+ * Show time object that contains a reference to movie, cinema, cineplex and movie schedule via their IDs.
+ * Implemented Comparator because it needs to be sorted.
+ * @author Chang En Kai
+ *
+ */
 public class ShowTime implements Comparator<ShowTime>{
 	
 	private int listingId;

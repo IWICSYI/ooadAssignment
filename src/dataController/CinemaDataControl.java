@@ -44,7 +44,7 @@ public class CinemaDataControl extends DataControl{
 	
 	/**
 	 * Read one cinema by its unique id
-	 * @param cId
+	 * @param cId cinemaID
 	 * @return
 	 * @throws IOException
 	 */
@@ -76,7 +76,7 @@ public class CinemaDataControl extends DataControl{
 
 	/**
 	 * Read all cinema in 1 cineplex
-	 * @param cId
+	 * @param cId cinemaID
 	 * @return
 	 * @throws IOException
 	 */

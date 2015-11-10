@@ -20,7 +20,7 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTime
 	/**
 	 * Display page to record customer information
 	 * @param showTimeId
-	 * @param m
+	 * @param m Movie object
 	 * @param listingId
 	 * @throws IOException
 	 * @throws ParseException
@@ -35,8 +35,8 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTime
 	/**
 	 * Display seat selctions
 	 * @param showTimeId
-	 * @param m
-	 * @param cust
+	 * @param m Movie object
+	 * @param cust A object container that contains transaction, movie, movie show time object
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -96,9 +96,9 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTime
 	 * @param showTimeId
 	 * @param seatList
 	 * @param selectedSeats
-	 * @param cust
-	 * @param sTlist
-	 * @param m
+	 * @param cust  A object container that contains transaction, movie, movie show time object
+	 * @param sTlist A list of seats
+	 * @param m Movie 
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -145,7 +145,7 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends CustBuyTicketChooseTime
 				while(scon.searchSeat(seatList, temp)==null);
 		
 			}
-			valid=scon.confirmSeats(seatsToValidate);
+			valid=CustBuyTicketControl.confirmSeats(seatsToValidate);
 			if(valid)
 			{
 				actualSeats=seatsToValidate;

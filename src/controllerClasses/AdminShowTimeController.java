@@ -32,11 +32,11 @@ public class AdminShowTimeController extends AdminSchedulerController {
 	
 /**
  * Check for timeslot clash when admin insert new time slot for movie. This method is used during update of timeslot.
- * @param movieLen
+ * @param movieLen Movie length
  * @param cinemaId
  * @param inputTime
- * @param time2
- * @param cal
+ * @param time2 Existed time
+ * @param cal Calendar object
  * @return
  * @throws IOException
  * @throws ParseException
@@ -92,8 +92,8 @@ public class AdminShowTimeController extends AdminSchedulerController {
 	 * Check for timeslot clash when admin insert new time slot for movie. This method is used during creation of timeslot for the first time.
 	 * @param cinemaId
 	 * @param inputTime
-	 * @param cal
-	 * @param movieLen
+	 * @param cal Calendar object
+	 * @param movieLen Movie length
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
@@ -138,8 +138,8 @@ public class AdminShowTimeController extends AdminSchedulerController {
 
 	/**
 	 * Retrieve timeslot allocated on each cinema screen.
-	 * @param cinemaId
-	 * @param tmp
+	 * @param cinemaId cinemaId
+	 * @param tmp Calendar object that contain dates to check for
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
@@ -177,13 +177,13 @@ public class AdminShowTimeController extends AdminSchedulerController {
 	
 	/**
 	 * Format form to handle creation/update of timeslots.
-	 * @param operation
-	 * @param cinpleId
-	 * @param sch
+	 * @param operation Can be add, update or create, use to differentiate which operation is using this function
+	 * @param cinpleId cineplex ID
+	 * @param sch Movie schedule
 	 * @param movieId
-	 * @param movieLen
-	 * @param movieType
-	 * @param runDate
+	 * @param movieLen Movie length
+	 * @param movieType 3D or not
+	 * @param runDate date the movie run
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -412,65 +412,6 @@ public class AdminShowTimeController extends AdminSchedulerController {
 		
   }
 
-	/* data entry function, not for real time use
 	
-	public static void TimeSlotCopier(MovieSchedule sch, int cineplexId) throws IOException, ParseException
-	{
-		ArrayList<ShowTime> stList=ShowTimeDataControl.readShowTimesBasedOnListingId(sch.getListingId());
-		
-		for(int i=0;i<stList.size();i++)
-		{
-			ShowTime copier=stList.get(i);
-			ShowTime copier2=stList.get(i);
-			if(cineplexId==1)
-			{
-				copier.setCinemaId(stList.get(i).getCinemaId()+3);
-				copier.setCineplexId(stList.get(i).getCineplexId()+1);
-				ShowTimeDataControl.createTimeSlot(copier,sch);
-				copier2.setCinemaId(stList.get(i).getCinemaId()+3);
-				copier2.setCineplexId(stList.get(i).getCineplexId()+1);
-				ShowTimeDataControl.createTimeSlot(copier2,sch);
-			}
-			else if(cineplexId==2){
-				copier.setCinemaId(stList.get(i).getCinemaId()+3);
-				copier.setCineplexId(stList.get(i).getCineplexId()+1);
-				ShowTimeDataControl.createTimeSlot(copier,sch);
-				copier.setCinemaId(stList.get(i).getCinemaId()-6);
-				copier.setCineplexId(stList.get(i).getCineplexId()-2);
-				ShowTimeDataControl.createTimeSlot(copier,sch);
-			}
-			else if(cineplexId==3){
-				copier.setCinemaId(stList.get(i).getCinemaId()-3);
-				copier.setCineplexId(stList.get(i).getCineplexId()-1);
-				ShowTimeDataControl.createTimeSlot(copier,sch);
-				copier.setCinemaId(stList.get(i).getCinemaId()-3);
-				copier.setCineplexId(stList.get(i).getCineplexId()-1);
-				ShowTimeDataControl.createTimeSlot(copier,sch);
-			}
-		}
-		
-	}
-
-	int copy=0;
-		if(!operation.equals("r"))
-		{
-			do
-			{	
-				System.out.println("Do you want to copy the same timeslots to other cineplex?");
-				System.out.println("1.Yes");
-				System.out.println("2.No");
-				copy=ValidationControl.validateYesNoAndReturnIntegerValue(sc.nextLine());
-			}while(copy<=0);
-			
-			if(copy==1){
-				
-				TimeSlotCopier(sch,cineplexId);
-			}
-			else if(copy==2)
-			{
-					
-			}
-
-	*/
 	
 }

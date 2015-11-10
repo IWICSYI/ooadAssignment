@@ -60,7 +60,7 @@ public class MovieScheduleDataControl extends DataControl{
 	
 	/**
 	 * Read one movie schedule based on its listing id
-	 * @param listId
+	 * @param listId listing ID
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
@@ -100,8 +100,8 @@ public class MovieScheduleDataControl extends DataControl{
 
 	/**
 	 * Read movie schedule listing based on its status(now showing, coming soon, preview, end)
-	 * @param stat
-	 * @param plat
+	 * @param stat Movie listing status
+	 * @param plat platinum status
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
@@ -154,7 +154,7 @@ public class MovieScheduleDataControl extends DataControl{
 	
 	/**
 	 * Read movie schedule listing based on selected movie
-	 * @param movie
+	 * @param movie Movie ID
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
@@ -194,7 +194,7 @@ public class MovieScheduleDataControl extends DataControl{
 
 /**
  * Create a schedule for a movie to be shown
- * @param m
+ * @param m Movie schedule to be created
  * @throws IOException
  * @throws ParseException
  */
@@ -413,7 +413,7 @@ public class MovieScheduleDataControl extends DataControl{
 }
 /**
  * Update schedule
- * @param sch
+ * @param Movie Schedule object
  * @throws IOException
  * @throws ParseException
  */
@@ -486,7 +486,7 @@ public class MovieScheduleDataControl extends DataControl{
 
 	/**
 	 * Method to end a movie listing, can be assesed only on update movie schedule page
-	 * @param sch
+	 * @param Movie Schedule object
 	 * @throws IOException
 	 * @throws ParseException
 	 */

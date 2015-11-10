@@ -1,6 +1,12 @@
 package data;
-//showTimeId|TrueSeatStatus|A1seatName|seatId|transectionId
+/**
+ * Seat object, contain reference to transcation and seat formation by their respective IDs.
+ * @author Chang En Kai
+ *
+ */
 public class Seats {
+	
+	
 	
 	private int seatsInformationId;
 	private int cinemaId;

@@ -145,9 +145,9 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerMainUi{
 	
 	/**
 	 * display listing details that user choose from the displayUpdate main method.
-	 * @param sch
-	 * @param movie
-	 * @param cineId
+	 * @param sch Passing down selected movie schedule from displayUpdate
+	 * @param movie passing down of selected movie details from display update
+	 * @param cineId cineplexID
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -252,10 +252,10 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerMainUi{
 	
 	/**
 	 * display page to choose which specific timeslot to edit
-	 * @param movieSchedule
-	 * @param movieId
-	 * @param cineId
-	 * @param movie
+	 * @param sch Passing down selected movie schedule from displayUpdate
+	 * @param movieId Movie ID
+	 * @param movie passing down of selected movie details from display update
+	 * @param cineId cineplexID
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -325,11 +325,11 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerMainUi{
 	
 /**
  * Display timeslots detail choosen during displayEditExistingTimeSlot() method.
- * @param pair
- * @param choice
+ * @param pair A list of object that contains movie schedule, movie show time and movie details
+ * @param choice User selection
  * @param movieSchedule
  * @param movie
- * @param cineId
+ * @param cineId cineplex ID
  * @throws IOException
  * @throws ParseException
  */

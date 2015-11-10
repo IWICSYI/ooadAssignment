@@ -20,8 +20,8 @@ public class CustReviewControl {
 	 * Communicate with ReviewDataControl to retrieve and format reviews
 	 * @param movieId
 	 * @param listingId
-	 * @param type
-	 * @param plat
+	 * @param type Movie type, 3d or not
+	 * @param plat Platinum status
 	 * @throws IOException
 	 * @throws ParseException
 	 */

@@ -113,7 +113,7 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
 	}
 /**
  * Create new holiday date!
- * @param hD
+ * @param hD inputed holiday date
  * @throws IOException
  * @throws ParseException
  */
@@ -145,8 +145,8 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
 
 	/**
 	 * Update holiday date
-	 * @param hDid
-	 * @param hD
+	 * @param hDid Holiday date id
+	 * @param hD input holiday date
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -186,7 +186,7 @@ public class TicketPriceAndHolidayDataControl extends DataControl {
 
 	/**
 	 * Remove holiday date
-	 * @param id
+	 * @param id hoildayDate ID
 	 * @throws IOException
 	 * @throws ParseException
 	 */

@@ -20,7 +20,7 @@ public class Cinema{
 	 * @param cinemaId
 	 * @param cinemaHallName
 	 * @param cinemaType
-	 * @param seats
+	 * @param seats 
 	 */
 	public Cinema(int cinplexId, int cinemaId, String cinemaHallName,
 			int cinemaType, int seats) {

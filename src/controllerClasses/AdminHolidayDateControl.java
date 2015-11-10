@@ -13,7 +13,7 @@ public class AdminHolidayDateControl {
 	
 /**
  * Check if holiday dates are duplicated.
- * @param s
+ * @param s inputed date
  * @return
  * @throws IOException
  * @throws ParseException

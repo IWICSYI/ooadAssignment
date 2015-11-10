@@ -18,10 +18,10 @@ public class AdminLoginControl  {
 	private static MessageDigest md;
 	/**
 	 * Encrypt password
-	 * @param pass
+	 * @param pass inputed password
 	 * @return
 	 */
-	private static String encrypt(String pass){
+	private String encrypt(String pass){
 	    try {
 	        md = MessageDigest.getInstance("MD5");
 	        byte[] passBytes = pass.getBytes();

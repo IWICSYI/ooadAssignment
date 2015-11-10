@@ -40,7 +40,7 @@ public class CineplexDataControl extends DataControl {
 
 /**
  * Read one cineplex based on its unique id
- * @param id
+ * @param id Cineplex ID
  * @return
  * @throws IOException
  */

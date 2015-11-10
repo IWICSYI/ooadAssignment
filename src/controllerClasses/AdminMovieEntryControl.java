@@ -19,7 +19,7 @@ import dataController.TransactionDataControl;
 public class AdminMovieEntryControl {
 /**
  * Method to remove cast member from cast list
- * @param m
+ * @param m Movie details that contain cast to be removed
  * @return
  */
 	public static String removeCast(Movie m){
@@ -58,7 +58,7 @@ public class AdminMovieEntryControl {
 	
 	/**
 	 * Method to add cast members
-	 * @param m
+	 * @param m Movie details 
 	 * @return
 	 */
 	public static String addCast(Movie m){
@@ -87,7 +87,7 @@ public class AdminMovieEntryControl {
 	
 	/**
 	 * Method to update cast list
-	 * @param m
+	 * @param m Movie details
 	 * @return
 	 */
 	public static String updateCast(Movie m){
@@ -137,7 +137,7 @@ public class AdminMovieEntryControl {
 
 /**
  * Check to see if movie can remove or not, if transcation of movie exist, it will stop user from removing the movie
- * @param temp
+ * @param temp Movie details 
  * @throws IOException
  * @throws ParseException
  */

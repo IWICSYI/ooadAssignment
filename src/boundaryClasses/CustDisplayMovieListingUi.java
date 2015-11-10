@@ -17,7 +17,7 @@ public class CustDisplayMovieListingUi extends CustMain{
 	
 	/**
 	 * Display movies that are now showing
-	 * @param plat
+	 * @param plat Platinum status
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -82,7 +82,7 @@ public class CustDisplayMovieListingUi extends CustMain{
 	
 	/**
 	 * Display movies that are coming soon
-	 * @param plat
+	 * @param plat Platinum status
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -147,7 +147,7 @@ public class CustDisplayMovieListingUi extends CustMain{
 	}
 /**
  * Display movies that are on preview
- * @param plat
+ * @param plat Platinum status
  * @throws IOException
  * @throws ParseException
  */

@@ -21,13 +21,13 @@ public class CustSeatsControl  {
 	
 	/**
 	 * Manage and generate seats selection information
-	 * @param sTList
+	 * @param sT A showtime object
 	 * @param showTimeId
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static ArrayList<ObjectContainer> manageSeats(ShowTime sTList, int showTimeId) throws IOException, ParseException{
+	public static ArrayList<ObjectContainer> manageSeats(ShowTime sT, int showTimeId) throws IOException, ParseException{
 		
 		
 		ArrayList<Seats> seatList =new ArrayList<Seats>();
@@ -36,14 +36,14 @@ public class CustSeatsControl  {
 		
 		SeatsInformation sInfor=new SeatsInformation();
 		sInfor.setSeatInfoId(showTimeId);
-		sInfor.setCinemaId(sTList.getCinemaId());
-		sInfor.setMovieId(sTList.getMovieId());
-		sInfor.setCineplexId(sTList.getCineplexId());
-		sInfor.setNoOfSeats(sTList.getNoOfSeats());
-		sInfor.setPrice(sTList.getTicketPrice());
+		sInfor.setCinemaId(sT.getCinemaId());
+		sInfor.setMovieId(sT.getMovieId());
+		sInfor.setCineplexId(sT.getCineplexId());
+		sInfor.setNoOfSeats(sT.getNoOfSeats());
+		sInfor.setPrice(sT.getTicketPrice());
 		sInfor.setshowTimeId(showTimeId);
-		sInfor.setStartEndTime(sTList.getShowTimeValue());
-		sInfor.setStartDate(sTList.getStartDate());
+		sInfor.setStartEndTime(sT.getShowTimeValue());
+		sInfor.setStartDate(sT.getStartDate());
 		if(sINfoList.size()==0)
 		{
 			SeatsDataControl.createSeatInformation(sInfor);
@@ -54,7 +54,7 @@ public class CustSeatsControl  {
 		String seatName = "";
 		char fA='A';
 		int seatA=1,seatB=1;
-		int seatAmount=sTList.getNoOfSeats();
+		int seatAmount=sT.getNoOfSeats();
 		int seatId = 1;
 		
 		
@@ -85,8 +85,8 @@ public class CustSeatsControl  {
 				Seats s=new Seats();
 				s.setOccupied(false);
 				//s.setShowTimeId(sTList.getShowTimeId());
-				s.setMovieId(sTList.getMovieId());
-				s.setCinemaId(sTList.getCinemaId());
+				s.setMovieId(sT.getMovieId());
+				s.setCinemaId(sT.getCinemaId());
 				s.setSeatName(seatName);
 				s.setSeatId(seatId++);
 				s.setSeatsInformationId(showTimeId);
@@ -123,7 +123,7 @@ public class CustSeatsControl  {
 	
 	/**
 	 * Design seats to be displayed for selections
-	 * @param seatList
+	 * @param seatList a List of seats
 	 */
 	public static void designSeats(ArrayList<Seats> seatList){
 		System.out.println("-------------------------------------------SCREEN----------------------------------------------");
@@ -175,8 +175,8 @@ public class CustSeatsControl  {
 	
 	/**
 	 * Check if selected seats are occupied or not.
-	 * @param seatList
-	 * @param name
+	 * @param seatList A list of seat that user selected
+	 * @param name seat name
 	 * @return
 	 */
 	public boolean checkOccupied(ArrayList<Seats> seatList,String name)
@@ -199,83 +199,7 @@ public class CustSeatsControl  {
 		return false;
 	}
 	
-	/**
-	 * Method to deal check if seat selections are valid, if valid, confirm the purchase
-	 * @param selectedSeats
-	 * @return
-	 */
-	public boolean confirmSeats(ArrayList<Seats> selectedSeats)
-	{
-		ArrayList<String> seatName=new ArrayList<String>();
-		int seatNum=0,seatNum2 = 2;
-		if(selectedSeats.size()==1)
-		{
-			return true;
-		
-		}
-		System.out.print("Selected Seats=");
-		for(int i=0;i<selectedSeats.size();i++)
-		{
-			System.out.print(selectedSeats.get(i).getSeatName()+" ");
-			seatName.add(selectedSeats.get(i).getSeatName());
-			
-		}
-		System.out.println();
-		boolean valid=false;
-		MiscControl ms=new MiscControl();
-		ms.setStringList(seatName);
-		ms.sort();
-		ArrayList<String> sorted=ms.getStringList();
-		int k=1;
-		
-		for(int i=0;i<sorted.size();i++)
-		{
-			//System.out.print(sorted.get(i));
-			char a=sorted.get(i).toUpperCase().charAt(0);
-			//System.out.println("a="+a);
-			if (sorted.get(i).length()==2)
-			{
-				 seatNum=Integer.parseInt(sorted.get(i).substring(1, 2));
-				//System.out.println("seatA="+seatNum);
-			}
-			else if(sorted.get(i).length()==3)
-			{
-				 seatNum=Integer.parseInt(sorted.get(i).substring(1, 3));
-				// System.out.println("seatb="+seatNum);
-				
-			}
-			for(int j=k;j<sorted.size();j++)
-			{
-				k++;
-				if (sorted.get(j).length()==2)
-				{
-					 seatNum2=Integer.parseInt(sorted.get(j).substring(1, 2));
-					// System.out.println("seatA2="+seatNum2);
-				}
-				else if(sorted.get(j).length()==3)
-				{
-					 seatNum2=Integer.parseInt(sorted.get(j).substring(1, 3));
-						//	 System.out.println("seatB2="+seatNum2);
-					
-				}
-				char b=sorted.get(j).toUpperCase().charAt(0);
-				 
-				if(a==b && seatNum2!=(seatNum+2)&& seatNum<20 && seatNum>0)
-				{
-					valid=true;
-					break;
-				}
-				else
-				{
-					System.out.println("Invalid seat combination, there might be a gap between your choosen seats!");
-					valid=false;
-					return valid;
-					
-				}
-			}
-		}
-		return valid;
-	}
+	
 
 	
 		

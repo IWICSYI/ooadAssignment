@@ -22,7 +22,7 @@ public class ValidationControl extends MovieListingControl{
 
 	/**
 	 * Validate if input is integer or not
-	 * @param s
+	 * @param s input string
 	 * @return
 	 */
 	public static boolean isInteger(String s) {
@@ -39,7 +39,7 @@ public class ValidationControl extends MovieListingControl{
 	
 	/**
 	 * Validate if input is double or not
-	 * @param s
+	 * @param s input string
 	 * @return
 	 */
 	public static boolean isDouble(String s) {
@@ -75,7 +75,7 @@ public class ValidationControl extends MovieListingControl{
 	}
 	/**
 	 * Validate if input is double, if it is, return inputed double, if not, return -2
-	 * @param s
+	 * @param s input string
 	 * @return
 	 */
 	public static Double validateAndReturnDoubleValue(String s)
@@ -93,7 +93,7 @@ public class ValidationControl extends MovieListingControl{
 	
 /**
  * Valid input for yes not choice.
- * @param s
+ * @param s input string
  * @return
  */
 	public static int validateYesNoAndReturnIntegerValue(String s)
@@ -122,7 +122,7 @@ public class ValidationControl extends MovieListingControl{
 	/**
 	 * Validate if date is of format dd/MM/yyyy
 	 * @param dateString
-	 * @param type
+	 * @param type type of validation
 	 * @return
 	 */
 	public static Date validateDate(String dateString, int type) {
@@ -248,7 +248,7 @@ public class ValidationControl extends MovieListingControl{
 
 	/**
 	 * Validate if inputed time is of value HHmm
-	 * @param s
+	 * @param s inputed string
 	 * @return
 	 */
 	public static int validateAndReturnTime(String s) {

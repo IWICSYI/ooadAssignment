@@ -13,8 +13,8 @@ import dataController.MovieDataControl;
 import dataController.TransactionDataControl;
 
 /**
- * Class use to keep track of all the transcations.
- * @author Chang
+ * Class use to keep track of all the transactions.
+ * @author Chang En Kai
  *
  */
 public class CustTransactionControl {
@@ -34,18 +34,7 @@ public class CustTransactionControl {
 			if(email.equals(tList.get(i).getEmail())){
 				System.out.println("\nBooking no."+count);
 				count++;
-				Movie m=MovieDataControl.readMovieBasedOnId(tList.get(i).getMovieId());
-				Cineplex c=CineplexDataControl.readCineplexBasedonCinplexId(tList.get(i).getCineplexId());
-				Cinema ch=CinemaDataControl.readCinemaByCinemaId(tList.get(i).getCinemaId());
-				System.out.println("Transcation Id:"+tList.get(i).getTranscationId());
-				System.out.println("Customer Name:"+tList.get(i).getCustName());
-				System.out.println("Mobile Phone:"+tList.get(i).getMobilePhone());
-				System.out.println("Email:"+tList.get(i).getEmail());
-				System.out.println("Movie Name:"+m.getMovieName());
-				System.out.println("Cineplex:"+c.getCineplexName());
-				System.out.println("Cinema hall:"+ch.getCinemaHallName());
-				System.out.println("Seats:"+tList.get(i).getSeats());
-				System.out.println("Total Price:"+(tList.get(i).getPrice()*tList.get(i).getNumSeat()));
+				tList.get(i).printTranscation();
 				exist=true;
 			}
 			System.out.println();

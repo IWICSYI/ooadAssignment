@@ -1,7 +1,11 @@
 package data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * Review Object, contains reference to movie object via movieId.
+ * @author Chang En Kai
+ *
+ */
 public class Review {
 	
 	private int movieId;

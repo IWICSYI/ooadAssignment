@@ -18,9 +18,9 @@ public class CustMovieDetailUi extends CustDisplayMovieListingUi {
 	
 	/**
 	 * Display movie selection to view movie details
-	 * @param oList
-	 * @param plat
-	 * @param type
+	 * @param oList An object container that pair user's choice with movie details
+	 * @param plat platinum status
+	 * @param type listing type, can be now showing, coming soon or preview.
 	 * @throws IOException
 	 * @throws ParseException
 	 */

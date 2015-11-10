@@ -30,8 +30,8 @@ public class MovieListingControl {
 	/**
 	 * 
 	 * Filter out all the movies details in a list of movie schedule
-	 * @param schList
-	 * @param plat
+	 * @param schList Movie schedule list
+	 * @param plat platinum status
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
@@ -63,11 +63,11 @@ public class MovieListingControl {
 	 * 
 	 * Format show time of movies depending on type. It's use for selecting movie time slot to purchase and to edit specific timeslot
 	 * 
-	 * @param listingid
+	 * @param listingid 
 	 * @param cineplexid
 	 * @param movieid
 	 * @param type
-	 * @param max
+	 * @param max Max to check how many time a for loop will loop
 	 * @param movieDetails
 	 * @return
 	 * @throws IOException

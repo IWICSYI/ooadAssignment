@@ -67,7 +67,7 @@ public class AdminConfigureTicketPriceUi extends AdminConfigureUi {
 	
 	/**
 	 * Display ui to do updating of ticket price
-	 * @param choice
+	 * @param choice User's selection from previous page.
 	 * @param priceList
 	 * @throws IOException
 	 * @throws ParseException 

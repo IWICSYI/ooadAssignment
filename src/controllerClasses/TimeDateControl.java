@@ -45,8 +45,8 @@ public class TimeDateControl {
 	
 	/**
 	 * Calculate how long a movie is showing based on starting date and ending date
-	 * @param sD
-	 * @param eD
+	 * @param sD Start Date
+	 * @param eD End Date
 	 * @return
 	 */
 	public static int calculateRunDate(Date sD,Date eD)
@@ -63,8 +63,8 @@ public class TimeDateControl {
 	}
 /**
  * Calculate the time range a movie will be showing by taking in the starting date and adding the movie length.
- * @param minutes
- * @param sD
+ * @param minutes movie length
+ * @param sD Inputed start date
  * @return
  */
 	public static String minutesPlusTime(int minutes,String sD)

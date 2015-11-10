@@ -5,7 +5,7 @@ public class AdminConfigTicketPriceControl {
 	
 	/**
 	 * Check if price is logical
-	 * @param choice
+	 * @param choice user's selection
 	 * @param baseprice
 	 * @param price
 	 * @return

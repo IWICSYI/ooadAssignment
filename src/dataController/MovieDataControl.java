@@ -60,7 +60,7 @@ public class MovieDataControl extends DataControl {
 		}
 		/**
 		 * Read single movie based on movie id
-		 * @param mId
+		 * @param mId Movie id
 		 * @return
 		 * @throws IOException
 		 */
@@ -105,7 +105,7 @@ public class MovieDataControl extends DataControl {
 		
 /**
  * Create movie entry
- * @param m
+ * @param m Movie entry to be created
  * @throws IOException
  */
 		public static void createMovie(Movie m) throws IOException {
@@ -153,7 +153,7 @@ public class MovieDataControl extends DataControl {
 		}
 /**
  * Update movie by passing in edited Movie m
- * @param m
+ * @param m Movie object to be udpated
  * @throws IOException
  */
 		public static void updateMovie(Movie m) throws IOException {

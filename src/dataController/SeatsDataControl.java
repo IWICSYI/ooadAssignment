@@ -21,7 +21,7 @@ public class SeatsDataControl extends DataControl {
 	
 	/**
 	 * Create seat informations for back up in case database of show time and transacation can't match-
-	 * @param seatInfos
+	 * @param seatInfos Seat informations
 	 * @throws IOException
 	 */
 	public static void createSeatInformation(SeatsInformation seatInfos) throws IOException
@@ -67,7 +67,7 @@ public class SeatsDataControl extends DataControl {
 	
 /**
  * Specific characteristics of each indiviual seat in a cinema hall
- * @param seatList
+ * @param seatList A list of seats
  * @throws IOException
  * @throws ParseException
  */
@@ -107,8 +107,8 @@ public class SeatsDataControl extends DataControl {
 	
 	/**
 	 * Update and reflect seat selections
-	 * @param seatList
-	 * @param actualSeats
+	 * @param seatList A list of existing seats
+	 * @param actualSeats User selected seats
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -163,8 +163,8 @@ public class SeatsDataControl extends DataControl {
 
 /**
  * Reflect seat selections by creating a temp file that will display seats that customer selected without commiting to anything.
- * @param seatList
- * @param actualSeats
+ * @param seatList A list of seats
+ * @param actualSeats Seats user selected
  * @throws IOException
  * @throws ParseException
  */
@@ -216,7 +216,7 @@ public class SeatsDataControl extends DataControl {
 	
 	/**
 	 * Read seats based on seat info Id
-	 * @param seatInfoId
+	 * @param seatInfoId Seat infor ID
 	 * @return
 	 * @throws IOException
 	 */
@@ -298,12 +298,12 @@ public class SeatsDataControl extends DataControl {
 	
 	/**
 	 * Read seat information
-	 * @param j
+	 * @param seatInfoID  seat info ID
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static ArrayList<SeatsInformation> readSeatInfor(int j) throws IOException, ParseException{
+	public static ArrayList<SeatsInformation> readSeatInfor(int seatInfoID) throws IOException, ParseException{
 		ArrayList alr = new ArrayList() ;
 		ArrayList stringArray =new ArrayList();
 		try
@@ -346,7 +346,7 @@ public class SeatsDataControl extends DataControl {
 				// add to  list
 				
 				// add to  list
-				if(seatInfoId==j){
+				if(seatInfoId==seatInfoID){
 					SeatsInformation u = new SeatsInformation(date,time,seatInfoId,noOfSeats,noOfEmptySeats,movieId,cinemaId,cineplexId,showTimeId,price);
 					alr.add(u) ;
 				}

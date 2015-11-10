@@ -35,7 +35,7 @@ public class AdminSchedulerController {
  * The condition of duplicated is if the same movie has the same movie listing that are of now showing and coming soon status.	 * A movie listing is not duplicated if one of the same movie is showing on a platinum suite and one isn't. 
  * A movie listing is not duplicated if  one of the same movie had already ended its showing. 
  * This is to make sure that cinema staff can rerun new showing after it a list has ended.
- * @param sch
+ * @param sch Movie schedule to check if inputed schedule exist or not
  * @return
  * @throws IOException
  * @throws ParseException
@@ -63,7 +63,7 @@ public class AdminSchedulerController {
 	
 	/**
 	 * Format forms to create movie schedule based on types such as now showing or coming soon
-	 * @param type
+	 * @param type Movie listing type, can be now showing, coming soon and preview
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -241,11 +241,10 @@ public class AdminSchedulerController {
 	
 
 /**
- * Method to extend either the start or end date of a movie listing
- * @param sOrE
+ * Method to edit start date
  * @param movieSchedule
- * @param m
- * @param cineId
+ * @param m Movie details
+ * @param cineId cineplex id
  * @throws IOException
  * @throws ParseException
  */
@@ -286,9 +285,13 @@ public class AdminSchedulerController {
 			{
 				Calendar cal=Calendar.getInstance();
 				cal.setTime(newDate);
-				ShowTimeDataControl.removeShowTimeWhenEditStartDate(sch.getListingId(), cal);
+				boolean canRemove=ShowTimeDataControl.removeShowTimeWhenEditStartDate(sch.getListingId(), cal);
 				newsch.setStartDate(newDate);
-				MovieScheduleDataControl.updateSchedule(newsch);
+				if(canRemove){
+					MovieScheduleDataControl.updateSchedule(newsch);
+				}
+				else
+					AdminSchedulerUpdateUi.displayUpdatePageDetails(sch, m, cineId);
 			}
 			else
 			{
@@ -310,7 +313,14 @@ public class AdminSchedulerController {
 
 	
 	
-	
+	/**
+	 * Edit ending date of movie listing
+	 * @param sch Movie schedule
+	 * @param m movie details
+	 * @param cineId cineplex ID
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void editEndDate(MovieSchedule sch,Movie m, int cineId) throws IOException, ParseException {
 		MovieSchedule newsch=sch;
 		MovieSchedule tmpsch=sch;
@@ -350,9 +360,12 @@ public class AdminSchedulerController {
 			{
 				Calendar cal=Calendar.getInstance();
 				cal.setTime(newDate);
-				ShowTimeDataControl.removeShowTimeWhenEditEndDate(sch.getListingId(), cal);
+				boolean canRemove=ShowTimeDataControl.removeShowTimeWhenEditEndDate(sch.getListingId(), cal);
 				newsch.setEndDate(newDate);
-				MovieScheduleDataControl.updateSchedule(newsch);
+				if(canRemove)
+					MovieScheduleDataControl.updateSchedule(newsch);
+				else
+					AdminSchedulerUpdateUi.displayUpdatePageDetails(sch, m, cineId);
 			}
 			else
 			{
@@ -376,12 +389,12 @@ public class AdminSchedulerController {
 
 	/**
 	 * Method to handle the form of editing specific timeslot
-	 * @param pairingIdWithSlot
-	 * @param pair
-	 * @param choice
-	 * @param sch
-	 * @param m
-	 * @param cineId
+	 * @param pairingIdWithSlot a list of object that contains movie, schedule, show time and number that associate with them.
+	 * @param pair required arguement to return back to previous page
+	 * @param choice User selection
+	 * @param sch Movie schedule
+	 * @param m Movie detail
+	 * @param cineId cineplex ID
 	 * @throws IOException
 	 * @throws ParseException
 	 */

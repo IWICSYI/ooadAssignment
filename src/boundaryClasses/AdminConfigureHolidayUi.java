@@ -19,7 +19,7 @@ public class AdminConfigureHolidayUi extends AdminConfigureUi {
 	
 	/**
 	 * Display UI of Holiday Configuration page.
-	 * @throws IOException
+	 * @throws IOException 
 	 * @throws ParseException
 	 */
 	public static void displayHolidayMain() throws IOException, ParseException
@@ -159,8 +159,8 @@ public class AdminConfigureHolidayUi extends AdminConfigureUi {
 	
 	/**
 	 * Display page to input new edited date
-	 * @param oList
-	 * @param choice
+	 * @param oList A list of object that pairs user's choice with holiday date
+	 * @param choice User choice
 	 * @throws ParseException
 	 * @throws IOException
 	 */

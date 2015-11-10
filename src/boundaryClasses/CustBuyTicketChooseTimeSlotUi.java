@@ -24,9 +24,9 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 	
 	/**
 	 * Display time slot for user to buy ticket for the movie
-	 * @param lType
+	 * @param lType List Type, can be now showing, coming soon or preview
 	 * @param movieId
-	 * @param visit
+	 * @param visit number of times this method is accessed, used to manipulate which cineplex to choose to display timeslots
 	 * @param cineplexId
 	 * @param movieDetails
 	 * @param listingId
@@ -91,9 +91,9 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 
 /**
  * Method to let user choose between multiple cineplex because each cineplex has their own time slot
- * @param lType
+ * @param lType List Type, can be now showing, coming soon or preview
  * @param movieId
- * @param visit
+ * @param visit number of times this method is accessed, used to manipulate which cineplex to choose to display timeslots.
  * @param cineId
  * @param movieDetails
  * @param listingId
@@ -131,9 +131,9 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 
 /**
  * Display time slot selection. 
- * @param pair
- * @param choice2
- * @param m
+ * @param pair A list of object that contain showtime and schedule objects
+ * @param choice2 User choice
+ * @param m Movie object(required parameter to go back to previous page)
  * @param listingId
  * @throws IOException
  * @throws ParseException

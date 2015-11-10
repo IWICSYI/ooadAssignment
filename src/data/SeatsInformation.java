@@ -2,7 +2,11 @@ package data;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+ * Object to facilitate and link between seats and transaction.
+ * @author Chang En Kai
+ *
+ */
 public class SeatsInformation {
 	
 	

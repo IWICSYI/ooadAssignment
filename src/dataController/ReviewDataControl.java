@@ -57,7 +57,7 @@ public class ReviewDataControl extends DataControl {
 	
 	/**
 	 * Read the review of a specific movie
-	 * @param movieIdC
+	 * @param movieIdC Movie ID
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException
@@ -96,7 +96,7 @@ public class ReviewDataControl extends DataControl {
 	
 /**
  * Create review
- * @param m
+ * @param m Review object
  * @throws IOException
  * @throws ParseException
  */

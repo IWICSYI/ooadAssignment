@@ -1,7 +1,11 @@
 package data;
 import java.util.ArrayList;
 import java.util.Date;
-//1cineplexId|1movieUniqueId|4listingId|startDate|endDate|1typeofDay|status
+/**
+ * Movie Schedule object, has reference to movie via movie id.
+ * @author Chang En Kai
+ *
+ */
 public class MovieSchedule {
 	
 	public MovieSchedule(){}

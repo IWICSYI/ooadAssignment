@@ -4,14 +4,14 @@ public class Prices {
 	
 	/**
 	 * Constructor use to create/update price
-	 * @param normal
-	 * @param plat 
-	 * @param tD
-	 * @param blockbuster
-	 * @param oldPrice
-	 * @param childPrice
-	 * @param holi
-	 * @param weekend
+	 * @param normal Base price
+	 * @param plat  Platinum price
+	 * @param tD 3D price
+	 * @param blockbuster Blockbuster price
+	 * @param oldPrice senior citizen price
+	 * @param childPrice Children price
+	 * @param holi Holiday price
+	 * @param weekend Weekend price
 	 */
 	public Prices(double normal, double plat, double tD, double blockbuster,
 			double oldPrice, double childPrice, double holi, double weekend) {
