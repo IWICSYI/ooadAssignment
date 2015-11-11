@@ -1,6 +1,6 @@
 package sortMethodClasses;
 
-public class SortShowTime implements Comparable{
+public class SortShowTime implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {

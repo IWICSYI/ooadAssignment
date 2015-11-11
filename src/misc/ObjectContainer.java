@@ -46,8 +46,10 @@ public class ObjectContainer {
 	private ArrayList<String> stringArray;
 	private String timeValue;
 	private ArrayList<Integer> sTIdList;
-	public ObjectContainer(){}
-	
+
+	public ObjectContainer() {
+	}
+
 	public int getCineplexId() {
 		return cineplexId;
 	}
@@ -56,83 +58,89 @@ public class ObjectContainer {
 		this.cineplexId = cineplexId;
 	}
 
-	
-	//Constructor to pair id and choice with name
+	// Constructor to pair id and choice with name
 	public ObjectContainer(int i, int id, String name, int cineType, int seatNo) {
 		super();
 		this.i = i;
 		this.id = id;
 		this.name = name;
-		this.cineType=cineType;
-		this.seatNo=seatNo;
+		this.cineType = cineType;
+		this.seatNo = seatNo;
 	}
-	
+
 	public ObjectContainer(String name, ArrayList<Seats> seats) {
 		super();
-		
+
 		this.name = name;
-		this.seatList=seats;
+		this.seatList = seats;
 	}
-	
+
 	public ObjectContainer(int i, int id, String name) {
 		super();
 		this.i = i;
 		this.id = id;
 		this.name = name;
-		
+
 	}
-	
+
 	public ObjectContainer(int id, String string) {
 		super();
 		this.id = id;
 		this.setTimeValue(string);
 	}
-	
-	public ObjectContainer(int i, int id, int len, int movieType, int block, Movie movie) {
+
+	public ObjectContainer(int i, int id, int len, int movieType, int block,
+			Movie movie) {
 		super();
 		this.i = i;
 		this.id = id;
 		this.movieLen = len;
-		this.movieType=movieType;
-		this.block=block;
-		this.m=movie;
+		this.movieType = movieType;
+		this.block = block;
+		this.m = movie;
 	}
-	
-	//Constructor to pair id and choice 
+
+	// Constructor to pair id and choice
 	public ObjectContainer(int i, int id) {
 		super();
 		this.i = i;
 		this.id = id;
 	}
-	
+
 	public ObjectContainer(int i2, Movie m2) {
-		this.i=i2;
-		this.m=m2;
+		this.i = i2;
+		this.m = m2;
 	}
 
-	public ObjectContainer(int i2, int dayOfWeek,String showTimeArray,int showTimeId) {
-		this.i=i2;
-		this.dayType=dayOfWeek;
-		this.timeValue=showTimeArray;
-		this.showTimeId=showTimeId;
-				
+	public ObjectContainer(int i2, int dayOfWeek, String showTimeArray,
+			int showTimeId) {
+		this.i = i2;
+		this.dayType = dayOfWeek;
+		this.timeValue = showTimeArray;
+		this.showTimeId = showTimeId;
+
 	}
 
 	public int getI() {
 		return i;
 	}
+
 	public void setI(int i) {
 		this.i = i;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int choice) {
 		this.id = choice;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -159,23 +167,20 @@ public class ObjectContainer {
 
 	public String printNewSTList() {
 		String a = "";
-		for(int i=0;i<newST.size();i++)
-		{
-			a=a+" "+newST.get(i).toString();
+		for (int i = 0; i < newST.size(); i++) {
+			a = a + " " + newST.get(i).toString();
 		}
 		return a;
 	}
-	
+
 	public Set<Integer> getUniqueNewSTList() {
-		Set<Integer> a=new HashSet<Integer>();
-		for(int i=0;i<newST.size();i++)
-		{
+		Set<Integer> a = new HashSet<Integer>();
+		for (int i = 0; i < newST.size(); i++) {
 			a.add(newST.get(i).intValue());
 		}
 		return a;
 	}
 
-	
 	public void setNewST(ArrayList<Integer> newST) {
 		this.newST = newST;
 	}
@@ -191,14 +196,16 @@ public class ObjectContainer {
 	public ArrayList<String> getStringArray() {
 		return stringArray;
 	}
-	
+
 	public void printStringArray() {
-		for(int i=0;i< stringArray.size();i++)
-		if(id==1)
-			System.out.print("Movie Already Allocated:"+stringArray.get(i)+" ");
-		else if(id==2)
-			System.out.print("Cinema Already Allocated:"+stringArray.get(i)+" ");
-		
+		for (int i = 0; i < stringArray.size(); i++)
+			if (id == 1)
+				System.out.print("Movie Already Allocated:"
+						+ stringArray.get(i) + " ");
+			else if (id == 2)
+				System.out.print("Cinema Already Allocated:"
+						+ stringArray.get(i) + " ");
+
 	}
 
 	public void setStringArray(ArrayList<String> stringArray) {
@@ -412,7 +419,5 @@ public class ObjectContainer {
 	public void setInitialprice(double initialprice) {
 		this.initialprice = initialprice;
 	}
-
-
 
 }

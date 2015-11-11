@@ -141,10 +141,16 @@ public class MovieListingControl {
 		System.out
 				.println("------------------------------------------------------");
 		for (int i = 1; i <= max; i++) {
-
-			showTimeList = ShowTimeDataControl
-					.readShowTimesBasedOnListingIdAndCineplexId(listingid,
-							calTemp, cineplexid);
+			if(type.equals("now"))
+			{
+				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingIdAndCineplexIdAndNowShowing(listingid, calTemp,cineplexid);
+			}
+			else if(type.equals("update")||type.equals("preview"))
+			{
+				
+				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingIdAndCineplexId(listingid, calTemp,cineplexid);
+				
+			}
 
 			for (int h = 0; h < hDList.size(); h++) {
 				String d1 = sdf.format(calTemp.getTime());

@@ -102,7 +102,7 @@ public class CustBuyTicketsWithSeatsSelectionsUi extends
 		else if(choice==2)
 		{
 			CustBuyTicketChooseTimeSlotUi a=new CustBuyTicketChooseTimeSlotUi();
-			a.displayBuyTicket( lType,  m.getMovieId(),  1, cineplexId, m,  listingId,  plat);
+			a.displayBuyTicket( lType,  m.getMovieId(),  0, cineplexId, m,  listingId,  plat);
 		}
 
 	}
