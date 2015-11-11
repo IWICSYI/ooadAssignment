@@ -6,8 +6,8 @@
 6|1|Jlee|Bad|2.0|Sat Nov 07 12:24:33 SGT 2015
 7|1|Lee|Its awesome!|5.0|Sat Nov 07 12:28:23 SGT 2015
 8|2|Ek|Best movie ever. 4 hours long movie that has no boring momemnts. Highly recomended!|5.0|Sun Nov 08 06:34:26 GMT+08:00 2015
-9|4|Ek|Nice spectacle, empty plotline.|3.0|Sun Nov 08 06:44:37 GMT+08:00 2015
-10|4|JX|HYPE!|5.0|Sun Nov 08 06:44:56 GMT+08:00 2015
+9|3|Ek|Nice spectacle, empty plotline.|3.0|Sun Nov 08 06:44:37 GMT+08:00 2015
+10|3|JX|HYPE!|5.0|Sun Nov 08 06:44:56 GMT+08:00 2015
 11|1|ek|Not bad for such a generic title.|4.0|Sun Nov 08 07:03:18 GMT+08:00 2015
-12|5|ek|Interesting idea, the one who thought of something like this is a genius!!|4.0|Sun Nov 08 08:18:18 GMT+08:00 2015
-13|5|ll|good|2.0|Tue Nov 10 07:46:19 GMT+08:00 2015
+14|7|Bruce fan|I am fan of bruce lee, film is awesome|5.0|Wed Nov 11 22:47:48 GMT+08:00 2015
+15|7|Bruce is legend|Bruce lee is a legend, man.|5.0|Wed Nov 11 22:48:24 GMT+08:00 2015

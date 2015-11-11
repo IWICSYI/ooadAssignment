@@ -26,7 +26,7 @@ public class ModuleSelectionUi {
 			String s = sc.nextLine();
 			choice = ValidationControl.validateYesNoAndReturnIntegerValue(s);
 			if (choice < 1 || choice > 2) {
-				System.out.println("Invalid input, please try again" + choice);
+				System.out.println("Invalid input, please try again" );
 				choice = 200;
 			} else if (choice == 1) {
 

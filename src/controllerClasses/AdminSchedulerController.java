@@ -47,10 +47,8 @@ public class AdminSchedulerController {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public boolean checkDuplicatedSchedule(MovieSchedule sch)
-			throws IOException, ParseException {
-		ArrayList<MovieSchedule> schList = MovieScheduleDataControl
-				.readScheduleListing();
+	public boolean checkDuplicatedSchedule(MovieSchedule sch)throws IOException, ParseException {
+		ArrayList<MovieSchedule> schList = MovieScheduleDataControl.readScheduleListing();
 		int movie = 0, plat = 0, preview;
 		Date startDate = new Date();
 		Date endDate = new Date();
@@ -60,9 +58,7 @@ public class AdminSchedulerController {
 			movie = schList.get(i).getMovieId();
 			plat = schList.get(i).getPlatOrNot();
 			preview = schList.get(i).getPreviewStatus();
-			if (movie == sch.getMovieId() && plat == sch.getPlatOrNot()
-					&& preview == schList.get(i).getPreviewStatus()
-					&& schList.get(i).getStatus() != 4) {
+			if (movie == sch.getMovieId() && plat == sch.getPlatOrNot()&& preview == schList.get(i).getPreviewStatus()&& schList.get(i).getStatus() != 4) {
 				return true;
 			}
 		}
@@ -363,22 +359,23 @@ public class AdminSchedulerController {
 		if (newDate.before(edDate)) {
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(newDate);
-			boolean canRemove = ShowTimeDataControl
-					.removeShowTimeWhenEditEndDate(sch.getListingId(), cal);
+			boolean canRemove = ShowTimeDataControl.removeShowTimeWhenEditEndDate(sch.getListingId(), cal);
 			newsch.setEndDate(newDate);
 			if (canRemove)
 				MovieScheduleDataControl.updateSchedule(newsch);
 			else
 				AdminSchedulerUpdateUi.displayUpdatePageDetails(sch, m, cineId);
-		} else {
+		} 
+		else {
 
 			newsch.setEndDate(newDate);
 			MovieScheduleDataControl.updateSchedule(newsch);
 			DateTime dt1 = new DateTime(newDate);
 			DateTime dt2 = new DateTime(edDate);
+			DateTime dt3 = new DateTime(edDate);
 			dt2.plusMinutes(30);
 			int extend = Days.daysBetween(dt2, dt1).getDays();
-			tmpsch.setStartDate(newDate);
+			tmpsch.setStartDate(dt3.plusDays(1).toDate());
 			AdminShowTimeController.timeSlotHandler("u", 0, tmpsch,
 					m.getMovieId(), m.getMovieLength(), m.getMovieType(),
 					extend, m);

@@ -179,7 +179,7 @@ public class ValidationControl extends MovieListingControl {
 				date.setHours(23);
 				date.setMinutes(59);
 
-				if (type == 0) {
+				if (type == 1||type==0) {
 					valid = true;
 					break;
 				}

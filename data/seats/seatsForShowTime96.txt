@@ -1,12 +1,12 @@
-1|5|4|96|A1|false
+1|5|4|96|A1|true
 2|5|4|96|A2|false
 3|5|4|96|A3|false
 4|5|4|96|A4|false
-5|5|4|96|A5|false
+5|5|4|96|A5|true
 6|5|4|96|A6|false
 7|5|4|96|A7|false
 8|5|4|96|A8|false
-9|5|4|96|A9|false
+9|5|4|96|A9|true
 10|5|4|96|A10|false
 11|5|4|96|A11|false
 12|5|4|96|A12|false

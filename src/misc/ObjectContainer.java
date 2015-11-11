@@ -420,4 +420,24 @@ public class ObjectContainer {
 		this.initialprice = initialprice;
 	}
 
+	@Override
+	public String toString() {
+		return "ObjectContainer [old=" + old + ", child=" + child
+				+ ", holiday=" + holiday + ", plat=" + plat + ", blockBuster="
+				+ blockBuster + ", tD=" + tD + ", weekEnd=" + weekEnd + ", i="
+				+ i + ", id=" + id + ", cineplexId=" + cineplexId
+				+ ", cinemaId=" + cinemaId + ", cineType=" + cineType
+				+ ", movieId=" + movieId + ", movieLen=" + movieLen
+				+ ", movieType=" + movieType + ", block=" + block
+				+ ", dayType=" + dayType + ", seatNo=" + seatNo
+				+ ", showTimeId=" + showTimeId + ", listingId=" + listingId
+				+ ", date=" + date + ", price=" + price + ", initialprice="
+				+ initialprice + ", m=" + m + ", sT=" + sT + ", seat=" + seat
+				+ ", movieListing=" + movieListing + ", transcation="
+				+ transcation + ", name=" + name + ", showTimeList="
+				+ showTimeList + ", seatList=" + seatList + ", newST=" + newST
+				+ ", stringArray=" + stringArray + ", timeValue=" + timeValue
+				+ ", sTIdList=" + sTIdList + "]";
+	}
+
 }

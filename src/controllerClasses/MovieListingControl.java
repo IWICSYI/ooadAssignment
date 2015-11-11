@@ -143,6 +143,7 @@ public class MovieListingControl {
 		for (int i = 1; i <= max; i++) {
 			if(type.equals("now"))
 			{
+				
 				showTimeList=ShowTimeDataControl.readShowTimesBasedOnListingIdAndCineplexIdAndNowShowing(listingid, calTemp,cineplexid);
 			}
 			else if(type.equals("update")||type.equals("preview"))
@@ -178,17 +179,19 @@ public class MovieListingControl {
 				ObjectContainer o = new ObjectContainer();
 				ArrayList<ShowTime> showTimeListTemp = new ArrayList<ShowTime>();
 				for (int p = 0; p < showTimeList.size(); p++) {
-
+					
 					showTimeArray.add(showTimeList.get(p).getShowTimeValue());
 					ShowTime s = showTimeList.get(p);
 					showTimeListTemp.add(s);
 				}
-				o.setShowTimeList(showTimeListTemp);
-				o.setI(i);
-				o.setCineplexId(cineplexid);
-				o.setDate(sdf.format(calTemp.getTime()));
-				pair.add(o);
-
+				if(!showTimeArray.isEmpty()){
+					o.setShowTimeList(showTimeListTemp);
+					o.setI(i);
+					o.setCineplexId(cineplexid);
+				
+					o.setDate(sdf.format(calTemp.getTime()));
+					pair.add(o);
+				}
 				// showTimeListTemp.clear();
 			}
 
@@ -217,8 +220,7 @@ public class MovieListingControl {
 
 			}
 		}
-		System.out
-				.println("------------------------------------------------------");
+		System.out.println("------------------------------------------------------");
 		return pair;
 
 	}

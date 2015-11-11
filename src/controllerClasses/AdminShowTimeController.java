@@ -320,15 +320,16 @@ public class AdminShowTimeController extends AdminSchedulerController {
 				// SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
 
 				do {
-					System.out
-							.print("Please enter no of slots for show times:");
+					System.out.print("Please enter no of slots for show times:");
 					String s = sc.nextLine();
 					valid = ValidationControl.isInteger(s);
 					num = ValidationControl.validateAndReturnIntegerValue(s);
 					if (num > 4) {
 						System.out.println("Too many time slot.");
 					}
-				} while (num > 4);
+					
+						
+				} while (num > 4||num<=0);
 
 			} while (!valid);
 
@@ -344,14 +345,12 @@ public class AdminShowTimeController extends AdminSchedulerController {
 					for (int l = 0; l < allocatedShowTime.size(); l++) {
 						System.out.print(allocatedShowTime.get(l) + "	");
 						if (allocatedShowTime.isEmpty()) {
-							System.out
-									.println("No timeslot for this cinema hall!");
+							System.out.println("No timeslot for this cinema hall!");
 
 						}
 					}
 					System.out.println();
-					System.out
-							.print("Please enter show time(eg.1900 for 7pm) for slot number "
+					System.out.print("Please enter show time(eg.1900 for 7pm) for slot number "
 									+ (counter + 1)
 									+ "(input -1 to rechoose everything).");
 					String s = sc.nextLine();
@@ -399,8 +398,7 @@ public class AdminShowTimeController extends AdminSchedulerController {
 
 		int repeat = 0;
 		do {
-			System.out
-					.println("Time slot and listing created. Do you want to create more time slot for different cineplex?");
+			System.out.println("Time slot and listing created. Do you want to create more time slot for different cineplex?");
 			System.out.println("1.Yes");
 			System.out.println("2.No");
 			repeat = ValidationControl.validateYesNoAndReturnIntegerValue(sc
@@ -413,7 +411,8 @@ public class AdminShowTimeController extends AdminSchedulerController {
 		} else if (repeat == 2) {
 			if (operation.equals("c")) {
 				AdminSchedulerMainUi.displaySchedulerMain();
-			} else if (operation.equals("u"))
+			} 
+			else if (operation.equals("u"))
 				AdminSchedulerUpdateUi.displayUpdateMain();
 			else if (operation.equals("add"))
 				AdminSchedulerUpdateUi.displayEditExistingTimeSlot(sch,

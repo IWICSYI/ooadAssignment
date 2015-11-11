@@ -167,10 +167,8 @@ public class CustDisplayMovieListingUi extends CustMain {
 	public static void displayPreview(int plat) throws IOException,ParseException {
 		MovieScheduleDataControl.updateScheduleStatus();
 		int type = 1;
-		ArrayList<MovieSchedule> schList = MovieScheduleDataControl
-				.readScheduleListingBasedOnStatus(2, plat);
-		ArrayList<Movie> movieList = MovieListingControl
-				.filterUniqueMovieListFromSchedule(schList, plat);
+		ArrayList<MovieSchedule> schList = MovieScheduleDataControl.readScheduleListingBasedOnStatus(2, plat);
+		ArrayList<Movie> movieList = MovieListingControl.filterUniqueMovieListFromSchedule(schList, plat);
 		ArrayList<ObjectContainer> oList = new ArrayList<ObjectContainer>();
 
 		Scanner sc = new Scanner(System.in);

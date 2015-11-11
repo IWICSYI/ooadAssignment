@@ -1,6 +1,8 @@
 package controllerClasses;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,8 +42,9 @@ public class SortTop5 implements Comparable<Movie> {
 						p2.getOverallRating());
 			}
 		});
-
+		int rank=1;
 		Collections.reverse(movie);
+		NumberFormat formatter = new DecimalFormat("#0.00");
 		System.out
 				.println("-----------------------------------------------------------------");
 		System.out
@@ -51,11 +54,13 @@ public class SortTop5 implements Comparable<Movie> {
 		for (i = 0; i <= movie.size(); i++) {
 			if (movie.get(i).getOverallRating() <= 0) {
 
-			} else
-				System.out.print("Movie Title:" + movie.get(i).getMovieName()
+			} 
+			else{
+				System.out.print(rank+".Movie Title:" + movie.get(i).getMovieName()
 						+ " Movie Average Score:"
-						+ movie.get(i).getOverallRating() + "\n");
-
+						+ formatter.format(movie.get(i).getOverallRating()) + "\n");
+				rank++;
+			}
 			if (i == 5)
 				break;
 		}
@@ -87,7 +92,7 @@ public class SortTop5 implements Comparable<Movie> {
 						p2.getOverallRating());
 			}
 		});
-
+		int rank=1;
 		Collections.reverse(movie);
 		System.out
 				.println("---------------------------------------------------");
@@ -95,17 +100,17 @@ public class SortTop5 implements Comparable<Movie> {
 				.println("|These are the top rated movies that are showing!!!|");
 		System.out
 				.println("----------------------------------------------------");
+		NumberFormat formatter = new DecimalFormat("#0.00");
 		for (i = 0; i <= movie.size(); i++) {
 			if (movie.get(i).getOverallRating() <= 0) {
 
 			} else {
 				for (int j = 0; j < schList.size(); j++) {
-					if (schList.get(j).getMovieId() == movie.get(i)
-							.getMovieId() && schList.get(i).getStatus() == 1) {
-						System.out.print((i + 1) + ".Movie Title:"
-								+ movie.get(i).getMovieName()
-								+ " Movie Average Score:"
-								+ movie.get(i).getOverallRating() + "\n");
+					if (schList.get(j).getMovieId() == movie.get(i).getMovieId() && schList.get(i).getStatus() == 1)
+					{
+						System.out.print(rank + ".Movie Title:"	+ movie.get(i).getMovieName()
+								+ " Movie Average Score:"+ formatter.format(movie.get(i).getOverallRating()) + "\n");
+						rank++;
 						break;
 					}
 				}
@@ -137,7 +142,7 @@ public class SortTop5 implements Comparable<Movie> {
 				return Double.compare(p1.getTicketSales(), p2.getTicketSales());
 			}
 		});
-
+		int rank=1;
 		Collections.reverse(movie);
 		System.out
 				.println("-----------------------------------------------------------------");
@@ -150,10 +155,13 @@ public class SortTop5 implements Comparable<Movie> {
 		for (i = 0; i <= movie.size(); i++) {
 			if (movie.get(i).getTicketSales() <= 0) {
 
-			} else
-				System.out.print("Movie Title:" + movie.get(i).getMovieName()
+			} 
+			else{
+				System.out.print(rank+"Movie Title:" + movie.get(i).getMovieName()
 						+ " Movie Sales:" + movie.get(i).getTicketSales()
 						+ "\n");
+				rank++;
+			}
 			if (i == 5)
 				break;
 		}
@@ -186,6 +194,7 @@ public class SortTop5 implements Comparable<Movie> {
 		});
 
 		Collections.reverse(movie);
+	
 		System.out
 				.println("------------------------------------------------------");
 
@@ -194,13 +203,17 @@ public class SortTop5 implements Comparable<Movie> {
 		System.out
 				.println("------------------------------------------------------");
 
+		int rank=1;
 		for (i = 0; i <= movie.size(); i++) {
 			if (movie.get(i).getTicketSales() <= 0) {
 
-			} else {
+			} 
+			else {
 				for (int j = 0; j < schList.size(); j++) {
-					if (schList.get(j).getMovieId() == movie.get(i).getMovieId() && schList.get(j).getStatus() == 1) {
-						System.out.print((i + 1) + ".Movie Title:"+ movie.get(i).getMovieName() + "\n");
+					if (schList.get(j).getMovieId() == movie.get(i).getMovieId() && schList.get(j).getStatus() == 1)
+					{
+						System.out.print(rank + ".Movie Title:"+ movie.get(i).getMovieName() + "\n");
+						rank++;
 						break;
 					}
 				}

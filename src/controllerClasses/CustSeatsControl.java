@@ -62,6 +62,9 @@ public class CustSeatsControl {
 
 		// create new seats!
 		if (seatList.isEmpty()) {
+			System.out
+			.println("-------------------------------------------SCREEN----------------------------------------------");
+	
 			for (int i = 0; i < seatAmount; i++) {
 				seatName = fA + "" + seatA;
 
@@ -73,7 +76,7 @@ public class CustSeatsControl {
 				System.out.print("[" + seatName + "]");
 				if ((i + 1) % 10 == 0 && i != 0) {
 
-					System.out.print(" ");
+					System.out.print("|     |");
 				}
 				if ((i + 1) % 20 == 0 && i != 0) {
 					fA = (char) ('A' + seatB);
