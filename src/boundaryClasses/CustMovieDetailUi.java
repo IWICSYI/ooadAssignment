@@ -147,6 +147,7 @@ public class CustMovieDetailUi extends CustDisplayMovieListingUi {
 				review.setReview(reviewWords);
 
 				ReviewDataControl.createReview(review);
+				System.out.println("Review sucessfully recorded");
 				ReviewDataControl.updateMovieReviewAverageScore(movieId);
 				displayMovieDetails(movieId, listingId, type, plat);
 			}

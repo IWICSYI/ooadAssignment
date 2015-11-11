@@ -185,6 +185,7 @@ public class AdminMovieEntryUi extends AdminMainUi {
 		}
 
 		MovieDataControl.createMovie(movie);
+		System.out.println("Movie created!");
 		displayMovieMain();
 
 	}
