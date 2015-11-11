@@ -1,8 +1,7 @@
 package data;
 
+public class Cinema {
 
-public class Cinema{
-	
 	/**
 	 * 
 	 * 
@@ -12,15 +11,15 @@ public class Cinema{
 	private String cinemaHallName;
 	private int cinemaType;
 	private int seats;
-	
-	
+
 	/**
 	 * Constructor for cinema, use by data controller to read cinema details.
+	 * 
 	 * @param cinplexId
 	 * @param cinemaId
 	 * @param cinemaHallName
 	 * @param cinemaType
-	 * @param seats 
+	 * @param seats
 	 */
 	public Cinema(int cinplexId, int cinemaId, String cinemaHallName,
 			int cinemaType, int seats) {
@@ -30,7 +29,7 @@ public class Cinema{
 		this.cinemaHallName = cinemaHallName;
 		this.cinemaType = cinemaType;
 		this.seats = seats;
-		
+
 	}
 
 	/**
@@ -40,10 +39,10 @@ public class Cinema{
 		// TODO Auto-generated constructor stub
 	}
 
-/**
- * 
- * @return cineplexId
- */
+	/**
+	 * 
+	 * @return cineplexId
+	 */
 	public int getCinplexId() {
 		return cinplexId;
 	}
@@ -55,10 +54,11 @@ public class Cinema{
 	public void setCinplexId(int cinplexId) {
 		this.cinplexId = cinplexId;
 	}
-/**
- * 
- * @return cinemaId
- */
+
+	/**
+	 * 
+	 * @return cinemaId
+	 */
 	public int getCinemaId() {
 		return cinemaId;
 	}
@@ -70,10 +70,11 @@ public class Cinema{
 	public void setCinemaId(int cinemaId) {
 		this.cinemaId = cinemaId;
 	}
-/**
- * 
- * @return cinemaHallName
- */
+
+	/**
+	 * 
+	 * @return cinemaHallName
+	 */
 	public String getCinemaHallName() {
 		return cinemaHallName;
 	}
@@ -97,7 +98,5 @@ public class Cinema{
 	public void setSeats(int seats) {
 		this.seats = seats;
 	}
-
-	
 
 }

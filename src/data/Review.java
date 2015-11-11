@@ -1,24 +1,29 @@
 package data;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /**
  * Review Object, contains reference to movie object via movieId.
+ * 
  * @author Chang En Kai
  *
  */
 public class Review {
-	
+
 	private int movieId;
 	private int reviewId;
 	private String reviewerName;
-	private String review;	
+	private String review;
 	private double score;
 	private Date reviewDate;
-	
-	public Review(){}
-	
-	public Review(int reviewId, int movieId, String reviewerName, String review, double score, Date reviewDate) {
-		//super();
+
+	public Review() {
+	}
+
+	public Review(int reviewId, int movieId, String reviewerName,
+			String review, double score, Date reviewDate) {
+		// super();
 		this.movieId = movieId;
 		this.reviewId = reviewId;
 		this.reviewerName = reviewerName;
@@ -26,15 +31,19 @@ public class Review {
 		this.score = score;
 		this.reviewDate = reviewDate;
 	}
-	//Get details
+
+	// Get details
 	public void getString() {
-//		String scoreStar = "*";
-//		for(int i=0; i<=score;i++)
-//			scoreStar+=scoreStar;
-		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		System.out.println("\nReview ID:"+reviewId+" \nScore:"+score+"\n By:"+reviewerName+"\nDate:"+sdf.format(reviewDate)+"\nReview:\n"+review);
-		
+		// String scoreStar = "*";
+		// for(int i=0; i<=score;i++)
+		// scoreStar+=scoreStar;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		System.out.println("\nReview ID:" + reviewId + " \nScore:" + score
+				+ "\n By:" + reviewerName + "\nDate:" + sdf.format(reviewDate)
+				+ "\nReview:\n" + review);
+
 	}
+
 	public int getReviewId() {
 		return reviewId;
 	}
@@ -50,8 +59,6 @@ public class Review {
 	public void setReview(String review) {
 		this.review = review;
 	}
-
-
 
 	public double getScore() {
 		return score;

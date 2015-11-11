@@ -1,4 +1,5 @@
 package controllerClasses;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,44 +11,40 @@ import dataController.TicketPriceAndHolidayDataControl;
 
 public class AdminHolidayDateControl {
 
-	
-/**
- * Check if holiday dates are duplicated.
- * @param s inputed date
- * @return
- * @throws IOException
- * @throws ParseException
- */
-	public static boolean checkDuplicatedHoliday(Date s) throws IOException, ParseException {
-		if(s==null){
+	/**
+	 * Check if holiday dates are duplicated.
+	 * 
+	 * @param s
+	 *            inputed date
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public static boolean checkDuplicatedHoliday(Date s) throws IOException,
+			ParseException {
+		if (s == null) {
 			return false;
 		}
-		
-		String existDate="";
-		String inputDate=new SimpleDateFormat("dd/MM/yyyy").format(s);
-				//
-		boolean valid=false;
-		ArrayList<HolidayDate> holidayList=TicketPriceAndHolidayDataControl.readHoliday();
-		for(int i=0;i<holidayList.size();i++)
-		{
-			existDate=new SimpleDateFormat("dd/MM/yyyy").format(holidayList.get(i).getHolidayDate());
-			if(existDate.equals(inputDate))
-			{
+
+		String existDate = "";
+		String inputDate = new SimpleDateFormat("dd/MM/yyyy").format(s);
+		//
+		boolean valid = false;
+		ArrayList<HolidayDate> holidayList = TicketPriceAndHolidayDataControl
+				.readHoliday();
+		for (int i = 0; i < holidayList.size(); i++) {
+			existDate = new SimpleDateFormat("dd/MM/yyyy").format(holidayList
+					.get(i).getHolidayDate());
+			if (existDate.equals(inputDate)) {
 				System.out.println("Duplicated date found in the system!");
-				valid=false;
+				valid = false;
 				break;
-			}
-			else{
-				valid=true;
+			} else {
+				valid = true;
 			}
 		}
-		
+
 		return valid;
 	}
 
-
-	
-
-
-	
 }

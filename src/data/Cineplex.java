@@ -2,8 +2,8 @@ package data;
 
 import java.util.ArrayList;
 
-public class Cineplex  {
-	
+public class Cineplex {
+
 	public Cineplex(int cinplexId, String cineplexName) {
 		super();
 		this.cinplexId = cinplexId;
@@ -15,7 +15,7 @@ public class Cineplex  {
 	private ArrayList<Cinema> cinemaList;
 
 	public Cineplex() {
-		
+
 	}
 
 	public int getCinplexId() {
@@ -41,8 +41,5 @@ public class Cineplex  {
 	public void setCinemaList(ArrayList<Cinema> cinemaList) {
 		this.cinemaList = cinemaList;
 	}
-	
-	
-	
 
 }

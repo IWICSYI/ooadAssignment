@@ -5,13 +5,15 @@ import java.util.Comparator;
 import java.util.Date;
 
 /**
- * Show time object that contains a reference to movie, cinema, cineplex and movie schedule via their IDs.
- * Implemented Comparator because it needs to be sorted.
+ * Show time object that contains a reference to movie, cinema, cineplex and
+ * movie schedule via their IDs. Implemented Comparator because it needs to be
+ * sorted.
+ * 
  * @author Chang En Kai
  *
  */
-public class ShowTime implements Comparator<ShowTime>{
-	
+public class ShowTime implements Comparator<ShowTime> {
+
 	private int listingId;
 	private int cinemaId;
 	private int movieId;
@@ -24,11 +26,12 @@ public class ShowTime implements Comparator<ShowTime>{
 	private double ticketPrice;
 	private int previewStatus;
 	private int cineplexId;
-	
+
 	private ArrayList<Seats> listOfSeats;
-	
+
 	/**
 	 * Constructor for creation/update of showTime
+	 * 
 	 * @param listingId
 	 * @param movieId
 	 * @param cinemaId
@@ -42,23 +45,24 @@ public class ShowTime implements Comparator<ShowTime>{
 	 * @param prev
 	 * @param cineId
 	 */
-	public ShowTime(int listingId, int movieId, int cinemaId, int showTimeId, int dayType,
-			String showTime,int seats,Date startDate,Date endDate,double ticketPrice,int prev, int cineId){
+	public ShowTime(int listingId, int movieId, int cinemaId, int showTimeId,
+			int dayType, String showTime, int seats, Date startDate,
+			Date endDate, double ticketPrice, int prev, int cineId) {
 		super();
 		this.listingId = listingId;
 		this.cinemaId = cinemaId;
 		this.movieId = movieId;
 		this.showTimeId = showTimeId;
-		this.dayType=dayType;
-		noOfSeats=seats;
-		showTimeValue=showTime;
-		this.startDate=startDate;
-		this.endDate=endDate;
-		this.ticketPrice=ticketPrice;
-		this.previewStatus=prev;
-		this.cineplexId=cineId;
+		this.dayType = dayType;
+		noOfSeats = seats;
+		showTimeValue = showTime;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.ticketPrice = ticketPrice;
+		this.previewStatus = prev;
+		this.cineplexId = cineId;
 	}
-	
+
 	public ShowTime() {
 		// TODO Auto-generated constructor stub
 	}
@@ -66,43 +70,55 @@ public class ShowTime implements Comparator<ShowTime>{
 	public int getListingId() {
 		return listingId;
 	}
+
 	public void setListingId(int listingId) {
 		this.listingId = listingId;
 	}
+
 	public int getCinemaId() {
 		return cinemaId;
 	}
+
 	public void setCinemaId(int cinemaId) {
 		this.cinemaId = cinemaId;
 	}
+
 	public int getShowTimeId() {
 		return showTimeId;
 	}
+
 	public void setShowTimeId(int showTimeId) {
 		this.showTimeId = showTimeId;
 	}
-	
+
 	public ArrayList<Seats> getListOfSeats() {
 		return listOfSeats;
 	}
+
 	public void setListOfSeats(ArrayList<Seats> listOfSeats) {
 		this.listOfSeats = listOfSeats;
 	}
+
 	public int getMovieId() {
 		return movieId;
 	}
+
 	public void setMovieId(int movieId) {
 		this.movieId = movieId;
 	}
+
 	public int getNoOfSeats() {
 		return noOfSeats;
 	}
+
 	public void setNoOfSeats(int noOfSeats) {
 		this.noOfSeats = noOfSeats;
 	}
+
 	public int getDayType() {
 		return dayType;
 	}
+
 	public void setDayType(int dayType) {
 		this.dayType = dayType;
 	}
@@ -147,9 +163,6 @@ public class ShowTime implements Comparator<ShowTime>{
 		this.previewStatus = previewStatus;
 	}
 
-
-	
-
 	@Override
 	public int compare(ShowTime o1, ShowTime o2) {
 		return o1.getShowTimeValue().compareTo(o2.getShowTimeValue());
@@ -162,7 +175,5 @@ public class ShowTime implements Comparator<ShowTime>{
 	public void setCineplexId(int cineplexId) {
 		this.cineplexId = cineplexId;
 	}
-	
-	
-	
+
 }

@@ -30,10 +30,11 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 	 * @param cineplexId
 	 * @param movieDetails
 	 * @param listingId
+	 * @param plat 
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public void displayBuyTicket(String lType,int movieId,int visit,int cineplexId, Movie movieDetails, int listingId) throws IOException, ParseException
+	public void displayBuyTicket(String lType,int movieId,int visit,int cineplexId, Movie movieDetails, int listingId, int plat) throws IOException, ParseException
 	{
 
 		Scanner sc =new Scanner(System.in);
@@ -79,14 +80,14 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 
 
 		if(choice==c){
-			displayBasedOnCineplex(lType,movieId,hitCount,cineId,movieDetails,listingId);
+			displayBasedOnCineplex(lType,movieId,hitCount,cineId,movieDetails,listingId, plat);
 		}
 		else if(choice==(c+1))
 		{
 			CustDisplayMovieListingUi.displayCustMain();
 		}
 		//System.out.println(listingId);
-		displayTicketForDay(pair,choice,movieDetails,listingId);
+		displayTicketForDay(pair,choice,movieDetails,listingId, lType, plat, cineplexId);
 	}
 
 /**
@@ -100,7 +101,7 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
  * @throws IOException
  * @throws ParseException
  */
-	public void displayBasedOnCineplex(String lType,int movieId,int visit,int cineId, Movie movieDetails,int listingId) throws IOException, ParseException
+	public void displayBasedOnCineplex(String lType,int movieId,int visit,int cineId, Movie movieDetails,int listingId,int plat) throws IOException, ParseException
 	{
 		Calendar cal= Calendar.getInstance();
 		ArrayList<ObjectContainer> pair= new ArrayList<ObjectContainer>();
@@ -117,13 +118,13 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 
 		if(cineList.size()<=1){
 			System.out.println("Sorry, no other cineplex show this movie!");
-			displayBuyTicket(lType, movieId,visit,cineId,movieDetails, listingId);
+			displayBuyTicket(lType, movieId,visit,cineId,movieDetails, listingId, plat);
 		}
 		else
 		{
 			cinplexId=CustBuyTicketControl.filterNowShowingListingByCineplexId(listingId);
 			visit++;
-			displayBuyTicket(lType,movieId,visit,cinplexId,movieDetails,listingId);
+			displayBuyTicket(lType,movieId,visit,cinplexId,movieDetails,listingId, plat);
 		}
 	}
 
@@ -138,7 +139,7 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
  * @throws IOException
  * @throws ParseException
  */
-	public void displayTicketForDay(ArrayList<ObjectContainer> pair, int choice2,Movie m,int listingId) throws IOException, ParseException
+	public void displayTicketForDay(ArrayList<ObjectContainer> pair, int choice2,Movie m,int listingId,String lType,int plat,int cineplexId) throws IOException, ParseException
 	{
 
 		ArrayList<ObjectContainer> pairingIdWithSlot=new ArrayList<ObjectContainer>();
@@ -173,7 +174,8 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 		Scanner sc=new Scanner(System.in);
 		int choice=ValidationControl.validateAndReturnIntegerValue(sc.nextLine());
 		int showTimeId=pairingIdWithSlot.get(choice-1).getShowTimeId();
-		CustBuyTicketsWithSeatsSelectionsUi.displayCustomerInfo(showTimeId,m,listingId);
+		CustBuyTicketsWithSeatsSelectionsUi.displayCustomerInfo( showTimeId,  m,
+				 listingId, lType,  plat, cineplexId);
 		//
 
 	}

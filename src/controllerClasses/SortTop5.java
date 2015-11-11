@@ -14,180 +14,205 @@ import dataController.MovieScheduleDataControl;
 
 /**
  * Class that deals with ranking of the movies based on different criteria
+ * 
  * @author Chang En Kai
  *
  */
-  public class SortTop5 implements Comparable<Movie>{
-	//Sort movies by top 5 score in descending order in array and print
-	
-	  
-	  
-	  
-	  /**
-	   * Rank movies based on top score for admin, does not care if movie has ended already. 
-	   * @throws IOException
-	   */
-	  public static void sortTopScoreForAdmin() throws IOException{
-		List<Movie> movie = new ArrayList<Movie>();
-		int i=0;
-		// Fill it.
-		movie=MovieDataControl.readMovie();
-	
-		Collections.sort(movie, new Comparator<Movie>() {
-			@Override public int compare(Movie p1, Movie p2) {
-		    	return Double.compare(p1.getOverallRating(),p2.getOverallRating());
-		    }
-		 });
-		
-		Collections.reverse(movie);
-		System.out.println("-----------------------------------------------------------------");
-		System.out.println("|These are the top rated movies throughout the entire history:   |");
-		System.out.println("-----------------------------------------------------------------");
-		for(i=0;i<=movie.size();i++){
-			if(movie.get(i).getOverallRating()<=0)
-			{
-				
-			}
-			else
-				System.out.print("Movie Title:"+movie.get(i).getMovieName()+" Movie Average Score:"+movie.get(i).getOverallRating()+"\n");
-		
-			if(i==5)
-				break;
-		}
-		System.out.println("-----------------------------------------------------------------");
-	}
-	  
-	  /**
-	   * Rank movie based on rating for customer. Will not display movies that already ended showing
-	   * @throws IOException
-	   * @throws ParseException
-	   */
-	  public static void sortTopScoreForCustomer() throws IOException, ParseException{
-			List<Movie> movie = new ArrayList<Movie>();
-			ArrayList<MovieSchedule> schList= MovieScheduleDataControl.readScheduleListing();
-			
-			int i=0;
-			// Fill it.
-			movie=MovieDataControl.readMovie();
-		
-			Collections.sort(movie, new Comparator<Movie>() {
-				@Override public int compare(Movie p1, Movie p2) {
-			    	return Double.compare(p1.getOverallRating(),p2.getOverallRating());
-			    }
-			 });
-			
-			Collections.reverse(movie);
-			System.out.println("---------------------------------------------------");
-			System.out.println("|These are the top rated movies that are showing!!!|");
-			System.out.println("----------------------------------------------------");	
-			for(i=0;i<=movie.size();i++){
-				if(movie.get(i).getOverallRating()<=0)
-				{
-					
-				}
-				else
-				{
-					for(int j=0;j<schList.size();j++)
-					{
-						if(schList.get(j).getMovieId()==movie.get(i).getMovieId()&&schList.get(i).getStatus()==1)
-						{
-							System.out.print((i+1)+".Movie Title:"+movie.get(i).getMovieName()+" Movie Average Score:"+movie.get(i).getOverallRating()+"\n");
-							break;
-						}
-					}
-				}
-				if(i==5)
-					break;
-			}
-			System.out.println("----------------------------------------------------");	
-			
-		}
-	  
+public class SortTop5 implements Comparable<Movie> {
+	// Sort movies by top 5 score in descending order in array and print
+
 	/**
-	 * Rank movie based on top sales for admin. Does not care if movie already ended its showing.
+	 * Rank movies based on top score for admin, does not care if movie has
+	 * ended already.
+	 * 
 	 * @throws IOException
 	 */
-	public static void sortTopSalesForAdmin() throws IOException{
+	public static void sortTopScoreForAdmin() throws IOException {
 		List<Movie> movie = new ArrayList<Movie>();
-
-		int i=0;
+		int i = 0;
 		// Fill it.
-		movie=MovieDataControl.readMovie();
-		
+		movie = MovieDataControl.readMovie();
+
 		Collections.sort(movie, new Comparator<Movie>() {
-			@Override public int compare(Movie p1, Movie p2) {
-			    return Double.compare(p1.getTicketSales(),p2.getTicketSales());
-			 }
-		});
-			
-		Collections.reverse(movie);
-		System.out.println("-----------------------------------------------------------------");
-		
-		System.out.println("|These are the best selling movies throughout the entire history:|");
-		System.out.println("------------------------------------------------------------------");
-		
-		for(i=0;i<=movie.size();i++){
-			if(movie.get(i).getTicketSales()<=0)
-			{
-				
+			@Override
+			public int compare(Movie p1, Movie p2) {
+				return Double.compare(p1.getOverallRating(),
+						p2.getOverallRating());
 			}
-			else
-				System.out.print("Movie Title:"+movie.get(i).getMovieName()+" Movie Sales:"+movie.get(i).getTicketSales()+"\n");
-			if(i==5)
+		});
+
+		Collections.reverse(movie);
+		System.out
+				.println("-----------------------------------------------------------------");
+		System.out
+				.println("|These are the top rated movies throughout the entire history:   |");
+		System.out
+				.println("-----------------------------------------------------------------");
+		for (i = 0; i <= movie.size(); i++) {
+			if (movie.get(i).getOverallRating() <= 0) {
+
+			} else
+				System.out.print("Movie Title:" + movie.get(i).getMovieName()
+						+ " Movie Average Score:"
+						+ movie.get(i).getOverallRating() + "\n");
+
+			if (i == 5)
 				break;
 		}
-		System.out.println("------------------------------------------------------------------");
-    }
+		System.out
+				.println("-----------------------------------------------------------------");
+	}
 
 	/**
-	 * Rank movie based of top sale, for customer use only. Will not rank movies that are not showing.
+	 * Rank movie based on rating for customer. Will not display movies that
+	 * already ended showing
+	 * 
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static void sortTopSalesForCustomer() throws IOException, ParseException{
+	public static void sortTopScoreForCustomer() throws IOException,
+			ParseException {
 		List<Movie> movie = new ArrayList<Movie>();
-		ArrayList<MovieSchedule> schList= MovieScheduleDataControl.readScheduleListing();
-		
-		int i=0;
+		ArrayList<MovieSchedule> schList = MovieScheduleDataControl
+				.readScheduleListing();
+
+		int i = 0;
 		// Fill it.
-		movie=MovieDataControl.readMovie();
-		
+		movie = MovieDataControl.readMovie();
+
 		Collections.sort(movie, new Comparator<Movie>() {
-			@Override public int compare(Movie p1, Movie p2) {
-			    return Double.compare(p1.getTicketSales(),p2.getTicketSales());
-			 }
-		});
-			
-		Collections.reverse(movie);
-		System.out.println("------------------------------------------------------");
-		
-		System.out.println("|These are the best selling movies that are showing!!!|");
-		System.out.println("------------------------------------------------------");
-		
-		for(i=0;i<=movie.size();i++){
-			if(movie.get(i).getTicketSales()<=0)
-			{
-				
+			@Override
+			public int compare(Movie p1, Movie p2) {
+				return Double.compare(p1.getOverallRating(),
+						p2.getOverallRating());
 			}
-			else
-			{
-				for(int j=0;j<schList.size();j++)
-				{
-					if(schList.get(j).getMovieId()==movie.get(i).getMovieId()&&schList.get(i).getStatus()==1)
-					{
-						System.out.print((i+1)+".Movie Title:"+movie.get(i).getMovieName()+"\n");
+		});
+
+		Collections.reverse(movie);
+		System.out
+				.println("---------------------------------------------------");
+		System.out
+				.println("|These are the top rated movies that are showing!!!|");
+		System.out
+				.println("----------------------------------------------------");
+		for (i = 0; i <= movie.size(); i++) {
+			if (movie.get(i).getOverallRating() <= 0) {
+
+			} else {
+				for (int j = 0; j < schList.size(); j++) {
+					if (schList.get(j).getMovieId() == movie.get(i)
+							.getMovieId() && schList.get(i).getStatus() == 1) {
+						System.out.print((i + 1) + ".Movie Title:"
+								+ movie.get(i).getMovieName()
+								+ " Movie Average Score:"
+								+ movie.get(i).getOverallRating() + "\n");
 						break;
 					}
 				}
 			}
-			if(i==5)
+			if (i == 5)
 				break;
 		}
-		System.out.println("------------------------------------------------------");
-		
+		System.out
+				.println("----------------------------------------------------");
 
-    }
-	
+	}
+
+	/**
+	 * Rank movie based on top sales for admin. Does not care if movie already
+	 * ended its showing.
+	 * 
+	 * @throws IOException
+	 */
+	public static void sortTopSalesForAdmin() throws IOException {
+		List<Movie> movie = new ArrayList<Movie>();
+
+		int i = 0;
+		// Fill it.
+		movie = MovieDataControl.readMovie();
+
+		Collections.sort(movie, new Comparator<Movie>() {
+			@Override
+			public int compare(Movie p1, Movie p2) {
+				return Double.compare(p1.getTicketSales(), p2.getTicketSales());
+			}
+		});
+
+		Collections.reverse(movie);
+		System.out
+				.println("-----------------------------------------------------------------");
+
+		System.out
+				.println("|These are the best selling movies throughout the entire history:|");
+		System.out
+				.println("------------------------------------------------------------------");
+
+		for (i = 0; i <= movie.size(); i++) {
+			if (movie.get(i).getTicketSales() <= 0) {
+
+			} else
+				System.out.print("Movie Title:" + movie.get(i).getMovieName()
+						+ " Movie Sales:" + movie.get(i).getTicketSales()
+						+ "\n");
+			if (i == 5)
+				break;
+		}
+		System.out
+				.println("------------------------------------------------------------------");
+	}
+
+	/**
+	 * Rank movie based of top sale, for customer use only. Will not rank movies
+	 * that are not showing.
+	 * 
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public static void sortTopSalesForCustomer() throws IOException,
+			ParseException {
+		List<Movie> movie = new ArrayList<Movie>();
+		ArrayList<MovieSchedule> schList = MovieScheduleDataControl
+				.readScheduleListing();
+
+		int i = 0;
+		// Fill it.
+		movie = MovieDataControl.readMovie();
+
+		Collections.sort(movie, new Comparator<Movie>() {
+			@Override
+			public int compare(Movie p1, Movie p2) {
+				return Double.compare(p1.getTicketSales(), p2.getTicketSales());
+			}
+		});
+
+		Collections.reverse(movie);
+		System.out
+				.println("------------------------------------------------------");
+
+		System.out
+				.println("|These are the best selling movies that are showing!!!|");
+		System.out
+				.println("------------------------------------------------------");
+
+		for (i = 0; i <= movie.size(); i++) {
+			if (movie.get(i).getTicketSales() <= 0) {
+
+			} else {
+				for (int j = 0; j < schList.size(); j++) {
+					if (schList.get(j).getMovieId() == movie.get(i).getMovieId() && schList.get(j).getStatus() == 1) {
+						System.out.print((i + 1) + ".Movie Title:"+ movie.get(i).getMovieName() + "\n");
+						break;
+					}
+				}
+			}
+			if (i == 5)
+				break;
+		}
+		System.out
+				.println("------------------------------------------------------");
+
+	}
+
 	@Override
 	public int compareTo(Movie o) {
 		// TODO Auto-generated method stub

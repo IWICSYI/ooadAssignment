@@ -165,7 +165,7 @@ public class AdminHolidayConfigureUi extends AdminConfigureUi {
 					System.out.println("Enter new updated date:");
 					String s=sc.nextLine();
 					Date nHD=ValidationControl.validateDate(s,0);
-					valid=AdminHolidayDateControl.checkDuplicatedHoliday(s);
+					valid=AdminHolidayDateControl.checkDuplicatedHoliday(nHD);
 					if(valid)
 					{
 						HolidayDate hD=new HolidayDate();
