@@ -184,7 +184,7 @@ public class MovieListingControl {
 					ShowTime s = showTimeList.get(p);
 					showTimeListTemp.add(s);
 				}
-				if(!showTimeArray.isEmpty()){
+				if(!showTimeArray.isEmpty() && type.equals("now") || type.equals("preview")){
 					o.setShowTimeList(showTimeListTemp);
 					o.setI(i);
 					o.setCineplexId(cineplexid);
@@ -192,6 +192,15 @@ public class MovieListingControl {
 					o.setDate(sdf.format(calTemp.getTime()));
 					pair.add(o);
 				}
+				else if(type.equals("update")){
+					o.setShowTimeList(showTimeListTemp);
+					o.setI(i);
+					o.setCineplexId(cineplexid);
+				
+					o.setDate(sdf.format(calTemp.getTime()));
+					pair.add(o);
+				}
+				
 				// showTimeListTemp.clear();
 			}
 

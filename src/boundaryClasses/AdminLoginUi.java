@@ -36,9 +36,10 @@ public class AdminLoginUi {
 			System.out.println("Please enter username:");
 			userName = sc.nextLine();
 			if (console != null) {
-				System.out.println("Couldn't get Console instance");
+				
 				char[] pW = console.readPassword("Please your  password: ");
-				password = pW.toString();
+				password = new String(pW);
+				
 			} else {
 				System.out.println("Please enter password:");
 				password = sc.nextLine();

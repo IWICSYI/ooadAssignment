@@ -114,7 +114,11 @@ public class ValidationControl extends MovieListingControl {
 		if (s.isEmpty()) {
 			System.out.println("Cannot leave empty string!");
 			return false;
-		} else
+		} 
+		else if(s.contains("|")){
+			System.out.println("Cannot have special symbols!");
+			return false;
+		}
 			return true;
 	}
 
