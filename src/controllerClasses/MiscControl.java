@@ -6,7 +6,11 @@ import java.util.Set;
 
 import misc.ObjectContainer;
 import data.Movie;
-
+/**
+ * Misc control to do utillity stuff
+ * @author Chang En Kai
+ *
+ */
 public class MiscControl {
 
 	private ArrayList<String> stringList = new ArrayList<String>();

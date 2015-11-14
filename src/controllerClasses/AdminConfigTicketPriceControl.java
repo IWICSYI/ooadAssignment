@@ -1,5 +1,9 @@
 package controllerClasses;
-
+/**
+ * Control class for configuring tick prices
+ * @author Chang En Kai
+ *
+ */
 public class AdminConfigTicketPriceControl {
 
 	/**

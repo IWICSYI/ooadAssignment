@@ -465,8 +465,7 @@ public class MovieScheduleDataControl extends DataControl {
 	/**
 	 * Update schedule
 	 * 
-	 * @param Movie
-	 *            Schedule object
+	 * @param sch Movie Schedule object
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -536,11 +535,10 @@ public class MovieScheduleDataControl extends DataControl {
 	}
 
 	/**
-	 * Method to end a movie listing, can be assesed only on update movie
+	 * Method to end a movie listing, can be accessed only on update movie
 	 * schedule page
 	 * 
-	 * @param Movie
-	 *            Schedule object
+	 * @param sch Movie Schedule object
 	 * @throws IOException
 	 * @throws ParseException
 	 */

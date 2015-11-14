@@ -86,18 +86,15 @@ public class ShowTimeDataControl extends DataControl {
 		return alr;
 	}
 
-	/**
-	 * Read show time based on cinema id and dates. Used to check if time slot
-	 * of that day is taken or not
-	 * 
-	 * @param cinemaID
-	 * @param tmp
-	 *            Calendar object that contain date to check which show time to
-	 *            retreive
-	 * @return
-	 * @throws IOException
-	 * @throws ParseException
-	 */
+/**
+ * Read showtime for now showing time slot selections
+ * @param listId listing id
+ * @param calTemp date to read
+ * @param cId cineplex id
+ * @return
+ * @throws IOException
+ * @throws ParseException
+ */
 	public static ArrayList<ShowTime> readShowTimesBasedOnListingIdAndCineplexIdAndNowShowing(int listId,Calendar calTemp,int cId) throws IOException, ParseException{
 		ArrayList stringArray = (ArrayList)read("data/showTimes.txt");
 		ArrayList alr = new ArrayList() ;// to store data
@@ -161,7 +158,14 @@ public class ShowTimeDataControl extends DataControl {
 			}
 			return alr ;
 	}
-	
+	/**
+	 * Read show times that are already on cinema in specific date, use to validate timeslot clash
+	 * @param cinemaID cinema ID
+	 * @param tmp calendar for dates that needs to check
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static ArrayList<ShowTime> readShowTimesBasedOnCinemaIdAndNowShowing(
 			int cinemaID, Calendar tmp) throws IOException, ParseException {
 		ArrayList stringArray = (ArrayList) read("data/showTimes.txt");

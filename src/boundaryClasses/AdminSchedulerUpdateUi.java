@@ -25,7 +25,11 @@ import dataController.MovieDataControl;
 import dataController.MovieScheduleDataControl;
 import dataController.ShowTimeDataControl;
 import dataController.TransactionDataControl;
-
+/**
+ * Display ui to handle updating of movie schedule
+ * @author Chang En Kai
+ *
+ */
 public class AdminSchedulerUpdateUi extends AdminSchedulerMainUi {
 
 	/**
@@ -236,7 +240,7 @@ public class AdminSchedulerUpdateUi extends AdminSchedulerMainUi {
 	/**
 	 * display page to choose which specific timeslot to edit
 	 * 
-	 * @param sch
+	 * @param movieSchedule
 	 *            Passing down selected movie schedule from displayUpdate
 	 * @param movieId
 	 *            Movie ID

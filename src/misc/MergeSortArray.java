@@ -1,7 +1,11 @@
 package misc;
 
 import java.util.ArrayList;
-
+/**
+ * Merge sort, example of extndability where I can use other sorting method instead of implementing comparator.
+ * @author Chang En Kai
+ *
+ */
 public class MergeSortArray {
 
 	ArrayList<String> stringList = new ArrayList<String>();

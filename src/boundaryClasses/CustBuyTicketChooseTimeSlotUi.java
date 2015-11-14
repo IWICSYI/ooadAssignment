@@ -26,14 +26,18 @@ import dataController.CineplexDataControl;
 import dataController.DataControl;
 import dataController.MovieScheduleDataControl;
 import dataController.ShowTimeDataControl;
-
+/**
+ * Display ui to choose time slot
+ * @author Chang En Kai
+ *
+ */
 public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 
 	/**
 	 * Display time slot for user to buy ticket for the movie
 	 * @param lType List Type, can be now showing, coming soon or preview
 	 * @param movieId
-	 * @param visit number of times this method is accessed, used to manipulate which cineplex to choose to display timeslots
+	 * @param hit number of times this method is accessed, used to manipulate which cineplex to choose to display timeslots
 	 * @param cineplexId
 	 * @param movieDetails
 	 * @param listingId
@@ -143,7 +147,6 @@ public class CustBuyTicketChooseTimeSlotUi extends CustMovieDetailUi {
 	/**
 	 * Display time slot selection. 
 	 * @param pair A list of object that contain showtime and schedule objects
-	 * @param choice2 User choice
 	 * @param m Movie object(required parameter to go back to previous page)
 	 * @param listingId
 	 * @throws IOException

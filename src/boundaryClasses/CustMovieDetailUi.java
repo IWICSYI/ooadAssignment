@@ -14,6 +14,11 @@ import data.Review;
 import dataController.MovieDataControl;
 import dataController.ReviewDataControl;
 
+/**
+ * Display ui for movie details
+ * @author Chang En Kai
+ *
+ */
 public class CustMovieDetailUi extends CustDisplayMovieListingUi {
 
 	/**

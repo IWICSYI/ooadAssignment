@@ -1,5 +1,9 @@
 package data;
-
+/**
+ * Prices object
+ * @author Chang En Kai
+ *
+ */
 public class Prices {
 
 	/**

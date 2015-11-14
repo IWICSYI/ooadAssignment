@@ -5,7 +5,11 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 import controllerClasses.ValidationControl;
-
+/**
+ * Display main configuration page that can access holiday and price
+ * configuration pages/
+ * 
+ */
 public class AdminConfigureUi extends AdminMainUi {
 
 	/**

@@ -1,7 +1,11 @@
 package data;
 
 import java.util.Date;
-
+/**
+ * Holiday date object
+ * @author Chang En Kai
+ *
+ */
 public class HolidayDate {
 
 	public HolidayDate(int holidayId, Date holidayDate) {

@@ -12,7 +12,11 @@ import controllerClasses.AdminHolidayDateControl;
 import controllerClasses.ValidationControl;
 import data.HolidayDate;
 import dataController.TicketPriceAndHolidayDataControl;
-
+/**
+ * Display UI of Holiday Configuration page.
+ * 
+ * 
+ */
 public class AdminConfigureHolidayUi extends AdminConfigureUi {
 
 	/**

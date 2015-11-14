@@ -12,7 +12,11 @@ import controllerClasses.ValidationControl;
 import data.Movie;
 import data.MovieSchedule;
 import dataController.MovieScheduleDataControl;
-
+/**
+ * Display movie listing, can be now showing, preview or coming soon
+ * @author Chang En Kai
+ *
+ */
 public class CustDisplayMovieListingUi extends CustMain {
 
 	/**

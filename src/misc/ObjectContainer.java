@@ -9,7 +9,11 @@ import data.MovieSchedule;
 import data.Seats;
 import data.ShowTime;
 import data.Transaction;
-
+/**
+ * Utility object to pair every object together with id
+ * @author Chang En Kai
+ *
+ */
 public class ObjectContainer {
 	private boolean old;
 	private boolean child;

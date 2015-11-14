@@ -9,7 +9,11 @@ import controllerClasses.AdminConfigTicketPriceControl;
 import controllerClasses.ValidationControl;
 import data.Prices;
 import dataController.TicketPriceAndHolidayDataControl;
-
+/**
+ * Display UI of ticket configuration page
+ * 
+ * 
+ */
 public class AdminConfigureTicketPriceUi extends AdminConfigureUi {
 
 	/**

@@ -5,7 +5,11 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 import controllerClasses.ValidationControl;
-
+/**
+ * Display ui of what admin will see when they log in.
+ * @author Chang
+ *
+ */
 public class AdminMainUi {
 
 	/**

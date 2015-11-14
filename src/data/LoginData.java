@@ -1,5 +1,9 @@
 package data;
-
+/**
+ * Login data
+ * @author Chang En Kai
+ *
+ */
 public class LoginData {
 	private String username;
 	private String password;

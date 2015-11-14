@@ -7,6 +7,11 @@ import java.util.Scanner;
 import controllerClasses.CustTransactionControl;
 import controllerClasses.ValidationControl;
 
+/**
+ * Display ui for searching of booking history
+ * @author Chang En Kai
+ *
+ */
 public class CustSearchBookingUi extends CustMain {
 
 	/**

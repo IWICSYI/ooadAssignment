@@ -8,7 +8,11 @@ import java.util.Date;
 
 import data.HolidayDate;
 import dataController.TicketPriceAndHolidayDataControl;
-
+/**
+ * Control class to handle holiday date logicc
+ * @author Chang En Kai
+ *
+ */
 public class AdminHolidayDateControl {
 
 	/**
@@ -29,7 +33,7 @@ public class AdminHolidayDateControl {
 		String existDate = "";
 		String inputDate = new SimpleDateFormat("dd/MM/yyyy").format(s);
 		//
-		boolean valid = false;
+		boolean valid = true;
 		ArrayList<HolidayDate> holidayList = TicketPriceAndHolidayDataControl
 				.readHoliday();
 		for (int i = 0; i < holidayList.size(); i++) {

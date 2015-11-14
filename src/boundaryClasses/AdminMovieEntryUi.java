@@ -7,11 +7,15 @@ import java.util.Scanner;
 
 import misc.ObjectContainer;
 import controllerClasses.AdminMovieEntryControl;
-import controllerClasses.SortTop5;
+import controllerClasses.SortTop5Control;
 import controllerClasses.ValidationControl;
 import data.Movie;
 import dataController.MovieDataControl;
-
+/**
+ * Display ui to crud movie entries
+ * @author Chang En Kai
+ *
+ */
 public class AdminMovieEntryUi extends AdminMainUi {
 
 	/**
@@ -47,12 +51,12 @@ public class AdminMovieEntryUi extends AdminMainUi {
 			else if (choice == 2) {
 				displayMovieUpdatePage();
 			} else if (choice == 3) {
-				SortTop5.sortTopScoreForAdmin();
+				SortTop5Control.sortTopScoreForAdmin();
 				System.out.println("Press anything to resume... ...");
 				sc.nextLine();
 				displayMovieMain();
 			} else if (choice == 4) {
-				SortTop5.sortTopSalesForAdmin();
+				SortTop5Control.sortTopSalesForAdmin();
 				System.out.println("Press anything to resume... ...");
 				sc.nextLine();
 				displayMovieMain();

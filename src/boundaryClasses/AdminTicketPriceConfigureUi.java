@@ -8,7 +8,11 @@ import controllerClasses.AdminConfigTicketPriceControl;
 import controllerClasses.ValidationControl;
 import data.Prices;
 import dataController.TicketPriceAndHolidayDataControl;
-
+/**
+ * Display ui to configure ticket and prices
+ * @author Chang En Kai
+ *
+ */
 public class AdminTicketPriceConfigureUi extends AdminConfigureUi {
 	
 	public static void displayTicketConfigureMain() throws IOException{

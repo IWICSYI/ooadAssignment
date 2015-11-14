@@ -9,7 +9,11 @@ import java.util.logging.Logger;
 
 import data.LoginData;
 import dataController.LoginDataControl;
-
+/**
+ * Control class to handle login
+ * @author Chang En Kai
+ *
+ */
 public class AdminLoginControl {
 
 	/**

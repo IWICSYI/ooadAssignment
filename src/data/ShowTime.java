@@ -176,16 +176,5 @@ public class ShowTime implements Comparator<ShowTime> {
 		this.cineplexId = cineplexId;
 	}
 
-	@Override
-	public String toString() {
-		return "ShowTime [listingId=" + listingId + ", cinemaId=" + cinemaId
-				+ ", movieId=" + movieId + ", showTimeId=" + showTimeId
-				+ ", noOfSeats=" + noOfSeats + ", dayType=" + dayType
-				+ ", showTimeValue=" + showTimeValue + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", ticketPrice="
-				+ ticketPrice + ", previewStatus=" + previewStatus
-				+ ", cineplexId=" + cineplexId + ", listOfSeats=" + listOfSeats
-				+ "]";
-	}
-
+	
 }

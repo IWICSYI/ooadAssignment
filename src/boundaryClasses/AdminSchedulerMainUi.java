@@ -5,7 +5,11 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 import controllerClasses.ValidationControl;
-
+/**
+ * Display ui to choose whether to create or update movie schedule.
+ * @author Chang
+ *
+ */
 public class AdminSchedulerMainUi extends AdminMainUi {
 
 	/**

@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-import controllerClasses.SortTop5;
+import controllerClasses.SortTop5Control;
 import controllerClasses.ValidationControl;
 import dataController.MovieScheduleDataControl;
-
+/**
+ * Display ui when customer first enter the page
+ * @author Chang En Kai
+ *
+ */
 public class CustMain {
 
 	/**
@@ -41,12 +45,12 @@ public class CustMain {
 		} else if (choice == 2) {
 			CustDisplayMovieListingUi.displayNowShowing(1);
 		} else if (choice == 3) {
-			SortTop5.sortTopScoreForCustomer();
+			SortTop5Control.sortTopScoreForCustomer();
 			System.out.println("Press anything to resume... ...");
 			sc.nextLine();
 			displayCustMain();
 		} else if (choice == 4) {
-			SortTop5.sortTopSalesForCustomer();
+			SortTop5Control.sortTopSalesForCustomer();
 			System.out.println("Press anything to resume... ...");
 			sc.nextLine();
 			displayCustMain();

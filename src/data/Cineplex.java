@@ -1,7 +1,11 @@
 package data;
 
 import java.util.ArrayList;
-
+/**
+ * Cineplex object
+ * @author Chang En Kai
+ *
+ */
 public class Cineplex {
 
 	public Cineplex(int cinplexId, String cineplexName) {

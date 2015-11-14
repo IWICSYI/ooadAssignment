@@ -1,11 +1,12 @@
 package data;
-
+/**
+ * Cinema object
+ * @author Chang En Kai
+ *
+ */
 public class Cinema {
 
-	/**
-	 * 
-	 * 
-	 */
+	
 	private int cinplexId;
 	private int cinemaId;
 	private String cinemaHallName;

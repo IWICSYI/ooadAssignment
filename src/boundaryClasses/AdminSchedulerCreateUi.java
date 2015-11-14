@@ -6,7 +6,11 @@ import java.util.Scanner;
 
 import controllerClasses.AdminSchedulerController;
 import controllerClasses.ValidationControl;
-
+/**
+ * Display ui to handle creation of movie schedule
+ * @author Chang En Kai
+ *
+ */
 public class AdminSchedulerCreateUi extends AdminSchedulerMainUi {
 
 	/**

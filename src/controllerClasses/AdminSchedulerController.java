@@ -238,11 +238,9 @@ public class AdminSchedulerController {
 	/**
 	 * Method to edit start date
 	 * 
-	 * @param movieSchedule
-	 * @param m
-	 *            Movie details
-	 * @param cineId
-	 *            cineplex id
+	 * @param sch Movie Schedule
+	 * @param m  Movie details
+	 * @param cineId cineplex id
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -387,13 +385,13 @@ public class AdminSchedulerController {
 	}
 
 	/**
-	 * Method to handle the form of editing specific timeslot
+	 *   Method to dynamically change the ui of editing specific timeslot
 	 * 
 	 * @param pairingIdWithSlot
 	 *            a list of object that contains movie, schedule, show time and
 	 *            number that associate with them.
 	 * @param pair
-	 *            required arguement to return back to previous page
+	 *            required args to return back to previous page
 	 * @param choice
 	 *            User selection
 	 * @param sch

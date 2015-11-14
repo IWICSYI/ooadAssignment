@@ -6,10 +6,9 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 import controllerClasses.AdminLoginControl;
-
 /**
- * @author Chang En Kai
- *
+ * Display login page
+ * 
  */
 public class AdminLoginUi {
 

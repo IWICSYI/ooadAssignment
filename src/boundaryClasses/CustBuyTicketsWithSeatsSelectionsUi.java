@@ -14,7 +14,11 @@ import data.Seats;
 import data.ShowTime;
 import dataController.SeatsDataControl;
 import dataController.ShowTimeDataControl;
-
+/**
+ * Display ui for customer to choose seats
+ * @author Chang En Kai
+ *
+ */
 public class CustBuyTicketsWithSeatsSelectionsUi extends
 		CustBuyTicketChooseTimeSlotUi {
 

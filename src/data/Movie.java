@@ -3,7 +3,11 @@ package data;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-
+/**
+ * Movie object
+ * @author Chang En Kai
+ *
+ */
 public class Movie {
 
 	private int movieId;
